@@ -54,7 +54,7 @@ QuXAT-Scoring/
 - **Streamlit** - Web app framework
 - **Pandas** - Data manipulation
 - **NumPy** - Numerical computing
-- **Plotly** - Interactive charts
+- **Native Streamlit Charts** - Built-in interactive visualizations
 
 ## Usage
 
