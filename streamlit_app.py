@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
@@ -18,47 +17,51 @@ st.set_page_config(
 st.title("📊 QuXAT Scoring Dashboard")
 st.markdown("---")
 
-try:
-    # Sidebar navigation
-    st.sidebar.title("Navigation")
-    page = st.sidebar.selectbox("Choose a page", ["Home", "Data Analysis", "Scoring", "Settings"])
+# Sidebar navigation
+st.sidebar.title("🧭 Navigation")
+page = st.sidebar.selectbox("Choose a page:", 
+                           ["Home", "Data Analysis", "Scoring", "Settings"])
 
+# Main content based on page selection
+try:
     if page == "Home":
         st.header("🏠 Welcome to QuXAT Scoring Dashboard")
         
-        # Create sample metrics
-        col1, col2, col3, col4 = st.columns(4)
+        st.markdown("""
+        ### 📋 About QuXAT
+        The **QuXAT (Quality Assessment Tool)** is designed to help educators and administrators 
+        track and analyze student performance data efficiently.
         
-        with col1:
-            st.metric("Total Students", "156", "12")
-        with col2:
-            st.metric("Average Score", "78.5", "2.3")
-        with col3:
-            st.metric("Pass Rate", "89%", "5%")
-        with col4:
-            st.metric("Completion Rate", "94%", "1%")
+        ### 🎯 Key Features:
+        - **📊 Interactive Dashboards** - Visualize student performance data
+        - **📈 Trend Analysis** - Track progress over time  
+        - **✏️ Easy Scoring** - Streamlined grading interface
+        - **⚙️ Customizable Settings** - Adapt to your needs
+        """)
         
-        st.markdown("---")
-        
-        # Sample data for visualization
+        # Sample data for demonstration
         sample_data = pd.DataFrame({
-            'Score Range': ['0-20', '21-40', '41-60', '61-80', '81-100'],
-            'Count': [5, 12, 28, 67, 44]
+            'Score Range': ['90-100', '80-89', '70-79', '60-69', '50-59'],
+            'Count': [25, 45, 30, 15, 5]
         })
+        
+        st.subheader("📊 Sample Performance Overview")
         
         col1, col2 = st.columns(2)
         
         with col1:
             st.subheader("📊 Score Distribution")
-            fig = px.bar(sample_data, x='Score Range', y='Count', 
-                        title="Student Score Distribution")
-            st.plotly_chart(fig, use_container_width=True)
+            # Using native Streamlit bar chart instead of Plotly
+            st.bar_chart(sample_data.set_index('Score Range')['Count'])
         
         with col2:
-            st.subheader("🥧 Performance Overview")
-            fig = px.pie(sample_data, values='Count', names='Score Range',
-                        title="Score Range Distribution")
-            st.plotly_chart(fig, use_container_width=True)
+            st.subheader("📋 Score Summary")
+            # Display data as metrics instead of pie chart
+            for idx, row in sample_data.iterrows():
+                st.metric(
+                    label=f"Score Range: {row['Score Range']}", 
+                    value=f"{row['Count']} students"
+                )
 
     elif page == "Data Analysis":
         st.header("📈 Data Analysis")
@@ -69,9 +72,8 @@ try:
         time_data = pd.DataFrame({'Date': dates, 'Average Score': scores})
         
         st.subheader("📊 Score Trends Over Time")
-        fig = px.line(time_data, x='Date', y='Average Score', 
-                     title="Average Scores Trend")
-        st.plotly_chart(fig, use_container_width=True)
+        # Using native Streamlit line chart instead of Plotly
+        st.line_chart(time_data.set_index('Date')['Average Score'])
         
         st.subheader("📋 Raw Data")
         st.dataframe(time_data, use_container_width=True)
@@ -79,48 +81,83 @@ try:
     elif page == "Scoring":
         st.header("✏️ Student Scoring")
         
-        with st.form("scoring_form"):
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                student_name = st.text_input("Student Name")
-                student_id = st.text_input("Student ID")
-                
-            with col2:
-                score = st.number_input("Score", min_value=0, max_value=100, value=0)
-                subject = st.selectbox("Subject", ["Mathematics", "Science", "English", "History"])
-            
-            comments = st.text_area("Comments")
-            
-            submitted = st.form_submit_button("Submit Score")
-            
-            if submitted:
-                st.success(f"Score submitted for {student_name} (ID: {student_id})")
-                st.info(f"Subject: {subject}, Score: {score}")
-
-    elif page == "Settings":
-        st.header("⚙️ Settings")
-        
-        st.subheader("🔗 GitHub Integration")
-        st.info("This application is connected to GitHub repository: shawredanalytics/QuXAT")
-        
-        st.subheader("📱 Application Settings")
+        st.markdown("### 📝 Quick Score Entry")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.checkbox("Enable notifications", value=True)
-            st.checkbox("Auto-save scores", value=True)
+            student_name = st.text_input("👤 Student Name")
+            assignment = st.selectbox("📚 Assignment", 
+                                    ["Quiz 1", "Quiz 2", "Midterm", "Final", "Project"])
+        
+        with col2:
+            score = st.number_input("📊 Score", min_value=0, max_value=100, value=85)
+            date = st.date_input("📅 Date", datetime.now())
+        
+        if st.button("💾 Save Score"):
+            if student_name:
+                st.success(f"✅ Score saved for {student_name}: {score}/100 on {assignment}")
+                
+                # Display saved entry
+                st.info(f"📋 **Entry Details:**\n- Student: {student_name}\n- Assignment: {assignment}\n- Score: {score}/100\n- Date: {date}")
+            else:
+                st.error("❌ Please enter a student name")
+        
+        st.markdown("---")
+        st.markdown("### 📊 Recent Entries")
+        
+        # Sample recent entries
+        recent_data = pd.DataFrame({
+            'Student': ['Alice Johnson', 'Bob Smith', 'Carol Davis'],
+            'Assignment': ['Quiz 1', 'Midterm', 'Quiz 2'],
+            'Score': [92, 78, 85],
+            'Date': ['2024-01-15', '2024-01-14', '2024-01-13']
+        })
+        
+        st.dataframe(recent_data, use_container_width=True)
+
+    elif page == "Settings":
+        st.header("⚙️ Settings")
+        
+        st.markdown("### 🎨 Display Preferences")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            theme = st.selectbox("🎨 Theme", ["Light", "Dark", "Auto"])
+            show_grid = st.checkbox("📊 Show Grid Lines", value=True)
             
         with col2:
-            st.selectbox("Theme", ["Light", "Dark", "Auto"])
-            st.slider("Refresh interval (seconds)", 5, 60, 30)
-
-    # Footer
-    st.markdown("---")
-    st.markdown("Built with ❤️ using Streamlit | Connected to GitHub: shawredanalytics/QuXAT")
+            default_view = st.selectbox("🏠 Default Page", 
+                                      ["Home", "Data Analysis", "Scoring"])
+            auto_save = st.checkbox("💾 Auto-save Entries", value=True)
+        
+        st.markdown("### 📊 Scoring Settings")
+        
+        col3, col4 = st.columns(2)
+        
+        with col3:
+            max_score = st.number_input("📈 Maximum Score", min_value=50, max_value=200, value=100)
+            passing_grade = st.number_input("✅ Passing Grade", min_value=0, max_value=max_score, value=60)
+            
+        with col4:
+            grade_scale = st.selectbox("📏 Grading Scale", 
+                                     ["Standard (A-F)", "Numerical (0-100)", "Pass/Fail"])
+            round_scores = st.checkbox("🔢 Round Scores", value=True)
+        
+        if st.button("💾 Save Settings"):
+            st.success("✅ Settings saved successfully!")
+            st.balloons()
 
 except Exception as e:
-    st.error("An error occurred while loading the application.")
-    st.error(f"Error details: {str(e)}")
-    st.info("Please refresh the page or contact support if the issue persists.")
+    st.error(f"❌ An error occurred: {str(e)}")
+    st.info("🔄 Please refresh the page or contact support if the issue persists.")
+
+# Footer
+st.markdown("---")
+st.markdown("""
+<div style='text-align: center; color: #666; padding: 20px;'>
+    <p>📊 QuXAT Scoring Dashboard v2.0 | Built with Streamlit</p>
+    <p>🚀 No external chart dependencies - Pure Streamlit implementation</p>
+</div>
+""", unsafe_allow_html=True)
