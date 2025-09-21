@@ -18,100 +18,109 @@ st.set_page_config(
 st.title("📊 QuXAT Scoring Dashboard")
 st.markdown("---")
 
-# Sidebar
-st.sidebar.header("Navigation")
-page = st.sidebar.selectbox("Choose a page", ["Home", "Data Analysis", "Scoring", "Settings"])
-
 try:
+    # Sidebar navigation
+    st.sidebar.title("Navigation")
+    page = st.sidebar.selectbox("Choose a page", ["Home", "Data Analysis", "Scoring", "Settings"])
+
     if page == "Home":
-        st.header("Welcome to QuXAT Scoring System")
+        st.header("🏠 Welcome to QuXAT Scoring Dashboard")
         
-        col1, col2, col3 = st.columns(3)
+        # Create sample metrics
+        col1, col2, col3, col4 = st.columns(4)
         
         with col1:
-            st.metric("Total Scores", "1,234", "12%")
+            st.metric("Total Students", "156", "12")
+        with col2:
+            st.metric("Average Score", "78.5", "2.3")
+        with col3:
+            st.metric("Pass Rate", "89%", "5%")
+        with col4:
+            st.metric("Completion Rate", "94%", "1%")
+        
+        st.markdown("---")
+        
+        # Sample data for visualization
+        sample_data = pd.DataFrame({
+            'Score Range': ['0-20', '21-40', '41-60', '61-80', '81-100'],
+            'Count': [5, 12, 28, 67, 44]
+        })
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("📊 Score Distribution")
+            fig = px.bar(sample_data, x='Score Range', y='Count', 
+                        title="Student Score Distribution")
+            st.plotly_chart(fig, use_container_width=True)
         
         with col2:
-            st.metric("Average Score", "85.6", "2.1%")
-        
-        with col3:
-            st.metric("Active Users", "456", "5%")
-        
-        # Sample chart
-        st.subheader("Score Distribution")
-        try:
-            data = np.random.normal(85, 15, 1000)
-            fig = px.histogram(x=data, nbins=30, title="Score Distribution")
+            st.subheader("🥧 Performance Overview")
+            fig = px.pie(sample_data, values='Count', names='Score Range',
+                        title="Score Range Distribution")
             st.plotly_chart(fig, use_container_width=True)
-        except Exception as e:
-            st.error(f"Error creating chart: {str(e)}")
 
     elif page == "Data Analysis":
-        st.header("Data Analysis")
+        st.header("📈 Data Analysis")
         
-        try:
-            # Generate sample data
-            dates = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
-            scores = np.random.normal(80, 10, len(dates))
-            df = pd.DataFrame({'Date': dates, 'Score': scores})
-            
-            st.subheader("Score Trends Over Time")
-            fig = px.line(df, x='Date', y='Score', title="Daily Scores")
-            st.plotly_chart(fig, use_container_width=True)
-            
-            st.subheader("Raw Data")
-            st.dataframe(df.head(10))
-        except Exception as e:
-            st.error(f"Error in data analysis: {str(e)}")
+        # Sample time series data
+        dates = pd.date_range('2024-01-01', periods=30, freq='D')
+        scores = np.random.normal(75, 10, 30)
+        time_data = pd.DataFrame({'Date': dates, 'Average Score': scores})
+        
+        st.subheader("📊 Score Trends Over Time")
+        fig = px.line(time_data, x='Date', y='Average Score', 
+                     title="Average Scores Trend")
+        st.plotly_chart(fig, use_container_width=True)
+        
+        st.subheader("📋 Raw Data")
+        st.dataframe(time_data, use_container_width=True)
 
     elif page == "Scoring":
-        st.header("Scoring Interface")
+        st.header("✏️ Student Scoring")
         
         with st.form("scoring_form"):
-            st.subheader("Enter Score Details")
-            
             col1, col2 = st.columns(2)
             
             with col1:
                 student_name = st.text_input("Student Name")
-                subject = st.selectbox("Subject", ["Math", "Science", "English", "History"])
-            
+                student_id = st.text_input("Student ID")
+                
             with col2:
                 score = st.number_input("Score", min_value=0, max_value=100, value=0)
-                date = st.date_input("Date", datetime.now())
+                subject = st.selectbox("Subject", ["Mathematics", "Science", "English", "History"])
             
             comments = st.text_area("Comments")
             
             submitted = st.form_submit_button("Submit Score")
             
             if submitted:
-                st.success(f"Score submitted for {student_name}: {score}/100 in {subject}")
+                st.success(f"Score submitted for {student_name} (ID: {student_id})")
+                st.info(f"Subject: {subject}, Score: {score}")
 
     elif page == "Settings":
-        st.header("Settings")
+        st.header("⚙️ Settings")
         
-        st.subheader("GitHub Integration")
-        github_token = st.text_input("GitHub Token", type="password", help="Enter your GitHub personal access token")
-        repo_url = st.text_input("Repository URL", placeholder="https://github.com/username/repo")
+        st.subheader("🔗 GitHub Integration")
+        st.info("This application is connected to GitHub repository: shawredanalytics/QuXAT")
         
-        if st.button("Test GitHub Connection"):
-            if github_token and repo_url:
-                st.success("✅ GitHub connection successful!")
-            else:
-                st.error("❌ Please provide both GitHub token and repository URL")
+        st.subheader("📱 Application Settings")
         
-        st.subheader("Application Settings")
-        theme = st.selectbox("Theme", ["Light", "Dark"])
-        auto_save = st.checkbox("Auto-save data", value=True)
-        notifications = st.checkbox("Enable notifications", value=True)
+        col1, col2 = st.columns(2)
         
-        if st.button("Save Settings"):
-            st.success("Settings saved successfully!")
+        with col1:
+            st.checkbox("Enable notifications", value=True)
+            st.checkbox("Auto-save scores", value=True)
+            
+        with col2:
+            st.selectbox("Theme", ["Light", "Dark", "Auto"])
+            st.slider("Refresh interval (seconds)", 5, 60, 30)
+
+    # Footer
+    st.markdown("---")
+    st.markdown("Built with ❤️ using Streamlit | Connected to GitHub: shawredanalytics/QuXAT")
 
 except Exception as e:
-    st.error(f"Application error: {str(e)}")
+    st.error("An error occurred while loading the application.")
+    st.error(f"Error details: {str(e)}")
     st.info("Please refresh the page or contact support if the issue persists.")
-
-# Footer
-st.markdown("---")
-st.markdown("Built with Streamlit 🚀 | Connected to GitHub 🐙")
