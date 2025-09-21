@@ -1,6 +1,11 @@
 # QuXAT Scoring Dashboard
 
-A comprehensive Streamlit application for managing and analyzing QuXAT scores with GitHub integration.
+A comprehensive Streamlit application for managing and analyzing QuXAT scores with seamless cloud deployment.
+
+## 🚀 Live Demo
+
+**Deploy to Streamlit Community Cloud:**
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io)
 
 ## Features
 
@@ -16,8 +21,8 @@ A comprehensive Streamlit application for managing and analyzing QuXAT scores wi
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd QuXAT-Scoring
+   git clone https://github.com/shawredanalytics/QuXAT.git
+   cd QuXAT
    ```
 
 2. **Install dependencies**
@@ -27,26 +32,32 @@ A comprehensive Streamlit application for managing and analyzing QuXAT scores wi
 
 3. **Run the application**
    ```bash
-   streamlit run app.py
+   streamlit run streamlit_app.py
    ```
 
 4. **Open your browser** to `http://localhost:8501`
 
-### Deploy to Streamlit Cloud
+### Deploy to Streamlit Community Cloud
 
-1. **Push this repository to GitHub**
+1. **Fork this repository** on GitHub
 2. **Visit [share.streamlit.io](https://share.streamlit.io)**
-3. **Connect your GitHub account**
-4. **Deploy from your repository**
-5. **Get your public URL!**
+3. **Sign in with your GitHub account**
+4. **Click "New app"**
+5. **Select your forked repository**
+6. **Set main file path:** `streamlit_app.py`
+7. **Click "Deploy!"**
+8. **Get your public URL instantly!**
 
 ## Project Structure
 
 ```
 QuXAT-Scoring/
-├── app.py              # Main Streamlit application
-├── requirements.txt    # Python dependencies
-└── README.md          # This file
+├── streamlit_app.py       # Main Streamlit application
+├── requirements.txt       # Python dependencies
+├── .streamlit/
+│   ├── config.toml       # Streamlit configuration
+│   └── secrets.toml      # Secrets template
+└── README.md             # This file
 ```
 
 ## Dependencies
@@ -72,15 +83,22 @@ QuXAT-Scoring/
 - Submit scores with validation
 
 ### Settings
-- Configure GitHub integration
-- Customize application preferences
+- Configure application preferences
+- Customize display options
 
-## GitHub Integration
+## Deployment Options
 
-The application includes built-in GitHub integration features:
-- Connect to your repositories
-- Sync data and configurations
-- Collaborate with team members
+### Streamlit Community Cloud (Recommended)
+- **Free hosting** for public repositories
+- **Automatic deployments** from GitHub
+- **Custom domains** available
+- **Built-in secrets management**
+
+### Alternative Platforms
+- Heroku
+- Railway
+- DigitalOcean App Platform
+- AWS/GCP/Azure
 
 ## Contributing
 
