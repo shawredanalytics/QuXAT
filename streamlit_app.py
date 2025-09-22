@@ -1159,6 +1159,11 @@ try:
                     st.session_state.current_org = org_name
                     st.session_state.current_data = org_data
                     
+                    # Define variables needed for comparison table
+                    score = org_data['total_score']
+                    grade = "A+" if score >= 75 else "A" if score >= 65 else "B+" if score >= 55 else "B" if score >= 45 else "C"
+                    org_type = "Hospital"  # Default type, can be enhanced later
+                    
                     # Display organization profile
                     st.subheader(f"🏥 {org_name} - Quality Scorecard")
                     
@@ -1166,7 +1171,6 @@ try:
                     col1, col2, col3, col4 = st.columns(4)
                     
                     with col1:
-                        score = org_data['total_score']
                         score_color = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
                         st.metric("🏆 Overall Quality Score", f"{score}/100", f"{score_color}")
                     
