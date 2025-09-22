@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test script for NABH data integration with QuXAT Healthcare Quality Scorecard
+Test script for NABH data integration with QuXAT Healthcare Quality Grid
 This script validates the integration of NABH accredited hospitals data
 """
 
