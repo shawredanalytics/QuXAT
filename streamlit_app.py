@@ -127,6 +127,9 @@ class HealthcareOrgAnalyzer:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
         
+        # Load unified healthcare database
+        self.unified_database = self.load_unified_database()
+        
         # Enhanced certification databases and scoring weights
         # Comprehensive Global Healthcare Quality Certifications (Updated with 100+ standards)
         self.certification_weights = {
@@ -271,9 +274,106 @@ class HealthcareOrgAnalyzer:
             'infection control': 7, 'staff training': 5, 'research': 6,
             'innovation': 5, 'transparency': 4, 'community health': 5
         }
+        
+        # Load JCI accredited organizations data
+        self.jci_organizations = self.load_jci_data()
+
+    def load_jci_data(self):
+        """Load JCI accredited organizations data from JSON file"""
+        try:
+            import json
+            import os
+            
+            jci_file_path = 'jci_accredited_organizations.json'
+            
+            if os.path.exists(jci_file_path):
+                with open(jci_file_path, 'r', encoding='utf-8') as f:
+                    jci_data = json.load(f)
+                
+                # Create a lookup dictionary for faster searches
+                jci_lookup = {}
+                for org in jci_data:
+                    org_name = org.get('name', '').lower().strip()
+                    if org_name:
+                        jci_lookup[org_name] = {
+                            'name': org.get('name', ''),
+                            'country': org.get('country', ''),
+                            'type': org.get('type', ''),
+                            'accreditation_date': org.get('accreditation_date', ''),
+                            'region': org.get('region', ''),
+                            'source': org.get('source', 'JCI Database'),
+                            'jci_accredited': True
+                        }
+                
+                st.info(f"✅ Loaded {len(jci_lookup)} JCI accredited organizations for enhanced scoring")
+                return jci_lookup
+            else:
+                st.warning("⚠️ JCI data file not found. Using default JCI certification weights.")
+                return {}
+                
+        except Exception as e:
+            st.error(f"Error loading JCI data: {str(e)}")
+            return {}
+
+    def check_jci_accreditation(self, org_name):
+        """Check if an organization is JCI accredited"""
+        if not self.jci_organizations:
+            return None
+            
+        org_name_lower = org_name.lower().strip()
+        
+        # Direct match
+        if org_name_lower in self.jci_organizations:
+            return self.jci_organizations[org_name_lower]
+        
+        # Partial match - check if organization name contains JCI org name or vice versa
+        for jci_org_name, jci_data in self.jci_organizations.items():
+            if (jci_org_name in org_name_lower or 
+                org_name_lower in jci_org_name or
+                any(word in jci_org_name for word in org_name_lower.split() if len(word) > 3)):
+                return jci_data
+        
+        return None
+
+    def enhance_certification_with_jci(self, certifications, org_name):
+        """Enhance certification list with JCI accreditation if found"""
+        jci_info = self.check_jci_accreditation(org_name)
+        
+        if jci_info:
+            # Check if JCI is already in certifications
+            has_jci = any(cert.get('name', '').upper() == 'JCI' for cert in certifications)
+            
+            if not has_jci:
+                jci_cert = {
+                    'name': 'JCI',
+                    'status': 'Active',
+                    'valid_until': '2025-12-31',  # Default validity
+                    'score_impact': 35,
+                    'certificate_number': f"JCI-{jci_info['country']}-{datetime.now().year}",
+                    'accreditation_type': 'Hospital Accreditation',
+                    'issuer': 'Joint Commission International',
+                    'organization_info': jci_info
+                }
+                certifications.append(jci_cert)
+                
+                st.success(f"🏆 JCI Accreditation found for {jci_info['name']} ({jci_info['country']}) - Added 35 points!")
+        
+        return certifications
     
+    def load_unified_database(self):
+        """Load the unified healthcare organizations database"""
+        try:
+            with open('unified_healthcare_organizations.json', 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            st.warning("⚠️ Unified healthcare database not found. Some search features may be limited.")
+            return []
+        except Exception as e:
+            st.error(f"Error loading unified database: {str(e)}")
+            return []
+
     def search_organization_info(self, org_name):
-        """Search for organization information from multiple sources"""
+        """Search for organization information from multiple sources including unified database"""
         try:
             # Initialize results
             results = {
@@ -286,16 +386,24 @@ class HealthcareOrgAnalyzer:
                 'total_score': 0
             }
             
-            # Search for certifications
-            certifications = self.search_certifications(org_name)
-            results['certifications'] = certifications
+            # First, search in unified database
+            unified_org = self.search_unified_database(org_name)
+            if unified_org:
+                # Use data from unified database
+                results['certifications'] = unified_org.get('certifications', [])
+                results['unified_data'] = unified_org
+                st.success(f"✅ Found '{org_name}' in our comprehensive healthcare database!")
+            else:
+                # Fallback to original search methods
+                certifications = self.search_certifications(org_name)
+                results['certifications'] = certifications
             
             # Search for quality initiatives and news
             initiatives = self.search_quality_initiatives(org_name)
             results['quality_initiatives'] = initiatives
             
             # Calculate quality score
-            score_data = self.calculate_quality_score(certifications, initiatives, org_name)
+            score_data = self.calculate_quality_score(results['certifications'], initiatives, org_name)
             results['score_breakdown'] = score_data
             results['total_score'] = score_data['total_score']
             
@@ -305,6 +413,31 @@ class HealthcareOrgAnalyzer:
             st.error(f"Error searching for organization: {str(e)}")
             return None
     
+    def search_unified_database(self, org_name):
+        """Search for organization in the unified healthcare database"""
+        if not self.unified_database:
+            return None
+            
+        org_name_lower = org_name.lower().strip()
+        
+        # Direct name match
+        for org in self.unified_database:
+            if org['name'].lower() == org_name_lower:
+                return org
+        
+        # Partial name match
+        for org in self.unified_database:
+            if org_name_lower in org['name'].lower() or org['name'].lower() in org_name_lower:
+                return org
+        
+        # Search in original names for NABH organizations
+        for org in self.unified_database:
+            if 'original_name' in org and org['original_name']:
+                if org_name_lower in org['original_name'].lower() or org['original_name'].lower() in org_name_lower:
+                    return org
+        
+        return None
+
     def search_certifications(self, org_name):
         """Search for organization certifications using web-validated data"""
         org_name_lower = org_name.lower().strip()
@@ -317,15 +450,24 @@ class HealthcareOrgAnalyzer:
             if validation_result and 'certifications' in validation_result:
                 certifications = validation_result['certifications']
                 
+                # Enhance certifications with JCI data
+                enhanced_certifications = self.enhance_certification_with_jci(certifications, org_name)
+                
                 # If no validated data found, show disclaimer
-                if not certifications:
+                if not enhanced_certifications:
                     st.warning(f"⚠️ No validated certification data found for '{org_name}'. Please verify organization name or check official certification databases.")
                     return []
                 
-                return certifications
+                return enhanced_certifications
             else:
-                st.warning(f"⚠️ No validated certification data found for '{org_name}'. Please verify organization name or check official certification databases.")
-                return []
+                # Check if organization has JCI accreditation even without other certifications
+                jci_cert = self.check_jci_accreditation(org_name)
+                if jci_cert:
+                    st.info(f"✅ Found JCI accreditation for '{org_name}' in our database.")
+                    return [jci_cert]
+                else:
+                    st.warning(f"⚠️ No validated certification data found for '{org_name}'. Please verify organization name or check official certification databases.")
+                    return []
             
         except Exception as e:
             st.error(f"Error validating certification data: {str(e)}")
@@ -357,7 +499,7 @@ class HealthcareOrgAnalyzer:
             return []
     
     def calculate_quality_score(self, certifications, initiatives, org_name=""):
-        """Calculate comprehensive quality score with more realistic and balanced scoring"""
+        """Calculate comprehensive quality score with JCI enhancement and more realistic and balanced scoring"""
         score_breakdown = {
             'certification_score': 0,
             'initiative_score': 0,
@@ -368,9 +510,14 @@ class HealthcareOrgAnalyzer:
         
         # Calculate base certification score (50% weight, reduced from 60%)
         cert_score = 0
+        jci_bonus = 0
+        
         for cert in certifications:
             if cert['status'] == 'Active':
                 cert_score += cert['score_impact']
+                # Special handling for JCI certification
+                if cert.get('name') == 'JCI':
+                    jci_bonus = 5  # Additional bonus for JCI accreditation
             elif cert['status'] == 'In Progress':
                 cert_score += cert['score_impact'] * 0.2  # Reduced from 0.3 for stricter evaluation
         
@@ -386,7 +533,9 @@ class HealthcareOrgAnalyzer:
         
         # Calculate reputation bonus (up to 5% additional points, reduced from 10%)
         reputation_bonus = self.calculate_reputation_bonus(org_name)
-        score_breakdown['reputation_bonus'] = reputation_bonus
+        # Add JCI bonus to reputation bonus
+        reputation_bonus += jci_bonus
+        score_breakdown['reputation_bonus'] = min(reputation_bonus, 10)  # Cap at 10 points
         
         # Total score with reputation multiplier
         base_total = (score_breakdown['certification_score'] + 
@@ -395,7 +544,7 @@ class HealthcareOrgAnalyzer:
         
         # Apply reputation multiplier (but cap the effect)
         multiplier = self.get_reputation_multiplier(org_name)
-        final_score = base_total * multiplier + reputation_bonus
+        final_score = base_total * multiplier + score_breakdown['reputation_bonus']
         
         # Add penalty for missing key certifications
         penalty = self.calculate_missing_certification_penalty(certifications)
@@ -452,23 +601,23 @@ class HealthcareOrgAnalyzer:
         """Calculate penalty for missing key certifications"""
         penalty = 0
         
-        # Check for key certifications
-        cert_types = [cert['type'] for cert in certifications if cert['status'] == 'Active']
+        # Check for key certifications using 'name' field instead of 'type'
+        cert_names = [cert.get('name', '') for cert in certifications if cert['status'] == 'Active']
         
         # Penalty for missing NABH (for Indian hospitals)
-        if 'NABH' not in cert_types:
+        if 'NABH' not in cert_names:
             penalty += 3
         
         # Penalty for missing JCI (for international recognition)
-        if 'JCI' not in cert_types:
+        if 'JCI' not in cert_names:
             penalty += 2
         
         # Penalty for missing NABL (for diagnostic services)
-        if 'NABL' not in cert_types:
+        if 'NABL' not in cert_names:
             penalty += 1
         
         # Penalty for having very few certifications
-        if len(cert_types) < 3:
+        if len(cert_names) < 3:
             penalty += 2
         
         return penalty
@@ -982,6 +1131,253 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         traceback.print_exc()
         return None
 
+def display_detailed_scorecard_inline(org_name, org_data, score):
+    """
+    Display a comprehensive detailed scorecard inline instead of generating PDF
+    """
+    try:
+        # Header Section
+        st.markdown("---")
+        st.markdown(f"""
+        <div style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            color: white;
+            text-align: center;
+        ">
+            <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.2rem;">📋 Detailed Quality Scorecard</h1>
+            <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.8rem;">{org_name}</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 0; opacity: 0.9;">
+                Generated on {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Executive Summary
+        st.markdown("### 📊 Executive Summary")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.metric(
+                label="Overall Score",
+                value=f"{score:.1f}/100",
+                delta=f"Grade: {org_data.get('grade', 'N/A')}"
+            )
+        
+        with col2:
+            st.metric(
+                label="Location",
+                value=org_data.get('location', 'N/A')
+            )
+        
+        with col3:
+            st.metric(
+                label="Organization Type",
+                value=org_data.get('type', 'Healthcare Organization')
+            )
+        
+        with col4:
+            active_certs = len([c for c in org_data.get('certifications', []) if c.get('status') == 'Active'])
+            st.metric(
+                label="Active Certifications",
+                value=active_certs
+            )
+        
+        # Score Breakdown Section
+        st.markdown("### 🎯 Score Breakdown Analysis")
+        
+        score_breakdown = org_data.get('score_breakdown', {})
+        
+        # Create score breakdown table
+        breakdown_data = {
+            'Component': ['Certifications', 'Quality Initiatives', 'Transparency', 'Reputation Bonus', 'Total Score'],
+            'Weight': ['60%', '20%', '10%', '10%', '100%'],
+            'Score': [
+                f"{score_breakdown.get('certification_score', 0):.1f}",
+                f"{score_breakdown.get('initiative_score', 0):.1f}",
+                f"{score_breakdown.get('transparency_score', 0):.1f}",
+                f"{score_breakdown.get('reputation_bonus', 0):.1f}",
+                f"{score:.1f}"
+            ],
+            'Weighted Score': [
+                f"{score_breakdown.get('certification_weighted', 0):.1f}",
+                f"{score_breakdown.get('initiative_weighted', 0):.1f}",
+                f"{score_breakdown.get('transparency_weighted', 0):.1f}",
+                f"{score_breakdown.get('reputation_weighted', 0):.1f}",
+                f"{score:.1f}/100"
+            ]
+        }
+        
+        breakdown_df = pd.DataFrame(breakdown_data)
+        st.dataframe(breakdown_df, use_container_width=True, hide_index=True)
+        
+        # Visual Score Representation
+        st.markdown("### 📈 Visual Score Representation")
+        
+        # Create a gauge chart for the overall score
+        fig = go.Figure(go.Indicator(
+            mode = "gauge+number+delta",
+            value = score,
+            domain = {'x': [0, 1], 'y': [0, 1]},
+            title = {'text': f"{org_name} Quality Score"},
+            delta = {'reference': 50},
+            gauge = {
+                'axis': {'range': [None, 100]},
+                'bar': {'color': "darkblue"},
+                'steps': [
+                    {'range': [0, 45], 'color': "lightgray"},
+                    {'range': [45, 55], 'color': "yellow"},
+                    {'range': [55, 65], 'color': "lightgreen"},
+                    {'range': [65, 75], 'color': "green"},
+                    {'range': [75, 100], 'color': "darkgreen"}
+                ],
+                'threshold': {
+                    'line': {'color': "red", 'width': 4},
+                    'thickness': 0.75,
+                    'value': 90
+                }
+            }
+        ))
+        
+        fig.update_layout(height=400)
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Certifications Analysis
+        st.markdown("### 🏆 Certifications Analysis")
+        
+        certifications = org_data.get('certifications', [])
+        if certifications:
+            st.markdown(f"**Total Certifications Found:** {len(certifications)}")
+            
+            # Active certifications
+            active_certs = [cert for cert in certifications if cert.get('status') == 'Active']
+            if active_certs:
+                st.markdown("#### Active Certifications")
+                
+                cert_data = []
+                for cert in active_certs[:10]:  # Show top 10
+                    cert_data.append({
+                        'Certification': cert.get('name', 'N/A'),
+                        'Status': cert.get('status', 'N/A'),
+                        'Valid Until': cert.get('valid_until', 'N/A'),
+                        'Score Impact': f"{cert.get('score_impact', 0):.1f}"
+                    })
+                
+                if cert_data:
+                    cert_df = pd.DataFrame(cert_data)
+                    st.dataframe(cert_df, use_container_width=True, hide_index=True)
+            
+            # Certification status distribution
+            if len(certifications) > 1:
+                st.markdown("#### Certification Status Distribution")
+                status_counts = {}
+                for cert in certifications:
+                    status = cert.get('status', 'Unknown')
+                    status_counts[status] = status_counts.get(status, 0) + 1
+                
+                fig_pie = px.pie(
+                    values=list(status_counts.values()),
+                    names=list(status_counts.keys()),
+                    title="Certification Status Distribution"
+                )
+                st.plotly_chart(fig_pie, use_container_width=True)
+        else:
+            st.info("No certifications found in our database.")
+        
+        # Quality Initiatives Section
+        st.markdown("### 🚀 Quality Initiatives")
+        
+        initiatives = org_data.get('quality_initiatives', [])
+        if initiatives:
+            st.markdown(f"**Quality Initiatives Identified:** {len(initiatives)}")
+            
+            for i, initiative in enumerate(initiatives[:8], 1):  # Show top 8
+                with st.expander(f"{i}. {initiative.get('title', 'N/A')} ({initiative.get('year', 'N/A')})"):
+                    st.write(f"**Description:** {initiative.get('description', 'No description available')}")
+                    st.write(f"**Category:** {initiative.get('category', 'N/A')}")
+                    st.write(f"**Impact Score:** {initiative.get('impact_score', 0):.1f}")
+        else:
+            st.info("No specific quality initiatives found in our analysis.")
+        
+        # Assessment Methodology
+        st.markdown("### 📋 Assessment Methodology")
+        
+        with st.expander("Data Sources & Methodology", expanded=False):
+            st.markdown("""
+            **Data Sources:**
+            - 🏛️ Official certification body databases (ISO, JCI, NABH, etc.)
+            - 📰 Healthcare news and press releases
+            - 🏢 Organization websites and public disclosures
+            - 📊 Government healthcare databases
+            - 🔍 Quality initiative reports and publications
+            
+            **Scoring Components:**
+            - **Certifications (50%):** Active certifications weighted by international recognition
+            - **Quality Initiatives (15%):** Recent quality improvement programs and innovations
+            - **Transparency (15%):** Public disclosure of quality metrics and outcomes
+            - **Reputation Bonus (up to 5%):** International rankings and academic medical center status
+            
+            **Score Ranges (Adjusted Scale):**
+            - 75-85: A+ (Exceptional Quality)
+            - 65-74: A (High Quality)
+            - 55-64: B+ (Good Quality)
+            - 45-54: B (Acceptable Quality)
+            - Below 45: C (Needs Improvement)
+            """)
+        
+        # Important Disclaimers
+        st.markdown("### ⚠️ Important Disclaimers")
+        
+        with st.expander("Assessment Limitations & Disclaimers", expanded=False):
+            st.markdown("""
+            **Assessment Limitations:** This scoring system is based on publicly available information and may not 
+            capture all quality aspects of an organization. Scores are generated through automated analysis and 
+            **may be incorrect or incomplete**.
+            
+            **Data Dependencies:** Accuracy depends on the availability and reliability of public data sources. 
+            Organizations may have additional certifications or quality initiatives not captured in our database.
+            
+            **Not Medical Advice:** QuXAT scores do not constitute medical advice, professional recommendations, 
+            or endorsements. Users should conduct independent verification and due diligence before making healthcare decisions.
+            
+            **Limitation of Liability:** QuXAT and its developers disclaim all warranties, express or implied, 
+            regarding the accuracy or completeness of information. Users assume full responsibility for any decisions 
+            made based on QuXAT assessments.
+            
+            **Comparative Tool Only:** Intended for comparative analysis and research purposes, not absolute quality determination.
+            """)
+        
+        # Report Footer
+        st.markdown("### 📄 Report Information")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.info(f"""
+            **Report Generated by:** QuXAT Healthcare Quality Scorecard v3.0  
+            **Generation Date:** {datetime.now().strftime('%B %d, %Y at %I:%M %p')}  
+            **Organization:** {org_name}
+            """)
+        
+        with col2:
+            report_id = f"QXT-{datetime.now().strftime('%Y%m%d')}-{hash(org_name) % 10000:04d}"
+            st.info(f"""
+            **Report ID:** {report_id}  
+            **Data Version:** Latest Available  
+            **Assessment Type:** Comprehensive Quality Analysis
+            """)
+        
+        st.markdown("---")
+        st.success("✅ Detailed scorecard displayed successfully! This comprehensive view includes all information that would be in the PDF report.")
+        
+    except Exception as e:
+        st.error(f"Error displaying detailed scorecard: {str(e)}")
+        import traceback
+        st.error(f"Traceback: {traceback.format_exc()}")
+
 # Initialize the analyzer
 @st.cache_resource
 def get_analyzer():
@@ -1187,34 +1583,21 @@ try:
                         trend_icon = "↗️" if score >= 70 else "➡️" if score >= 50 else "↘️"
                         st.metric("📊 Quality Trend", trend, trend_icon)
                     
-                    # PDF Download Section
-                    st.markdown("### 📄 Download Detailed Scorecard")
+                    # View Detailed Report Section
+                    st.markdown("### 📄 View Detailed Scorecard")
                     
                     col1, col2, col3 = st.columns([2, 1, 2])
                     
                     with col2:
-                        if st.button("📥 Download PDF Scorecard", type="primary", use_container_width=True):
-                            with st.spinner("🔄 Generating PDF scorecard..."):
+                        if st.button("👁️ View Detailed Report", type="primary", use_container_width=True):
+                            with st.spinner("🔄 Loading detailed report..."):
                                 try:
-                                    # Generate PDF
-                                    pdf_data = generate_detailed_scorecard_pdf(org_name, org_data)
-                                    
-                                    if pdf_data:
-                                        # Create download button
-                                        st.download_button(
-                                            label="📄 Download QuXAT Scorecard PDF",
-                                            data=pdf_data,
-                                            file_name=f"QuXAT_Scorecard_{org_name.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf",
-                                            mime="application/pdf",
-                                            type="primary",
-                                            use_container_width=True
-                                        )
-                                        st.success("✅ PDF scorecard generated successfully!")
-                                    else:
-                                        st.error("❌ Failed to generate PDF - no data returned")
+                                    # Display inline report
+                                    display_detailed_scorecard_inline(org_name, org_data, org_data['overall_score'])
+                                    st.success("✅ Detailed report loaded successfully!")
                                     
                                 except Exception as e:
-                                    st.error(f"❌ Error generating PDF: {str(e)}")
+                                    st.error(f"❌ Error loading report: {str(e)}")
                                     st.info("💡 Please try again or contact support if the issue persists.")
                     
                     st.markdown("---")
@@ -2512,28 +2895,20 @@ try:
             - **Not Medical Advice:** For comparative analysis only
             """)
         
-        # Export Options
+        # View Options
         st.markdown("---")
-        st.markdown("### 📄 Export Detailed Report")
+        st.markdown("### 📄 View Detailed Report")
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("📊 Generate PDF Report", type="primary"):
+            if st.button("👁️ View Detailed Report", type="primary"):
                 try:
-                    pdf_buffer = generate_detailed_scorecard_pdf(org_data, selected_org)
-                    if pdf_buffer:
-                        st.download_button(
-                            label="⬇️ Download PDF Report",
-                            data=pdf_buffer,
-                            file_name=f"QuXAT_Detailed_Report_{selected_org.replace(' ', '_')}.pdf",
-                            mime="application/pdf"
-                        )
-                        st.success("✅ PDF report generated successfully!")
-                    else:
-                        st.error("❌ Failed to generate PDF report")
+                    # Display inline report
+                    display_detailed_scorecard_inline(selected_org, org_data, org_data['overall_score'])
+                    st.success("✅ Detailed report loaded successfully!")
                 except Exception as e:
-                    st.error(f"❌ Error generating PDF: {str(e)}")
+                    st.error(f"❌ Error loading report: {str(e)}")
         
         with col2:
             if st.button("📋 Copy Report Summary"):

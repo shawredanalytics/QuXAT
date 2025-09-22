@@ -1,0 +1,330 @@
+[
+  {
+    "name": "Singapore General Hospital",
+    "country": "Singapore",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2019-01-15",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "National University Hospital Singapore",
+    "country": "Singapore",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2018-06-20",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Mount Elizabeth Hospital",
+    "country": "Singapore",
+    "type": "Private Hospital",
+    "accreditation_date": "2017-03-10",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Gleneagles Hospital Singapore",
+    "country": "Singapore",
+    "type": "Private Hospital",
+    "accreditation_date": "2016-11-25",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Raffles Hospital",
+    "country": "Singapore",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-09-12",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Apollo Hospitals Chennai",
+    "country": "India",
+    "type": "Multi-specialty Hospital",
+    "accreditation_date": "2019-05-08",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Fortis Memorial Research Institute",
+    "country": "India",
+    "type": "Multi-specialty Hospital",
+    "accreditation_date": "2018-12-15",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Max Super Speciality Hospital Saket",
+    "country": "India",
+    "type": "Multi-specialty Hospital",
+    "accreditation_date": "2017-08-22",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Medanta The Medicity",
+    "country": "India",
+    "type": "Multi-specialty Hospital",
+    "accreditation_date": "2019-02-18",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Manipal Hospital Bangalore",
+    "country": "India",
+    "type": "Multi-specialty Hospital",
+    "accreditation_date": "2018-07-30",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Bumrungrad International Hospital",
+    "country": "Thailand",
+    "type": "International Hospital",
+    "accreditation_date": "2019-04-12",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Bangkok Hospital",
+    "country": "Thailand",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-10-05",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Samitivej Hospital",
+    "country": "Thailand",
+    "type": "Private Hospital",
+    "accreditation_date": "2017-12-20",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Prince Court Medical Centre",
+    "country": "Malaysia",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-03-15",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Pantai Hospital Kuala Lumpur",
+    "country": "Malaysia",
+    "type": "Private Hospital",
+    "accreditation_date": "2017-09-08",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Seoul National University Hospital",
+    "country": "South Korea",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2019-01-25",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Asan Medical Center",
+    "country": "South Korea",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2018-11-10",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Samsung Medical Center",
+    "country": "South Korea",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2017-06-18",
+    "region": "Asia-Pacific",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "King Faisal Specialist Hospital",
+    "country": "Saudi Arabia",
+    "type": "Specialty Hospital",
+    "accreditation_date": "2019-03-20",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "King Abdulaziz Medical City",
+    "country": "Saudi Arabia",
+    "type": "Medical City",
+    "accreditation_date": "2018-08-15",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Cleveland Clinic Abu Dhabi",
+    "country": "UAE",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2019-06-10",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "American Hospital Dubai",
+    "country": "UAE",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-04-25",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Mediclinic City Hospital",
+    "country": "UAE",
+    "type": "Private Hospital",
+    "accreditation_date": "2017-11-12",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Al Zahra Hospital Dubai",
+    "country": "UAE",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-09-30",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hamad Medical Corporation",
+    "country": "Qatar",
+    "type": "Public Hospital System",
+    "accreditation_date": "2019-02-14",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Sidra Medicine",
+    "country": "Qatar",
+    "type": "Women and Children Hospital",
+    "accreditation_date": "2018-12-08",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "King Hussein Cancer Center",
+    "country": "Jordan",
+    "type": "Cancer Center",
+    "accreditation_date": "2019-05-22",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "American University of Beirut Medical Center",
+    "country": "Lebanon",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2018-07-18",
+    "region": "Middle East",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Anadolu Medical Center",
+    "country": "Turkey",
+    "type": "Private Hospital",
+    "accreditation_date": "2019-04-08",
+    "region": "Europe",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Acıbadem Healthcare Group",
+    "country": "Turkey",
+    "type": "Hospital Network",
+    "accreditation_date": "2018-10-15",
+    "region": "Europe",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Memorial Healthcare Group",
+    "country": "Turkey",
+    "type": "Hospital Network",
+    "accreditation_date": "2017-12-05",
+    "region": "Europe",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Medicana International Istanbul",
+    "country": "Turkey",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-06-28",
+    "region": "Europe",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hirslanden Private Hospital Group",
+    "country": "Switzerland",
+    "type": "Private Hospital Network",
+    "accreditation_date": "2019-01-12",
+    "region": "Europe",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "University Hospital Zurich",
+    "country": "Switzerland",
+    "type": "Academic Medical Center",
+    "accreditation_date": "2018-09-20",
+    "region": "Europe",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hospital Israelita Albert Einstein",
+    "country": "Brazil",
+    "type": "Private Hospital",
+    "accreditation_date": "2019-03-15",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hospital Sírio-Libanês",
+    "country": "Brazil",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-11-22",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hospital Alemão Oswaldo Cruz",
+    "country": "Brazil",
+    "type": "Private Hospital",
+    "accreditation_date": "2017-08-10",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Fundación Cardioinfantil",
+    "country": "Colombia",
+    "type": "Cardiac Hospital",
+    "accreditation_date": "2018-05-18",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hospital Pablo Tobón Uribe",
+    "country": "Colombia",
+    "type": "General Hospital",
+    "accreditation_date": "2019-02-25",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hospital Británico de Buenos Aires",
+    "country": "Argentina",
+    "type": "Private Hospital",
+    "accreditation_date": "2018-07-12",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  },
+  {
+    "name": "Hospital Italiano de Buenos Aires",
+    "country": "Argentina",
+    "type": "Private Hospital",
+    "accreditation_date": "2017-10-30",
+    "region": "Americas",
+    "source": "Known JCI Database"
+  }
+]

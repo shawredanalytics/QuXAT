@@ -1,0 +1,15 @@
+runtime: python311
+
+env_variables:
+  PORT: 8080
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+
+entrypoint: streamlit run streamlit_app.py --server.port=$PORT --server.address=0.0.0.0 --server.enableCORS=false --server.enableXsrfProtection=false

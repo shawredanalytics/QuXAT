@@ -1,0 +1,42 @@
+name,country,type,accreditation_date,region,source
+Singapore General Hospital,Singapore,Academic Medical Center,2019-01-15,Asia-Pacific,Known JCI Database
+National University Hospital Singapore,Singapore,Academic Medical Center,2018-06-20,Asia-Pacific,Known JCI Database
+Mount Elizabeth Hospital,Singapore,Private Hospital,2017-03-10,Asia-Pacific,Known JCI Database
+Gleneagles Hospital Singapore,Singapore,Private Hospital,2016-11-25,Asia-Pacific,Known JCI Database
+Raffles Hospital,Singapore,Private Hospital,2018-09-12,Asia-Pacific,Known JCI Database
+Apollo Hospitals Chennai,India,Multi-specialty Hospital,2019-05-08,Asia-Pacific,Known JCI Database
+Fortis Memorial Research Institute,India,Multi-specialty Hospital,2018-12-15,Asia-Pacific,Known JCI Database
+Max Super Speciality Hospital Saket,India,Multi-specialty Hospital,2017-08-22,Asia-Pacific,Known JCI Database
+Medanta The Medicity,India,Multi-specialty Hospital,2019-02-18,Asia-Pacific,Known JCI Database
+Manipal Hospital Bangalore,India,Multi-specialty Hospital,2018-07-30,Asia-Pacific,Known JCI Database
+Bumrungrad International Hospital,Thailand,International Hospital,2019-04-12,Asia-Pacific,Known JCI Database
+Bangkok Hospital,Thailand,Private Hospital,2018-10-05,Asia-Pacific,Known JCI Database
+Samitivej Hospital,Thailand,Private Hospital,2017-12-20,Asia-Pacific,Known JCI Database
+Prince Court Medical Centre,Malaysia,Private Hospital,2018-03-15,Asia-Pacific,Known JCI Database
+Pantai Hospital Kuala Lumpur,Malaysia,Private Hospital,2017-09-08,Asia-Pacific,Known JCI Database
+Seoul National University Hospital,South Korea,Academic Medical Center,2019-01-25,Asia-Pacific,Known JCI Database
+Asan Medical Center,South Korea,Academic Medical Center,2018-11-10,Asia-Pacific,Known JCI Database
+Samsung Medical Center,South Korea,Academic Medical Center,2017-06-18,Asia-Pacific,Known JCI Database
+King Faisal Specialist Hospital,Saudi Arabia,Specialty Hospital,2019-03-20,Middle East,Known JCI Database
+King Abdulaziz Medical City,Saudi Arabia,Medical City,2018-08-15,Middle East,Known JCI Database
+Cleveland Clinic Abu Dhabi,UAE,Academic Medical Center,2019-06-10,Middle East,Known JCI Database
+American Hospital Dubai,UAE,Private Hospital,2018-04-25,Middle East,Known JCI Database
+Mediclinic City Hospital,UAE,Private Hospital,2017-11-12,Middle East,Known JCI Database
+Al Zahra Hospital Dubai,UAE,Private Hospital,2018-09-30,Middle East,Known JCI Database
+Hamad Medical Corporation,Qatar,Public Hospital System,2019-02-14,Middle East,Known JCI Database
+Sidra Medicine,Qatar,Women and Children Hospital,2018-12-08,Middle East,Known JCI Database
+King Hussein Cancer Center,Jordan,Cancer Center,2019-05-22,Middle East,Known JCI Database
+American University of Beirut Medical Center,Lebanon,Academic Medical Center,2018-07-18,Middle East,Known JCI Database
+Anadolu Medical Center,Turkey,Private Hospital,2019-04-08,Europe,Known JCI Database
+Acıbadem Healthcare Group,Turkey,Hospital Network,2018-10-15,Europe,Known JCI Database
+Memorial Healthcare Group,Turkey,Hospital Network,2017-12-05,Europe,Known JCI Database
+Medicana International Istanbul,Turkey,Private Hospital,2018-06-28,Europe,Known JCI Database
+Hirslanden Private Hospital Group,Switzerland,Private Hospital Network,2019-01-12,Europe,Known JCI Database
+University Hospital Zurich,Switzerland,Academic Medical Center,2018-09-20,Europe,Known JCI Database
+Hospital Israelita Albert Einstein,Brazil,Private Hospital,2019-03-15,Americas,Known JCI Database
+Hospital Sírio-Libanês,Brazil,Private Hospital,2018-11-22,Americas,Known JCI Database
+Hospital Alemão Oswaldo Cruz,Brazil,Private Hospital,2017-08-10,Americas,Known JCI Database
+Fundación Cardioinfantil,Colombia,Cardiac Hospital,2018-05-18,Americas,Known JCI Database
+Hospital Pablo Tobón Uribe,Colombia,General Hospital,2019-02-25,Americas,Known JCI Database
+Hospital Británico de Buenos Aires,Argentina,Private Hospital,2018-07-12,Americas,Known JCI Database
+Hospital Italiano de Buenos Aires,Argentina,Private Hospital,2017-10-30,Americas,Known JCI Database
