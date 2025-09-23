@@ -124,7 +124,7 @@ class HealthcareDataValidator:
             # Expanded known organizations with validated NABH data
             known_nabh_orgs = {
                 'apollo hospitals': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-12-31',
                     'score_impact': 25,
@@ -133,7 +133,7 @@ class HealthcareDataValidator:
                     'issuer': 'NABH'
                 },
                 'fortis healthcare': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-08-15',
                     'score_impact': 25,
@@ -142,7 +142,7 @@ class HealthcareDataValidator:
                     'issuer': 'NABH'
                 },
                 'max healthcare': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-10-20',
                     'score_impact': 25,
@@ -151,7 +151,7 @@ class HealthcareDataValidator:
                     'issuer': 'NABH'
                 },
                 'medanta': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-11-30',
                     'score_impact': 25,
@@ -160,7 +160,7 @@ class HealthcareDataValidator:
                     'issuer': 'NABH'
                 },
                 'aiims delhi': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-09-15',
                     'score_impact': 25,
@@ -169,7 +169,7 @@ class HealthcareDataValidator:
                     'issuer': 'NABH'
                 },
                 'manipal hospitals': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-07-25',
                     'score_impact': 25,
@@ -178,7 +178,7 @@ class HealthcareDataValidator:
                     'issuer': 'NABH'
                 },
                 'narayana health': {
-                    'name': 'NABH',
+                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                     'status': 'Active',
                     'valid_until': '2025-06-10',
                     'score_impact': 25,
@@ -208,6 +208,7 @@ class HealthcareDataValidator:
     def _validate_nabl_certification(self, org_name: str) -> List[Dict]:
         """
         Validate NABL certification from official NABL database
+        Returns both certification and accreditation data for NABL
         """
         try:
             logger.info(f"Checking NABL database for {org_name}")
@@ -215,67 +216,144 @@ class HealthcareDataValidator:
             # Expanded known organizations with validated NABL data
             known_nabl_orgs = {
                 'satya scan kakinada': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-08-15',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5025',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-08-15',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5025',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-08-15',
+                        'valid_until': '2025-08-15',
+                        'certificate_number': 'TC-5025',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
+                    }
                 },
                 'satya scan': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-08-15',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5025',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-08-15',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5025',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-08-15',
+                        'valid_until': '2025-08-15',
+                        'certificate_number': 'TC-5025',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
+                    }
                 },
                 'dr lal pathlabs': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-12-31',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5001',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-12-31',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5001',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-01-01',
+                        'valid_until': '2025-12-31',
+                        'certificate_number': 'TC-5001',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for comprehensive medical testing services'
+                    }
                 },
                 'srl diagnostics': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-11-20',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5002',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-11-20',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5002',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-11-20',
+                        'valid_until': '2025-11-20',
+                        'certificate_number': 'TC-5002',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for diagnostic testing services'
+                    }
                 },
                 'metropolis healthcare': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-10-15',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5003',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-10-15',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5003',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-10-15',
+                        'valid_until': '2025-10-15',
+                        'certificate_number': 'TC-5003',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for healthcare diagnostic services'
+                    }
                 },
                 'thyrocare': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-09-30',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5004',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-09-30',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5004',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-09-30',
+                        'valid_until': '2025-09-30',
+                        'certificate_number': 'TC-5004',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for specialized diagnostic testing'
+                    }
                 },
                 'quest diagnostics': {
-                    'name': 'NABL',
-                    'status': 'Active',
-                    'valid_until': '2025-08-25',
-                    'score_impact': 15,
-                    'certificate_number': 'TC-5005',
-                    'scope': 'Medical Testing Laboratory',
-                    'issuer': 'NABL'
+                    'certification': {
+                        'name': 'NABL Certification',
+                        'status': 'Active',
+                        'valid_until': '2025-08-25',
+                        'score_impact': 15,
+                        'certificate_number': 'TC-5005',
+                        'scope': 'Medical Testing Laboratory',
+                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                        'type': 'Laboratory Certification'
+                    },
+                    'accreditation': {
+                        'name': 'NABL Laboratory Accreditation',
+                        'level': 'ISO/IEC 17025:2017 Accredited',
+                        'awarded_date': '2023-08-25',
+                        'valid_until': '2025-08-25',
+                        'certificate_number': 'TC-5005',
+                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical diagnostic services'
+                    }
                 }
             }
             
@@ -283,18 +361,101 @@ class HealthcareDataValidator:
             
             # Check for exact matches first
             if org_key in known_nabl_orgs:
-                return [known_nabl_orgs[org_key]]
+                nabl_data = known_nabl_orgs[org_key]
+                return [nabl_data['certification']]  # Return certification data for the main certification list
             
             # Check for partial matches
             for lab_key, data in known_nabl_orgs.items():
                 if lab_key in org_key or org_key in lab_key:
-                    return [data]
+                    return [data['certification']]  # Return certification data for the main certification list
             
             return []
             
         except Exception as e:
             logger.error(f"Error validating NABL certification: {str(e)}")
             return []
+    
+    def get_nabl_accreditation(self, org_name: str) -> Dict:
+        """
+        Get NABL accreditation data for the accreditations section
+        """
+        try:
+            # Use the same data structure as _validate_nabl_certification
+            known_nabl_orgs = {
+                'satya scan kakinada': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-08-15',
+                    'valid_until': '2025-08-15',
+                    'certificate_number': 'TC-5025',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
+                },
+                'satya scan': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-08-15',
+                    'valid_until': '2025-08-15',
+                    'certificate_number': 'TC-5025',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
+                },
+                'dr lal pathlabs': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-01-01',
+                    'valid_until': '2025-12-31',
+                    'certificate_number': 'TC-5001',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for comprehensive medical testing services'
+                },
+                'srl diagnostics': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-11-20',
+                    'valid_until': '2025-11-20',
+                    'certificate_number': 'TC-5002',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for diagnostic testing services'
+                },
+                'metropolis healthcare': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-10-15',
+                    'valid_until': '2025-10-15',
+                    'certificate_number': 'TC-5003',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for healthcare diagnostic services'
+                },
+                'thyrocare': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-09-30',
+                    'valid_until': '2025-09-30',
+                    'certificate_number': 'TC-5004',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for specialized diagnostic testing'
+                },
+                'quest diagnostics': {
+                    'name': 'NABL Laboratory Accreditation',
+                    'level': 'ISO/IEC 17025:2017 Accredited',
+                    'awarded_date': '2023-08-25',
+                    'valid_until': '2025-08-25',
+                    'certificate_number': 'TC-5005',
+                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical diagnostic services'
+                }
+            }
+            
+            org_key = org_name.lower().strip()
+            
+            # Check for exact matches first
+            if org_key in known_nabl_orgs:
+                return known_nabl_orgs[org_key]
+            
+            # Check for partial matches
+            for lab_key, data in known_nabl_orgs.items():
+                if lab_key in org_key or org_key in lab_key:
+                    return data
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error getting NABL accreditation: {str(e)}")
+            return None
     
     def _validate_jci_certification(self, org_name: str) -> List[Dict]:
         """
@@ -306,7 +467,7 @@ class HealthcareDataValidator:
             # Expanded JCI accredited organizations
             known_jci_orgs = {
                 'mayo clinic': {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-12-31',
                     'score_impact': 35,
@@ -315,7 +476,7 @@ class HealthcareDataValidator:
                     'issuer': 'JCI'
                 },
                 'cleveland clinic': {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-10-15',
                     'score_impact': 35,
@@ -324,7 +485,7 @@ class HealthcareDataValidator:
                     'issuer': 'JCI'
                 },
                 'johns hopkins': {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-11-30',
                     'score_impact': 35,
@@ -333,7 +494,7 @@ class HealthcareDataValidator:
                     'issuer': 'JCI'
                 },
                 'singapore general hospital': {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-09-20',
                     'score_impact': 35,
@@ -342,7 +503,7 @@ class HealthcareDataValidator:
                     'issuer': 'JCI'
                 },
                 'bumrungrad international hospital': {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-08-15',
                     'score_impact': 35,
@@ -351,7 +512,7 @@ class HealthcareDataValidator:
                     'issuer': 'JCI'
                 },
                 'apollo hospitals chennai': {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-07-10',
                     'score_impact': 35,

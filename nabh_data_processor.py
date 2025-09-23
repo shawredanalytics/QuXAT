@@ -143,7 +143,7 @@ class NABHDataProcessor:
                     'country': location_info['country'],
                     'hospital_type': self.determine_hospital_type(hospital.get('name', '')),
                     'certifications': [{
-                        'name': 'NABH',
+                        'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
                         'type': 'NABH Accreditation',
                         'status': hospital.get('status', 'Unknown'),
                         'accreditation_date': self.standardize_date(hospital.get('valid_from', '')),

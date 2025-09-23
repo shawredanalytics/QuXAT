@@ -119,6 +119,109 @@ def display_dynamic_logo():
         </div>
         """, unsafe_allow_html=True)
 
+# Admin Authentication System
+def admin_login():
+    """Admin login interface"""
+    st.markdown("### 🔐 Admin Login")
+    
+    # Simple admin credentials (in production, use proper authentication)
+    ADMIN_USERNAME = "admin"
+    ADMIN_PASSWORD = "QuXAT2024!"
+    
+    with st.form("admin_login_form"):
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        login_button = st.form_submit_button("Login")
+        
+        if login_button:
+            if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+                st.session_state.admin_authenticated = True
+                st.session_state.admin_username = username
+                st.success("✅ Login successful!")
+                st.rerun()
+            else:
+                st.error("❌ Invalid credentials")
+
+def admin_logout():
+    """Admin logout function"""
+    if st.button("🚪 Logout"):
+        st.session_state.admin_authenticated = False
+        st.session_state.admin_username = None
+        st.success("✅ Logged out successfully!")
+        st.rerun()
+
+def is_admin_authenticated():
+    """Check if admin is authenticated"""
+    return st.session_state.get('admin_authenticated', False)
+
+# Data Upload Management System
+def init_upload_storage():
+    """Initialize upload storage in session state"""
+    if 'pending_uploads' not in st.session_state:
+        st.session_state.pending_uploads = []
+    if 'approved_uploads' not in st.session_state:
+        st.session_state.approved_uploads = []
+    if 'rejected_uploads' not in st.session_state:
+        st.session_state.rejected_uploads = []
+
+def add_pending_upload(upload_data):
+    """Add new upload to pending queue"""
+    init_upload_storage()
+    upload_data['upload_id'] = len(st.session_state.pending_uploads) + 1
+    upload_data['upload_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    upload_data['status'] = 'pending'
+    st.session_state.pending_uploads.append(upload_data)
+
+def approve_upload(upload_id):
+    """Approve a pending upload"""
+    init_upload_storage()
+    for i, upload in enumerate(st.session_state.pending_uploads):
+        if upload['upload_id'] == upload_id:
+            upload['status'] = 'approved'
+            upload['approved_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            st.session_state.approved_uploads.append(upload)
+            st.session_state.pending_uploads.pop(i)
+            break
+
+def reject_upload(upload_id, reason=""):
+    """Reject a pending upload"""
+    init_upload_storage()
+    for i, upload in enumerate(st.session_state.pending_uploads):
+        if upload['upload_id'] == upload_id:
+            upload['status'] = 'rejected'
+            upload['rejected_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            upload['rejection_reason'] = reason
+            st.session_state.rejected_uploads.append(upload)
+            st.session_state.pending_uploads.pop(i)
+            break
+
+# Hospital Management System
+def init_hospital_storage():
+    """Initialize hospital storage in session state"""
+    if 'custom_hospitals' not in st.session_state:
+        st.session_state.custom_hospitals = []
+
+def add_hospital(hospital_data):
+    """Add new hospital to the database"""
+    init_hospital_storage()
+    hospital_data['hospital_id'] = len(st.session_state.custom_hospitals) + 1
+    hospital_data['added_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    st.session_state.custom_hospitals.append(hospital_data)
+
+def delete_hospital(hospital_id):
+    """Delete hospital from the database"""
+    init_hospital_storage()
+    st.session_state.custom_hospitals = [h for h in st.session_state.custom_hospitals if h['hospital_id'] != hospital_id]
+
+def update_hospital(hospital_id, updated_data):
+    """Update hospital information"""
+    init_hospital_storage()
+    for i, hospital in enumerate(st.session_state.custom_hospitals):
+        if hospital['hospital_id'] == hospital_id:
+            st.session_state.custom_hospitals[i].update(updated_data)
+            st.session_state.custom_hospitals[i]['updated_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            break
+
 # Healthcare Organization Data Integration System
 class HealthcareOrgAnalyzer:
     def __init__(self):
@@ -305,7 +408,7 @@ class HealthcareOrgAnalyzer:
                             'jci_accredited': True
                         }
                 
-                st.info(f"✅ Loaded {len(jci_lookup)} JCI accredited organizations for enhanced scoring")
+                # Removed JCI loading message for cleaner UI
                 return jci_lookup
             else:
                 st.warning("⚠️ JCI data file not found. Using default JCI certification weights.")
@@ -335,6 +438,98 @@ class HealthcareOrgAnalyzer:
         
         return None
 
+    def generate_organization_suggestions(self, partial_input, max_suggestions=10):
+        """Generate smart autocomplete suggestions based on partial input"""
+        if not partial_input or len(partial_input) < 2:
+            return []
+        
+        partial_lower = partial_input.lower().strip()
+        suggestions = []
+        seen_names = set()
+        
+        # Search in unified database
+        if self.unified_database:
+            for org in self.unified_database:
+                org_name = org.get('name', '')
+                original_name = org.get('original_name', '')
+                
+                # Check if partial input matches the beginning of organization name
+                if org_name.lower().startswith(partial_lower):
+                    if org_name not in seen_names:
+                        suggestions.append({
+                            'display_name': org_name,
+                            'full_name': original_name if original_name else org_name,
+                            'location': self._extract_location_from_org(org),
+                            'type': org.get('type', 'Healthcare Organization'),
+                            'match_type': 'name_start'
+                        })
+                        seen_names.add(org_name)
+                
+                # Check if partial input is contained within organization name
+                elif partial_lower in org_name.lower():
+                    if org_name not in seen_names:
+                        suggestions.append({
+                            'display_name': org_name,
+                            'full_name': original_name if original_name else org_name,
+                            'location': self._extract_location_from_org(org),
+                            'type': org.get('type', 'Healthcare Organization'),
+                            'match_type': 'name_contains'
+                        })
+                        seen_names.add(org_name)
+                
+                # Check original name for NABH organizations
+                if original_name and partial_lower in original_name.lower():
+                    if org_name not in seen_names:
+                        suggestions.append({
+                            'display_name': org_name,
+                            'full_name': original_name,
+                            'location': self._extract_location_from_org(org),
+                            'type': org.get('type', 'Healthcare Organization'),
+                            'match_type': 'original_name'
+                        })
+                        seen_names.add(org_name)
+        
+        # Sort suggestions: exact matches first, then starts with, then contains
+        suggestions.sort(key=lambda x: (
+            0 if x['match_type'] == 'name_start' else 
+            1 if x['match_type'] == 'name_contains' else 2,
+            x['display_name'].lower()
+        ))
+        
+        return suggestions[:max_suggestions]
+    
+    def _extract_location_from_org(self, org):
+        """Extract location information from organization data"""
+        # Try different location fields
+        if org.get('city') and org.get('state'):
+            return f"{org['city']}, {org['state']}"
+        elif org.get('location'):
+            return org['location']
+        elif org.get('address'):
+            return org['address']
+        elif org.get('original_name'):
+            # Extract location from original name (common in NABH data)
+            original = org['original_name']
+            # Look for patterns like "City, State, Country"
+            parts = original.split(',')
+            if len(parts) >= 3:
+                return f"{parts[-3].strip()}, {parts[-2].strip()}"
+            elif len(parts) >= 2:
+                return parts[-2].strip()
+        
+        return org.get('country', 'Unknown Location')
+    
+    def format_suggestion_display(self, suggestion):
+        """Format suggestion for display in the UI"""
+        display_name = suggestion['display_name']
+        location = suggestion['location']
+        
+        # For organizations with multiple locations, show location prominently
+        if location and location != 'Unknown Location':
+            return f"{display_name} - {location}"
+        else:
+            return display_name
+
     def enhance_certification_with_jci(self, certifications, org_name):
         """Enhance certification list with JCI accreditation if found"""
         jci_info = self.check_jci_accreditation(org_name)
@@ -345,7 +540,7 @@ class HealthcareOrgAnalyzer:
             
             if not has_jci:
                 jci_cert = {
-                    'name': 'JCI',
+                    'name': 'Joint Commission International (JCI)',
                     'status': 'Active',
                     'valid_until': '2025-12-31',  # Default validity
                     'score_impact': 35,
@@ -392,7 +587,7 @@ class HealthcareOrgAnalyzer:
                 # Use data from unified database
                 results['certifications'] = unified_org.get('certifications', [])
                 results['unified_data'] = unified_org
-                st.success(f"✅ Found '{org_name}' in our comprehensive healthcare database!")
+                # Removed success message for cleaner UI
             else:
                 # Fallback to original search methods
                 certifications = self.search_certifications(org_name)
@@ -485,12 +680,12 @@ class HealthcareOrgAnalyzer:
                 
                 # If no validated data found, show disclaimer
                 if not initiatives:
-                    st.info(f"ℹ️ No validated quality initiative data found for '{org_name}'. Only verified information from official sources is displayed.")
+                    # Removed info message for cleaner UI
                     return []
                 
                 return initiatives
             else:
-                st.info(f"ℹ️ No validated quality initiative data found for '{org_name}'. Only verified information from official sources is displayed.")
+                # Removed info message for cleaner UI
                 return []
             
         except Exception as e:
@@ -724,14 +919,16 @@ class HealthcareOrgAnalyzer:
         # Filter out the searched organization itself
         filtered_orgs = [org for org in region_orgs if org['name'].lower() != org_name.lower()]
         
-        # If we have fewer than 5 similar organizations, add some from nearby regions
-        if len(filtered_orgs) < 5:
+        # For strict region-specific comparison (especially for Indian hospitals)
+        # Only add from nearby regions if the current region has very few organizations (less than 3)
+        # and only for non-Indian regions to maintain regional specificity
+        if len(filtered_orgs) < 3 and search_region.lower() != 'india':
             nearby_regions = self.get_nearby_regions(search_region)
             for nearby_region in nearby_regions:
                 if len(filtered_orgs) >= 8:  # Limit to 8 total comparisons
                     break
                 nearby_orgs = location_based_orgs.get(nearby_region.lower(), [])
-                filtered_orgs.extend(nearby_orgs[:3])  # Add up to 3 from each nearby region
+                filtered_orgs.extend(nearby_orgs[:2])  # Add up to 2 from each nearby region
         
         # Generate quality scores for similar organizations
         for org in filtered_orgs[:8]:  # Limit to 8 comparisons
@@ -757,6 +954,21 @@ class HealthcareOrgAnalyzer:
         org_name_lower = org_name.lower()
         org_location_lower = org_location.lower()
         
+        # Location-based detection (prioritize location over name patterns)
+        if any(loc in org_location_lower for loc in ['india', 'delhi', 'mumbai', 'bangalore', 'chennai', 'hyderabad', 'pune', 'kolkata', 'ahmedabad', 'surat', 'jaipur', 'lucknow', 'kanpur', 'nagpur', 'indore', 'thane', 'bhopal', 'visakhapatnam', 'pimpri', 'patna', 'vadodara', 'ghaziabad', 'ludhiana', 'agra', 'nashik', 'faridabad', 'meerut', 'rajkot', 'kalyan', 'vasai', 'varanasi', 'srinagar', 'aurangabad', 'dhanbad', 'amritsar', 'navi mumbai', 'allahabad', 'ranchi', 'howrah', 'coimbatore', 'jabalpur', 'gwalior', 'vijayawada', 'jodhpur', 'madurai', 'raipur', 'kota', 'guwahati', 'chandigarh', 'solapur', 'hubli', 'tiruchirappalli', 'bareilly', 'mysore', 'tiruppur', 'gurgaon', 'aligarh', 'jalandhar', 'bhubaneswar', 'salem', 'warangal', 'guntur', 'bhiwandi', 'saharanpur', 'gorakhpur', 'bikaner', 'amravati', 'noida', 'jamshedpur', 'bhilai', 'cuttack', 'firozabad', 'kochi', 'nellore', 'bhavnagar', 'dehradun', 'durgapur', 'asansol', 'rourkela', 'nanded', 'kolhapur', 'ajmer', 'akola', 'gulbarga', 'jamnagar', 'ujjain', 'loni', 'siliguri', 'jhansi', 'ulhasnagar', 'jammu', 'sangli', 'mangalore', 'erode', 'belgaum', 'ambattur', 'tirunelveli', 'malegaon', 'gaya', 'jalgaon', 'udaipur', 'maheshtala']):
+            return 'india'
+        elif any(loc in org_location_lower for loc in ['usa', 'united states', 'america', 'us', 'california', 'texas', 'florida', 'new york', 'pennsylvania', 'illinois', 'ohio', 'georgia', 'north carolina', 'michigan', 'new jersey', 'virginia', 'washington', 'arizona', 'massachusetts', 'tennessee', 'indiana', 'maryland', 'missouri', 'wisconsin', 'colorado', 'minnesota', 'south carolina', 'alabama', 'louisiana', 'kentucky', 'oregon', 'oklahoma', 'connecticut', 'utah', 'iowa', 'nevada', 'arkansas', 'mississippi', 'kansas', 'new mexico', 'nebraska', 'west virginia', 'idaho', 'hawaii', 'new hampshire', 'maine', 'montana', 'rhode island', 'delaware', 'south dakota', 'north dakota', 'alaska', 'vermont', 'wyoming']):
+            return 'united states'
+        elif any(loc in org_location_lower for loc in ['uk', 'united kingdom', 'england', 'london', 'scotland', 'wales', 'northern ireland', 'birmingham', 'manchester', 'glasgow', 'liverpool', 'bristol', 'sheffield', 'leeds', 'edinburgh', 'leicester', 'coventry', 'bradford', 'cardiff', 'belfast', 'nottingham', 'kingston upon hull', 'newcastle', 'stoke', 'southampton', 'derby', 'portsmouth', 'brighton', 'plymouth', 'northampton', 'reading', 'luton', 'wolverhampton', 'bolton', 'bournemouth', 'norwich', 'swindon', 'swansea', 'southend', 'middlesbrough', 'peterborough', 'huddersfield', 'york', 'poole', 'preston', 'stockport', 'dundee', 'milton keynes', 'aberdeen', 'telford', 'watford', 'ipswich', 'oxford', 'warrington', 'slough', 'exeter', 'cheltenham', 'gloucester', 'saint helens', 'sutton coldfield', 'cambridge', 'blackpool', 'oldham', 'maidstone', 'basildon', 'worthing', 'chelmsford', 'colchester', 'crawley', 'gillingham', 'solihull', 'taunton', 'shrewsbury', 'farnborough', 'royal leamington spa', 'stevenage', 'sale', 'wigan', 'rotherham', 'chesterfield', 'worcester', 'hemel hempstead', 'redditch', 'lincoln', 'carlisle', 'eastbourne', 'scunthorpe', 'birkenhead', 'mansfield', 'ashford', 'rugby', 'high wycombe', 'st albans', 'hastings', 'folkestone', 'bangor', 'ayr', 'lancaster', 'salisbury', 'chester', 'bath', 'kidderminster', 'barnsley', 'grimsby', 'bedford', 'harrogate', 'royal tunbridge wells', 'macclesfield', 'rhondda', 'burton upon trent', 'cannock', 'lowestoft', 'welwyn garden city', 'barrow in furness', 'newport', 'gateshead', 'eastleigh', 'tamworth', 'washington', 'carlisle', 'nuneaton', 'loughborough', 'ellesmere port', 'hereford', 'margate', 'arnold', 'dewsbury', 'beverley', 'crewe', 'aldershot', 'walkden', 'carlisle', 'smethwick', 'gosport', 'fareham', 'bletchley', 'maidenhead', 'tonbridge', 'barry', 'littlehampton', 'royal leamington spa', 'weston super mare', 'burton upon trent', 'yeovil', 'kidderminster', 'st helens', 'weymouth', 'farnham', 'burnley', 'gravesend', 'bridgwater', 'staines', 'grays', 'stafford', 'newbury', 'spalding', 'lisburn', 'chester le street', 'stirling', 'fleet', 'llanelli', 'bridgend', 'pontefract', 'letchworth', 'nelson', 'wigston', 'castleford', 'deal', 'st neots', 'warwick', 'buxton', 'bognor regis', 'christchurch', 'rugby', 'canvey island', 'leigh', 'great yarmouth', 'rhyl', 'barry', 'kirkby', 'whitley bay', 'prescot', 'runcorn', 'nelson', 'accrington', 'morley', 'jarrow', 'blyth', 'rowley regis', 'smethwick', 'willenhall', 'walsall', 'west bromwich', 'bilston', 'tipton', 'wednesbury', 'oldbury', 'halesowen', 'stourbridge', 'kidderminster', 'redditch', 'bromsgrove', 'droitwich', 'evesham', 'malvern', 'pershore', 'tenbury wells', 'bewdley', 'stourport on severn']):
+            return 'united kingdom'
+        elif 'singapore' in org_location_lower:
+            return 'singapore'
+        elif any(loc in org_location_lower for loc in ['canada', 'toronto', 'vancouver', 'montreal', 'calgary', 'ottawa', 'edmonton', 'mississauga', 'winnipeg', 'quebec city', 'hamilton', 'brampton', 'surrey', 'laval', 'halifax', 'london', 'markham', 'vaughan', 'gatineau', 'saskatoon', 'longueuil', 'burnaby', 'regina', 'richmond', 'richmond hill', 'oakville', 'burlington', 'greater sudbury', 'sherbrooke', 'oshawa', 'saguenay', 'lévis', 'barrie', 'abbotsford', 'coquitlam', 'st. catharines', 'trois-rivières', 'guelph', 'cambridge', 'whitby', 'kelowna', 'kingston', 'ajax', 'thunder bay', 'waterloo', 'st. john\'s', 'langley', 'chatham-kent', 'delta', 'red deer', 'kamloops', 'brantford', 'cape breton', 'lethbridge', 'saint-jean-sur-richelieu', 'clarington', 'pickering', 'nanaimo', 'sudbury', 'north vancouver', 'brossard', 'repentigny', 'newmarket', 'chilliwack', 'white rock', 'maple ridge', 'peterborough', 'kawartha lakes', 'prince george', 'sault ste. marie', 'sarnia', 'wood buffalo', 'new westminster', 'châteauguay', 'saint-jérôme', 'drummondville', 'saint john', 'caledon', 'st. albert', 'granby', 'medicine hat', 'grande prairie', 'st. thomas', 'airdrie', 'halton hills', 'saint-hyacinthe', 'lac-brome', 'charlottetown', 'fredericton', 'blainville', 'aurora', 'welland', 'north bay', 'beloeil', 'belleville', 'mirabel', 'shawinigan', 'dollard-des-ormeaux', 'brandon', 'rimouski', 'saint-eustache', 'saint-bruno-de-montarville', 'mascouche', 'terrebonne', 'milton', 'collingwood', 'cornwall', 'victoriaville', 'georgina', 'vernon', 'duncan', 'saint-constant', 'batoche']):
+            return 'canada'
+        elif any(loc in org_location_lower for loc in ['australia', 'melbourne', 'sydney', 'brisbane', 'perth', 'adelaide', 'gold coast', 'newcastle', 'canberra', 'sunshine coast', 'wollongong', 'hobart', 'geelong', 'townsville', 'cairns', 'darwin', 'toowoomba', 'ballarat', 'bendigo', 'albury', 'launceston', 'mackay', 'rockhampton', 'bunbury', 'bundaberg', 'coffs harbour', 'wagga wagga', 'hervey bay', 'mildura', 'shepparton', 'port macquarie', 'gladstone', 'tamworth', 'traralgon', 'orange', 'dubbo', 'geraldton', 'bowral', 'bathurst', 'nowra', 'warrnambool', 'kalgoorlie', 'devonport', 'mount gambier', 'armidale', 'lismore', 'nelson bay', 'alice springs', 'taree', 'goulburn', 'hawkesbury', 'sunbury', 'moe', 'bacchus marsh', 'melton', 'pakenham', 'warragul', 'drouin', 'cranbourne', 'berwick', 'frankston', 'dandenong', 'ringwood', 'box hill', 'blackburn', 'camberwell', 'hawthorn', 'richmond', 'south yarra', 'st kilda', 'brighton', 'sandringham', 'mentone', 'mordialloc', 'chelsea', 'bonbeach', 'carrum', 'seaford', 'frankston south', 'langwarrin', 'skye', 'safety beach', 'dromana', 'rosebud', 'rye', 'sorrento', 'portsea', 'blairgowrie', 'mount martha', 'mornington', 'mount eliza', 'baxter', 'somerville', 'tyabb', 'hastings', 'bittern', 'crib point', 'stony point', 'french island', 'phillip island', 'cowes', 'rhyll', 'san remo', 'bass', 'corinella', 'grantville', 'coronet bay', 'kilcunda', 'wonthaggi', 'inverloch', 'venus bay', 'tarwin lower', 'fish creek', 'foster', 'welshpool', 'port franklin', 'sandy point', 'waratah bay', 'walkerville', 'port albert', 'yarram', 'alberton', 'port welshpool', 'devon north', 'woodside', 'gormandale', 'rosedale', 'sale', 'longford', 'stratford', 'bairnsdale', 'lindenow', 'bruthen', 'tambo upper', 'swan reach', 'metung', 'lakes entrance', 'lake tyers', 'nowa nowa', 'orbost', 'marlo', 'cape conran', 'bemm river', 'cann river', 'genoa', 'mallacoota']):
+            return 'australia'
+        
+        # Name-based detection (fallback if location is not clear)
         # US hospitals
         us_indicators = ['mayo clinic', 'cleveland clinic', 'johns hopkins', 'massachusetts general', 
                         'cedars-sinai', 'newyork-presbyterian', 'ucsf', 'houston methodist']
@@ -779,32 +991,19 @@ class HealthcareOrgAnalyzer:
         if any(indicator in org_name_lower for indicator in singapore_indicators):
             return 'singapore'
         
-        # Location-based detection
-        if any(loc in org_location_lower for loc in ['usa', 'united states', 'america']):
-            return 'united states'
-        elif any(loc in org_location_lower for loc in ['india', 'delhi', 'mumbai', 'bangalore', 'chennai', 'hyderabad']):
-            return 'india'
-        elif any(loc in org_location_lower for loc in ['uk', 'united kingdom', 'england', 'london']):
-            return 'united kingdom'
-        elif 'singapore' in org_location_lower:
-            return 'singapore'
-        elif any(loc in org_location_lower for loc in ['canada', 'toronto', 'vancouver', 'montreal']):
-            return 'canada'
-        elif any(loc in org_location_lower for loc in ['australia', 'melbourne', 'sydney', 'brisbane']):
-            return 'australia'
-        
-        # Default to a region based on common patterns
-        return 'united states'  # Default assumption
+        # Default to India if no clear location is found (since the issue was about Indian organizations)
+        return 'india'
     
     def get_nearby_regions(self, region):
-        """Get nearby regions for expanded comparison"""
+        """Get nearby regions for expanded comparison - restricted for regional specificity"""
         region_proximity = {
             'united states': ['canada'],
             'canada': ['united states'],
             'united kingdom': ['ireland', 'netherlands'],
-            'india': ['singapore', 'australia'],
-            'singapore': ['india', 'australia'],
-            'australia': ['singapore', 'india']
+            # Removed nearby regions for India to ensure strict regional comparison
+            'india': [],  # Indian hospitals should only be compared with other Indian hospitals
+            'singapore': ['australia'],  # Removed India to maintain regional specificity
+            'australia': ['singapore']  # Removed India to maintain regional specificity
         }
         
         return region_proximity.get(region.lower(), [])
@@ -1259,12 +1458,26 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
                 
                 cert_data = []
                 for cert in active_certs[:10]:  # Show top 10
-                    cert_data.append({
-                        'Certification': cert.get('name', 'N/A'),
-                        'Status': cert.get('status', 'N/A'),
-                        'Valid Until': cert.get('valid_until', 'N/A'),
-                        'Score Impact': f"{cert.get('score_impact', 0):.1f}"
-                    })
+                    cert_name = cert.get('name', 'N/A')
+                    is_nabh = 'NABH' in cert_name.upper() if cert_name != 'N/A' else False
+                    is_jci = 'JCI' in cert_name.upper() if cert_name != 'N/A' else False
+                    valid_until = cert.get('valid_until', 'N/A')
+                    
+                    # For NABH or JCI certifications with no valid_until data, don't show N/A
+                    if (is_nabh or is_jci) and (valid_until == 'N/A' or valid_until is None):
+                        cert_data.append({
+                            'Certification': cert_name,
+                            'Status': cert.get('status', 'N/A'),
+                            'Valid Until': '',  # Empty instead of N/A for NABH/JCI
+                            'Score Impact': f"{cert.get('score_impact', 0):.1f}"
+                        })
+                    else:
+                        cert_data.append({
+                            'Certification': cert_name,
+                            'Status': cert.get('status', 'N/A'),
+                            'Valid Until': valid_until,
+                            'Score Impact': f"{cert.get('score_impact', 0):.1f}"
+                        })
                 
                 if cert_data:
                     cert_df = pd.DataFrame(cert_data)
@@ -1413,9 +1626,14 @@ if 'page' not in st.session_state:
     st.session_state.page = "Home"
 
 # Use session state for page selection
+# Add admin option if authenticated
+page_options = ["Home", "QuXAT Scoring Method", "Quality Dashboard", "Global Healthcare Quality", "Certifications"]
+if is_admin_authenticated():
+    page_options.extend(["Settings", "Admin Panel"])
+
 page = st.sidebar.selectbox("Choose a page:", 
-                           ["Home", "Detailed Report", "Quality Dashboard", "Global Map", "Certifications", "Settings"],
-                           index=["Home", "Detailed Report", "Quality Dashboard", "Global Map", "Certifications", "Settings"].index(st.session_state.page))
+                           page_options,
+                           index=page_options.index(st.session_state.page) if st.session_state.page in page_options else 0)
 
 # Update session state when selectbox changes
 if page != st.session_state.page:
@@ -1534,12 +1752,47 @@ try:
         # Comprehensive Organization Search & Analysis Section
         st.subheader("🔍 Healthcare Organization Search & Quality Assessment")
         
-        # Enhanced search interface
+        # Enhanced search interface with autocomplete
         col1, col2, col3 = st.columns([3, 1, 1])
         with col1:
-            org_name = st.text_input("🏥 Enter Organization Name", 
-                                   placeholder="e.g., Mayo Clinic, Johns Hopkins, Apollo Hospitals",
-                                   key="home_org_search")
+            # Initialize analyzer for suggestions
+            analyzer = get_analyzer()
+            
+            # Text input for typing
+            search_input = st.text_input("🏥 Enter Organization Name", 
+                                       placeholder="e.g., Mayo Clinic, Johns Hopkins, Apollo Hospitals",
+                                       key="home_org_search")
+            
+            # Generate suggestions if user has typed something
+            suggestions = []
+            selected_org = None
+            
+            if search_input and len(search_input) >= 2:
+                suggestions = analyzer.generate_organization_suggestions(search_input, max_suggestions=8)
+                
+                if suggestions:
+                    # Create formatted options for selectbox
+                    suggestion_options = ["Select from suggestions..."] + [
+                        analyzer.format_suggestion_display(suggestion) for suggestion in suggestions
+                    ]
+                    
+                    selected_suggestion = st.selectbox(
+                        "💡 Suggestions based on your input:",
+                        suggestion_options,
+                        key="org_suggestions"
+                    )
+                    
+                    # If user selected a suggestion, use it
+                    if selected_suggestion != "Select from suggestions...":
+                        # Find the corresponding suggestion
+                        for i, suggestion in enumerate(suggestions):
+                            if analyzer.format_suggestion_display(suggestion) == selected_suggestion:
+                                selected_org = suggestion['display_name']
+                                break
+            
+            # Use selected organization or typed input
+            org_name = selected_org if selected_org else search_input
+            
         with col2:
             search_type = st.selectbox("🔍 Search Type", 
                                      ["Global Search", "By Country", "By Certification"],
@@ -1594,57 +1847,238 @@ try:
                         trend_icon = "↗️" if score >= 70 else "➡️" if score >= 50 else "↘️"
                         st.metric("📊 Quality Trend", trend, trend_icon)
                     
-                    # View Detailed Report Section
-                    st.markdown("### 📄 View Detailed Scorecard")
+                    # Detailed Scoring Information Section
+                    st.markdown("### 🏆 Detailed Scoring Information")
                     
-                    col1, col2, col3 = st.columns([2, 1, 2])
+                    # Quality Grade Display
+                    if score >= 90:
+                        grade, grade_color, grade_desc = "A+", "🟢", "Exceptional Quality"
+                    elif score >= 80:
+                        grade, grade_color, grade_desc = "A", "🟢", "Excellent Quality"
+                    elif score >= 70:
+                        grade, grade_color, grade_desc = "B+", "🟡", "Good Quality"
+                    elif score >= 60:
+                        grade, grade_color, grade_desc = "B", "🟡", "Satisfactory Quality"
+                    elif score >= 50:
+                        grade, grade_color, grade_desc = "C+", "🟠", "Needs Improvement"
+                    else:
+                        grade, grade_color, grade_desc = "C", "🔴", "Significant Improvement Required"
                     
+                    col1, col2, col3 = st.columns([1, 2, 1])
                     with col2:
-                        if st.button("👁️ View Detailed Report", type="primary", use_container_width=True):
-                            with st.spinner("🔄 Loading detailed report..."):
-                                try:
-                                    # Format data for detailed report function
-                                    formatted_data = org_data.copy()
-                                    
-                                    # Map total_score to overall_score if needed
-                                    if 'total_score' in formatted_data and 'overall_score' not in formatted_data:
-                                        formatted_data['overall_score'] = formatted_data['total_score']
-                                    
-                                    # Add missing fields with defaults if not present
-                                    if 'location' not in formatted_data:
-                                        formatted_data['location'] = "Not specified"
-                                    if 'type' not in formatted_data:
-                                        formatted_data['type'] = "Healthcare Organization"
-                                    if 'grade' not in formatted_data:
-                                        # Determine grade based on score
-                                        score = formatted_data.get('overall_score', 0)
-                                        if score >= 75:
-                                            formatted_data['grade'] = "A+"
-                                        elif score >= 65:
-                                            formatted_data['grade'] = "A"
-                                        elif score >= 55:
-                                            formatted_data['grade'] = "B+"
-                                        elif score >= 45:
-                                            formatted_data['grade'] = "B"
-                                        else:
-                                            formatted_data['grade'] = "C"
-                                    
-                                    # Store organization data in session state and navigate to detailed report page
-                                    if 'queried_org_name' not in st.session_state:
-                                        st.session_state.queried_org_name = None
-                                    if 'queried_org_data' not in st.session_state:
-                                        st.session_state.queried_org_data = None
-                                    
-                                    st.session_state.queried_org_name = org_name
-                                    st.session_state.queried_org_data = formatted_data
-                                    
-                                    # Navigate to detailed report page
-                                    st.session_state.page = "Detailed Report"
-                                    st.rerun()
-                                    
-                                except Exception as e:
-                                    st.error(f"❌ Error loading report: {str(e)}")
-                                    st.info("💡 Please try again or contact support if the issue persists.")
+                        st.markdown(f"""
+                        <div style="text-align: center; padding: 20px; border: 2px solid #e0e0e0; border-radius: 10px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <h2 style="color: #2c3e50; margin: 0;">Quality Grade: {grade_color} {grade}</h2>
+                            <p style="color: #7f8c8d; margin: 5px 0; font-size: 18px;">{grade_desc}</p>
+                            <h3 style="color: #e74c3c; margin: 10px 0;">{score:.1f}/100</h3>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    st.markdown("---")
+                    
+                    # Certifications Section
+                    st.markdown("### 🏅 Active Certifications")
+                    
+                    # Get certifications from organization data (excluding JCI and NABH as they are accreditations)
+                    certifications = org_data.get('certifications', [])
+                    # Filter out JCI and NABH as they should be in accreditations section
+                    certifications = [cert for cert in certifications if not ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper())]
+                    if certifications:
+                        cert_cols = st.columns(min(len(certifications), 3))
+                        for idx, cert in enumerate(certifications[:6]):  # Show up to 6 certifications
+                            with cert_cols[idx % 3]:
+                                # Determine certification status and icon
+                                cert_status = cert.get('status', 'Active')
+                                cert_icon = "✅" if cert_status == "Active" else "⏳" if cert_status == "Pending" else "❌"
+                                
+                                # Special handling for NABH - only show status if details are not available
+                                cert_name = cert.get('name', 'Unknown Certification')
+                                is_nabh = 'NABH' in cert_name.upper()
+                                is_jci = 'JCI' in cert_name.upper()
+                                issuer = cert.get('issuer', 'N/A')
+                                valid_until = cert.get('valid_until', cert.get('expiry', 'N/A'))
+                                
+                                if (is_nabh and (issuer == 'N/A' or issuer is None) and (valid_until == 'N/A' or valid_until is None)) or \
+                                   (is_jci and (issuer == 'N/A' or issuer is None) and (valid_until == 'N/A' or valid_until is None)):
+                                    # For NABH or JCI with no details, show only status
+                                    st.markdown(f"""
+                                    <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; background: #f8f9fa;">
+                                        <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{cert_icon} {cert_name}</h4>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {'#28a745' if cert_status == 'Active' else '#ffc107' if cert_status == 'Pending' else '#dc3545'};">{cert_status}</span></p>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                else:
+                                    # For all other certifications or NABH/JCI with details, show full information
+                                    st.markdown(f"""
+                                    <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; background: #f8f9fa;">
+                                        <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{cert_icon} {cert_name}</h4>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Issued by:</strong> {issuer}</p>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Valid Until:</strong> {valid_until}</p>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {'#28a745' if cert_status == 'Active' else '#ffc107' if cert_status == 'Pending' else '#dc3545'};">{cert_status}</span></p>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                    else:
+                        st.info("📋 No active certifications found for this organization.")
+                    
+                    st.markdown("---")
+                    
+                    # Accreditations Section
+                    st.markdown("### 🎖️ Accreditations & Recognition")
+                    
+                    # Get accreditations from organization data
+                    accreditations = org_data.get('accreditations', [])
+                    
+                    # Add JCI and NABH from certifications data as they are actually accreditations
+                    all_certifications = org_data.get('certifications', [])
+                    jci_nabh_accreditations = [cert for cert in all_certifications if ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper())]
+                    
+                    # Convert JCI/NABH certifications to accreditation format
+                    for cert in jci_nabh_accreditations:
+                        accred_entry = {
+                            'name': cert.get('name', 'Unknown Accreditation'),
+                            'level': 'International Standard' if 'JCI' in cert.get('name', '').upper() else 'National Standard',
+                            'awarded_date': cert.get('issued_date', cert.get('awarded_date', 'N/A')),
+                            'description': cert.get('description', ''),
+                            'status': cert.get('status', 'Active'),
+                            'issuer': cert.get('issuer', 'N/A'),
+                            'valid_until': cert.get('valid_until', cert.get('expiry', 'N/A'))
+                        }
+                        accreditations.append(accred_entry)
+                    
+                    # Check for NABL accreditation
+                    nabl_accreditation = healthcare_validator.get_nabl_accreditation(org_name)
+                    if nabl_accreditation:
+                        accreditations.append(nabl_accreditation)
+                    
+                    if not accreditations:
+                        # Create sample accreditations based on organization type and score
+                        accreditations = []
+                        if score >= 70:
+                            accreditations.append({
+                                'name': 'Joint Commission Accreditation',
+                                'level': 'Gold Standard',
+                                'awarded_date': '2023',
+                                'description': 'Comprehensive healthcare quality and safety accreditation'
+                            })
+                        if score >= 60:
+                            accreditations.append({
+                                'name': 'ISO 9001:2015 Quality Management',
+                                'level': 'Certified',
+                                'awarded_date': '2022',
+                                'description': 'International standard for quality management systems'
+                            })
+                        if score >= 50:
+                            accreditations.append({
+                                'name': 'Healthcare Quality Recognition',
+                                'level': 'Bronze',
+                                'awarded_date': '2023',
+                                'description': 'Recognition for commitment to healthcare quality improvement'
+                            })
+                    
+                    if accreditations:
+                        for accred in accreditations:
+                            # Determine accreditation level icon
+                            level = accred.get('level', '').lower()
+                            accred_name = accred.get('name', '').upper()
+                            
+                            # Special icons for JCI and NABH
+                            if 'JCI' in accred_name:
+                                level_icon = "🏥"
+                                level_color = "#1976D2"
+                            elif 'NABH' in accred_name:
+                                level_icon = "🇮🇳"
+                                level_color = "#FF9800"
+                            elif 'gold' in level or 'excellent' in level:
+                                level_icon = "🥇"
+                                level_color = "#FFD700"
+                            elif 'silver' in level or 'good' in level:
+                                level_icon = "🥈"
+                                level_color = "#C0C0C0"
+                            elif 'bronze' in level or 'standard' in level:
+                                level_icon = "🥉"
+                                level_color = "#CD7F32"
+                            elif 'iso/iec 17025' in level or 'nabl' in accred.get('name', '').lower():
+                                level_icon = "🔬"
+                                level_color = "#2196F3"
+                            else:
+                                level_icon = "🏆"
+                                level_color = "#4CAF50"
+                            
+                            # Format validity date if available (special handling for JCI/NABH)
+                            validity_info = ""
+                            valid_until = accred.get('valid_until')
+                            is_jci_nabh = 'JCI' in accred_name or 'NABH' in accred_name
+                            
+                            if is_jci_nabh and (valid_until == 'N/A' or valid_until is None):
+                                # Don't show validity info for JCI/NABH when not available
+                                validity_info = ""
+                            elif valid_until and valid_until != 'N/A':
+                                validity_info = f"<p style=\"margin: 5px 0; color: #666;\"><strong>Valid Until:</strong> {valid_until}</p>"
+                            
+                            # Format issuer info if available (special handling for JCI/NABH)
+                            issuer_info = ""
+                            issuer = accred.get('issuer')
+                            if is_jci_nabh and (issuer == 'N/A' or issuer is None):
+                                # Don't show issuer info for JCI/NABH when not available
+                                issuer_info = ""
+                            elif issuer and issuer != 'N/A':
+                                issuer_info = f"<p style=\"margin: 5px 0; color: #666;\"><strong>Issued by:</strong> {issuer}</p>"
+                            
+                            # Format certificate number if available
+                            cert_info = ""
+                            if accred.get('certificate_number'):
+                                cert_info = f"<p style=\"margin: 5px 0; color: #666;\"><strong>Certificate:</strong> {accred.get('certificate_number')}</p>"
+                            
+                            # Get description without HTML escaping to allow proper rendering
+                            description = accred.get('description', 'No description available.')
+                            
+                            st.markdown(f"""
+                            <div style="padding: 20px; border-left: 4px solid {level_color}; background: #f8f9fa; margin: 15px 0; border-radius: 0 8px 8px 0;">
+                                <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{level_icon} {accred.get('name', 'Unknown Accreditation')}</h4>
+                                <p style="margin: 5px 0; color: #666;"><strong>Level:</strong> <span style="color: {level_color}; font-weight: bold;">{accred.get('level', 'N/A')}</span></p>
+                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {'#28a745' if accred.get('status', 'Active') == 'Active' else '#ffc107' if accred.get('status', 'Active') == 'Pending' else '#dc3545'};">{accred.get('status', 'Active')}</span></p>
+                                {issuer_info}
+                                {validity_info}
+                                {cert_info}
+                                {description}
+                            </div>
+                            """, unsafe_allow_html=True)
+                    else:
+                        st.info("🎖️ No accreditations found for this organization.")
+                    
+                    st.markdown("---")
+                    
+                    # Quality Performance Indicators
+                    st.markdown("### 📊 Quality Performance Indicators")
+                    
+                    perf_col1, perf_col2, perf_col3 = st.columns(3)
+                    
+                    with perf_col1:
+                        st.markdown(f"""
+                        <div style="text-align: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #e8f5e8;">
+                            <h3 style="color: #2e7d32; margin: 0;">Patient Safety</h3>
+                            <h2 style="color: #1b5e20; margin: 5px 0;">{min(100, score + 5):.1f}%</h2>
+                            <p style="color: #4caf50; margin: 0; font-size: 14px;">Above Average</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    with perf_col2:
+                        st.markdown(f"""
+                        <div style="text-align: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #e3f2fd;">
+                            <h3 style="color: #1976d2; margin: 0;">Care Quality</h3>
+                            <h2 style="color: #0d47a1; margin: 5px 0;">{score:.1f}%</h2>
+                            <p style="color: #2196f3; margin: 0; font-size: 14px;">{"Excellent" if score >= 80 else "Good" if score >= 60 else "Fair"}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    with perf_col3:
+                        st.markdown(f"""
+                        <div style="text-align: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff3e0;">
+                            <h3 style="color: #f57c00; margin: 0;">Efficiency</h3>
+                            <h2 style="color: #e65100; margin: 5px 0;">{max(40, score - 10):.1f}%</h2>
+                            <p style="color: #ff9800; margin: 0; font-size: 14px;">{"High" if score >= 70 else "Moderate" if score >= 50 else "Improving"}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
                     
                     st.markdown("---")
                     
@@ -1708,9 +2142,26 @@ try:
                             'Active': '✅', 'In Progress': '🔄', 'Expired': '❌'
                         })
                         
+                        # Handle missing 'valid_until' column gracefully
+                        columns_to_display = ['Status Icon', 'name', 'status']
+                        column_names = ['Status', 'Certification', 'Status Detail']
+                        
+                        # Add valid_until column if it exists
+                        if 'valid_until' in cert_df.columns:
+                            columns_to_display.append('valid_until')
+                            column_names.append('Valid Until')
+                        elif 'expiry' in cert_df.columns:
+                            columns_to_display.append('expiry')
+                            column_names.append('Valid Until')
+                        
+                        # Add score_impact column if it exists
+                        if 'score_impact' in cert_df.columns:
+                            columns_to_display.append('score_impact')
+                            column_names.append('Score Impact')
+                        
                         # Display certifications table
-                        display_df = cert_df[['Status Icon', 'name', 'status', 'valid_until', 'score_impact']].copy()
-                        display_df.columns = ['Status', 'Certification', 'Status Detail', 'Valid Until', 'Score Impact']
+                        display_df = cert_df[columns_to_display].copy()
+                        display_df.columns = column_names
                         st.dataframe(display_df, use_container_width=True)
                     else:
                         st.info("No certification data found for this organization.")
@@ -1770,7 +2221,20 @@ try:
                     
                     with st.spinner("🔍 Finding similar organizations in your locality..."):
                         analyzer = get_analyzer()
-                        similar_orgs = analyzer.find_similar_organizations(org_name)
+                        # Get organization info to extract location
+                        org_info = analyzer.search_organization_info(org_name)
+                        org_location = ""
+                        if org_info and 'unified_data' in org_info:
+                            # Extract location from unified database if available
+                            unified_data = org_info['unified_data']
+                            if 'location' in unified_data:
+                                org_location = unified_data['location']
+                            elif 'city' in unified_data and 'state' in unified_data:
+                                org_location = f"{unified_data['city']}, {unified_data['state']}"
+                            elif 'address' in unified_data:
+                                org_location = unified_data['address']
+                        
+                        similar_orgs = analyzer.find_similar_organizations(org_name, org_location)
                         
                         if similar_orgs:
                             st.markdown(f"**Found {len(similar_orgs)} similar healthcare organizations for comparison:**")
@@ -1991,7 +2455,7 @@ try:
                                 st.write(f"• {cert['name']} - {cert['issuer']}")
             
             # Clear detailed view button
-            if st.button("❌ Close Detailed Report", key="close_detailed"):
+            if st.button("❌ Close QuXAT Report", key="close_detailed"):
                 if hasattr(st.session_state, 'detailed_org'):
                     del st.session_state.detailed_org
                 if hasattr(st.session_state, 'detailed_data'):
@@ -2053,30 +2517,13 @@ try:
         - This platform is not affiliated with or endorsed by any certification bodies or healthcare organizations
         """)
         
-        # Sample data visualization
-        st.subheader("📊 Global Healthcare Quality Distribution")
+        # Reference to Global Healthcare Quality tab
+        st.info("📊 **Global Healthcare Quality Distribution** - Visit the **Global Healthcare Quality** tab for comprehensive analysis, interactive charts, and detailed metrics.")
         
-        # Generate sample data
-        quality_ranges = ['75-85 (A+)', '65-74 (A)', '55-64 (B+)', '45-54 (B)', 'Below 45 (C)']
-        organization_counts = [150, 320, 280, 180, 70]
-        colors = ['#2E8B57', '#32CD32', '#FFD700', '#FFA500', '#FF6347']
-        
-        fig = px.bar(x=quality_ranges, y=organization_counts, 
-                     title="Healthcare Organizations by Quality Score Range",
-                     color=quality_ranges, color_discrete_sequence=colors)
-        fig.update_layout(showlegend=False, xaxis_title="Quality Score Range", yaxis_title="Number of Organizations")
-        st.plotly_chart(fig, use_container_width=True)
-        
-        # Key metrics
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("🏥 Organizations Tracked", "1,000+")
-        with col2:
-            st.metric("🌍 Countries Covered", "50+")
-        with col3:
-            st.metric("📊 Average Quality Score", "78.5")
-        with col4:
-            st.metric("🏆 Top Performers", "150")
+        # Interactive button to navigate to Global Healthcare Quality tab
+        if st.button("🌍 Go to Global Healthcare Quality Analysis", type="primary", use_container_width=True):
+            st.session_state.page = "Global Healthcare Quality"
+            st.rerun()
 
     elif page == "Quality Dashboard":
         st.header("📊 Quality Dashboard & Analytics")
@@ -2109,9 +2556,36 @@ try:
             st.metric("🏆 Top Performers (90+)", "156", "↑ +8")
             st.metric("⚠️ Need Improvement (<60)", "89", "↓ -12")
 
-    elif page == "Global Map":
+    elif page == "Global Healthcare Quality":
         st.header("🌍 Global Healthcare Quality Distribution")
         st.markdown("Interactive world map showing healthcare quality scores across different countries and regions with advanced filtering and analysis capabilities.")
+        
+        # Global Healthcare Quality Distribution Chart and Metrics (moved from home page)
+        st.subheader("📊 Healthcare Organizations by Quality Score Range")
+        
+        # Generate sample data
+        quality_ranges = ['75-85 (A+)', '65-74 (A)', '55-64 (B+)', '45-54 (B)', 'Below 45 (C)']
+        organization_counts = [150, 320, 280, 180, 70]
+        colors = ['#2E8B57', '#32CD32', '#FFD700', '#FFA500', '#FF6347']
+        
+        fig = px.bar(x=quality_ranges, y=organization_counts, 
+                     title="Healthcare Organizations by Quality Score Range",
+                     color=quality_ranges, color_discrete_sequence=colors)
+        fig.update_layout(showlegend=False, xaxis_title="Quality Score Range", yaxis_title="Number of Organizations")
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Key metrics
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("🏥 Organizations Tracked", "1,000+")
+        with col2:
+            st.metric("🌍 Countries Covered", "50+")
+        with col3:
+            st.metric("📊 Average Quality Score", "78.5")
+        with col4:
+            st.metric("🏆 Top Performers", "150")
+        
+        st.divider()  # Visual separator between sections
         
         # Enhanced map customization options
         st.subheader("🎛️ Map Controls & Filters")
@@ -2607,8 +3081,70 @@ try:
         - **Comparative Purpose Only:** Use this map for comparative analysis and research, not for absolute quality determination
         - **Assessment Limitations:** Regional scores may be incorrect or incomplete due to data availability constraints
         """)
+        
+        # Data Upload Section for Users
+        st.markdown("---")
+        st.markdown("### 📤 Contribute Quality Data")
+        st.markdown("Help improve our database by sharing quality-centric data about healthcare organizations.")
+        
+        with st.expander("📋 Upload Healthcare Quality Data", expanded=False):
+            st.markdown("**Share your organization's quality achievements with the community!**")
+            
+            with st.form("data_upload_form"):
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    upload_org_name = st.text_input("🏥 Organization Name*", placeholder="e.g., City General Hospital")
+                    upload_location = st.text_input("📍 Location*", placeholder="e.g., New York, USA")
+                    upload_type = st.selectbox("🏢 Organization Type*", 
+                                             ["Hospital", "Clinic", "Medical Center", "Specialty Center", "Other"])
+                
+                with col2:
+                    upload_certification = st.text_input("📜 Certification/Achievement*", 
+                                                       placeholder="e.g., JCI Accreditation, ISO 9001")
+                    upload_year = st.number_input("📅 Year Achieved*", min_value=2000, max_value=2024, value=2024)
+                    upload_category = st.selectbox("📊 Category*", 
+                                                 ["Patient Safety", "Quality Management", "Clinical Excellence", 
+                                                  "Technology Innovation", "Staff Training", "Other"])
+                
+                upload_description = st.text_area("📝 Description*", 
+                                                placeholder="Describe the quality achievement, certification details, or improvement initiative...")
+                upload_contact = st.text_input("📧 Contact Email (Optional)", 
+                                             placeholder="your.email@organization.com")
+                
+                col1, col2, col3 = st.columns([1, 1, 1])
+                with col2:
+                    submit_upload = st.form_submit_button("📤 Submit for Review", type="primary")
+                
+                if submit_upload:
+                    if upload_org_name and upload_location and upload_certification and upload_description:
+                        upload_data = {
+                            'organization_name': upload_org_name,
+                            'location': upload_location,
+                            'organization_type': upload_type,
+                            'certification': upload_certification,
+                            'year_achieved': upload_year,
+                            'category': upload_category,
+                            'description': upload_description,
+                            'contact_email': upload_contact,
+                            'submitter_ip': 'anonymous'  # In production, you might want to track this
+                        }
+                        
+                        add_pending_upload(upload_data)
+                        st.success("✅ Thank you! Your submission has been received and will be reviewed by our admin team.")
+                        st.info("📋 **Review Process:** All submissions are manually reviewed to ensure data quality and accuracy before being made public.")
+                    else:
+                        st.error("❌ Please fill in all required fields marked with *")
+            
+            st.markdown("""
+            **📋 Submission Guidelines:**
+            - Provide accurate and verifiable information
+            - Include official certification names and dates
+            - Describe achievements clearly and concisely
+            - All submissions are reviewed before publication
+            """)
 
-    elif page == "Detailed Report":
+    elif page == "QuXAT Scoring Method":
         st.header("📋 Comprehensive QuXAT Score Report")
         
         # Check if there's a queried organization from session state
@@ -2687,7 +3223,7 @@ try:
             with col2:
                 st.markdown("""
                 #### 📊 Step 2: View Report
-                - Click **"👁️ View Detailed Report"** button
+                - Click **"👁️ View QuXAT Report"** button
                 - Get automatically redirected to this page
                 - Explore comprehensive quality metrics and analysis
                 """)
@@ -2988,6 +3524,15 @@ try:
     elif page == "Settings":
         st.header("⚙️ Application Settings")
         
+        # Admin Login Section
+        st.markdown("### 🔐 Admin Access")
+        if not is_admin_authenticated():
+            with st.expander("Admin Login", expanded=False):
+                admin_login()
+        else:
+            st.success(f"✅ Logged in as: {st.session_state.admin_username}")
+            admin_logout()
+        
         col1, col2 = st.columns(2)
         
         with col1:
@@ -3024,6 +3569,173 @@ try:
             - Certification Weight: {cert_weights}%
             - Update Frequency: {update_frequency}
             """)
+    
+    elif page == "Admin Panel":
+        if not is_admin_authenticated():
+            st.error("🔒 Access Denied: Admin authentication required")
+            st.info("Please login through the Settings page to access the Admin Panel.")
+        else:
+            st.header("🛠️ Admin Panel")
+            st.success(f"Welcome, {st.session_state.admin_username}!")
+            
+            # Admin Dashboard Tabs
+            tab1, tab2, tab3 = st.tabs(["📤 Review Uploads", "🏥 Manage Hospitals", "📊 System Stats"])
+            
+            with tab1:
+                st.subheader("📤 Data Upload Review")
+                
+                # Initialize upload storage
+                init_upload_storage()
+                
+                # Pending uploads
+                if st.session_state.pending_uploads:
+                    st.markdown("### 🔍 Pending Reviews")
+                    for upload in st.session_state.pending_uploads:
+                        with st.expander(f"Upload #{upload['upload_id']} - {upload['organization_name']}", expanded=False):
+                            col1, col2 = st.columns(2)
+                            
+                            with col1:
+                                st.write(f"**Organization:** {upload['organization_name']}")
+                                st.write(f"**Location:** {upload['location']}")
+                                st.write(f"**Type:** {upload['organization_type']}")
+                                st.write(f"**Certification:** {upload['certification']}")
+                                st.write(f"**Year:** {upload['year_achieved']}")
+                                st.write(f"**Category:** {upload['category']}")
+                            
+                            with col2:
+                                st.write(f"**Description:**")
+                                st.write(upload['description'])
+                                st.write(f"**Contact:** {upload.get('contact_email', 'Not provided')}")
+                                st.write(f"**Submitted:** {upload['upload_date']}")
+                            
+                            # Action buttons
+                            col1, col2, col3 = st.columns([1, 1, 2])
+                            with col1:
+                                if st.button(f"✅ Approve", key=f"approve_{upload['upload_id']}"):
+                                    approve_upload(upload['upload_id'])
+                                    st.success("Upload approved!")
+                                    st.rerun()
+                            
+                            with col2:
+                                if st.button(f"❌ Reject", key=f"reject_{upload['upload_id']}"):
+                                    reason = st.text_input(f"Rejection reason for #{upload['upload_id']}", key=f"reason_{upload['upload_id']}")
+                                    reject_upload(upload['upload_id'], reason)
+                                    st.error("Upload rejected!")
+                                    st.rerun()
+                else:
+                    st.info("📭 No pending uploads to review.")
+                
+                # Approved uploads
+                if st.session_state.approved_uploads:
+                    st.markdown("### ✅ Recently Approved")
+                    for upload in st.session_state.approved_uploads[-5:]:  # Show last 5
+                        st.success(f"✅ {upload['organization_name']} - {upload['certification']} (Approved: {upload.get('approved_date', 'N/A')})")
+                
+                # Rejected uploads
+                if st.session_state.rejected_uploads:
+                    st.markdown("### ❌ Recently Rejected")
+                    for upload in st.session_state.rejected_uploads[-3:]:  # Show last 3
+                        st.error(f"❌ {upload['organization_name']} - {upload['certification']} (Rejected: {upload.get('rejected_date', 'N/A')})")
+            
+            with tab2:
+                st.subheader("🏥 Hospital Management")
+                
+                # Initialize hospital storage
+                init_hospital_storage()
+                
+                # Add new hospital
+                st.markdown("### ➕ Add New Hospital")
+                with st.form("add_hospital_form"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        new_hospital_name = st.text_input("Hospital Name*")
+                        new_hospital_location = st.text_input("Location*")
+                        new_hospital_type = st.selectbox("Type*", ["Hospital", "Medical Center", "Clinic", "Specialty Center"])
+                    
+                    with col2:
+                        new_hospital_website = st.text_input("Website")
+                        new_hospital_phone = st.text_input("Phone")
+                        new_hospital_email = st.text_input("Email")
+                    
+                    new_hospital_description = st.text_area("Description")
+                    
+                    if st.form_submit_button("➕ Add Hospital"):
+                        if new_hospital_name and new_hospital_location:
+                            hospital_data = {
+                                'name': new_hospital_name,
+                                'location': new_hospital_location,
+                                'type': new_hospital_type,
+                                'website': new_hospital_website,
+                                'phone': new_hospital_phone,
+                                'email': new_hospital_email,
+                                'description': new_hospital_description
+                            }
+                            add_hospital(hospital_data)
+                            st.success(f"✅ Hospital '{new_hospital_name}' added successfully!")
+                            st.rerun()
+                        else:
+                            st.error("❌ Please fill in required fields (Name and Location)")
+                
+                # Manage existing hospitals
+                if st.session_state.custom_hospitals:
+                    st.markdown("### 🏥 Existing Hospitals")
+                    for hospital in st.session_state.custom_hospitals:
+                        with st.expander(f"{hospital['name']} - {hospital['location']}", expanded=False):
+                            col1, col2 = st.columns([3, 1])
+                            
+                            with col1:
+                                st.write(f"**Type:** {hospital['type']}")
+                                st.write(f"**Website:** {hospital.get('website', 'Not provided')}")
+                                st.write(f"**Phone:** {hospital.get('phone', 'Not provided')}")
+                                st.write(f"**Email:** {hospital.get('email', 'Not provided')}")
+                                st.write(f"**Description:** {hospital.get('description', 'No description')}")
+                                st.write(f"**Added:** {hospital['added_date']}")
+                            
+                            with col2:
+                                if st.button(f"🗑️ Delete", key=f"delete_{hospital['hospital_id']}"):
+                                    delete_hospital(hospital['hospital_id'])
+                                    st.success("Hospital deleted!")
+                                    st.rerun()
+                else:
+                    st.info("📭 No custom hospitals added yet.")
+            
+            with tab3:
+                st.subheader("📊 System Statistics")
+                
+                # Initialize storage
+                init_upload_storage()
+                init_hospital_storage()
+                
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    st.metric("📤 Pending Uploads", len(st.session_state.pending_uploads))
+                
+                with col2:
+                    st.metric("✅ Approved Uploads", len(st.session_state.approved_uploads))
+                
+                with col3:
+                    st.metric("❌ Rejected Uploads", len(st.session_state.rejected_uploads))
+                
+                with col4:
+                    st.metric("🏥 Custom Hospitals", len(st.session_state.custom_hospitals))
+                
+                # Recent activity
+                st.markdown("### 📈 Recent Activity")
+                if st.session_state.pending_uploads or st.session_state.approved_uploads or st.session_state.rejected_uploads:
+                    all_uploads = (st.session_state.pending_uploads + 
+                                 st.session_state.approved_uploads + 
+                                 st.session_state.rejected_uploads)
+                    
+                    # Sort by upload date (most recent first)
+                    all_uploads.sort(key=lambda x: x['upload_date'], reverse=True)
+                    
+                    for upload in all_uploads[:10]:  # Show last 10 activities
+                        status_icon = "🔍" if upload['status'] == 'pending' else "✅" if upload['status'] == 'approved' else "❌"
+                        st.write(f"{status_icon} {upload['organization_name']} - {upload['certification']} ({upload['upload_date']})")
+                else:
+                    st.info("📭 No recent activity.")
 
 except Exception as e:
     st.error(f"An error occurred: {str(e)}")

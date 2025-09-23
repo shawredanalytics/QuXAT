@@ -52,7 +52,7 @@ class DatabaseIntegrator:
                     'country': org.get('country', ''),
                     'hospital_type': org.get('type', 'General Hospital'),
                     'certifications': [{
-                        'name': 'JCI',
+                        'name': 'Joint Commission International (JCI)',
                         'type': 'JCI Accreditation',
                         'status': 'Active',
                         'accreditation_date': org.get('accreditation_date', ''),
@@ -97,7 +97,7 @@ class DatabaseIntegrator:
                 # Add JCI certification if found
                 if jci_accredited:
                     jci_cert = {
-                        'name': 'JCI',
+                        'name': 'Joint Commission International (JCI)',
                         'type': 'JCI Accreditation',
                         'status': 'Active',
                         'accreditation_date': jci_accredited.get('accreditation_date', ''),

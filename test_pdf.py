@@ -123,7 +123,7 @@ def test_streamlit_pdf_function():
             'certifications': [
                 {'name': 'ISO 9001:2015', 'status': 'Active', 'valid_until': '2025-12-31', 'score_impact': 15},
                 {'name': 'ISO 14001:2015', 'status': 'Active', 'valid_until': '2025-12-31', 'score_impact': 12},
-                {'name': 'NABH', 'status': 'Active', 'valid_until': '2026-06-30', 'score_impact': 25}
+                {'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)', 'status': 'Active', 'valid_until': '2026-06-30', 'score_impact': 25}
             ],
             'quality_initiatives': [
                 {'title': 'Patient Safety Program', 'year': '2024'},
