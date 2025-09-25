@@ -800,7 +800,7 @@ class HealthcareOrgAnalyzer:
             return False
             
         # Prefer more detailed certification (more fields)
-         return len(str(cert1)) > len(str(cert2))
+        return len(str(cert1)) > len(str(cert2))
     
     def _deduplicate_jci_certifications(self, certifications):
         """
