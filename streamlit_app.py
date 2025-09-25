@@ -695,12 +695,15 @@ class HealthcareOrgAnalyzer:
                 # Enhance certifications with JCI data
                 enhanced_certifications = self.enhance_certification_with_jci(certifications, org_name)
                 
+                # COMPREHENSIVE DEDUPLICATION: Remove all JCI duplicates
+                final_certifications = self._deduplicate_jci_certifications(enhanced_certifications)
+                
                 # If no validated data found, show disclaimer
-                if not enhanced_certifications:
+                if not final_certifications:
                     st.warning(f"⚠️ No validated certification data found for '{org_name}'. Please verify organization name or check official certification databases.")
                     return []
                 
-                return enhanced_certifications
+                return final_certifications
             else:
                 # Check if organization has JCI accreditation even without other certifications
                 jci_cert = self.check_jci_accreditation(org_name)
@@ -715,6 +718,42 @@ class HealthcareOrgAnalyzer:
             st.error(f"Error validating certification data: {str(e)}")
             st.info("💡 Please check the organization name and try again. Only validated data from official sources is displayed.")
             return []
+    
+    def _deduplicate_jci_certifications(self, certifications):
+        """
+        Comprehensive JCI deduplication to prevent multiple JCI entries from different sources
+        """
+        if not certifications:
+            return certifications
+        
+        # Separate JCI and non-JCI certifications
+        jci_certs = []
+        other_certs = []
+        
+        for cert in certifications:
+            cert_name = cert.get('name', '').upper()
+            if ('JCI' in cert_name or 
+                'JOINT COMMISSION INTERNATIONAL' in cert_name):
+                jci_certs.append(cert)
+            else:
+                other_certs.append(cert)
+        
+        # If multiple JCI certifications found, keep the most comprehensive one
+        if len(jci_certs) > 1:
+            # Priority: 1) Has organization_info, 2) Highest score_impact, 3) Most recent
+            best_jci = max(jci_certs, key=lambda x: (
+                'organization_info' in x,  # Prefer JCI with org info
+                x.get('score_impact', 0),  # Prefer higher score
+                x.get('certificate_number', ''),  # Prefer with cert number
+                len(str(x))  # Prefer more detailed entry
+            ))
+            
+            # Log deduplication for debugging
+            st.info(f"🔧 Removed {len(jci_certs) - 1} duplicate JCI certification(s)")
+            
+            return other_certs + [best_jci]
+        
+        return certifications
     
     def search_quality_initiatives(self, org_name):
         """Search for quality initiatives using web-validated data"""
