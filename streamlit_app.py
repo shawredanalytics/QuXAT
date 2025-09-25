@@ -731,7 +731,7 @@ class HealthcareOrgAnalyzer:
     
     def _comprehensive_deduplicate_certifications(self, certifications):
         """
-        Comprehensive deduplication to prevent all types of certification duplicates
+        Enhanced comprehensive deduplication to prevent all types of certification duplicates
         """
         if not certifications:
             return certifications
@@ -747,6 +747,10 @@ class HealthcareOrgAnalyzer:
             # Normalize certification name for comparison
             normalized_name = self._normalize_cert_name(cert_name)
             
+            # Skip empty normalized names
+            if not normalized_name:
+                continue
+            
             # If this is a new certification, add it
             if normalized_name not in unique_certs:
                 unique_certs[normalized_name] = cert
@@ -756,28 +760,89 @@ class HealthcareOrgAnalyzer:
                 if self._is_better_cert(cert, existing_cert):
                     unique_certs[normalized_name] = cert
         
-        return list(unique_certs.values())
+        # Additional pass to catch similar certifications that might have been missed
+        final_certs = list(unique_certs.values())
+        
+        # Check for similar certifications using fuzzy matching
+        import difflib
+        to_remove = set()
+        
+        for i, cert1 in enumerate(final_certs):
+            if i in to_remove:
+                continue
+            for j, cert2 in enumerate(final_certs[i+1:], i+1):
+                if j in to_remove:
+                    continue
+                
+                # Check similarity between original names
+                similarity = difflib.SequenceMatcher(None, 
+                    cert1.get('name', '').upper(), 
+                    cert2.get('name', '').upper()).ratio()
+                
+                if similarity > 0.8:  # 80% similarity threshold
+                    # Keep the better certification
+                    if self._is_better_cert(cert2, cert1):
+                        to_remove.add(i)
+                    else:
+                        to_remove.add(j)
+        
+        # Remove duplicates identified by fuzzy matching
+        final_certs = [cert for i, cert in enumerate(final_certs) if i not in to_remove]
+        
+        return final_certs
     
     def _normalize_cert_name(self, cert_name):
-        """Normalize certification name for comparison"""
+        """Enhanced normalization for comprehensive duplicate detection"""
+        import re
+        
         # Convert to uppercase and remove common variations
         normalized = cert_name.upper().strip()
         
-        # Handle common variations
+        # Handle common organization variations
         normalized = normalized.replace('JOINT COMMISSION INTERNATIONAL', 'JCI')
+        normalized = normalized.replace('JOINT COMMISSION', 'JCI')
         normalized = normalized.replace('NATIONAL ACCREDITATION BOARD FOR HOSPITALS', 'NABH')
+        normalized = normalized.replace('NATIONAL ACCREDITATION BOARD FOR HOSPITALS & HEALTHCARE PROVIDERS', 'NABH')
         normalized = normalized.replace('COLLEGE OF AMERICAN PATHOLOGISTS', 'CAP')
         normalized = normalized.replace('INTERNATIONAL ORGANIZATION FOR STANDARDIZATION', 'ISO')
+        normalized = normalized.replace('INTERNATIONAL STANDARDS ORGANIZATION', 'ISO')
         
-        # Remove common prefixes/suffixes
-        normalized = normalized.replace('ACCREDITATION', '').strip()
-        normalized = normalized.replace('CERTIFICATION', '').strip()
-        normalized = normalized.replace('CERTIFICATE', '').strip()
+        # Handle ISO variations
+        normalized = re.sub(r'ISO\s*(\d+)', r'ISO\1', normalized)  # ISO 9001 -> ISO9001
+        normalized = re.sub(r'ISO\s*-\s*(\d+)', r'ISO\1', normalized)  # ISO-9001 -> ISO9001
         
-        # Remove extra spaces
+        # Remove common words that don't add meaning
+        words_to_remove = [
+            'ACCREDITATION', 'ACCREDITED', 'CERTIFICATION', 'CERTIFIED', 'CERTIFICATE',
+            'STANDARD', 'STANDARDS', 'QUALITY', 'MANAGEMENT', 'SYSTEM', 'SYSTEMS',
+            'HEALTHCARE', 'HOSPITAL', 'MEDICAL', 'CLINICAL', 'LABORATORY', 'LAB',
+            'INTERNATIONAL', 'NATIONAL', 'BOARD', 'COMMISSION', 'ORGANIZATION',
+            'THE', 'OF', 'FOR', 'AND', '&', 'IN', 'ON', 'AT', 'BY', 'WITH'
+        ]
+        
+        for word in words_to_remove:
+            normalized = normalized.replace(word, ' ')
+        
+        # Remove punctuation and special characters
+        normalized = re.sub(r'[^\w\s]', ' ', normalized)
+        
+        # Remove extra spaces and join
         normalized = ' '.join(normalized.split())
         
-        return normalized
+        # Handle specific cases
+        if 'JCI' in normalized:
+            normalized = 'JCI'
+        elif 'NABH' in normalized:
+            normalized = 'NABH'
+        elif 'CAP' in normalized:
+            normalized = 'CAP'
+        elif re.search(r'ISO\s*\d+', normalized):
+            # Extract ISO number
+            iso_match = re.search(r'ISO\s*(\d+)', normalized)
+            if iso_match:
+                normalized = f'ISO{iso_match.group(1)}'
+        
+        return normalized.strip()
     
     def _is_better_cert(self, cert1, cert2):
         """Determine which certification has more complete information"""
