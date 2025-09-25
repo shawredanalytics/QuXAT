@@ -48,7 +48,7 @@ def test_pdf_generation():
             textColor=colors.darkblue
         )
         
-        story.append(Paragraph("QuXAT Test PDF Report", title_style))
+        story.append(Paragraph("QuXAT Healthcare Quality Grid Test PDF Report", title_style))
         story.append(Spacer(1, 12))
         
         # Add content
@@ -173,7 +173,7 @@ def test_streamlit_pdf_function():
         return None, str(e)
 
 if __name__ == "__main__":
-    print("🧪 QuXAT PDF Generation Test Suite")
+    print("🧪 QuXAT Healthcare Quality Grid PDF Generation Test Suite")
     print("=" * 60)
     
     # Test 1: Basic PDF generation

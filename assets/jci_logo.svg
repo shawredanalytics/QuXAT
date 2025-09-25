@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <!-- Background -->
+  <rect width="200" height="60" fill="#ffffff" stroke="#e0e0e0" stroke-width="1" rx="5"/>
+  
+  <!-- JCI Logo Circle -->
+  <circle cx="30" cy="30" r="20" fill="#0066cc" stroke="#004499" stroke-width="2"/>
+  
+  <!-- JCI Text in Circle -->
+  <text x="30" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">JCI</text>
+  
+  <!-- Joint Commission International Text -->
+  <text x="60" y="20" fill="#0066cc" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Joint Commission</text>
+  <text x="60" y="35" fill="#0066cc" font-family="Arial, sans-serif" font-size="10" font-weight="bold">International</text>
+  
+  <!-- Quality Excellence Badge -->
+  <rect x="60" y="40" width="80" height="12" fill="#f0f8ff" stroke="#0066cc" stroke-width="1" rx="2"/>
+  <text x="100" y="48" text-anchor="middle" fill="#0066cc" font-family="Arial, sans-serif" font-size="8">Quality Excellence</text>
+  
+  <!-- Accreditation Symbol -->
+  <polygon points="170,15 175,25 185,25 177,32 180,42 170,37 160,42 163,32 155,25 165,25" fill="#ffd700" stroke="#ffcc00" stroke-width="1"/>
+</svg>

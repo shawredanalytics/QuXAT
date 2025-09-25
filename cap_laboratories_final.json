@@ -1,0 +1,2165 @@
+[
+  {
+    "id": "cap_001",
+    "name": "Accupath Diagnostic Laboratories, Inc.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "201 Summit View Dr., Suite 100, Brentwood, TN 37027",
+    "phone": "800-874-8532",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "TN",
+      "zip_code": "37027"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Clinical Diagnostics",
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.270971",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_002",
+    "name": "Accupath Diagnostic Laboratories, Inc.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "5005 South 40th Street, Suite 1100, Phoenix, AZ 85040",
+    "phone": "615-495-0615",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "AZ",
+      "zip_code": "85040"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Clinical Diagnostics",
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271009",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_003",
+    "name": "Almac Diagnostic Services",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "20 Seagoe Industrial Estate, Craigavon, Northern Ireland, BT63 5QD",
+    "phone": "+44 (0) 28 3833 2200",
+    "website": "",
+    "location": {
+      "country": "United Kingdom",
+      "state": "Northern Ireland",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Clinical Diagnostics",
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271030",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_004",
+    "name": "Almac Diagnostic Services LLC",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "4238 Technology Drive, Durham, North Carolina 27704",
+    "phone": "919-479-8850",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NC",
+      "zip_code": "27704"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Clinical Diagnostics",
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271045",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_005",
+    "name": "Alverno Laboratories",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "2434 Interstate Plaza Dr., Hammond, IN 46324",
+    "phone": "219-845-4026",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "IN",
+      "zip_code": "46324"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271060",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_006",
+    "name": "ARUP Laboratories",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "500 Chipeta Way, Salt Lake City, UT 84108",
+    "phone": "801-583-2787",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "UT",
+      "zip_code": "84108"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271074",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_007",
+    "name": "Avera McKennan Hospital & University Health Center",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "800 E. 21st Street, Sioux Falls, SD 57105",
+    "phone": "605-322-8000",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "SD",
+      "zip_code": "57105"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271089",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_008",
+    "name": "BioReference Health, LLC",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "481 Edward H. Ross Drive, Elmwood Park, NJ 07407",
+    "phone": "800-229-5227",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NJ",
+      "zip_code": "07407"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271104",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_009",
+    "name": "Caris MPI Inc. d/b/a Caris Life Sciences",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "4610 S. 44th Place, Phoenix, AZ 85040",
+    "phone": "602-792-2442",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "AZ",
+      "zip_code": "85040"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271117",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_010",
+    "name": "CB Laboratory",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1687-1 Matoba, Kawagoe-shi, Saitama-ken 350-1101",
+    "phone": "+86 21 51371173",
+    "website": "",
+    "location": {
+      "country": "Japan",
+      "state": "Saitama",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271132",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_011",
+    "name": "Centogene GmbH",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "Schillingalee 68, Rostock 18057",
+    "phone": "+49(0)381 203652 218",
+    "website": "",
+    "location": {
+      "country": "Germany",
+      "state": "Mecklenburg-Vorpommern",
+      "zip_code": "18057"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271146",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_012",
+    "name": "Cleveland HeartLab",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "6701 Carnegie Avenue - Suite 500, Cleveland, Ohio 44103",
+    "phone": "866-358-9828",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "OH",
+      "zip_code": "44103"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Cardiovascular Testing",
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271161",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_013",
+    "name": "CooperSurgical, Inc.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "3 Regent St., Livingston, NJ 07039",
+    "phone": "877-282-3112",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NJ",
+      "zip_code": "07039"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271176",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_014",
+    "name": "Crown BioScience GmbH",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "Falkenried 88, Bldg. D, 20251 Hamburg",
+    "phone": "+49 40 69 63 572 0",
+    "website": "",
+    "location": {
+      "country": "Germany",
+      "state": "Hamburg",
+      "zip_code": "20251"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271189",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_015",
+    "name": "Cytespace Africa Pty. Ltd.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "125 Amkoor Road, Lyttelton Manor, Centurion 0157",
+    "phone": "+27 (0) 12 671 2333",
+    "website": "",
+    "location": {
+      "country": "South Africa",
+      "state": "Gauteng",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271204",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_016",
+    "name": "Department of Pathology and Laboratory Medicine King Abdulaziz Medical City-MNGHA",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "Khashmlaan Road, Riyadh 11426",
+    "phone": "+966-11-801-1111 ext. 13456",
+    "website": "",
+    "location": {
+      "country": "Saudi Arabia",
+      "state": "Riyadh",
+      "zip_code": "11426"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing",
+      "Anatomic Pathology"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271218",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_017",
+    "name": "Dianon Systems, Inc. and Esoterix Genetic Laboratories, LLC",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1 and 3 Forest Parkway, Shelton, CT 06484",
+    "phone": "203-926-7100",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "CT",
+      "zip_code": "06484"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Molecular Diagnostics",
+      "Medical Laboratory Testing",
+      "Genetic Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271232",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_018",
+    "name": "Esoterix, Inc Endocrinology Laboratory",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "4301 Lost Hills Rd., Calabasas, CA 91301",
+    "phone": "818-867-1419",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "CA",
+      "zip_code": "91301"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing",
+      "Endocrinology Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271247",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_019",
+    "name": "Esoterix Genetic Laboratories, LLC (MA)",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "3400 Computer Dr., Westborough, MA 01581",
+    "phone": "508-898-9001",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "MA",
+      "zip_code": "01581"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Molecular Diagnostics",
+      "Medical Laboratory Testing",
+      "Genetic Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271261",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_020",
+    "name": "Esoterix Genetic Laboratories, LLC (NM)",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "2000 Vivigen Way, Santa Fe, NM 87505",
+    "phone": "800-848-4436",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NM",
+      "zip_code": "87505"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Molecular Diagnostics",
+      "Medical Laboratory Testing",
+      "Genetic Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271274",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_021",
+    "name": "Fleury S/A Laboratory",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "Avenida Morumbi, 8860, Sao Paulo",
+    "phone": "(55 11) 5014-7200",
+    "website": "",
+    "location": {
+      "country": "Brazil",
+      "state": "São Paulo",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271287",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_022",
+    "name": "GC LabTech, Inc.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "485 Spencer Lane, San Antonio, Texas 78201",
+    "phone": "210-405-4258",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "TX",
+      "zip_code": "78201"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271302",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_023",
+    "name": "GRAIL, Inc.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "4001 E NC 54 Hwy Assembly, Durham, NC 27709",
+    "phone": "833-694-2553",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NC",
+      "zip_code": "27709"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271316",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_024",
+    "name": "Guardant Health, Inc",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "505 Penobscot Drive, Redwood City, CA 94063-4737",
+    "phone": "650-458-7381",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "CA",
+      "zip_code": "94063-4737"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271330",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_025",
+    "name": "Henry Ford Health System",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "2799 W. Grand Blvd., Detroit, MI 48202",
+    "phone": "4313-916-2964",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "MI",
+      "zip_code": "48202"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271343",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_026",
+    "name": "ICON Clinical Research Limited",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "South County Business Park, Leopardstown, Dublin 18",
+    "phone": "+353-1-291-2000",
+    "website": "",
+    "location": {
+      "country": "Ireland",
+      "state": "Dublin",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Clinical Diagnostics",
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271357",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_027",
+    "name": "Inivata Ltd. Clinical Laboratory NeoGenomics",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "Glenn Berge Building, Babraham Research Park, Cambridge CB22 3FH",
+    "phone": "239-768-0600",
+    "website": "",
+    "location": {
+      "country": "United Kingdom",
+      "state": "England",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Clinical Diagnostics",
+      "Molecular Diagnostics",
+      "Medical Laboratory Testing",
+      "Genetic Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271371",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_028",
+    "name": "Joint Pathology Center Laboratory",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "606 Stephen Sitter Avenue, Silver Spring, MD 20910",
+    "phone": "301-295-5002",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "MD",
+      "zip_code": "20910"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing",
+      "Anatomic Pathology"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271386",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_029",
+    "name": "Kaleida Health Center for Laboratory Medicine",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "115 Flint Road, Williamsville, New York 14221",
+    "phone": "716-626-7920",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NY",
+      "zip_code": "14221"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271399",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_030",
+    "name": "Labcorp Central Laboratory Services LP",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "8211 SciCor Drive, Indianapolis, IN 46214",
+    "phone": "219-845-4026",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "IN",
+      "zip_code": "46214"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271413",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_031",
+    "name": "Labcorp Central Laboratory Services S.a.r.l.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "7 rue Marcinhes, Geneva",
+    "phone": "+41-58-822-7000",
+    "website": "",
+    "location": {
+      "country": "Switzerland",
+      "state": "Geneva",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271427",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_032",
+    "name": "Labcorp Development (Asia) Pte.Ltd.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1 International Business Park, #01-01 The Synergy Singapore 609917",
+    "phone": "+41 65 6568 6567",
+    "website": "",
+    "location": {
+      "country": "Singapore",
+      "state": "Singapore",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271597",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_033",
+    "name": "Labcorp Pharmaceutical Research and Development (Shanghai) Co., Ltd.",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1st Floor, No. 6 Building, No. 151 Li Bing Road, Zhangjiang Hi-Tech Park, Shanghai 201203",
+    "phone": "+86 21 5137 1173",
+    "website": "",
+    "location": {
+      "country": "China",
+      "state": "Shanghai",
+      "zip_code": ""
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271618",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_034",
+    "name": "Laboratory Corporation of America - Houston",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "7207 N. Gessner, Houston, TX 77040",
+    "phone": "713-561-4453",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "TX",
+      "zip_code": "77040"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271635",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_035",
+    "name": "Laboratory Corporation of America - Tampa, Florida",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "5610 West LaSalle St., Tampa, FL 33607",
+    "phone": "800-877-5227",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "FL",
+      "zip_code": "33607"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271649",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_036",
+    "name": "Laboratory Corporation of America Center For Molecular Biology and Pathology",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1912 Alexander Drive, Research Triangle Park, NC 27709",
+    "phone": "919-361-7168",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "NC",
+      "zip_code": "27709"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Molecular Diagnostics",
+      "Medical Laboratory Testing",
+      "Genetic Testing",
+      "Anatomic Pathology"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271663",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_037",
+    "name": "Laboratory Corporation of America-Birmingham, AL",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1801 1st Avenue South, Birmingham, AL 35233",
+    "phone": "800-621-8037",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "AL",
+      "zip_code": "35233"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271678",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_038",
+    "name": "Laboratory Corporation of America-Dallas",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "7777 Forest Lane, Suite C350, Dallas, TX 75230",
+    "phone": "800-788-9892",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "TX",
+      "zip_code": "75230"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271692",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_039",
+    "name": "Laboratory Corporation of America-Englewood",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "8490 Upland Drive, Englewood, CO 80112",
+    "phone": "602-453-6898",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "CO",
+      "zip_code": "80112"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271705",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_040",
+    "name": "Laboratory Corporation of America-Phoenix",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "5005 S. 40th St., Phoenix, AZ 85040",
+    "phone": "800-788-9892",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "AZ",
+      "zip_code": "85040"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271717",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_041",
+    "name": "Laboratory Corporation of America-San Antonio",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "6603 First Park Ten Blvd., San Antonio, TX 78213",
+    "phone": "800-788-9892",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "TX",
+      "zip_code": "78213"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271731",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  },
+  {
+    "id": "cap_042",
+    "name": "Laboratory Corporation of America-Tennessee",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "1924 Alcoa Highway, Knoxville, TN 37920",
+    "phone": "865-305-9705",
+    "website": "",
+    "location": {
+      "country": "United States",
+      "state": "TN",
+      "zip_code": "37920"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189 Medical Laboratory Accreditation",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Quality Management",
+        "scope": "Medical testing and calibration laboratories"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Laboratory Quality Assurance",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "specialties": [
+      "Medical Laboratory Testing"
+    ],
+    "quality_score": 98.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "scraped_date": "2025-09-24T20:03:39.271747",
+    "data_source": "CAP 15189 Accredited Laboratories Directory",
+    "last_updated": "2025-09-24"
+  }
+]

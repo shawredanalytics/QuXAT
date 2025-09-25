@@ -1,8 +1,10 @@
-# QuXAT Scoring Dashboard
+# QuXAT Healthcare Quality Grid Scoring Dashboard
 
-A comprehensive Streamlit application for managing and analyzing QuXAT scores with seamless cloud deployment.
+A comprehensive Streamlit application for managing and analyzing QuXAT Healthcare Quality Grid scores with seamless cloud deployment.
 
 ## 🚀 Live Demo
+
+The QuXAT Healthcare Quality Grid Scoring Dashboard is a comprehensive healthcare quality assessment tool that provides:
 
 **Deploy to Streamlit Community Cloud:**
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io)
@@ -11,6 +13,7 @@ A comprehensive Streamlit application for managing and analyzing QuXAT scores wi
 
 - 📊 **Interactive Dashboard** - Real-time metrics and score distribution charts
 - 📈 **Data Analysis** - Trend visualization and historical data tracking
+- 🏥 **Healthcare Quality Assessment** - Comprehensive QuXAT Healthcare Quality Grid scoring system
 - ✏️ **Scoring Interface** - Easy-to-use form for entering new scores
 - ⚙️ **GitHub Integration** - Connect with your GitHub repositories
 - 🎨 **Modern UI** - Clean, responsive design with multiple pages

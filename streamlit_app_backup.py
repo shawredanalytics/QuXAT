@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import warnings
-import os
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -13,13 +12,12 @@ from urllib.parse import quote_plus
 import plotly.express as px
 import plotly.graph_objects as go
 from reportlab.lib.pagesizes import letter, A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as ReportLabImage, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.lib import colors as rl_colors
 from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.barcharts import VerticalBarChart
-import traceback
 
 # Import data validation module
 from data_validator import healthcare_validator
@@ -44,6 +42,8 @@ st.set_page_config(
 # Dynamic logo function for consistent display across all pages
 def display_dynamic_logo():
     """Display the QuXAT Healthcare Quality Grid logo dynamically by loading from assets folder"""
+    import os
+    from PIL import Image
     
     # Path to the PNG logo file
     logo_path = os.path.join("assets", "QuXAT Logo Facebook.png")
@@ -52,7 +52,7 @@ def display_dynamic_logo():
         # Check if logo file exists
         if os.path.exists(logo_path):
             # Load and display the PNG image
-            logo_image = PILImage.open(logo_path)
+            logo_image = Image.open(logo_path)
             
             # Create a centered container with styling - improved centering
             st.markdown("""
@@ -387,6 +387,8 @@ class HealthcareOrgAnalyzer:
     def load_jci_data(self):
         """Load JCI accredited organizations data from JSON file"""
         try:
+            import json
+            import os
             
             jci_file_path = 'jci_accredited_organizations.json'
             
@@ -594,9 +596,6 @@ class HealthcareOrgAnalyzer:
                 certifications = self.search_certifications(org_name)
                 results['certifications'] = certifications
             
-            # Apply comprehensive deduplication to all certifications
-            results['certifications'] = self._comprehensive_deduplicate_certifications(results['certifications'])
-            
             # Search for quality initiatives and news
             initiatives = self.search_quality_initiatives(org_name)
             results['quality_initiatives'] = initiatives
@@ -608,29 +607,22 @@ class HealthcareOrgAnalyzer:
                 
                 # Add ISO certifications to the main certifications list for scoring
                 if iso_certifications and iso_certifications.active_certifications > 0:
-                    # Get existing certification names for deduplication
-                    existing_cert_names = {cert.get('name', '').upper() for cert in results['certifications']}
-                    
                     # Convert ISO certifications to the format expected by the scoring system
                     for cert_type in iso_certifications.certification_types:
-                        # Check if this ISO certification already exists
-                        cert_name_upper = cert_type.upper()
-                        if cert_name_upper not in existing_cert_names:
-                            iso_cert = {
-                                'name': cert_type,
-                                'status': 'Active',
-                                'score_impact': self._get_iso_score_impact(cert_type),
-                                'certificate_number': f"ISO-{cert_type.replace(':', '-')}",
-                                'accreditation_type': 'ISO Certification',
-                                'issuer': 'International Organization for Standardization',
-                                'organization_info': {
-                                    'name': org_name,
-                                    'certification_bodies': iso_certifications.certification_bodies,
-                                    'quality_score_impact': iso_certifications.quality_score_impact
-                                }
+                        iso_cert = {
+                            'name': cert_type,
+                            'status': 'Active',
+                            'score_impact': self._get_iso_score_impact(cert_type),
+                            'certificate_number': f"ISO-{cert_type.replace(':', '-')}",
+                            'accreditation_type': 'ISO Certification',
+                            'issuer': 'International Organization for Standardization',
+                            'organization_info': {
+                                'name': org_name,
+                                'certification_bodies': iso_certifications.certification_bodies,
+                                'quality_score_impact': iso_certifications.quality_score_impact
                             }
-                            results['certifications'].append(iso_cert)
-                            existing_cert_names.add(cert_name_upper)
+                        }
+                        results['certifications'].append(iso_cert)
                         
             except Exception as e:
                 # If ISO certification scraping fails, continue without it
@@ -705,15 +697,12 @@ class HealthcareOrgAnalyzer:
                 # Enhance certifications with JCI data
                 enhanced_certifications = self.enhance_certification_with_jci(certifications, org_name)
                 
-                # COMPREHENSIVE DEDUPLICATION: Remove all JCI duplicates
-                final_certifications = self._deduplicate_jci_certifications(enhanced_certifications)
-                
                 # If no validated data found, show disclaimer
-                if not final_certifications:
+                if not enhanced_certifications:
                     st.warning(f"⚠️ No validated certification data found for '{org_name}'. Please verify organization name or check official certification databases.")
                     return []
                 
-                return final_certifications
+                return enhanced_certifications
             else:
                 # Check if organization has JCI accreditation even without other certifications
                 jci_cert = self.check_jci_accreditation(org_name)
@@ -728,115 +717,6 @@ class HealthcareOrgAnalyzer:
             st.error(f"Error validating certification data: {str(e)}")
             st.info("💡 Please check the organization name and try again. Only validated data from official sources is displayed.")
             return []
-    
-    def _comprehensive_deduplicate_certifications(self, certifications):
-        """
-        Comprehensive deduplication to prevent all types of certification duplicates
-        """
-        if not certifications:
-            return certifications
-        
-        # Track unique certifications by normalized name
-        unique_certs = {}
-        
-        for cert in certifications:
-            cert_name = cert.get('name', '').strip()
-            if not cert_name:
-                continue
-                
-            # Normalize certification name for comparison
-            normalized_name = self._normalize_cert_name(cert_name)
-            
-            # If this is a new certification, add it
-            if normalized_name not in unique_certs:
-                unique_certs[normalized_name] = cert
-            else:
-                # If duplicate found, keep the one with more information
-                existing_cert = unique_certs[normalized_name]
-                if self._is_better_cert(cert, existing_cert):
-                    unique_certs[normalized_name] = cert
-        
-        return list(unique_certs.values())
-    
-    def _normalize_cert_name(self, cert_name):
-        """Normalize certification name for comparison"""
-        # Convert to uppercase and remove common variations
-        normalized = cert_name.upper().strip()
-        
-        # Handle common variations
-        normalized = normalized.replace('JOINT COMMISSION INTERNATIONAL', 'JCI')
-        normalized = normalized.replace('NATIONAL ACCREDITATION BOARD FOR HOSPITALS', 'NABH')
-        normalized = normalized.replace('COLLEGE OF AMERICAN PATHOLOGISTS', 'CAP')
-        normalized = normalized.replace('INTERNATIONAL ORGANIZATION FOR STANDARDIZATION', 'ISO')
-        
-        # Remove common prefixes/suffixes
-        normalized = normalized.replace('ACCREDITATION', '').strip()
-        normalized = normalized.replace('CERTIFICATION', '').strip()
-        normalized = normalized.replace('CERTIFICATE', '').strip()
-        
-        # Remove extra spaces
-        normalized = ' '.join(normalized.split())
-        
-        return normalized
-    
-    def _is_better_cert(self, cert1, cert2):
-        """Determine which certification has more complete information"""
-        # Prefer certification with organization_info
-        if 'organization_info' in cert1 and 'organization_info' not in cert2:
-            return True
-        if 'organization_info' in cert2 and 'organization_info' not in cert1:
-            return False
-            
-        # Prefer certification with higher score impact
-        score1 = cert1.get('score_impact', 0)
-        score2 = cert2.get('score_impact', 0)
-        if score1 != score2:
-            return score1 > score2
-            
-        # Prefer certification with certificate number
-        if cert1.get('certificate_number') and not cert2.get('certificate_number'):
-            return True
-        if cert2.get('certificate_number') and not cert1.get('certificate_number'):
-            return False
-            
-        # Prefer more detailed certification (more fields)
-         return len(str(cert1)) > len(str(cert2))
-    
-    def _deduplicate_jci_certifications(self, certifications):
-        """
-        Comprehensive JCI deduplication to prevent multiple JCI entries from different sources
-        """
-        if not certifications:
-            return certifications
-        
-        # Separate JCI and non-JCI certifications
-        jci_certs = []
-        other_certs = []
-        
-        for cert in certifications:
-            cert_name = cert.get('name', '').upper()
-            if ('JCI' in cert_name or 
-                'JOINT COMMISSION INTERNATIONAL' in cert_name):
-                jci_certs.append(cert)
-            else:
-                other_certs.append(cert)
-        
-        # If multiple JCI certifications found, keep the most comprehensive one
-        if len(jci_certs) > 1:
-            # Priority: 1) Has organization_info, 2) Highest score_impact, 3) Most recent
-            best_jci = max(jci_certs, key=lambda x: (
-                'organization_info' in x,  # Prefer JCI with org info
-                x.get('score_impact', 0),  # Prefer higher score
-                x.get('certificate_number', ''),  # Prefer with cert number
-                len(str(x))  # Prefer more detailed entry
-            ))
-            
-            # Log deduplication for debugging
-            st.info(f"🔧 Removed {len(jci_certs) - 1} duplicate JCI certification(s)")
-            
-            return other_certs + [best_jci]
-        
-        return certifications
     
     def search_quality_initiatives(self, org_name):
         """Search for quality initiatives using web-validated data"""
@@ -878,9 +758,6 @@ class HealthcareOrgAnalyzer:
         cert_score = 0
         jci_bonus = 0
         
-        if certifications is None:
-            certifications = []
-        
         for cert in certifications:
             if cert['status'] == 'Active':
                 cert_score += cert['score_impact']
@@ -893,9 +770,7 @@ class HealthcareOrgAnalyzer:
         score_breakdown['certification_score'] = min(cert_score, 50)  # Expanded to 50 points
         
         # Calculate initiative score (20% weight - expanded for comprehensive assessment)
-        if initiatives is None:
-            initiatives = []
-        init_score = sum([init.get('impact_score', init.get('score_impact', 0)) for init in initiatives])
+        init_score = sum([init['impact_score'] for init in initiatives])
         score_breakdown['initiative_score'] = min(init_score, 20)
         
         # Calculate transparency score (15% weight - expanded for better granularity)
@@ -1416,62 +1291,91 @@ class HealthcareOrgAnalyzer:
         return iso_relevance.get(iso_standard, iso_relevance.get(base_standard, 'Medium - General quality standard'))
     
     def find_similar_organizations(self, org_name, org_location="", org_type="Hospital"):
-        """Find similar organizations in the same region using unified database with their quality scores"""
+        """Find similar organizations in the same or nearby locality with their quality scores"""
         similar_orgs = []
+        
+        # Define location-based similar organizations database
+        location_based_orgs = {
+            # US Organizations
+            'united states': [
+                {'name': 'Mayo Clinic', 'location': 'Rochester, MN', 'type': 'Academic Medical Center'},
+                {'name': 'Cleveland Clinic', 'location': 'Cleveland, OH', 'type': 'Academic Medical Center'},
+                {'name': 'Johns Hopkins Hospital', 'location': 'Baltimore, MD', 'type': 'Academic Medical Center'},
+                {'name': 'Massachusetts General Hospital', 'location': 'Boston, MA', 'type': 'Academic Medical Center'},
+                {'name': 'Cedars-Sinai Medical Center', 'location': 'Los Angeles, CA', 'type': 'Academic Medical Center'},
+                {'name': 'NewYork-Presbyterian Hospital', 'location': 'New York, NY', 'type': 'Academic Medical Center'},
+                {'name': 'UCSF Medical Center', 'location': 'San Francisco, CA', 'type': 'Academic Medical Center'},
+                {'name': 'Houston Methodist Hospital', 'location': 'Houston, TX', 'type': 'General Hospital'},
+            ],
+            
+            # Indian Organizations
+            'india': [
+                {'name': 'Apollo Hospitals', 'location': 'Chennai, Tamil Nadu', 'type': 'Multi-specialty Hospital'},
+                {'name': 'Fortis Healthcare', 'location': 'Gurgaon, Haryana', 'type': 'Multi-specialty Hospital'},
+                {'name': 'AIIMS Delhi', 'location': 'New Delhi, Delhi', 'type': 'Government Medical Institute'},
+                {'name': 'Yashoda Hospitals', 'location': 'Hyderabad, Telangana', 'type': 'Multi-specialty Hospital'},
+                {'name': 'Manipal Hospitals', 'location': 'Bangalore, Karnataka', 'type': 'Multi-specialty Hospital'},
+                {'name': 'Max Healthcare', 'location': 'New Delhi, Delhi', 'type': 'Multi-specialty Hospital'},
+                {'name': 'Narayana Health', 'location': 'Bangalore, Karnataka', 'type': 'Multi-specialty Hospital'},
+                {'name': 'Medanta - The Medicity', 'location': 'Gurgaon, Haryana', 'type': 'Multi-specialty Hospital'},
+            ],
+            
+            # UK Organizations
+            'united kingdom': [
+                {'name': 'Great Ormond Street Hospital', 'location': 'London, England', 'type': 'Pediatric Hospital'},
+                {'name': 'Royal Marsden Hospital', 'location': 'London, England', 'type': 'Cancer Center'},
+                {'name': 'Moorfields Eye Hospital', 'location': 'London, England', 'type': 'Specialty Hospital'},
+                {'name': 'King\'s College Hospital', 'location': 'London, England', 'type': 'Academic Medical Center'},
+                {'name': 'Imperial College Healthcare', 'location': 'London, England', 'type': 'Academic Medical Center'},
+            ],
+            
+            # Canadian Organizations
+            'canada': [
+                {'name': 'Toronto General Hospital', 'location': 'Toronto, ON', 'type': 'Academic Medical Center'},
+                {'name': 'Vancouver General Hospital', 'location': 'Vancouver, BC', 'type': 'Academic Medical Center'},
+                {'name': 'Montreal General Hospital', 'location': 'Montreal, QC', 'type': 'Academic Medical Center'},
+                {'name': 'Calgary Foothills Hospital', 'location': 'Calgary, AB', 'type': 'General Hospital'},
+            ],
+            
+            # Singapore Organizations
+            'singapore': [
+                {'name': 'Singapore General Hospital', 'location': 'Singapore', 'type': 'Academic Medical Center'},
+                {'name': 'National University Hospital', 'location': 'Singapore', 'type': 'Academic Medical Center'},
+                {'name': 'Tan Tock Seng Hospital', 'location': 'Singapore', 'type': 'General Hospital'},
+                {'name': 'Mount Elizabeth Hospital', 'location': 'Singapore', 'type': 'Private Hospital'},
+            ],
+            
+            # Australian Organizations
+            'australia': [
+                {'name': 'Royal Melbourne Hospital', 'location': 'Melbourne, VIC', 'type': 'Academic Medical Center'},
+                {'name': 'Royal Prince Alfred Hospital', 'location': 'Sydney, NSW', 'type': 'Academic Medical Center'},
+                {'name': 'Princess Alexandra Hospital', 'location': 'Brisbane, QLD', 'type': 'General Hospital'},
+                {'name': 'Royal Adelaide Hospital', 'location': 'Adelaide, SA', 'type': 'Academic Medical Center'},
+            ]
+        }
         
         # Determine the country/region for the searched organization
         search_region = self.determine_organization_region(org_name, org_location)
         
-        # Load unified database if not already loaded
-        if not hasattr(self, 'unified_database') or not self.unified_database:
-            self.unified_database = self.load_unified_database()
+        # Get organizations from the same region
+        region_orgs = location_based_orgs.get(search_region.lower(), [])
         
-        # Filter organizations from the same region using unified database
-        region_orgs = []
-        for org in self.unified_database:
-            org_country = org.get('country', '').lower()
-            org_region = org.get('region', '').lower()
-            
-            # Match by country or region
-            if (org_country == search_region.lower() or 
-                org_region == search_region.lower() or
-                self._is_same_region(org_country, search_region.lower())):
-                
-                # Skip the searched organization itself
-                if org['name'].lower() != org_name.lower():
-                    # Create location string
-                    location_parts = []
-                    if org.get('city'):
-                        location_parts.append(org['city'])
-                    if org.get('state'):
-                        location_parts.append(org['state'])
-                    if org.get('country'):
-                        location_parts.append(org['country'])
-                    
-                    org_location_str = ', '.join(location_parts) if location_parts else 'Unknown'
-                    
-                    # Determine organization type based on certifications
-                    org_type_determined = 'Healthcare Organization'
-                    certifications = org.get('certifications', [])
-                    if any('JCI' in cert.get('name', '') for cert in certifications):
-                        org_type_determined = 'JCI Accredited Hospital'
-                    elif any('NABH' in cert.get('name', '') for cert in certifications):
-                        org_type_determined = 'NABH Accredited Hospital'
-                    elif any('CAP' in cert.get('name', '') for cert in certifications):
-                        org_type_determined = 'CAP Accredited Laboratory'
-                    
-                    region_orgs.append({
-                        'name': org['name'],
-                        'location': org_location_str,
-                        'type': org_type_determined,
-                        'unified_data': org
-                    })
+        # Filter out the searched organization itself
+        filtered_orgs = [org for org in region_orgs if org['name'].lower() != org_name.lower()]
         
-        # Limit to 8 organizations for comparison
-        region_orgs = region_orgs[:8]
+        # For strict region-specific comparison (especially for Indian hospitals)
+        # Only add from nearby regions if the current region has very few organizations (less than 3)
+        # and only for non-Indian regions to maintain regional specificity
+        if len(filtered_orgs) < 3 and search_region.lower() != 'india':
+            nearby_regions = self.get_nearby_regions(search_region)
+            for nearby_region in nearby_regions:
+                if len(filtered_orgs) >= 8:  # Limit to 8 total comparisons
+                    break
+                nearby_orgs = location_based_orgs.get(nearby_region.lower(), [])
+                filtered_orgs.extend(nearby_orgs[:2])  # Add up to 2 from each nearby region
         
         # Generate quality scores for similar organizations
-        for org in region_orgs:
+        for org in filtered_orgs[:8]:  # Limit to 8 comparisons
             org_info = self.search_organization_info(org['name'])
             if org_info:
                 similar_orgs.append({
@@ -1488,35 +1392,6 @@ class HealthcareOrgAnalyzer:
         similar_orgs.sort(key=lambda x: x['total_score'], reverse=True)
         
         return similar_orgs
-    
-    def _is_same_region(self, org_country, search_region):
-        """Helper method to determine if an organization's country matches the search region"""
-        # Country to region mapping
-        country_region_map = {
-            'india': 'india',
-            'united states': 'united states',
-            'usa': 'united states',
-            'us': 'united states',
-            'united kingdom': 'united kingdom',
-            'uk': 'united kingdom',
-            'singapore': 'singapore',
-            'canada': 'canada',
-            'australia': 'australia'
-        }
-        
-        # Normalize country name
-        normalized_country = org_country.lower().strip()
-        
-        # Direct match
-        if normalized_country == search_region:
-            return True
-        
-        # Check mapped regions
-        mapped_region = country_region_map.get(normalized_country)
-        if mapped_region and mapped_region == search_region:
-            return True
-        
-        return False
     
     def determine_organization_region(self, org_name, org_location=""):
         """Determine the region/country of an organization based on name and location"""
@@ -1756,6 +1631,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         # Add score chart
         score_chart = create_score_chart(score, f"{org_name} Quality Score")
         if score_chart:
+            from reportlab.platypus import Image as ReportLabImage
             story.append(Paragraph("Visual Score Representation", subheading_style))
             story.append(ReportLabImage(score_chart, width=5*inch, height=3*inch))
             story.append(Spacer(1, 15))
@@ -1898,6 +1774,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
     except Exception as e:
         # Log error without using Streamlit functions to avoid context issues
         print(f"Error generating PDF: {str(e)}")
+        import traceback
         traceback.print_exc()
         return None
 
@@ -2184,6 +2061,7 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
                 
                 # Score history chart
                 if len(history) > 1:
+                    import plotly.graph_objects as go
                     
                     dates = [entry['date'] for entry in history]
                     scores = [entry['credit_score'] for entry in history]
@@ -2878,6 +2756,7 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         
     except Exception as e:
         st.error(f"Error displaying detailed scorecard: {str(e)}")
+        import traceback
         st.error(f"Traceback: {traceback.format_exc()}")
 
 # Initialize the analyzer
@@ -3291,7 +3170,7 @@ try:
                     # Get certifications from organization data (excluding JCI and NABH as they are accreditations)
                     certifications = org_data.get('certifications', [])
                     # Filter out JCI and NABH as they should be in accreditations section
-                    certifications = [cert for cert in certifications if not ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper())]
+                    certifications = [cert for cert in certifications if not ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper())]
                     if certifications:
                         cert_cols = st.columns(min(len(certifications), 3))
                         for idx, cert in enumerate(certifications[:6]):  # Show up to 6 certifications
@@ -3299,14 +3178,6 @@ try:
                                 # Determine certification status and icon
                                 cert_status = cert.get('status', 'Active')
                                 cert_icon = "✅" if cert_status == "Active" else "⏳" if cert_status == "Pending" else "❌"
-                                
-                                # Determine certification status color
-                                if cert_status == 'Active':
-                                    cert_status_color = "#28a745"
-                                elif cert_status == 'Pending':
-                                    cert_status_color = "#ffc107"
-                                else:
-                                    cert_status_color = "#dc3545"
                                 
                                 # Special handling for NABH - only show status if details are not available
                                 cert_name = cert.get('name', 'Unknown Certification')
@@ -3321,15 +3192,66 @@ try:
                                     st.markdown(f"""
                                     <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; background: #f8f9fa;">
                                         <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{cert_icon} {cert_name}</h4>
-                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {cert_status_color};">{cert_status}</span></p>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {'#28a745' if cert_status == 'Active' else '#ffc107' if cert_status == 'Pending' else '#dc3545'};">{cert_status}</span></p>
                                     </div>
                                     """, unsafe_allow_html=True)
                                 else:
-                                    # Simplified certification card - only show status
+                                    # For all other certifications or NABH/JCI with details, show full information
+                                    # Build the card content dynamically based on available data
+                                    
+                                    # Get organization details from session state
+                                    org_details = ""
+                                    if 'current_org' in st.session_state and 'current_data' in st.session_state:
+                                        current_org_name = st.session_state.current_org
+                                        current_org_data = st.session_state.current_data
+                                        
+                                        # Extract organization type
+                                        org_type = "Healthcare Organization"  # Default
+                                        if 'unified_data' in current_org_data:
+                                            unified_data = current_org_data['unified_data']
+                                            org_type = unified_data.get('type', org_type)
+                                        
+                                        # Extract organization location
+                                        org_location = ""
+                                        if 'unified_data' in current_org_data:
+                                            unified_data = current_org_data['unified_data']
+                                            if 'location' in unified_data:
+                                                org_location = unified_data['location']
+                                            elif 'city' in unified_data and 'state' in unified_data:
+                                                org_location = f"{unified_data['city']}, {unified_data['state']}"
+                                            elif 'address' in unified_data:
+                                                org_location = unified_data['address']
+                                        
+                                        # Build organization details section
+                                        org_details = f"""
+                                        <div style="background: #e8f4fd; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #007bff;">
+                                            <p style="margin: 2px 0; color: #495057; font-size: 0.9em;"><strong>🏥 Organization:</strong> {current_org_name}</p>"""
+                                        
+                                        if org_location:
+                                            org_details += f"""
+                                            <p style="margin: 2px 0; color: #495057; font-size: 0.9em;"><strong>📍 Location:</strong> {org_location}</p>"""
+                                        
+                                        org_details += f"""
+                                            <p style="margin: 2px 0; color: #495057; font-size: 0.9em;"><strong>🏢 Type:</strong> {org_type}</p>
+                                        </div>"""
+                                    
                                     card_content = f"""
                                     <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; background: #f8f9fa;">
                                         <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{cert_icon} {cert_name}</h4>
-                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {cert_status_color};">{cert_status}</span></p>
+                                        {org_details}"""
+                                    
+                                    # Only show issuer if it's not N/A or None
+                                    if issuer and issuer != 'N/A':
+                                        card_content += f"""
+                                        <p style="margin: 5px 0; color: #666;"><strong>Issued by:</strong> {issuer}</p>"""
+                                    
+                                    # Only show valid until if it's not N/A or None
+                                    if valid_until and valid_until != 'N/A':
+                                        card_content += f"""
+                                        <p style="margin: 5px 0; color: #666;"><strong>Valid Until:</strong> {valid_until}</p>"""
+                                    
+                                    card_content += f"""
+                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {'#28a745' if cert_status == 'Active' else '#ffc107' if cert_status == 'Pending' else '#dc3545'};">{cert_status}</span></p>
                                     </div>
                                     """
                                     
@@ -3347,19 +3269,13 @@ try:
                     
                     # Add JCI and NABH from certifications data as they are actually accreditations
                     all_certifications = org_data.get('certifications', [])
-                    jci_nabh_accreditations = [cert for cert in all_certifications if ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper())]
+                    jci_nabh_accreditations = [cert for cert in all_certifications if ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper())]
                     
-                    # Convert JCI/NABH certifications to accreditation format (avoid duplicates)
-                    existing_accred_names = [acc.get('name', '').upper() for acc in accreditations]
+                    # Convert JCI/NABH certifications to accreditation format
                     for cert in jci_nabh_accreditations:
-                        cert_name = cert.get('name', 'Unknown Accreditation')
-                        # Skip if this accreditation already exists
-                        if cert_name.upper() in existing_accred_names:
-                            continue
-                            
                         accred_entry = {
-                            'name': cert_name,
-                            'level': 'International Standard' if ('JCI' in cert_name.upper() or 'JOINT COMMISSION INTERNATIONAL' in cert_name.upper()) else 'National Standard',
+                            'name': cert.get('name', 'Unknown Accreditation'),
+                            'level': 'International Standard' if 'JCI' in cert.get('name', '').upper() else 'National Standard',
                             'awarded_date': cert.get('issued_date', cert.get('awarded_date', 'N/A')),
                             'description': cert.get('description', ''),
                             'status': cert.get('status', 'Active'),
@@ -3367,7 +3283,6 @@ try:
                             'valid_until': cert.get('valid_until', cert.get('expiry', 'N/A'))
                         }
                         accreditations.append(accred_entry)
-                        existing_accred_names.append(cert_name.upper())
                     
                     # Check for NABL accreditation
                     nabl_accreditation = healthcare_validator.get_nabl_accreditation(org_name)
@@ -3406,8 +3321,12 @@ try:
                             level = accred.get('level', '').lower()
                             accred_name = accred.get('name', '').upper()
                             
-                            # Special icons for NABH
-                            if 'NABH' in accred_name:
+                            # Special icons for JCI and NABH
+                            if 'JCI' in accred_name:
+                                # Use JCI logo for JCI accreditations
+                                level_icon = '<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iNjAiPgogIDwhLS0gQmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNlMGUwZTAiIHN0cm9rZS13aWR0aD0iMSIgcng9IjUiLz4KICA8IS0tIEpDSSBMb2dvIENpcmNsZSAtLT4KICA8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyMCIgZmlsbD0iIzAwNjZjYyIgc3Ryb2tlPSIjMDA0NDk5IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIEpDSSBUZXh0IGluIENpcmNsZSAtLT4KICA8dGV4dCB4PSIzMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIj5KQ0k8L3RleHQ+CiAgPCEtLSBKb2ludCBDb21taXNzaW9uIEludGVybmF0aW9uYWwgVGV4dCAtLT4KICA8dGV4dCB4PSI2MCIgeT0iMjAiIGZpbGw9IiMwMDY2Y2MiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiPkpvaW50IENvbW1pc3Npb248L3RleHQ+CiAgPHRleHQgeD0iNjAiIHk9IjM1IiBmaWxsPSIjMDA2NmNjIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIj5JbnRlcm5hdGlvbmFsPC90ZXh0PgogIDwhLS0gUXVhbGl0eSBFeGNlbGxlbmNlIEJhZGdlIC0tPgogIDxyZWN0IHg9IjYwIiB5PSI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjZjBmOGZmIiBzdHJva2U9IiMwMDY2Y2MiIHN0cm9rZS13aWR0aD0iMSIgcng9IjIiLz4KICA8dGV4dCB4PSIxMDAiIHk9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDA2NmNjIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCI+UXVhbGl0eSBFeGNlbGxlbmNlPC90ZXh0PgogIDwhLS0gQWNjcmVkaXRhdGlvbiBTeW1ib2wgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxNzAsMTUgMTc1LDI1IDE4NSwyNSAxNzcsMzIgMTgwLDQyIDE3MCwzNyAxNjAsNDIgMTYzLDMyIDE1NSwyNSAxNjUsMjUiIGZpbGw9IiNmZmQ3MDAiIHN0cm9rZT0iI2ZmY2MwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==" style="width: 40px; height: 12px; vertical-align: middle; margin-right: 5px;">'
+                                level_color = "#1976D2"
+                            elif 'NABH' in accred_name:
                                 level_icon = "🇮🇳"
                                 level_color = "#FF9800"
                             elif 'gold' in level or 'excellent' in level:
@@ -3425,15 +3344,6 @@ try:
                             else:
                                 level_icon = "🏆"
                                 level_color = "#4CAF50"
-                            
-                            # Determine status color
-                            status = accred.get('status', 'Active')
-                            if status == 'Active':
-                                status_color = "#28a745"
-                            elif status == 'Pending':
-                                status_color = "#ffc107"
-                            else:
-                                status_color = "#dc3545"
                             
                             # Format validity date if available (special handling for JCI/NABH)
                             validity_info = ""
@@ -3500,7 +3410,12 @@ try:
                             st.markdown(f"""
                             <div style="padding: 20px; border-left: 4px solid {level_color}; background: #f8f9fa; margin: 15px 0; border-radius: 0 8px 8px 0;">
                                 <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{level_icon} {accred.get('name', 'Unknown Accreditation')}</h4>
-                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {status_color};">{accred.get('status', 'Active')}</span></p>
+                                {org_details}
+                                <p style="margin: 5px 0; color: #666;"><strong>Level:</strong> <span style="color: {level_color}; font-weight: bold;">{accred.get('level', 'N/A')}</span></p>
+                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {'#28a745' if accred.get('status', 'Active') == 'Active' else '#ffc107' if accred.get('status', 'Active') == 'Pending' else '#dc3545'};">{accred.get('status', 'Active')}</span></p>
+                                {issuer_info}
+                                {validity_info}
+                                {cert_info}
                             </div>
                             """, unsafe_allow_html=True)
                             
@@ -3661,7 +3576,7 @@ try:
                                     st.write(f"**Initiative:** {initiative['name']}")
                                     st.write(f"**Year:** {initiative['year']}")
                                 with col2:
-                                    st.metric("Impact Score", f"+{initiative.get('impact_score', initiative.get('score_impact', 0))}")
+                                    st.metric("Impact Score", f"+{initiative['impact_score']}")
                     else:
                         st.info("No recent quality initiatives found.")
                     
@@ -3702,35 +3617,27 @@ try:
                     
                     # Comparative Analysis Section
                     st.markdown("---")
+                    st.markdown("### 🏥 Similar Organizations Comparison")
                     
-                    # Get organization region for display
-                    analyzer = get_analyzer()
-                    org_info = analyzer.search_organization_info(org_name)
-                    org_location = ""
-                    org_region = "Unknown Region"
-                    
-                    if org_info and 'unified_data' in org_info:
-                        # Extract location from unified database if available
-                        unified_data = org_info['unified_data']
-                        if 'location' in unified_data:
-                            org_location = unified_data['location']
-                        elif 'city' in unified_data and 'state' in unified_data:
-                            org_location = f"{unified_data['city']}, {unified_data['state']}"
-                        elif 'address' in unified_data:
-                            org_location = unified_data['address']
+                    with st.spinner("🔍 Finding similar organizations in your locality..."):
+                        analyzer = get_analyzer()
+                        # Get organization info to extract location
+                        org_info = analyzer.search_organization_info(org_name)
+                        org_location = ""
+                        if org_info and 'unified_data' in org_info:
+                            # Extract location from unified database if available
+                            unified_data = org_info['unified_data']
+                            if 'location' in unified_data:
+                                org_location = unified_data['location']
+                            elif 'city' in unified_data and 'state' in unified_data:
+                                org_location = f"{unified_data['city']}, {unified_data['state']}"
+                            elif 'address' in unified_data:
+                                org_location = unified_data['address']
                         
-                        # Get region for display
-                        org_region = analyzer.determine_organization_region(org_name, org_location)
-                        org_region = org_region.title()  # Capitalize for display
-                    
-                    st.markdown(f"### 🏥 Regional Quality Score Comparison - {org_region}")
-                    st.markdown(f"*Comparing with all healthcare organizations mapped in {org_region}*")
-                    
-                    with st.spinner(f"🔍 Finding healthcare organizations in {org_region}..."):
                         similar_orgs = analyzer.find_similar_organizations(org_name, org_location)
                         
                         if similar_orgs:
-                            st.markdown(f"**Found {len(similar_orgs)} healthcare organizations in {org_region} for comparison:**")
+                            st.markdown(f"**Found {len(similar_orgs)} similar healthcare organizations for comparison:**")
                             
                             # Create comparison table
                             comparison_data = []
@@ -3761,7 +3668,7 @@ try:
                             st.dataframe(comparison_df, use_container_width=True, hide_index=True)
                             
                             # Visualization: Score comparison chart
-                            st.markdown(f"#### 📊 Quality Score Comparison - {org_region} Region")
+                            st.markdown("#### 📊 Quality Score Comparison")
                             
                             col1, col2 = st.columns([2, 1])
                             
@@ -3782,7 +3689,7 @@ try:
                                 ])
                                 
                                 fig.update_layout(
-                                    title=f"Quality Score Comparison - {org_region} Region",
+                                    title="Quality Score Comparison",
                                     xaxis_title="Healthcare Organizations",
                                     yaxis_title="Quality Score (0-100)",
                                     height=400,
@@ -3862,47 +3769,6 @@ try:
             
             # Calculate rankings
             rankings_data = analyzer.calculate_organization_rankings(org_name, score)
-            
-            # Calculate credit score and grade for rankings display
-            credit_score = int(300 + (score / 100) * 550)
-            
-            # Credit-style risk categories and descriptions
-            if credit_score >= 800:
-                grade_color = '#28a745'
-                grade_text = 'Exceptional (800-850)'
-                grade_emoji = '🏆'
-                risk_level = 'Minimal Risk'
-                risk_description = 'Outstanding healthcare quality with minimal compliance risk'
-            elif credit_score >= 740:
-                grade_color = '#20c997'
-                grade_text = 'Very Good (740-799)'
-                grade_emoji = '⭐'
-                risk_level = 'Low Risk'
-                risk_description = 'Excellent healthcare quality with low compliance risk'
-            elif credit_score >= 670:
-                grade_color = '#ffc107'
-                grade_text = 'Good (670-739)'
-                grade_emoji = '👍'
-                risk_level = 'Moderate Risk'
-                risk_description = 'Good healthcare quality with moderate compliance oversight needed'
-            elif credit_score >= 580:
-                grade_color = '#fd7e14'
-                grade_text = 'Fair (580-669)'
-                grade_emoji = '👌'
-                risk_level = 'Elevated Risk'
-                risk_description = 'Fair healthcare quality requiring enhanced monitoring'
-            elif credit_score >= 500:
-                grade_color = '#dc3545'
-                grade_text = 'Poor (500-579)'
-                grade_emoji = '⚠️'
-                risk_level = 'High Risk'
-                risk_description = 'Poor healthcare quality requiring immediate attention'
-            else:
-                grade_color = '#6f42c1'
-                grade_text = 'Very Poor (300-499)'
-                grade_emoji = '🔄'
-                risk_level = 'Very High Risk'
-                risk_description = 'Critical healthcare quality issues requiring urgent intervention'
         
             # Add ranking data to history for trend tracking
             if rankings_data:
@@ -4036,6 +3902,7 @@ try:
                             'Type': performer['hospital_type']
                         })
                     
+                    import pandas as pd
                     df_comparison = pd.DataFrame(comparison_data)
                     st.dataframe(df_comparison, use_container_width=True, hide_index=True)
                 
@@ -4307,7 +4174,7 @@ try:
         - **ISO Certifications** - International Organization for Standardization
         - **NABH** - National Accreditation Board for Hospitals & Healthcare Providers
         - **NABL** - National Accreditation Board for Testing and Calibration Laboratories
-        - **JCI** 🏥 - Joint Commission International
+        - **JCI** <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iNjAiPgogIDwhLS0gQmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNlMGUwZTAiIHN0cm9rZS13aWR0aD0iMSIgcng9IjUiLz4KICA8IS0tIEpDSSBMb2dvIENpcmNsZSAtLT4KICA8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyMCIgZmlsbD0iIzAwNjZjYyIgc3Ryb2tlPSIjMDA0NDk5IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIEpDSSBUZXh0IGluIENpcmNsZSAtLT4KICA8dGV4dCB4PSIzMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIj5KQ0k8L3RleHQ+CiAgPCEtLSBKb2ludCBDb21taXNzaW9uIEludGVybmF0aW9uYWwgVGV4dCAtLT4KICA8dGV4dCB4PSI2MCIgeT0iMjAiIGZpbGw9IiMwMDY2Y2MiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiPkpvaW50IENvbW1pc3Npb248L3RleHQ+CiAgPHRleHQgeD0iNjAiIHk9IjM1IiBmaWxsPSIjMDA2NmNjIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIj5JbnRlcm5hdGlvbmFsPC90ZXh0PgogIDwhLS0gUXVhbGl0eSBFeGNlbGxlbmNlIEJhZGdlIC0tPgogIDxyZWN0IHg9IjYwIiB5PSI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjZjBmOGZmIiBzdHJva2U9IiMwMDY2Y2MiIHN0cm9rZS13aWR0aD0iMSIgcng9IjIiLz4KICA8dGV4dCB4PSIxMDAiIHk9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDA2NmNjIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCI+UXVhbGl0eSBFeGNlbGxlbmNlPC90ZXh0PgogIDwhLS0gQWNjcmVkaXRhdGlvbiBTeW1ib2wgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxNzAsMTUgMTc1LDI1IDE4NSwyNSAxNzcsMzIgMTgwLDQyIDE3MCwzNyAxNjAsNDIgMTYzLDMyIDE1NSwyNSAxNjUsMjUiIGZpbGw9IiNmZmQ3MDAiIHN0cm9rZT0iI2ZmY2MwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==" style="width: 30px; height: 9px; vertical-align: middle; margin-left: 5px;"> - Joint Commission International
         - **HIMSS** - Healthcare Information and Management Systems Society
         - **AAAHC** - Accreditation Association for Ambulatory Health Care
         
@@ -4913,6 +4780,897 @@ except Exception as e:
         st.error(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
-    # Streamlit applications don't need a main function
-    # The app runs automatically when executed
-    pass
+    main()
+        organization_counts = [150, 320, 280, 180, 70]
+        colors = ['#2E8B57', '#32CD32', '#FFD700', '#FFA500', '#FF6347']
+        
+        fig = px.bar(x=quality_ranges, y=organization_counts, 
+                     title="Healthcare Organizations by Quality Score Range",
+                     color=quality_ranges, color_discrete_sequence=colors)
+        fig.update_layout(showlegend=False, xaxis_title="Quality Score Range", yaxis_title="Number of Organizations")
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Key metrics
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("🏥 Organizations Tracked", "1,000+")
+        with col2:
+            st.metric("🌍 Countries Covered", "50+")
+        with col3:
+            st.metric("📊 Average Quality Score", "78.5")
+        with col4:
+            st.metric("🏆 Top Performers", "150")
+        
+        st.divider()  # Visual separator between sections
+        
+        # Enhanced map customization options
+        st.subheader("🎛️ Map Controls & Filters")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            color_scale = st.selectbox(
+                "🎨 Color Scale",
+                ["RdYlGn", "Viridis", "Plasma", "Blues", "Reds", "RdBu", "Turbo", "Rainbow"],
+                index=0,
+                help="Choose color scheme for the map visualization"
+            )
+        
+        with col2:
+            projection = st.selectbox(
+                "🗺️ Map Projection",
+                ["natural earth", "orthographic", "mercator", "robinson", "kavrayskiy7", "mollweide", "eckert4"],
+                index=0,
+                help="Select map projection style"
+            )
+        
+        with col3:
+            show_text = st.checkbox("📝 Show Country Codes", value=False, help="Display ISO country codes on map")
+        
+        with col4:
+            map_height = st.slider("📏 Map Height", 400, 800, 600, 50, help="Adjust map display height")
+        
+        # Advanced filtering options
+        st.markdown("### 🔍 Advanced Filters")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            score_range = st.slider(
+                "Quality Score Range",
+                min_value=60,
+                max_value=95,
+                value=(60, 95),
+                help="Filter countries by quality score range"
+            )
+        
+        with col2:
+            hospital_filter = st.slider(
+                "Minimum Top Hospitals",
+                min_value=0,
+                max_value=50,
+                value=0,
+                help="Show countries with at least this many top-tier hospitals"
+            )
+        
+        with col3:
+            region_filter = st.multiselect(
+                "Select Regions",
+                ["North America", "Europe", "Asia-Pacific", "Middle East & Africa", "Latin America", "Eastern Europe"],
+                default=["North America", "Europe", "Asia-Pacific", "Middle East & Africa", "Latin America", "Eastern Europe"],
+                help="Filter by geographic regions"
+            )
+        
+        # Enhanced global healthcare quality data with more comprehensive metrics
+        countries_data = {
+            'Country': [
+                'United States', 'Germany', 'Switzerland', 'Japan', 'Singapore', 'Canada', 'Australia', 
+                'United Kingdom', 'France', 'Netherlands', 'Sweden', 'Norway', 'Denmark', 'Finland',
+                'South Korea', 'Israel', 'Austria', 'Belgium', 'Italy', 'Spain', 'New Zealand',
+                'China', 'India', 'Brazil', 'Russia', 'Mexico', 'Turkey', 'Thailand', 'Malaysia',
+                'South Africa', 'Egypt', 'Argentina', 'Chile', 'Poland', 'Czech Republic', 'Hungary',
+                'Portugal', 'Greece', 'Ireland', 'Luxembourg', 'Iceland', 'Estonia', 'Latvia', 'Lithuania',
+                'UAE', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Jordan', 'Lebanon',
+                'Morocco', 'Tunisia', 'Algeria', 'Nigeria', 'Kenya', 'Ghana', 'Ethiopia', 'Tanzania',
+                'Uganda', 'Rwanda', 'Botswana', 'Namibia', 'Zambia', 'Zimbabwe', 'Mauritius', 'Seychelles'
+            ],
+            'ISO_Code': [
+                'USA', 'DEU', 'CHE', 'JPN', 'SGP', 'CAN', 'AUS', 'GBR', 'FRA', 'NLD', 'SWE', 'NOR', 
+                'DNK', 'FIN', 'KOR', 'ISR', 'AUT', 'BEL', 'ITA', 'ESP', 'NZL', 'CHN', 'IND', 'BRA', 
+                'RUS', 'MEX', 'TUR', 'THA', 'MYS', 'ZAF', 'EGY', 'ARG', 'CHL', 'POL', 'CZE', 'HUN',
+                'PRT', 'GRC', 'IRL', 'LUX', 'ISL', 'EST', 'LVA', 'LTU', 'ARE', 'SAU', 'QAT', 'KWT',
+                'BHR', 'OMN', 'JOR', 'LBN', 'MAR', 'TUN', 'DZA', 'NGA', 'KEN', 'GHA', 'ETH', 'TZA',
+                'UGA', 'RWA', 'BWA', 'NAM', 'ZMB', 'ZWE', 'MUS', 'SYC'
+            ],
+            'Quality_Score': [
+                92, 89, 94, 88, 91, 87, 86, 85, 84, 87, 88, 90, 89, 87, 85, 83, 86, 84, 82, 81, 85,
+                78, 72, 75, 70, 73, 74, 76, 77, 69, 65, 74, 78, 79, 80, 78, 81, 79, 86, 88, 89, 82, 81, 80,
+                82, 79, 85, 81, 83, 78, 76, 74, 71, 73, 68, 64, 67, 69, 63, 66, 68, 72, 75, 73, 70, 67, 79, 84
+            ],
+            'Healthcare_Rank': [
+                1, 4, 2, 6, 3, 8, 9, 10, 11, 7, 5, 4, 4, 8, 10, 12, 9, 11, 13, 14, 9,
+                25, 35, 28, 40, 32, 30, 26, 24, 42, 48, 29, 25, 22, 21, 23, 18, 20, 7, 6, 5, 19, 20, 21,
+                15, 27, 12, 17, 14, 31, 33, 36, 45, 38, 52, 58, 49, 44, 61, 55, 50, 41, 37, 39, 43, 54, 16, 13
+            ],
+            'Top_Hospitals': [
+                15, 8, 6, 7, 4, 6, 5, 9, 7, 4, 3, 2, 2, 2, 4, 3, 3, 2, 4, 3, 2,
+                12, 8, 4, 3, 2, 3, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1,
+                3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+            ],
+            'Population_Millions': [
+                331, 83, 8.7, 125, 5.9, 38, 25, 67, 68, 17, 10, 5.4, 5.8, 5.5, 52, 9.4, 9, 11.5, 60, 47, 5.1,
+                1439, 1380, 215, 146, 129, 84, 70, 33, 60, 104, 45, 19, 38, 10.7, 9.7, 10.3, 10.7, 5, 0.6, 0.37, 1.3, 1.9, 2.8,
+                9.9, 35, 2.9, 4.3, 1.7, 5.1, 10.2, 6.8, 37, 12, 44, 218, 54, 32, 117, 60, 47, 13, 2.6, 2.5, 18, 15, 1.3, 0.1
+            ],
+            'GDP_Per_Capita': [
+                63543, 46259, 81867, 39285, 59797, 46327, 51812, 42330, 38625, 52331, 51648, 75420, 60170, 48810, 31846, 43592, 47291, 46421, 31953, 27057, 42084,
+                10500, 1900, 8717, 11289, 9673, 9127, 7189, 11373, 6001, 3019, 9912, 13231, 13823, 23111, 15731, 23252, 17676, 78785, 115874, 68384, 19847, 17861, 19158,
+                43103, 23139, 62088, 29301, 23504, 15343, 4405, 8017, 3204, 3447, 2207, 2097, 1838, 2328, 854, 1141, 1155, 4315, 7715, 4448, 1539, 1464, 11208, 16426
+            ]
+        }
+        
+        df_countries = pd.DataFrame(countries_data)
+        
+        # Apply filters
+        filtered_df = df_countries[
+            (df_countries['Quality_Score'] >= score_range[0]) & 
+            (df_countries['Quality_Score'] <= score_range[1]) &
+            (df_countries['Top_Hospitals'] >= hospital_filter)
+        ]
+        
+        # Regional filtering
+        region_mapping = {
+            'North America': ['USA', 'CAN', 'MEX'],
+            'Europe': ['DEU', 'CHE', 'GBR', 'FRA', 'NLD', 'SWE', 'NOR', 'DNK', 'FIN', 'AUT', 'BEL', 'ITA', 'ESP', 'PRT', 'GRC', 'IRL', 'LUX', 'ISL', 'EST', 'LVA', 'LTU', 'POL', 'CZE', 'HUN'],
+            'Asia-Pacific': ['JPN', 'SGP', 'AUS', 'KOR', 'CHN', 'IND', 'THA', 'MYS', 'NZL'],
+            'Middle East & Africa': ['ISR', 'ZAF', 'EGY', 'ARE', 'SAU', 'QAT', 'KWT', 'BHR', 'OMN', 'JOR', 'LBN', 'MAR', 'TUN', 'DZA', 'NGA', 'KEN', 'GHA', 'ETH', 'TZA', 'UGA', 'RWA', 'BWA', 'NAM', 'ZMB', 'ZWE', 'MUS', 'SYC'],
+            'Latin America': ['BRA', 'ARG', 'CHL'],
+            'Eastern Europe': ['RUS', 'TUR']
+        }
+        
+        # Filter by selected regions
+        selected_countries = []
+        for region in region_filter:
+            if region in region_mapping:
+                selected_countries.extend(region_mapping[region])
+        
+        if selected_countries:
+            filtered_df = filtered_df[filtered_df['ISO_Code'].isin(selected_countries)]
+        
+        # Create the world map using Plotly Express
+        st.subheader("🗺️ Interactive World Healthcare Quality Map")
+        
+        # Display filter results
+        st.info(f"📊 Showing {len(filtered_df)} countries based on your filters")
+        
+        # Enhanced choropleth map with better styling
+        fig = px.choropleth(
+            filtered_df,
+            locations='ISO_Code',
+            color='Quality_Score',
+            hover_name='Country',
+            hover_data={
+                'Quality_Score': ':,.0f',
+                'Healthcare_Rank': ':,.0f',
+                'Top_Hospitals': ':,.0f',
+                'Population_Millions': ':,.1f',
+                'GDP_Per_Capita': ':,.0f',
+                'ISO_Code': False
+            },
+            color_continuous_scale=color_scale,
+            range_color=[score_range[0], score_range[1]],
+            title=f"Global Healthcare Quality Distribution (Quality Score: {score_range[0]}-{score_range[1]})",
+            labels={
+                'Quality_Score': 'Quality Score',
+                'Population_Millions': 'Population (M)',
+                'GDP_Per_Capita': 'GDP per Capita ($)'
+            }
+        )
+        
+        # Enhanced layout with better styling
+        fig.update_layout(
+            geo=dict(
+                showframe=False,
+                showcoastlines=True,
+                coastlinecolor="RebeccaPurple",
+                projection_type=projection,
+                bgcolor='rgba(0,0,0,0)',
+                showland=True,
+                landcolor='rgb(243, 243, 243)',
+                showocean=True,
+                oceancolor='rgb(204, 229, 255)'
+            ),
+            title_x=0.5,
+            title_font_size=16,
+            width=1200,
+            height=map_height,
+            font=dict(size=12),
+            coloraxis_colorbar=dict(
+                title="Quality Score",
+                thickness=15,
+                len=0.7,
+                x=1.02
+            )
+        )
+        
+        if show_text:
+            fig.update_traces(
+                text=filtered_df['ISO_Code'],
+                textposition="middle center",
+                textfont_size=8,
+                textfont_color="white"
+            )
+        
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Display key statistics
+        st.markdown("### 📊 Global Healthcare Quality Statistics")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_score = filtered_df['Quality_Score'].mean()
+            st.metric(
+                "Global Average Score", 
+                f"{avg_score:.2f}",
+                delta=f"{avg_score - 75:.2f} vs baseline"
+            )
+        
+        with col2:
+            top_country = filtered_df.loc[filtered_df['Quality_Score'].idxmax()]
+            st.metric(
+                "Top Performer", 
+                top_country['Country'],
+                delta=f"{top_country['Quality_Score']:.0f} points"
+            )
+        
+        with col3:
+            high_quality = len(filtered_df[filtered_df['Quality_Score'] >= 85])
+            st.metric(
+                "High Quality Countries", 
+                high_quality,
+                delta=f"{(high_quality/len(filtered_df)*100):.0f}% of total"
+            )
+        
+        with col4:
+            total_hospitals = filtered_df['Top_Hospitals'].sum()
+            st.metric(
+                "Total Top-Tier Hospitals", 
+                f"{total_hospitals:,}",
+                delta="Across all regions"
+            )
+        
+        # Regional Analysis
+        st.markdown("### 🌍 Regional Healthcare Quality Analysis")
+        
+        # Create regional breakdown
+        regions = {
+            'North America': ['United States', 'Canada'],
+            'Europe': ['Germany', 'United Kingdom', 'France', 'Switzerland', 'Netherlands', 'Sweden', 'Denmark', 'Norway'],
+            'Asia-Pacific': ['Singapore', 'Japan', 'Australia', 'South Korea', 'New Zealand'],
+            'Middle East': ['Israel', 'UAE'],
+            'Others': ['Brazil', 'South Africa']
+        }
+        
+        regional_data = []
+        for region, countries in regions.items():
+            region_df = filtered_df[filtered_df['Country'].isin(countries)]
+            if not region_df.empty:
+                regional_data.append({
+                    'Region': region,
+                    'Countries': len(region_df),
+                    'Avg_Score': region_df['Quality_Score'].mean(),
+                    'Top_Hospitals': region_df['Top_Hospitals'].sum(),
+                    'Avg_GDP': region_df['GDP_Per_Capita'].mean()
+                })
+        
+        if regional_data:
+            regional_df = pd.DataFrame(regional_data)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                # Regional quality scores bar chart
+                fig_bar = px.bar(
+                    regional_df, 
+                    x='Region', 
+                    y='Avg_Score',
+                    title="Average Quality Score by Region",
+                    color='Avg_Score',
+                    color_continuous_scale='Viridis',
+                    text='Avg_Score'
+                )
+                fig_bar.update_traces(texttemplate='%{text:.1f}', textposition='outside')
+                fig_bar.update_layout(height=400, showlegend=False)
+                st.plotly_chart(fig_bar, use_container_width=True)
+            
+            with col2:
+                # Regional hospital distribution pie chart
+                fig_pie = px.pie(
+                    regional_df, 
+                    values='Top_Hospitals', 
+                    names='Region',
+                    title="Distribution of Top-Tier Hospitals by Region"
+                )
+                fig_pie.update_layout(height=400)
+                st.plotly_chart(fig_pie, use_container_width=True)
+        
+        # Quality Score Distribution Analysis
+        st.markdown("### 📈 Quality Score Distribution Analysis")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**🏆 Top 5 Performers:**")
+            top_5 = filtered_df.nlargest(5, 'Quality_Score')[['Country', 'Quality_Score', 'Top_Hospitals']]
+            for idx, row in top_5.iterrows():
+                st.write(f"**{row['Country']}** - {row['Quality_Score']:.0f} points ({row['Top_Hospitals']} hospitals)")
+        
+        with col2:
+            st.markdown("**📊 Score Range Distribution:**")
+            score_ranges = [
+                ('75-85 (A+)', len(filtered_df[filtered_df['Quality_Score'] >= 75])),
+                    ('65-74 (A)', len(filtered_df[(filtered_df['Quality_Score'] >= 65) & (filtered_df['Quality_Score'] < 75)])),
+                    ('55-64 (B+)', len(filtered_df[(filtered_df['Quality_Score'] >= 55) & (filtered_df['Quality_Score'] < 65)])),
+                    ('45-54 (B)', len(filtered_df[(filtered_df['Quality_Score'] >= 45) & (filtered_df['Quality_Score'] < 55)])),
+                    ('Below 45 (C)', len(filtered_df[filtered_df['Quality_Score'] < 45]))
+            ]
+            
+            for range_name, count in score_ranges:
+                percentage = (count / len(filtered_df) * 100) if len(filtered_df) > 0 else 0
+                st.write(f"**{range_name}:** {count} countries ({percentage:.1f}%)")
+        
+        # Methodology and Data Sources
+        st.markdown("---")
+        st.markdown("### 📋 Methodology & Data Sources")
+        
+        with st.expander("🔍 View Detailed Methodology", expanded=False):
+            st.markdown("""
+            **Quality Score Calculation:**
+            - **Certifications (60%):** ISO, JCI, NABH, and other international standards
+            - **Quality Initiatives (20%):** Patient safety programs, digital health adoption
+            - **Transparency (10%):** Public reporting of quality metrics
+            - **Reputation Factors (10%):** International rankings and academic recognition
+
+            **Data Sources:**
+            - World Health Organization (WHO) Global Health Observatory
+            - OECD Health Statistics
+            - International healthcare accreditation bodies
+            - Academic medical center databases
+            - Government health ministry reports
+
+            **⚠️ Data Accuracy Disclaimers:**
+            - **Aggregated Metrics:** This visualization represents aggregated healthcare quality metrics based on available public data
+            - **Geographic Limitations:** Country-level data may not reflect individual organization quality within that region
+            - **Data Completeness:** Some countries may have limited or outdated information affecting accuracy of regional assessments
+            - **Comparative Purpose Only:** Use this map for comparative analysis and research, not for absolute quality determination
+            - **Assessment Limitations:** Regional scores may be incorrect or incomplete due to data availability constraints
+            """)
+        
+        # Update layout for better visualization
+        fig.update_layout(
+            geo=dict(
+                showframe=False,
+                showcoastlines=True,
+                projection_type=projection,
+                bgcolor='rgba(0,0,0,0)'
+            ),
+            title_x=0.5,
+            width=1000,
+            height=600,
+            font=dict(size=12)
+        )
+        
+        if show_text:
+            fig.update_traces(
+                text=df_countries['ISO_Code'],
+                textposition="middle center",
+                textfont_size=8
+            )
+        
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Statistics and insights
+        st.markdown("---")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_score = df_countries['Quality_Score'].mean()
+            st.metric("🌍 Global Average", f"{avg_score:.2f}", "Quality Score")
+        
+        with col2:
+            top_country = df_countries.loc[df_countries['Quality_Score'].idxmax(), 'Country']
+            top_score = df_countries['Quality_Score'].max()
+            st.metric("🥇 Top Performer", top_country, f"{top_score} pts")
+        
+        with col3:
+            high_quality = len(df_countries[df_countries['Quality_Score'] >= 85])
+            st.metric("⭐ High Quality (85+)", high_quality, "countries")
+        
+        with col4:
+            total_hospitals = df_countries['Top_Hospitals'].sum()
+            st.metric("🏥 Top-Tier Hospitals", total_hospitals, "globally")
+        
+        # Regional breakdown
+        st.subheader("📊 Regional Quality Analysis")
+        
+        # Define regions (simplified)
+        region_mapping = {
+            'North America': ['USA', 'CAN', 'MEX'],
+            'Europe': ['DEU', 'CHE', 'GBR', 'FRA', 'NLD', 'SWE', 'NOR', 'DNK', 'FIN', 'AUT', 'BEL', 'ITA', 'ESP', 'PRT', 'GRC', 'IRL', 'LUX', 'ISL', 'EST', 'LVA', 'LTU', 'POL', 'CZE', 'HUN'],
+            'Asia-Pacific': ['JPN', 'SGP', 'AUS', 'KOR', 'CHN', 'IND', 'THA', 'MYS', 'NZL'],
+            'Middle East & Africa': ['ISR', 'ZAF', 'EGY'],
+            'Latin America': ['BRA', 'ARG', 'CHL'],
+            'Eastern Europe': ['RUS', 'TUR']
+        }
+        
+        regional_data = []
+        for region, countries in region_mapping.items():
+            region_df = df_countries[df_countries['ISO_Code'].isin(countries)]
+            if not region_df.empty:
+                regional_data.append({
+                    'Region': region,
+                    'Average_Score': region_df['Quality_Score'].mean(),
+                    'Countries': len(region_df),
+                    'Top_Hospitals': region_df['Top_Hospitals'].sum()
+                })
+        
+        regional_df = pd.DataFrame(regional_data)
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            fig_regional = px.bar(
+                regional_df, 
+                x='Region', 
+                y='Average_Score',
+                title="Average Quality Score by Region",
+                color='Average_Score',
+                color_continuous_scale='RdYlGn'
+            )
+            fig_regional.update_layout(showlegend=False, xaxis_tickangle=-45)
+            st.plotly_chart(fig_regional, use_container_width=True)
+        
+        with col2:
+            fig_hospitals = px.pie(
+                regional_df, 
+                values='Top_Hospitals', 
+                names='Region',
+                title="Distribution of Top-Tier Hospitals by Region"
+            )
+            st.plotly_chart(fig_hospitals, use_container_width=True)
+        
+        # Top and bottom performers
+        st.subheader("🏆 Performance Rankings")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**🥇 Top 10 Performers**")
+            top_10 = df_countries.nlargest(10, 'Quality_Score')[['Country', 'Quality_Score', 'Healthcare_Rank']]
+            top_10.index = range(1, len(top_10) + 1)
+            st.dataframe(top_10, use_container_width=True)
+        
+        with col2:
+            st.markdown("**📈 Improvement Opportunities**")
+            bottom_10 = df_countries.nsmallest(10, 'Quality_Score')[['Country', 'Quality_Score', 'Healthcare_Rank']]
+            bottom_10.index = range(1, len(bottom_10) + 1)
+            st.dataframe(bottom_10, use_container_width=True)
+        
+        # Quality score distribution
+        st.subheader("📈 Quality Score Distribution")
+        
+        fig_dist = px.histogram(
+            df_countries, 
+            x='Quality_Score', 
+            nbins=15,
+            title="Distribution of Healthcare Quality Scores Globally",
+            labels={'count': 'Number of Countries', 'Quality_Score': 'Quality Score'},
+            color_discrete_sequence=['#2E86AB']
+        )
+        fig_dist.update_layout(showlegend=False)
+        st.plotly_chart(fig_dist, use_container_width=True)
+        
+        # Data source and methodology
+        st.markdown("---")
+        st.markdown("""
+        ### 📋 Methodology & Data Sources
+        
+        **Quality Score Calculation:**
+        - **Certifications (60%):** ISO, JCI, NABH, and other international standards
+        - **Quality Initiatives (20%):** Patient safety programs, digital health adoption
+        - **Transparency (10%):** Public reporting of quality metrics
+        - **Reputation Factors (10%):** International rankings and academic recognition
+        
+        **Data Sources:**
+        - World Health Organization (WHO) Global Health Observatory
+        - OECD Health Statistics
+        - International healthcare accreditation bodies
+        - Academic medical center databases
+        - Government health ministry reports
+        
+        **⚠️ Data Accuracy Disclaimers:**
+        - **Aggregated Metrics:** This visualization represents aggregated healthcare quality metrics based on available public data
+        - **Geographic Limitations:** Country-level data may not reflect individual organization quality within that region
+        - **Data Completeness:** Some countries may have limited or outdated information affecting accuracy of regional assessments
+        - **Comparative Purpose Only:** Use this map for comparative analysis and research, not for absolute quality determination
+        - **Assessment Limitations:** Regional scores may be incorrect or incomplete due to data availability constraints
+        """)
+        
+        # Data Upload Section for Users
+        st.markdown("---")
+        st.markdown("### 📤 Contribute Quality Data")
+        st.markdown("Help improve our database by sharing quality-centric data about healthcare organizations.")
+        
+        with st.expander("📋 Upload Healthcare Quality Data", expanded=False):
+            st.markdown("**Share your organization's quality achievements with the community!**")
+            
+            with st.form("data_upload_form"):
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    upload_org_name = st.text_input("🏥 Organization Name*", placeholder="e.g., City General Hospital")
+                    upload_location = st.text_input("📍 Location*", placeholder="e.g., New York, USA")
+                    upload_type = st.selectbox("🏢 Organization Type*", 
+                                             ["Hospital", "Clinic", "Medical Center", "Specialty Center", "Other"])
+                
+                with col2:
+                    upload_certification = st.text_input("📜 Certification/Achievement*", 
+                                                       placeholder="e.g., JCI Accreditation, ISO 9001")
+                    upload_year = st.number_input("📅 Year Achieved*", min_value=2000, max_value=2024, value=2024)
+                    upload_category = st.selectbox("📊 Category*", 
+                                                 ["Patient Safety", "Quality Management", "Clinical Excellence", 
+                                                  "Technology Innovation", "Staff Training", "Other"])
+                
+                upload_description = st.text_area("📝 Description*", 
+                                                placeholder="Describe the quality achievement, certification details, or improvement initiative...")
+                upload_contact = st.text_input("📧 Contact Email (Optional)", 
+                                             placeholder="your.email@organization.com")
+                
+                col1, col2, col3 = st.columns([1, 1, 1])
+                with col2:
+                    submit_upload = st.form_submit_button("📤 Submit for Review", type="primary")
+                
+                if submit_upload:
+                    if upload_org_name and upload_location and upload_certification and upload_description:
+                        upload_data = {
+                            'organization_name': upload_org_name,
+                            'location': upload_location,
+                            'organization_type': upload_type,
+                            'certification': upload_certification,
+                            'year_achieved': upload_year,
+                            'category': upload_category,
+                            'description': upload_description,
+                            'contact_email': upload_contact,
+                            'submitter_ip': 'anonymous'  # In production, you might want to track this
+                        }
+                        
+                        add_pending_upload(upload_data)
+                        st.success("✅ Thank you! Your submission has been received and will be reviewed by our admin team.")
+                        st.info("📋 **Review Process:** All submissions are manually reviewed to ensure data quality and accuracy before being made public.")
+                    else:
+                        st.error("❌ Please fill in all required fields marked with *")
+            
+            st.markdown("""
+            **📋 Submission Guidelines:**
+            - Provide accurate and verifiable information
+            - Include official certification names and dates
+            - Describe achievements clearly and concisely
+            - All submissions are reviewed before publication
+            """)
+
+if __name__ == "__main__":
+    main()
+                filtered_certs = filtered_certs[filtered_certs['Region'].isin(mea_regions)]
+            elif region_filter == "Latin America":
+                la_regions = ['Brazil', 'Argentina', 'Chile', 'Colombia', 'Peru', 'Mexico', 'Cuba', 'Uruguay',
+                             'Ecuador', 'Paraguay', 'Venezuela', 'Panama', 'El Salvador', 'Honduras', 'Guatemala',
+                             'Nicaragua', 'Costa Rica', 'Dominican Republic', 'Jamaica', 'Trinidad & Tobago']
+                filtered_certs = filtered_certs[filtered_certs['Region'].isin(la_regions)]
+        
+        if focus_filter != "All Areas":
+            filtered_certs = filtered_certs[filtered_certs['Focus Area'].str.contains(focus_filter, case=False, na=False)]
+        
+        # Display filtered results
+        st.markdown("---")
+        st.markdown(f"### 📊 Certification Results ({len(filtered_certs)} of {len(all_certs)} certifications)")
+        
+        if len(filtered_certs) > 0:
+            # Add color coding based on recognition level
+            def color_recognition(val):
+                if val == 'Very High':
+                    return 'background-color: #d4edda; color: #155724'
+                elif val == 'High':
+                    return 'background-color: #fff3cd; color: #856404'
+                elif val == 'Medium':
+                    return 'background-color: #f8d7da; color: #721c24'
+                else:
+                    return 'background-color: #f1f3f4; color: #5f6368'
+            
+            styled_df = filtered_certs.style.applymap(color_recognition, subset=['Recognition Level'])
+            st.dataframe(styled_df, use_container_width=True, height=400)
+            
+            # Statistics
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("🌍 Total Certifications", len(filtered_certs))
+            with col2:
+                very_high = len(filtered_certs[filtered_certs['Recognition Level'] == 'Very High'])
+                st.metric("⭐ Very High Recognition", very_high)
+            with col3:
+                avg_weight = filtered_certs['Score Weight'].mean()
+                st.metric("📊 Average Score Weight", f"{avg_weight:.2f}")
+            with col4:
+                regions = filtered_certs['Region'].nunique()
+                st.metric("🗺️ Regions Covered", regions)
+        else:
+            st.warning("No certifications found matching your search criteria. Please adjust your filters.")
+        
+        # Regional distribution chart
+        if len(filtered_certs) > 0:
+            st.markdown("---")
+            st.markdown("### 📈 Regional Distribution Analysis")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                region_counts = filtered_certs['Region'].value_counts().head(15)
+                fig_regions = px.bar(
+                    x=region_counts.values,
+                    y=region_counts.index,
+                    orientation='h',
+                    title="Top 15 Regions by Certification Count",
+                    labels={'x': 'Number of Certifications', 'y': 'Region'}
+                )
+                fig_regions.update_layout(height=400)
+                st.plotly_chart(fig_regions, use_container_width=True)
+            
+            with col2:
+                recognition_counts = filtered_certs['Recognition Level'].value_counts()
+                fig_recognition = px.pie(
+                    values=recognition_counts.values,
+                    names=recognition_counts.index,
+                    title="Distribution by Recognition Level"
+                )
+                st.plotly_chart(fig_recognition, use_container_width=True)
+
+    elif page == "Settings":
+        st.header("⚙️ Application Settings")
+        
+        # Admin Login Section
+        st.markdown("### 🔐 Admin Access")
+        if not is_admin_authenticated():
+            with st.expander("Admin Login", expanded=False):
+                admin_login()
+        else:
+            st.success(f"✅ Logged in as: {st.session_state.admin_username}")
+            admin_logout()
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("🎨 Display Preferences")
+            theme = st.selectbox("Theme", ["Light", "Dark", "Auto"])
+            default_view = st.selectbox("Default Page", ["Home", "Organization Search", "Quality Dashboard"])
+            
+            st.subheader("🔍 Search & Data Settings")
+            search_regions = st.multiselect("Search Regions", 
+                                          ["Global", "North America", "Europe", "Asia-Pacific", "Middle East", "Africa"],
+                                          default=["Global"])
+            data_sources = st.multiselect("Data Sources",
+                                        ["Company Disclosures", "News Articles", "Certification Bodies", "Government Databases"],
+                                        default=["Company Disclosures", "Certification Bodies"])
+        
+        with col2:
+            st.subheader("🏆 Certification Preferences")
+            cert_weights = st.slider("Certification Weight (%)", 50, 90, 70)
+            initiative_weights = st.slider("Initiative Weight (%)", 10, 40, 20)
+            transparency_weights = st.slider("Transparency Weight (%)", 5, 20, 10)
+            
+            st.subheader("📊 Export & Reporting")
+            export_format = st.selectbox("Export Format", ["PDF", "Excel", "CSV"])
+            update_frequency = st.selectbox("Data Update Frequency", ["Real-time", "Daily", "Weekly"])
+        
+        if st.button("💾 Save Settings"):
+            st.success("✅ Settings saved successfully!")
+            st.info(f"""
+            **Settings Summary:**
+            - Theme: {theme}
+            - Default Page: {default_view}
+            - Search Regions: {', '.join(search_regions)}
+            - Data Sources: {', '.join(data_sources)}
+            - Certification Weight: {cert_weights}%
+            - Update Frequency: {update_frequency}
+            """)
+    
+    elif page == "Admin Panel":
+        if not is_admin_authenticated():
+            st.error("🔒 Access Denied: Admin authentication required")
+            st.info("Please login through the Settings page to access the Admin Panel.")
+        else:
+            st.header("🛠️ Admin Panel")
+            st.success(f"Welcome, {st.session_state.admin_username}!")
+            
+            # Admin Dashboard Tabs
+            tab1, tab2, tab3 = st.tabs(["📤 Review Uploads", "🏥 Manage Hospitals", "📊 System Stats"])
+            
+            with tab1:
+                st.subheader("📤 Data Upload Review")
+                
+                # Initialize upload storage
+                init_upload_storage()
+                
+                # Pending uploads
+                if st.session_state.pending_uploads:
+                    st.markdown("### 🔍 Pending Reviews")
+                    for upload in st.session_state.pending_uploads:
+                        with st.expander(f"Upload #{upload['upload_id']} - {upload['organization_name']}", expanded=False):
+                            col1, col2 = st.columns(2)
+                            
+                            with col1:
+                                st.write(f"**Organization:** {upload['organization_name']}")
+                                st.write(f"**Location:** {upload['location']}")
+                                st.write(f"**Type:** {upload['organization_type']}")
+                                st.write(f"**Certification:** {upload['certification']}")
+                                st.write(f"**Year:** {upload['year_achieved']}")
+                                st.write(f"**Category:** {upload['category']}")
+                            
+                            with col2:
+                                st.write(f"**Description:**")
+                                st.write(upload['description'])
+                                st.write(f"**Contact:** {upload.get('contact_email', 'Not provided')}")
+                                st.write(f"**Submitted:** {upload['upload_date']}")
+                            
+                            # Action buttons
+                            col1, col2, col3 = st.columns([1, 1, 2])
+                            with col1:
+                                if st.button(f"✅ Approve", key=f"approve_{upload['upload_id']}"):
+                                    approve_upload(upload['upload_id'])
+                                    st.success("Upload approved!")
+                                    st.rerun()
+                            
+                            with col2:
+                                if st.button(f"❌ Reject", key=f"reject_{upload['upload_id']}"):
+                                    reason = st.text_input(f"Rejection reason for #{upload['upload_id']}", key=f"reason_{upload['upload_id']}")
+                                    reject_upload(upload['upload_id'], reason)
+                                    st.error("Upload rejected!")
+                                    st.rerun()
+                else:
+                    st.info("📭 No pending uploads to review.")
+                
+                # Approved uploads
+                if st.session_state.approved_uploads:
+                    st.markdown("### ✅ Recently Approved")
+                    for upload in st.session_state.approved_uploads[-5:]:  # Show last 5
+                        st.success(f"✅ {upload['organization_name']} - {upload['certification']} (Approved: {upload.get('approved_date', 'N/A')})")
+                
+                # Rejected uploads
+                if st.session_state.rejected_uploads:
+                    st.markdown("### ❌ Recently Rejected")
+                    for upload in st.session_state.rejected_uploads[-3:]:  # Show last 3
+                        st.error(f"❌ {upload['organization_name']} - {upload['certification']} (Rejected: {upload.get('rejected_date', 'N/A')})")
+            
+            with tab2:
+                st.subheader("🏥 Hospital Management")
+                
+                # Initialize hospital storage
+                init_hospital_storage()
+                
+                # Add new hospital
+                st.markdown("### ➕ Add New Hospital")
+                with st.form("add_hospital_form"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        new_hospital_name = st.text_input("Hospital Name*")
+                        new_hospital_location = st.text_input("Location*")
+                        new_hospital_type = st.selectbox("Type*", ["Hospital", "Medical Center", "Clinic", "Specialty Center"])
+                    
+                    with col2:
+                        new_hospital_website = st.text_input("Website")
+                        new_hospital_phone = st.text_input("Phone")
+                        new_hospital_email = st.text_input("Email")
+                    
+                    new_hospital_description = st.text_area("Description")
+                    
+                    if st.form_submit_button("➕ Add Hospital"):
+                        if new_hospital_name and new_hospital_location:
+                            hospital_data = {
+                                'name': new_hospital_name,
+                                'location': new_hospital_location,
+                                'type': new_hospital_type,
+                                'website': new_hospital_website,
+                                'phone': new_hospital_phone,
+                                'email': new_hospital_email,
+                                'description': new_hospital_description
+                            }
+                            add_hospital(hospital_data)
+                            st.success(f"✅ Hospital '{new_hospital_name}' added successfully!")
+                            st.rerun()
+                        else:
+                            st.error("❌ Please fill in required fields (Name and Location)")
+                
+                # Manage existing hospitals
+                if st.session_state.custom_hospitals:
+                    st.markdown("### 🏥 Existing Hospitals")
+                    for hospital in st.session_state.custom_hospitals:
+                        with st.expander(f"{hospital['name']} - {hospital['location']}", expanded=False):
+                            col1, col2 = st.columns([3, 1])
+                            
+                            with col1:
+                                st.write(f"**Type:** {hospital['type']}")
+                                st.write(f"**Website:** {hospital.get('website', 'Not provided')}")
+                                st.write(f"**Phone:** {hospital.get('phone', 'Not provided')}")
+                                st.write(f"**Email:** {hospital.get('email', 'Not provided')}")
+                                st.write(f"**Description:** {hospital.get('description', 'No description')}")
+                                st.write(f"**Added:** {hospital['added_date']}")
+                            
+                            with col2:
+                                if st.button(f"🗑️ Delete", key=f"delete_{hospital['hospital_id']}"):
+                                    delete_hospital(hospital['hospital_id'])
+                                    st.success("Hospital deleted!")
+                                    st.rerun()
+                else:
+                    st.info("📭 No custom hospitals added yet.")
+            
+            with tab3:
+                st.subheader("📊 System Statistics")
+                
+                # Initialize storage
+                init_upload_storage()
+                init_hospital_storage()
+                
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    st.metric("📤 Pending Uploads", len(st.session_state.pending_uploads))
+                
+                with col2:
+                    st.metric("✅ Approved Uploads", len(st.session_state.approved_uploads))
+                
+                with col3:
+                    st.metric("❌ Rejected Uploads", len(st.session_state.rejected_uploads))
+                
+                with col4:
+                    st.metric("🏥 Custom Hospitals", len(st.session_state.custom_hospitals))
+                
+                # Recent activity
+                st.markdown("### 📈 Recent Activity")
+                if st.session_state.pending_uploads or st.session_state.approved_uploads or st.session_state.rejected_uploads:
+                    all_uploads = (st.session_state.pending_uploads + 
+                                 st.session_state.approved_uploads + 
+                                 st.session_state.rejected_uploads)
+                    
+                    # Sort by upload date (most recent first)
+                    all_uploads.sort(key=lambda x: x['upload_date'], reverse=True)
+                    
+                    for upload in all_uploads[:10]:  # Show last 10 activities
+                        status_icon = "🔍" if upload['status'] == 'pending' else "✅" if upload['status'] == 'approved' else "❌"
+                        st.write(f"{status_icon} {upload['organization_name']} - {upload['certification']} ({upload['upload_date']})")
+                else:
+                    st.info("📭 No recent activity.")
+
+except Exception as e:
+    st.error(f"An error occurred: {str(e)}")
+    st.info("Please refresh the page or contact support if the issue persists.")
+
+# Footer
+st.markdown("---")
+st.markdown("""
+<div style='text-align: center; color: #666; padding: 12px;'>
+    <p>🏥 QuXAT Healthcare Quality Grid v3.0 | Built with Streamlit</p>
+    <p>🌍 Global Healthcare Quality Assessment Platform | Powered by AI & Data Analytics</p>
+    <p style='font-size: 0.8em; color: #888; margin-top: 8px;'>
+        ⚠️ <strong>Data Source Disclaimer:</strong> All data is validated from official certification bodies and healthcare organizations. 
+        Only verified information from NABH, NABL, JCI, ISO, and other accredited sources is displayed.
+    </p>
+    <p style='font-size: 0.7em; color: #999; margin-top: 4px;'>
+        🔍 <strong>Transparency Notice:</strong> If no validated data is found for an organization, appropriate disclaimers are shown. 
+        Users are encouraged to verify information directly with certification bodies.
+    </p>
+    <p style='font-size: 0.7em; color: #999; margin-top: 4px;'>
+        Not intended for medical advice or as sole basis for healthcare decisions. Use for comparative analysis only.
+    </p>
+</div>
+""", unsafe_allow_html=True)

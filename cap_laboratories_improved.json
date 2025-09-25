@@ -1,0 +1,1421 @@
+[
+  {
+    "id": "cap_1",
+    "name": "Accupath Diagnostic Laboratories, Inc.201 Summit View Dr., Suite 100Brentwood, TN 37027800-874-8532",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691579",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_2",
+    "name": "Accupath Diagnostic Laboratories, Inc.5005 South 40th Street, Suite 1100 Phoenix, AZ 85040615-495-0615",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691605",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_3",
+    "name": "Almac Diagnostic Services20 Seagoe Industrial EstateCraigavon, Northern Ireland, BT63 5QDUnited Kingdom+44 (0) 28 3833 2200",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691621",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_4",
+    "name": "Almac Diagnostic Services LLC4238 Technology DriveDurham, North Carolina 27704919-479-8850",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691634",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_5",
+    "name": "Alverno Laboratories2434 Interstate Plaza Dr.Hammond, IN 46324219-845-4026",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691645",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_6",
+    "name": "ARUP Laboratories500 Chipeta WaySalt Lake City, UT 84108801-583-2787",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691659",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_7",
+    "name": "Avera McKennan Hospital & University Health CenterMain Laboratory800 E. 21st StreetSioux Falls, SD 57105605-322-8000",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691671",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_8",
+    "name": "BioReference Health, LLC481 Edward H. Ross DriveElmwood Park, NJ 07407800-229-5227",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691682",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_9",
+    "name": "Caris MPI Inc.d/b/a Caris Life Sciences4610 S. 44th PlacePhoenix, AZ 85040602-792-2442",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691693",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_10",
+    "name": "CB Laboratory1687-1 Matoba, Kawagoe-shi, Saitama-ken350-1101 Japan+86 21 51371173",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691705",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_11",
+    "name": "Centogene GmbHSchillingalee 68Rostock 18057Germany+49(0)381 203652 218",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691717",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_12",
+    "name": "Cleveland HeartLab6701 Carnegie Avenue - Suite 500Cleveland, Ohio 44103866-358-9828",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691728",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_13",
+    "name": "CooperSurgical, Inc.3 Regent St.Livingston, NJ 07039877-282-3112",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691740",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_14",
+    "name": "Crown BioScience GmbHFalkenried 88, Bldg. D20251 Hamburg, Germany+49 40 69 63 572 0",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691751",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_15",
+    "name": "Cytespace Africa Pty. Ltd.125 Amkoor RoadLyttelton Manor, Centurion, South Africa 0157+27 (0) 12 671 2333",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691763",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_16",
+    "name": "Department of Pathology and Laboratory Medicine KingAbdulaziz Medical City-MNGHAKhashmlaan Road, Riyadh 11426Saudi Arabia+966-11-801-1111 ext. 13456",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691774",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_17",
+    "name": "Dianon Systems, Inc. and Esoterix Genetic Laboratories, LLC1 and 3 Forest ParkwayShelton, CT 06484203-926-7100",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691785",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_18",
+    "name": "Esoterix, IncEndocrinology Laboratory4301 Lost Hills Rd.Calabasas, CA 91301818-867-1419",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691796",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_19",
+    "name": "Esoterix Genetic Laboratories, LLC (MA)3400 Computer Dr.Westborough, MA 01581508-898-9001",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691808",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_20",
+    "name": "Esoterix Genetic Laboratories, LLC (NM)2000 Vivigen WaySanta Fe, NM 87505800-848-4436",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691819",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_21",
+    "name": "Fleury S/A LaboratoryAvenida Morumbi, 8860 Sao Paulo, Brazil(55 11) 5014-7200",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691831",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_22",
+    "name": "GC LabTech, Inc. 485 Spencer LaneSan Antonio, Texas 78201210-405-4258",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691842",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_23",
+    "name": "GRAIL, Inc.4001 E NC 54 Hwy AssemblyDurham, NC 27709833-694-2553",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691854",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_24",
+    "name": "Guardant Health, Inc505 Penobscot DriveRedwood City, CA 94063-4737650-458-7381",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691866",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_25",
+    "name": "Henry Ford Health System2799 W. Grand Blvd.Detroit, MI 482024313-916-2964",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691876",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_26",
+    "name": "ICON Clinical Research LimitedSouth County Business ParkLeopardstown, Dublin 18, Ireland+353-1-291-2000",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691887",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_27",
+    "name": "Inivata Ltd. Clinical Laboratory NeoGenomicsGlenn Berge BuildingBabraham Research ParkCambridge CB22 3FH, United Kingdom239-768-0600",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691899",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_28",
+    "name": "Joint Pathology Center Laboratory606 Stephen Sitter AvenueSilver Spring, MD 20910301-295-5002",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691910",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_29",
+    "name": "Kaleida Health Center for Laboratory Medicine115 Flint RoadWilliamsville, New York 14221716-626-7920",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691920",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_30",
+    "name": "Labcorp Central Laboratory Services LP8211 SciCor DriveIndianapolis, IN 46214219-845-4026",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691932",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_31",
+    "name": "Labcorp Central Laboratory Services S.a.r.l.7 rue MarcinhesGeneva, Switzerland+41-58-822-7000",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691943",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_32",
+    "name": "Labcorp Development (Asia) Pte.Ltd.1 International Business Park, #01-01The Synergy Singapore 609917+41 65 6568 6567",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691956",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_33",
+    "name": "Labcorp Pharmaceutical Research and Development (Shanghai) Co., Ltd.1st Floor, No. 6 Building, No. 151 Li Bing RoadZhangijiang Hi-Tech ParkShanghai 201203, China+86 21 5137 1173",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691968",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_34",
+    "name": "Laboratory Corporation of America - Houston7207 N. GessnerHouston, TX 77040713-561-4453",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691979",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_35",
+    "name": "Laboratory Corporation of America - Tampa, Florida5610 West LaSalle St.Tampa, FL 33607800-877-5227",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.691990",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_36",
+    "name": "Laboratory Corporation of AmericaCenter For Molecular Biology and Pathology1912 Alexander DriveResearch Triangle Park, NC 27709919-361-7168",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692001",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_37",
+    "name": "Laboratory Corporation of America-Birmingham, AL1801 1st Avenue SouthBirmingham, AL 35233800-621-8037",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692014",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_38",
+    "name": "Laboratory Corporation of America-Dallas7777 Forest Lane, Suite C350Dallas, TX 75230800-788-9892",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692024",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_39",
+    "name": "Laboratory Corporation of America-Englewood8490 Upland DriveEnglewood, CO 80112602-453-6898",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692035",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_40",
+    "name": "Laboratory Corporation of America-Phoenix5005 S. 40th St.Phoenix, AZ 85040800-788-9892",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692045",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_41",
+    "name": "Laboratory Corporation of America-San Antonio6603 First Park Ten Blvd.San Antonio, TX 78213800-788-9892",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692056",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_42",
+    "name": "Laboratory Corporation of America-Tennessee1924 Alcoa HighwayKnoxville, TN 37920865-305-9705",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692068",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  },
+  {
+    "id": "cap_43",
+    "name": "Laboratory Corporation of America Holdings19750 South Vermont Avenue, Suite 200",
+    "organization_type": "Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "",
+    "phone": "",
+    "location": {
+      "country": "United States"
+    },
+    "certifications": [
+      {
+        "name": "ISO 15189",
+        "issuer": "College of American Pathologists",
+        "status": "Active",
+        "issue_date": "2025-09-24",
+        "type": "Medical Laboratory Accreditation"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories",
+        "status": "Active",
+        "impact": "High"
+      }
+    ],
+    "quality_score": 88.0,
+    "scraped_date": "2025-09-24T20:00:52.692081",
+    "data_source": "CAP 15189 Accredited Laboratories"
+  }
+]

@@ -1,7 +1,7 @@
-# QuXAT Scoring Application - Deployment Guide
+# QuXAT Healthcare Quality Grid Deployment Guide
 
 ## Overview
-This guide provides instructions for deploying the QuXAT Scoring application to various cloud platforms.
+This guide provides comprehensive instructions for deploying the QuXAT Healthcare Quality Grid Scoring Dashboard to various cloud platforms.
 
 ## Prerequisites
 - Python 3.11+

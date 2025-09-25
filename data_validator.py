@@ -78,7 +78,8 @@ class HealthcareDataValidator:
             'certifications': [],
             'validation_timestamp': datetime.now().isoformat(),
             'data_sources': [],
-            'validation_status': 'pending'
+            'validation_status': 'pending',
+            'branches': self._detect_organization_branches(org_name)
         }
         
         try:
@@ -701,6 +702,164 @@ class HealthcareDataValidator:
             'data_sources': ['Official Press Releases', 'Healthcare Industry Reports'],
             'validation_status': 'validated' if initiatives else 'no_official_data_available',
             'note': 'Quality initiatives validated from official sources' if initiatives else 'Quality initiatives validation requires official press releases or announcements'
+        }
+    
+
+
+    def _detect_organization_branches(self, org_name: str) -> Dict:
+        """
+        Detect and return available branches/locations for healthcare organizations
+        
+        Args:
+            org_name: Name of the healthcare organization
+            
+        Returns:
+            Dict containing branch information and suggestions
+        """
+        org_name_lower = org_name.lower().strip()
+        
+        # Comprehensive multi-location healthcare organizations database
+        multi_location_orgs = {
+            # Major Indian Hospital Chains
+            'apollo hospitals': {
+                'has_multiple_locations': True,
+                'total_branches': 71,
+                'primary_locations': [
+                    {'name': 'Apollo Hospitals Chennai', 'city': 'Chennai', 'state': 'Tamil Nadu', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Apollo Hospitals Delhi', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Apollo Hospitals Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
+                    {'name': 'Apollo Hospitals Hyderabad', 'city': 'Hyderabad', 'state': 'Telangana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Apollo Hospitals Mumbai', 'city': 'Mumbai', 'state': 'Maharashtra', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Neurology']},
+                    {'name': 'Apollo Hospitals Kolkata', 'city': 'Kolkata', 'state': 'West Bengal', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Nephrology']}
+                ],
+                'regions': ['South India', 'North India', 'West India', 'East India']
+            },
+            'fortis healthcare': {
+                'has_multiple_locations': True,
+                'total_branches': 36,
+                'primary_locations': [
+                    {'name': 'Fortis Memorial Research Institute Gurgaon', 'city': 'Gurgaon', 'state': 'Haryana', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Fortis Hospital Mohali', 'city': 'Mohali', 'state': 'Punjab', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Fortis Hospital Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
+                    {'name': 'Fortis Hospital Mumbai', 'city': 'Mumbai', 'state': 'Maharashtra', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Fortis Hospital Noida', 'city': 'Noida', 'state': 'Uttar Pradesh', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Neurology']},
+                    {'name': 'Fortis Hospital Kolkata', 'city': 'Kolkata', 'state': 'West Bengal', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Nephrology']}
+                ],
+                'regions': ['North India', 'South India', 'West India', 'East India']
+            },
+            'max healthcare': {
+                'has_multiple_locations': True,
+                'total_branches': 17,
+                'primary_locations': [
+                    {'name': 'Max Super Speciality Hospital Saket', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Max Hospital Gurgaon', 'city': 'Gurgaon', 'state': 'Haryana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Max Hospital Mohali', 'city': 'Mohali', 'state': 'Punjab', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
+                    {'name': 'Max Hospital Patparganj', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Max Hospital Vaishali', 'city': 'Ghaziabad', 'state': 'Uttar Pradesh', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
+                    {'name': 'Max Hospital Pitampura', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
+                ],
+                'regions': ['North India']
+            },
+            'manipal hospitals': {
+                'has_multiple_locations': True,
+                'total_branches': 28,
+                'primary_locations': [
+                    {'name': 'Manipal Hospital Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Manipal Hospital Goa', 'city': 'Panaji', 'state': 'Goa', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Manipal Hospital Delhi', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
+                    {'name': 'Manipal Hospital Pune', 'city': 'Pune', 'state': 'Maharashtra', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Manipal Hospital Jaipur', 'city': 'Jaipur', 'state': 'Rajasthan', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
+                    {'name': 'Manipal Hospital Vijayawada', 'city': 'Vijayawada', 'state': 'Andhra Pradesh', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
+                ],
+                'regions': ['South India', 'North India', 'West India']
+            },
+            'narayana health': {
+                'has_multiple_locations': True,
+                'total_branches': 23,
+                'primary_locations': [
+                    {'name': 'Narayana Health City Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Narayana Hospital Kolkata', 'city': 'Kolkata', 'state': 'West Bengal', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Narayana Hospital Gurugram', 'city': 'Gurgaon', 'state': 'Haryana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
+                    {'name': 'Narayana Hospital Hyderabad', 'city': 'Hyderabad', 'state': 'Telangana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Narayana Hospital Ahmedabad', 'city': 'Ahmedabad', 'state': 'Gujarat', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
+                    {'name': 'Narayana Hospital Jaipur', 'city': 'Jaipur', 'state': 'Rajasthan', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
+                ],
+                'regions': ['South India', 'North India', 'West India', 'East India']
+            },
+            
+            # International Hospital Chains
+            'mayo clinic': {
+                'has_multiple_locations': True,
+                'total_branches': 3,
+                'primary_locations': [
+                    {'name': 'Mayo Clinic Rochester', 'city': 'Rochester', 'state': 'Minnesota', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Mayo Clinic Phoenix', 'city': 'Phoenix', 'state': 'Arizona', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Mayo Clinic Jacksonville', 'city': 'Jacksonville', 'state': 'Florida', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']}
+                ],
+                'regions': ['Midwest USA', 'Southwest USA', 'Southeast USA']
+            },
+            'cleveland clinic': {
+                'has_multiple_locations': True,
+                'total_branches': 12,
+                'primary_locations': [
+                    {'name': 'Cleveland Clinic Main Campus', 'city': 'Cleveland', 'state': 'Ohio', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Cleveland Clinic Florida', 'city': 'Weston', 'state': 'Florida', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Cleveland Clinic Nevada', 'city': 'Las Vegas', 'state': 'Nevada', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
+                    {'name': 'Cleveland Clinic London', 'city': 'London', 'state': 'England', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Cleveland Clinic Abu Dhabi', 'city': 'Abu Dhabi', 'state': 'UAE', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Neurology']},
+                    {'name': 'Cleveland Clinic Canada', 'city': 'Toronto', 'state': 'Ontario', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Nephrology']}
+                ],
+                'regions': ['Midwest USA', 'Southeast USA', 'Southwest USA', 'Europe', 'Middle East', 'North America']
+            },
+            'johns hopkins': {
+                'has_multiple_locations': True,
+                'total_branches': 6,
+                'primary_locations': [
+                    {'name': 'Johns Hopkins Hospital Baltimore', 'city': 'Baltimore', 'state': 'Maryland', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
+                    {'name': 'Johns Hopkins Bayview', 'city': 'Baltimore', 'state': 'Maryland', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
+                    {'name': 'Johns Hopkins Howard County', 'city': 'Columbia', 'state': 'Maryland', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
+                    {'name': 'Johns Hopkins All Children\'s Hospital', 'city': 'St. Petersburg', 'state': 'Florida', 'type': 'Specialty Branch', 'specialties': ['Pediatrics', 'Pediatric Cardiac', 'Pediatric Oncology']},
+                    {'name': 'Johns Hopkins Singapore', 'city': 'Singapore', 'state': 'Singapore', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
+                    {'name': 'Johns Hopkins Aramco Healthcare', 'city': 'Dhahran', 'state': 'Saudi Arabia', 'type': 'International Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
+                ],
+                'regions': ['Mid-Atlantic USA', 'Southeast USA', 'Asia', 'Middle East']
+            }
+        }
+        
+        # Check if organization has multiple locations
+        for org_key, branch_data in multi_location_orgs.items():
+            if org_key in org_name_lower or any(word in org_name_lower for word in org_key.split()):
+                return {
+                    'has_branches': True,
+                    'organization_name': org_key.title(),
+                    'total_branches': branch_data['total_branches'],
+                    'available_locations': branch_data['primary_locations'],
+                    'regions_served': branch_data['regions'],
+                    'suggestion_message': f"We found {branch_data['total_branches']} locations for {org_key.title()}. Please select a specific location for accurate quality assessment.",
+                    'search_type': 'multi_location'
+                }
+        
+        # Check if the search already includes a specific location
+        location_indicators = [
+            'chennai', 'delhi', 'bangalore', 'mumbai', 'hyderabad', 'kolkata', 'pune', 'gurgaon', 'noida',
+            'rochester', 'phoenix', 'jacksonville', 'cleveland', 'weston', 'las vegas', 'baltimore',
+            'london', 'abu dhabi', 'toronto', 'singapore', 'dhahran', 'mohali', 'patparganj', 'saket'
+        ]
+        
+        if any(location in org_name_lower for location in location_indicators):
+            return {
+                'has_branches': False,
+                'is_specific_location': True,
+                'search_type': 'specific_location',
+                'message': 'Specific location detected. Providing location-specific quality assessment.'
+            }
+        
+        # Default response for single-location organizations
+        return {
+            'has_branches': False,
+            'is_specific_location': False,
+            'search_type': 'single_location',
+            'message': 'Single location organization or location not specified.'
         }
 
 # Global instance

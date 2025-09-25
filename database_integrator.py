@@ -15,16 +15,22 @@ class DatabaseIntegrator:
         self.nabh_file = 'processed_nabh_hospitals.json'
         self.output_file = 'unified_healthcare_organizations.json'
         self.unified_data = []
+        self.jci_data_cache = None  # Cache JCI data to avoid repeated loading
         
     def load_jci_data(self) -> List[Dict]:
-        """Load JCI accredited organizations data"""
+        """Load JCI accredited organizations data (cached)"""
+        if self.jci_data_cache is not None:
+            return self.jci_data_cache
+            
         try:
             with open(self.jci_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             print(f"Loaded {len(data)} JCI organizations")
+            self.jci_data_cache = data  # Cache the data
             return data
         except Exception as e:
             print(f"Error loading JCI data: {str(e)}")
+            self.jci_data_cache = []
             return []
     
     def load_nabh_data(self) -> List[Dict]:

@@ -1,6 +1,5 @@
-"""
-JCI Accredited Organizations Data Extractor
-Extracts and processes JCI accredited hospitals data for QuXAT model training
+"""JCI Data Extractor for QuXAT Healthcare Quality Grid
+This module extracts and processes JCI accredited hospitals data for the QuXAT Healthcare Quality Grid system.
 """
 
 import requests
@@ -231,6 +230,7 @@ if __name__ == "__main__":
     organizations = extractor.extract_jci_data()
     
     print(f"\n=== JCI Data Extraction Complete ===")
+    print("🏥 JCI Data Extractor for QuXAT Healthcare Quality Grid")
     print(f"Total organizations extracted: {len(organizations)}")
     
     if organizations:
