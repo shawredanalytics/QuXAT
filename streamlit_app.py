@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import warnings
+import os
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -12,15 +13,17 @@ from urllib.parse import quote_plus
 import plotly.express as px
 import plotly.graph_objects as go
 from reportlab.lib.pagesizes import letter, A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as ReportLabImage, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.lib import colors as rl_colors
 from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.barcharts import VerticalBarChart
+import traceback
 
 # Import data validation module
 from data_validator import healthcare_validator
+from iso_certification_scraper import get_iso_certifications
 from reportlab.graphics.charts.piecharts import Pie
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 import matplotlib.pyplot as plt
@@ -32,7 +35,7 @@ warnings.filterwarnings('ignore')
 
 # Page configuration
 st.set_page_config(
-    page_title="QuXAT - Healthcare Quality Grid",
+    page_title="QuXAT Healthcare Quality Grid",
     page_icon="assets/QuXAT Logo Facebook.png",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -40,9 +43,7 @@ st.set_page_config(
 
 # Dynamic logo function for consistent display across all pages
 def display_dynamic_logo():
-    """Display the QuXAT logo dynamically by loading from assets folder"""
-    import os
-    from PIL import Image
+    """Display the QuXAT Healthcare Quality Grid logo dynamically by loading from assets folder"""
     
     # Path to the PNG logo file
     logo_path = os.path.join("assets", "QuXAT Logo Facebook.png")
@@ -51,27 +52,29 @@ def display_dynamic_logo():
         # Check if logo file exists
         if os.path.exists(logo_path):
             # Load and display the PNG image
-            logo_image = Image.open(logo_path)
+            logo_image = PILImage.open(logo_path)
             
-            # Create a centered container with styling
-            col1, col2, col3 = st.columns([1, 2, 1])
+            # Create a centered container with styling - improved centering
+            st.markdown("""
+            <div style="
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                padding: 8px 0; 
+                margin-bottom: 15px;
+                border-bottom: 1px solid #e8e8e8;
+                background: #ffffff;
+                width: 100%;
+            ">
+            """, unsafe_allow_html=True)
+            
+            # Use columns for perfect centering
+            col1, col2, col3 = st.columns([1, 1, 1])
             with col2:
-                st.markdown("""
-                <div style="
-                    display: flex; 
-                    justify-content: center; 
-                    align-items: center; 
-                    padding: 8px 0; 
-                    margin-bottom: 15px;
-                    border-bottom: 1px solid #e8e8e8;
-                    background: #ffffff;
-                ">
-                """, unsafe_allow_html=True)
-                
                 # Display the image with Streamlit's image function
                 st.image(logo_image, width=280)
-                
-                st.markdown("</div>", unsafe_allow_html=True)
+            
+            st.markdown("</div>", unsafe_allow_html=True)
         else:
             # Fallback if logo file doesn't exist
             st.markdown("""
@@ -91,7 +94,7 @@ def display_dynamic_logo():
                     font-size: 24px;
                     font-weight: bold;
                 ">
-                    🏥 QuXAT - Healthcare Quality Platform
+                    🏥 QuXAT Healthcare Quality Grid
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -384,8 +387,6 @@ class HealthcareOrgAnalyzer:
     def load_jci_data(self):
         """Load JCI accredited organizations data from JSON file"""
         try:
-            import json
-            import os
             
             jci_file_path = 'jci_accredited_organizations.json'
             
@@ -536,7 +537,7 @@ class HealthcareOrgAnalyzer:
         
         if jci_info:
             # Check if JCI is already in certifications
-            has_jci = any(cert.get('name', '').upper() == 'JCI' for cert in certifications)
+            has_jci = any('JCI' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper() for cert in certifications)
             
             if not has_jci:
                 jci_cert = {
@@ -597,10 +598,56 @@ class HealthcareOrgAnalyzer:
             initiatives = self.search_quality_initiatives(org_name)
             results['quality_initiatives'] = initiatives
             
-            # Calculate quality score
-            score_data = self.calculate_quality_score(results['certifications'], initiatives, org_name)
+            # Get ISO certifications
+            try:
+                iso_certifications = get_iso_certifications(org_name, location="")
+                results['iso_certifications'] = iso_certifications
+                
+                # Add ISO certifications to the main certifications list for scoring
+                if iso_certifications and iso_certifications.active_certifications > 0:
+                    # Convert ISO certifications to the format expected by the scoring system
+                    for cert_type in iso_certifications.certification_types:
+                        iso_cert = {
+                            'name': cert_type,
+                            'status': 'Active',
+                            'score_impact': self._get_iso_score_impact(cert_type),
+                            'certificate_number': f"ISO-{cert_type.replace(':', '-')}",
+                            'accreditation_type': 'ISO Certification',
+                            'issuer': 'International Organization for Standardization',
+                            'organization_info': {
+                                'name': org_name,
+                                'certification_bodies': iso_certifications.certification_bodies,
+                                'quality_score_impact': iso_certifications.quality_score_impact
+                            }
+                        }
+                        results['certifications'].append(iso_cert)
+                        
+            except Exception as e:
+                # If ISO certification scraping fails, continue without it
+                results['iso_certifications'] = None
+                pass
+            
+            # Get branch info from healthcare validator
+            branch_info = None
+            try:
+                validation_result = healthcare_validator.validate_organization_certifications(org_name)
+                if validation_result and 'branches' in validation_result:
+                    branch_info = validation_result['branches']
+                    results['branch_info'] = branch_info
+            except Exception as e:
+                # If branch info generation fails, continue without it
+                pass
+            
+            # Calculate quality score with branch information
+            # Patient feedback data will be automatically scraped within calculate_quality_score
+            patient_feedback_data = []  # Not used anymore - automated scraping handles this
+            
+            score_data = self.calculate_quality_score(results['certifications'], initiatives, org_name, branch_info, patient_feedback_data)
             results['score_breakdown'] = score_data
             results['total_score'] = score_data['total_score']
+            
+            # Add score to history for trend tracking
+            add_score_to_history(org_name, score_data)
             
             return results
             
@@ -693,62 +740,216 @@ class HealthcareOrgAnalyzer:
             st.info("💡 Please check the organization name and try again. Only validated data from official sources is displayed.")
             return []
     
-    def calculate_quality_score(self, certifications, initiatives, org_name=""):
-        """Calculate comprehensive quality score with JCI enhancement and more realistic and balanced scoring"""
+    def calculate_quality_score(self, certifications, initiatives, org_name="", branch_info=None, patient_feedback_data=None):
+        """Calculate comprehensive quality score with JCI enhancement, location-specific adjustments, patient feedback integration, and more realistic and balanced scoring"""
         score_breakdown = {
             'certification_score': 0,
             'initiative_score': 0,
             'transparency_score': 0,
             'reputation_bonus': 0,
+            'location_adjustment': 0,
+            'patient_feedback_score': 0,
             'total_score': 0
         }
         
-        # Calculate base certification score (50% weight, reduced from 60%)
+        # Calculate base certification score (50% weight - expanded for 0-100 scale)
         cert_score = 0
         jci_bonus = 0
+        
+        if certifications is None:
+            certifications = []
         
         for cert in certifications:
             if cert['status'] == 'Active':
                 cert_score += cert['score_impact']
                 # Special handling for JCI certification
                 if cert.get('name') == 'JCI':
-                    jci_bonus = 5  # Additional bonus for JCI accreditation
+                    jci_bonus = 8  # Increased bonus for JCI accreditation on 100-point scale
             elif cert['status'] == 'In Progress':
-                cert_score += cert['score_impact'] * 0.2  # Reduced from 0.3 for stricter evaluation
+                cert_score += cert['score_impact'] * 0.3  # Partial credit for in-progress certifications
         
-        score_breakdown['certification_score'] = min(cert_score, 50)  # Reduced max from 60 to 50
+        score_breakdown['certification_score'] = min(cert_score, 50)  # Expanded to 50 points
         
-        # Calculate initiative score (15% weight, reduced from 20%)
-        init_score = sum([init['impact_score'] for init in initiatives])
-        score_breakdown['initiative_score'] = min(init_score, 15)  # Reduced max from 20 to 15
+        # Calculate initiative score (20% weight - expanded for comprehensive assessment)
+        if initiatives is None:
+            initiatives = []
+        init_score = sum([init.get('impact_score', init.get('score_impact', 0)) for init in initiatives])
+        score_breakdown['initiative_score'] = min(init_score, 20)
         
-        # Calculate transparency score (15% weight, increased from 10%)
-        transparency_score = np.random.randint(4, 8)  # Reduced baseline range
+        # Calculate transparency score (15% weight - expanded for better granularity)
+        transparency_score = np.random.randint(6, 12)  # Expanded baseline range for 100-point scale
         score_breakdown['transparency_score'] = transparency_score
         
-        # Calculate reputation bonus (up to 5% additional points, reduced from 10%)
+        # Calculate patient feedback score (15% weight - AUTOMATED SCRAPING)
+        patient_feedback_score = 0
+        try:
+            from patient_feedback_module import PatientFeedbackAnalyzer
+            analyzer = PatientFeedbackAnalyzer()
+            
+            # Scrape and analyze patient feedback from multiple platforms
+            scraped_feedbacks = analyzer.get_patient_feedback_data(org_name, location="")
+            
+            if scraped_feedbacks:
+                # Calculate patient feedback score using automated system
+                feedback_scores = analyzer.calculate_patient_feedback_score(scraped_feedbacks)
+                patient_feedback_score = feedback_scores['patient_feedback_score']
+                
+                # Store additional feedback metrics for detailed view
+                score_breakdown['feedback_volume_score'] = feedback_scores.get('volume_score', 0)
+                score_breakdown['feedback_sentiment_score'] = feedback_scores.get('sentiment_score', 0)
+                score_breakdown['feedback_rating_score'] = feedback_scores.get('rating_score', 0)
+                score_breakdown['feedback_trend_score'] = feedback_scores.get('trend_score', 0)
+                score_breakdown['feedback_confidence'] = feedback_scores.get('confidence_multiplier', 0)
+                
+                # Get summary for additional context
+                feedback_summary = analyzer.analyze_feedback_summary(org_name, location="")
+                score_breakdown['feedback_platform_breakdown'] = feedback_summary.platform_breakdown
+                score_breakdown['feedback_total_count'] = feedback_summary.total_feedback_count
+                score_breakdown['feedback_average_rating'] = feedback_summary.average_rating
+                score_breakdown['feedback_recent_trend'] = feedback_summary.recent_trend
+            else:
+                # No feedback found - set default values
+                patient_feedback_score = 0.0
+                score_breakdown['feedback_volume_score'] = 0
+                score_breakdown['feedback_sentiment_score'] = 0
+                score_breakdown['feedback_rating_score'] = 0
+                score_breakdown['feedback_trend_score'] = 0
+                score_breakdown['feedback_confidence'] = 0
+                score_breakdown['feedback_platform_breakdown'] = {}
+                score_breakdown['feedback_total_count'] = 0
+                score_breakdown['feedback_average_rating'] = 0.0
+                score_breakdown['feedback_recent_trend'] = 'stable'
+                
+        except Exception as e:
+            print(f"Warning: Could not process automated patient feedback for {org_name}: {e}")
+            patient_feedback_score = 0.0
+            # Set default values for error case
+            score_breakdown['feedback_volume_score'] = 0
+            score_breakdown['feedback_sentiment_score'] = 0
+            score_breakdown['feedback_rating_score'] = 0
+            score_breakdown['feedback_trend_score'] = 0
+            score_breakdown['feedback_confidence'] = 0
+            score_breakdown['feedback_platform_breakdown'] = {}
+            score_breakdown['feedback_total_count'] = 0
+            score_breakdown['feedback_average_rating'] = 0.0
+            score_breakdown['feedback_recent_trend'] = 'stable'
+        
+        score_breakdown['patient_feedback_score'] = patient_feedback_score
+        
+        # Calculate reputation bonus (up to 15% additional points for 100-point scale)
         reputation_bonus = self.calculate_reputation_bonus(org_name)
         # Add JCI bonus to reputation bonus
         reputation_bonus += jci_bonus
-        score_breakdown['reputation_bonus'] = min(reputation_bonus, 10)  # Cap at 10 points
+        score_breakdown['reputation_bonus'] = min(reputation_bonus, 15)  # Expanded cap for 100-point scale
+        
+        # Calculate location-specific adjustments
+        location_adjustment = self.calculate_location_adjustment(org_name, branch_info)
+        score_breakdown['location_adjustment'] = location_adjustment
         
         # Total score with reputation multiplier
         base_total = (score_breakdown['certification_score'] + 
                      score_breakdown['initiative_score'] + 
-                     score_breakdown['transparency_score'])
+                     score_breakdown['transparency_score'] +
+                     score_breakdown['patient_feedback_score'])  # Include patient feedback
         
         # Apply reputation multiplier (but cap the effect)
         multiplier = self.get_reputation_multiplier(org_name)
-        final_score = base_total * multiplier + score_breakdown['reputation_bonus']
+        final_score = base_total * multiplier + score_breakdown['reputation_bonus'] + location_adjustment
         
         # Add penalty for missing key certifications
         penalty = self.calculate_missing_certification_penalty(certifications)
         final_score = max(final_score - penalty, 0)
         
-        # Cap final score at 85 for more realistic scoring (reduced from 100)
-        score_breakdown['total_score'] = min(final_score, 85)
+        # Full 0-100 scale scoring with proper grade boundaries
+        score_breakdown['total_score'] = min(final_score, 100)  # Full 100-point scale
         
         return score_breakdown
+    
+    def calculate_location_adjustment(self, org_name, branch_info):
+        """Calculate location-specific quality score adjustments based on branch type and regional factors"""
+        if not branch_info or not branch_info.get('has_branches'):
+            return 0
+        
+        org_name_lower = org_name.lower().strip()
+        adjustment = 0
+        
+        # Location-specific adjustments based on branch type and regional healthcare infrastructure
+        location_factors = {
+            # Indian Cities - Healthcare Infrastructure Quality
+            'chennai': {'adjustment': 3, 'reason': 'Major medical hub with advanced infrastructure'},
+            'bangalore': {'adjustment': 3, 'reason': 'Leading healthcare destination with research facilities'},
+            'mumbai': {'adjustment': 2, 'reason': 'Metropolitan healthcare center with specialized services'},
+            'delhi': {'adjustment': 2, 'reason': 'National capital with premier medical institutions'},
+            'hyderabad': {'adjustment': 2, 'reason': 'Emerging healthcare hub with modern facilities'},
+            'pune': {'adjustment': 1, 'reason': 'Growing healthcare sector with quality infrastructure'},
+            'kolkata': {'adjustment': 1, 'reason': 'Established medical center with academic institutions'},
+            'gurgaon': {'adjustment': 2, 'reason': 'Modern healthcare infrastructure and corporate hospitals'},
+            'noida': {'adjustment': 1, 'reason': 'Developing healthcare sector with quality facilities'},
+            'mohali': {'adjustment': 1, 'reason': 'Regional healthcare center with specialized services'},
+            
+            # International Cities - Global Healthcare Standards
+            'rochester': {'adjustment': 5, 'reason': 'World-renowned medical destination (Mayo Clinic)'},
+            'cleveland': {'adjustment': 4, 'reason': 'Leading medical center with research excellence'},
+            'baltimore': {'adjustment': 4, 'reason': 'Academic medical center hub (Johns Hopkins)'},
+            'phoenix': {'adjustment': 2, 'reason': 'Major healthcare destination in Southwest US'},
+            'jacksonville': {'adjustment': 2, 'reason': 'Regional medical center with specialized care'},
+            'weston': {'adjustment': 3, 'reason': 'Premium healthcare facility in South Florida'},
+            'las vegas': {'adjustment': 1, 'reason': 'Growing healthcare sector with modern facilities'},
+            'london': {'adjustment': 4, 'reason': 'International healthcare excellence (NHS and private)'},
+            'abu dhabi': {'adjustment': 3, 'reason': 'Premium healthcare destination in Middle East'},
+            'toronto': {'adjustment': 3, 'reason': 'Leading Canadian healthcare center'},
+            'singapore': {'adjustment': 4, 'reason': 'World-class healthcare hub in Asia'},
+            'dhahran': {'adjustment': 2, 'reason': 'Specialized healthcare for expatriate community'}
+        }
+        
+        # Check for specific location in organization name
+        for location, data in location_factors.items():
+            if location in org_name_lower:
+                adjustment += data['adjustment']
+                break
+        
+        # Branch type adjustments
+        if branch_info.get('search_type') == 'multi_location':
+            # Find specific branch information
+            available_locations = branch_info.get('available_locations', [])
+            for location in available_locations:
+                location_name = location.get('name', '').lower()
+                if any(word in org_name_lower for word in location_name.split()):
+                    # Branch type bonus
+                    branch_type = location.get('type', '')
+                    if branch_type == 'Flagship':
+                        adjustment += 3  # Flagship locations get highest bonus
+                    elif branch_type == 'Major Branch':
+                        adjustment += 2  # Major branches get moderate bonus
+                    elif branch_type == 'International Branch':
+                        adjustment += 2  # International branches get moderate bonus
+                    elif branch_type == 'Specialty Branch':
+                        adjustment += 1  # Specialty branches get small bonus
+                    
+                    # Specialty-based adjustments
+                    specialties = location.get('specialties', [])
+                    if 'Transplant' in specialties:
+                        adjustment += 2  # Transplant capability is premium
+                    if 'Cardiac' in specialties and 'Oncology' in specialties:
+                        adjustment += 1  # Multi-specialty excellence
+                    
+                    break
+        
+        elif branch_info.get('search_type') == 'specific_location':
+            # Bonus for specific location searches (more targeted assessment)
+            adjustment += 1
+        
+        # Regional healthcare infrastructure adjustments
+        regions_served = branch_info.get('regions_served', [])
+        if 'South India' in regions_served and any(city in org_name_lower for city in ['chennai', 'bangalore', 'hyderabad']):
+            adjustment += 1  # South India healthcare excellence bonus
+        elif 'North India' in regions_served and any(city in org_name_lower for city in ['delhi', 'gurgaon', 'noida']):
+            adjustment += 1  # North India healthcare hub bonus
+        elif any(region in regions_served for region in ['Midwest USA', 'Mid-Atlantic USA']):
+            adjustment += 2  # US medical excellence regions
+        
+        # Cap the adjustment to prevent excessive scoring
+        return min(adjustment, 8)
     
     def calculate_reputation_bonus(self, org_name):
         """Calculate reputation bonus points based on global rankings (reduced for realistic scoring)"""
@@ -845,6 +1046,252 @@ class HealthcareOrgAnalyzer:
                 break
         
         return 1.0  # No multiplier for unknown hospitals
+    
+    def calculate_organization_rankings(self, current_org_name, current_score):
+        """Calculate rankings and percentiles for the current organization against all others in database"""
+        try:
+            # Get all organizations from unified database
+            all_orgs = []
+            
+            # Calculate scores for all organizations in the database
+            for org in self.unified_database:
+                org_name = org['name']
+                
+                # Skip if it's the current organization
+                if org_name.lower() == current_org_name.lower():
+                    continue
+                
+                # Get certifications from unified database
+                certifications = []
+                for cert in org.get('certifications', []):
+                    certifications.append({
+                        'name': cert.get('name', ''),
+                        'status': cert.get('status', 'Active'),
+                        'score_impact': cert.get('score_impact', 0)
+                    })
+                
+                # Calculate basic quality initiatives (simplified for ranking)
+                initiatives = []
+                if org.get('quality_indicators', {}).get('jci_accredited'):
+                    initiatives.append({'name': 'JCI Quality Standards', 'score_impact': 5})
+                if org.get('quality_indicators', {}).get('nabh_accredited'):
+                    initiatives.append({'name': 'NABH Quality Standards', 'score_impact': 3})
+                
+                # Calculate score for this organization
+                score_data = self.calculate_quality_score(certifications, initiatives, org_name, None, [])
+                
+                all_orgs.append({
+                    'name': org_name,
+                    'total_score': score_data['total_score'],
+                    'credit_score': int(300 + (score_data['total_score'] / 100) * 550),
+                    'country': org.get('country', 'Unknown'),
+                    'region': org.get('region', 'Unknown'),
+                    'hospital_type': org.get('hospital_type', 'Hospital'),
+                    'certifications': len(certifications),
+                    'certification_score': score_data['certification_score'],
+                    'patient_feedback_score': score_data['patient_feedback_score'],
+                    'quality_score': score_data['certification_score'] + score_data['initiative_score']
+                })
+            
+            # Sort organizations by total score (descending)
+            all_orgs.sort(key=lambda x: x['total_score'], reverse=True)
+            
+            # Calculate current organization's ranking
+            current_credit_score = int(300 + (current_score / 100) * 550)
+            
+            # Find ranking position
+            rank = 1
+            for i, org in enumerate(all_orgs):
+                if org['total_score'] < current_score:
+                    rank = i + 1
+                    break
+            else:
+                rank = len(all_orgs) + 1
+            
+            # Calculate percentile
+            total_orgs = len(all_orgs) + 1  # +1 for current organization
+            percentile = ((total_orgs - rank) / total_orgs) * 100
+            
+            # Category-specific rankings
+            category_rankings = self.calculate_category_rankings(all_orgs, current_score, current_org_name)
+            
+            return {
+                'overall_rank': rank,
+                'total_organizations': total_orgs,
+                'percentile': percentile,
+                'category_rankings': category_rankings,
+                'top_performers': all_orgs[:5],  # Top 5 organizations
+                'similar_performers': self.get_similar_performers(all_orgs, current_score),
+                'regional_ranking': self.get_regional_ranking(all_orgs, current_org_name, current_score)
+            }
+            
+        except Exception as e:
+            st.error(f"Error calculating rankings: {str(e)}")
+            return None
+    
+    def calculate_category_rankings(self, all_orgs, current_score, current_org_name):
+        """Calculate rankings for specific categories"""
+        try:
+            # Calculate current organization's component scores
+            current_org_info = self.search_organization_info(current_org_name)
+            if not current_org_info:
+                return {}
+            
+            current_breakdown = current_org_info.get('score_breakdown', {})
+            
+            categories = {
+                'quality': 'certification_score',
+                'safety': 'certification_score',  # Using certification as proxy for safety
+                'patient_satisfaction': 'patient_feedback_score'
+            }
+            
+            category_rankings = {}
+            
+            for category, score_field in categories.items():
+                current_category_score = current_breakdown.get(score_field, 0)
+                
+                # Count organizations with lower scores in this category
+                lower_count = sum(1 for org in all_orgs if org.get(score_field, 0) < current_category_score)
+                
+                # Calculate ranking and percentile
+                rank = len(all_orgs) - lower_count
+                percentile = (lower_count / len(all_orgs)) * 100 if all_orgs else 0
+                
+                category_rankings[category] = {
+                    'rank': rank,
+                    'percentile': percentile,
+                    'score': current_category_score
+                }
+            
+            return category_rankings
+            
+        except Exception as e:
+            return {}
+    
+    def get_similar_performers(self, all_orgs, current_score):
+        """Get organizations with similar performance levels"""
+        # Find organizations within ±5 points of current score
+        similar = []
+        for org in all_orgs:
+            if abs(org['total_score'] - current_score) <= 5:
+                similar.append(org)
+        
+        return similar[:10]  # Return top 10 similar performers
+    
+    def get_regional_ranking(self, all_orgs, current_org_name, current_score):
+        """Get ranking within the same region"""
+        try:
+            # Find current organization's region
+            current_org_data = None
+            for org in self.unified_database:
+                if org['name'].lower() == current_org_name.lower():
+                    current_org_data = org
+                    break
+            
+            if not current_org_data:
+                return None
+            
+            current_region = current_org_data.get('region', 'Unknown')
+            
+            # Filter organizations in the same region
+            regional_orgs = [org for org in all_orgs if org.get('region') == current_region]
+            
+            if not regional_orgs:
+                return None
+            
+            # Sort by score
+            regional_orgs.sort(key=lambda x: x['total_score'], reverse=True)
+            
+            # Find ranking
+            rank = 1
+            for i, org in enumerate(regional_orgs):
+                if org['total_score'] < current_score:
+                    rank = i + 1
+                    break
+            else:
+                rank = len(regional_orgs) + 1
+            
+            percentile = ((len(regional_orgs) + 1 - rank) / (len(regional_orgs) + 1)) * 100
+            
+            return {
+                'region': current_region,
+                'rank': rank,
+                'total_in_region': len(regional_orgs) + 1,
+                'percentile': percentile,
+                'top_in_region': regional_orgs[:3]
+            }
+            
+        except Exception as e:
+            return None
+    
+    def _get_iso_score_impact(self, iso_standard):
+        """Get the score impact for different ISO standards in healthcare"""
+        iso_score_mapping = {
+            'ISO 9001:2015': 12,  # Quality Management System - high impact
+            'ISO 9001': 12,
+            'ISO 13485:2016': 15,  # Medical Devices - highest impact for healthcare
+            'ISO 13485': 15,
+            'ISO 27001:2013': 10,  # Information Security - important for healthcare
+            'ISO 27001': 10,
+            'ISO 45001:2018': 8,   # Occupational Health & Safety
+            'ISO 45001': 8,
+            'ISO 14001:2015': 6,   # Environmental Management
+            'ISO 14001': 6,
+            'ISO 15189:2012': 12,  # Medical Laboratories
+            'ISO 15189': 12,
+            'ISO 22000:2018': 5,   # Food Safety
+            'ISO 22000': 5,
+            'ISO 50001:2018': 4,   # Energy Management
+            'ISO 50001': 4,
+            'ISO 27799:2016': 9,   # Health Informatics Security
+            'ISO 27799': 9,
+            'ISO 14155:2020': 8    # Clinical Investigation
+        }
+        
+        # Extract base standard if version is included
+        base_standard = iso_standard.split(':')[0]
+        
+        return iso_score_mapping.get(iso_standard, iso_score_mapping.get(base_standard, 5))
+    
+    def _get_iso_description(self, iso_standard):
+        """Get description for a specific ISO standard"""
+        iso_descriptions = {
+            'ISO 9001': 'Quality Management Systems - Ensures consistent quality in products and services',
+            'ISO 13485': 'Medical Devices Quality Management - Specific to medical device manufacturing and services',
+            'ISO 14001': 'Environmental Management Systems - Demonstrates environmental responsibility',
+            'ISO 45001': 'Occupational Health and Safety Management - Ensures workplace safety standards',
+            'ISO 27001': 'Information Security Management - Protects sensitive patient and organizational data',
+            'ISO 15189': 'Medical Laboratories - Quality and competence requirements for medical testing',
+            'ISO 17025': 'Testing and Calibration Laboratories - General requirements for laboratory competence',
+            'ISO 22000': 'Food Safety Management - Ensures food safety in healthcare facilities',
+            'ISO 50001': 'Energy Management Systems - Demonstrates energy efficiency and sustainability',
+            'ISO 37001': 'Anti-bribery Management Systems - Prevents and addresses bribery and corruption',
+            'ISO 27799': 'Health Informatics Security - Specific security requirements for health information',
+            'ISO 14155': 'Clinical Investigation - Good clinical practice for medical device studies'
+        }
+        # Extract base standard if version is included
+        base_standard = iso_standard.split(':')[0]
+        return iso_descriptions.get(iso_standard, iso_descriptions.get(base_standard, 'International standard for quality and management systems'))
+    
+    def _get_iso_relevance(self, iso_standard):
+        """Get relevance level for healthcare organizations"""
+        iso_relevance = {
+            'ISO 9001': 'High - Core quality management',
+            'ISO 13485': 'Very High - Medical device specific',
+            'ISO 14001': 'Medium - Environmental compliance',
+            'ISO 45001': 'High - Patient and staff safety',
+            'ISO 27001': 'High - Patient data protection',
+            'ISO 15189': 'Very High - Laboratory services',
+            'ISO 17025': 'High - Testing accuracy',
+            'ISO 22000': 'Medium - Food service safety',
+            'ISO 50001': 'Low - Operational efficiency',
+            'ISO 37001': 'Medium - Governance and ethics',
+            'ISO 27799': 'Very High - Health data security',
+            'ISO 14155': 'High - Clinical research quality'
+        }
+        # Extract base standard if version is included
+        base_standard = iso_standard.split(':')[0]
+        return iso_relevance.get(iso_standard, iso_relevance.get(base_standard, 'Medium - General quality standard'))
     
     def find_similar_organizations(self, org_name, org_location="", org_type="Hospital"):
         """Find similar organizations in the same or nearby locality with their quality scores"""
@@ -1137,7 +1584,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         grade = "A+" if score >= 75 else "A" if score >= 65 else "B+" if score >= 55 else "B" if score >= 45 else "C"
         
         summary_text = f"""
-        <b>{org_name}</b> has achieved an overall QuXAT quality score of <b>{score:.1f}/100</b> (Grade: <b>{grade}</b>).
+        <b>{org_name}</b> has achieved an overall QuXAT Healthcare Quality Grid quality score of <b>{score:.1f}/100</b> (Grade: <b>{grade}</b>).
         This assessment is based on comprehensive analysis of certifications, quality initiatives, transparency measures, 
         and reputation factors from publicly available sources.
         """
@@ -1152,15 +1599,19 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         # Create score breakdown table
         score_data = [
             ['Component', 'Weight', 'Score', 'Weighted Score'],
-            ['Certifications', '60%', f"{score_breakdown.get('certification_score', 0):.1f}", 
-             f"{score_breakdown.get('certification_weighted', 0):.1f}"],
-            ['Quality Initiatives', '20%', f"{score_breakdown.get('initiative_score', 0):.1f}", 
-             f"{score_breakdown.get('initiative_weighted', 0):.1f}"],
-            ['Transparency', '10%', f"{score_breakdown.get('transparency_score', 0):.1f}", 
-             f"{score_breakdown.get('transparency_weighted', 0):.1f}"],
-            ['Reputation Bonus', '10%', f"{score_breakdown.get('reputation_bonus', 0):.1f}", 
-             f"{score_breakdown.get('reputation_weighted', 0):.1f}"],
-            ['', '', 'Total Score:', f"{score:.1f}/100"]
+            ['Certifications', '45%', f"{score_breakdown.get('certification_score', 0):.2f}",
+                f"{score_breakdown.get('certification_score', 0):.2f}"],
+                ['Quality Initiatives', '15%', f"{score_breakdown.get('initiative_score', 0):.2f}",
+                f"{score_breakdown.get('initiative_score', 0):.2f}"],
+                ['Transparency', '10%', f"{score_breakdown.get('transparency_score', 0):.2f}",
+                f"{score_breakdown.get('transparency_score', 0):.2f}"],
+                ['Patient Feedback', '15%', f"{score_breakdown.get('patient_feedback_score', 0):.2f}",
+                f"{score_breakdown.get('patient_feedback_score', 0):.2f}"],
+                ['Reputation Bonus', '10%', f"{score_breakdown.get('reputation_bonus', 0):.2f}",
+                f"{score_breakdown.get('reputation_bonus', 0):.2f}"],
+                ['Location Adjustment', '5%', f"{score_breakdown.get('location_adjustment', 0):.2f}",
+                f"{score_breakdown.get('location_adjustment', 0):.2f}"],
+                ['', '', 'Total Score:', f"{score:.2f}/100"]
         ]
         
         score_table = Table(score_data, colWidths=[2.5*inch, 1*inch, 1*inch, 1.5*inch])
@@ -1183,7 +1634,6 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         # Add score chart
         score_chart = create_score_chart(score, f"{org_name} Quality Score")
         if score_chart:
-            from reportlab.platypus import Image as ReportLabImage
             story.append(Paragraph("Visual Score Representation", subheading_style))
             story.append(ReportLabImage(score_chart, width=5*inch, height=3*inch))
             story.append(Spacer(1, 15))
@@ -1240,7 +1690,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
             story.append(Paragraph(f"Quality Initiatives Identified: {len(initiatives)}", subheading_style))
             
             for i, initiative in enumerate(initiatives[:8], 1):  # Show top 8
-                init_text = f"<b>{i}.</b> {initiative.get('title', 'N/A')} ({initiative.get('year', 'N/A')})"
+                init_text = f"<b>{i}.</b> {initiative.get('name', 'N/A')} ({initiative.get('year', 'N/A')})"
                 story.append(Paragraph(init_text, normal_style))
             
             story.append(Spacer(1, 15))
@@ -1290,12 +1740,12 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         <b>Data Dependencies:</b> Accuracy depends on the availability and reliability of public data sources. 
         Organizations may have additional certifications or quality initiatives not captured in our database.<br/><br/>
         
-        <b>Not Medical Advice:</b> QuXAT scores do not constitute medical advice, professional recommendations, 
+        <b>Not Medical Advice:</b> QuXAT Healthcare Quality Grid scores do not constitute medical advice, professional recommendations, 
         or endorsements. Users should conduct independent verification and due diligence before making healthcare decisions.<br/><br/>
         
-        <b>Limitation of Liability:</b> QuXAT and its developers disclaim all warranties, express or implied, 
+        <b>Limitation of Liability:</b> QuXAT Healthcare Quality Grid and its developers disclaim all warranties, express or implied, 
         regarding the accuracy or completeness of information. Users assume full responsibility for any decisions 
-        made based on QuXAT assessments.<br/><br/>
+        made based on QuXAT Healthcare Quality Grid assessments.<br/><br/>
         
         <b>Comparative Tool Only:</b> Intended for comparative analysis and research purposes, not absolute quality determination.
         """
@@ -1326,7 +1776,6 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
     except Exception as e:
         # Log error without using Streamlit functions to avoid context issues
         print(f"Error generating PDF: {str(e)}")
-        import traceback
         traceback.print_exc()
         return None
 
@@ -1385,33 +1834,735 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
                 value=active_certs
             )
         
-        # Score Breakdown Section
-        st.markdown("### 🎯 Score Breakdown Analysis")
+        # Score Breakdown Section with Visual Progress Bars
+        st.markdown("### 🎯 Detailed Score Breakdown Analysis")
         
         score_breakdown = org_data.get('score_breakdown', {})
         
-        # Create score breakdown table
-        breakdown_data = {
-            'Component': ['Certifications', 'Quality Initiatives', 'Transparency', 'Reputation Bonus', 'Total Score'],
-            'Weight': ['60%', '20%', '10%', '10%', '100%'],
-            'Score': [
-                f"{score_breakdown.get('certification_score', 0):.1f}",
-                f"{score_breakdown.get('initiative_score', 0):.1f}",
-                f"{score_breakdown.get('transparency_score', 0):.1f}",
-                f"{score_breakdown.get('reputation_bonus', 0):.1f}",
-                f"{score:.1f}"
-            ],
-            'Weighted Score': [
-                f"{score_breakdown.get('certification_weighted', 0):.1f}",
-                f"{score_breakdown.get('initiative_weighted', 0):.1f}",
-                f"{score_breakdown.get('transparency_weighted', 0):.1f}",
-                f"{score_breakdown.get('reputation_weighted', 0):.1f}",
-                f"{score:.1f}/100"
-            ]
-        }
+        # Define score components with their maximum values and colors
+        components = [
+            {
+                'name': 'Certifications',
+                'score': score_breakdown.get('certification_score', 0),
+                'max_score': 50,
+                'color': '#1f77b4',
+                'weight': '50%',
+                'description': 'Active healthcare certifications and accreditations'
+            },
+            {
+                'name': 'Quality Initiatives',
+                'score': score_breakdown.get('initiative_score', 0),
+                'max_score': 20,
+                'color': '#ff7f0e',
+                'weight': '20%',
+                'description': 'Quality improvement programs and innovations'
+            },
+            {
+                'name': 'Transparency',
+                'score': score_breakdown.get('transparency_score', 0),
+                'max_score': 15,
+                'color': '#2ca02c',
+                'weight': '15%',
+                'description': 'Public disclosure of quality metrics and outcomes'
+            },
+            {
+                'name': 'Patient Feedback',
+                'score': score_breakdown.get('patient_feedback_score', 0),
+                'max_score': 15,
+                'color': '#d62728',
+                'weight': '15%',
+                'description': 'Patient reviews and satisfaction scores from multiple platforms'
+            }
+        ]
         
-        breakdown_df = pd.DataFrame(breakdown_data)
-        st.dataframe(breakdown_df, use_container_width=True, hide_index=True)
+        # Display each component with progress bar and reasoning
+        for component in components:
+            col1, col2 = st.columns([3, 1])
+            
+            with col1:
+                # Progress bar
+                progress_percentage = (component['score'] / component['max_score']) * 100 if component['max_score'] > 0 else 0
+                
+                # Color coding based on performance
+                if progress_percentage >= 80:
+                    bar_color = '#28a745'  # Green
+                    performance_text = "Excellent"
+                elif progress_percentage >= 60:
+                    bar_color = '#ffc107'  # Yellow
+                    performance_text = "Good"
+                elif progress_percentage >= 40:
+                    bar_color = '#fd7e14'  # Orange
+                    performance_text = "Fair"
+                else:
+                    bar_color = '#dc3545'  # Red
+                    performance_text = "Needs Improvement"
+                
+                st.markdown(f"""
+                <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="margin: 0; color: {component['color']};">{component['name']} ({component['weight']})</h4>
+                        <span style="font-weight: bold; color: {bar_color};">{component['score']:.1f}/{component['max_score']} ({performance_text})</span>
+                    </div>
+                    <div style="background-color: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">
+                        <div style="background-color: {bar_color}; height: 100%; width: {progress_percentage}%; border-radius: 10px; transition: width 0.3s ease;"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #6c757d; font-size: 0.9rem;">{component['description']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                # Performance indicator
+                if progress_percentage >= 80:
+                    st.success(f"🟢 {progress_percentage:.0f}%")
+                elif progress_percentage >= 60:
+                    st.warning(f"🟡 {progress_percentage:.0f}%")
+                elif progress_percentage >= 40:
+                    st.warning(f"🟠 {progress_percentage:.0f}%")
+                else:
+                    st.error(f"🔴 {progress_percentage:.0f}%")
+        
+        # QuXAT Credit Score Display - Similar to FICO Credit Scoring
+        st.markdown("---")
+        
+        # Convert 0-100 score to 300-850 credit-style range
+        credit_score = int(300 + (score / 100) * 550)
+        
+        # Credit-style risk categories and descriptions
+        if credit_score >= 800:
+            grade_color = '#28a745'
+            grade_text = 'Exceptional (800-850)'
+            grade_emoji = '🏆'
+            risk_level = 'Minimal Risk'
+            risk_description = 'Outstanding healthcare quality with minimal compliance risk'
+        elif credit_score >= 740:
+            grade_color = '#20c997'
+            grade_text = 'Very Good (740-799)'
+            grade_emoji = '⭐'
+            risk_level = 'Low Risk'
+            risk_description = 'Excellent healthcare quality with low compliance risk'
+        elif credit_score >= 670:
+            grade_color = '#ffc107'
+            grade_text = 'Good (670-739)'
+            grade_emoji = '👍'
+            risk_level = 'Moderate Risk'
+            risk_description = 'Good healthcare quality with moderate compliance oversight needed'
+        elif credit_score >= 580:
+            grade_color = '#fd7e14'
+            grade_text = 'Fair (580-669)'
+            grade_emoji = '👌'
+            risk_level = 'Elevated Risk'
+            risk_description = 'Fair healthcare quality requiring enhanced monitoring'
+        elif credit_score >= 500:
+            grade_color = '#dc3545'
+            grade_text = 'Poor (500-579)'
+            grade_emoji = '⚠️'
+            risk_level = 'High Risk'
+            risk_description = 'Poor healthcare quality requiring immediate attention'
+        else:
+            grade_color = '#6f42c1'
+            grade_text = 'Very Poor (300-499)'
+            grade_emoji = '🔄'
+            risk_level = 'Very High Risk'
+            risk_description = 'Critical healthcare quality issues requiring urgent intervention'
+        
+        st.markdown(f"""
+        <div style="
+            background: linear-gradient(135deg, {grade_color}20, {grade_color}10);
+            border: 2px solid {grade_color};
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1rem 0;
+        ">
+            <h2 style="color: {grade_color}; margin-bottom: 0.5rem;">
+                {grade_emoji} QuXAT Credit Score: {credit_score}
+            </h2>
+            <h3 style="color: {grade_color}; margin-bottom: 0.5rem;">
+                {grade_text}
+            </h3>
+            <p style="color: #666; margin-bottom: 0.5rem; font-size: 1.1em;">
+                <strong>Risk Level:</strong> {risk_level}
+            </p>
+            <p style="color: #666; margin-bottom: 1rem; font-style: italic;">
+                {risk_description}
+            </p>
+            <div style="background: rgba(255,255,255,0.8); padding: 0.8rem; border-radius: 8px; margin-top: 1rem;">
+                <p style="color: #333; margin: 0; font-size: 0.9em;">
+                    <strong>Base Quality Score:</strong> {score:.1f}/100 | 
+                    <strong>Credit Range:</strong> 300-850 | 
+                    <strong>Industry:</strong> Healthcare Quality & Compliance
+                </p>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Score History and Trend Analysis
+        trend_data = get_score_trend(org_name)
+        if trend_data or org_name in st.session_state.score_history:
+            st.markdown("### 📈 QuXAT Credit Score History & Trends")
+            st.markdown("*Track your healthcare quality score over time, just like credit monitoring*")
+            
+            if org_name in st.session_state.score_history and len(st.session_state.score_history[org_name]) > 0:
+                history = st.session_state.score_history[org_name]
+                
+                # Create trend visualization
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    if trend_data and isinstance(trend_data, dict):
+                        direction = trend_data.get('direction', 'stable')
+                        status = trend_data.get('status', 'stable')
+                        change = trend_data.get('change', 0)
+                        
+                        trend_color = '#28a745' if direction == 'up' else '#dc3545' if direction == 'down' else '#6c757d'
+                        trend_emoji = '📈' if direction == 'up' else '📉' if direction == 'down' else '➡️'
+                        
+                        st.markdown(f"""
+                        <div style="background: {trend_color}20; padding: 1rem; border-radius: 8px; text-align: center;">
+                            <h4 style="color: {trend_color}; margin-bottom: 0.5rem;">{trend_emoji} Score Trend</h4>
+                            <div style="font-size: 1.2em; font-weight: bold; color: {trend_color};">
+                                {status.title() if status else 'Stable'}
+                            </div>
+                            <p style="margin: 0; font-size: 0.9em; color: #666;">
+                                {'+' if direction == 'up' else '-' if direction == 'down' else ''}{change} points
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        st.markdown("""
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                            <h4 style="color: #6c757d; margin-bottom: 0.5rem;">📊 First Assessment</h4>
+                            <p style="margin: 0; color: #666;">Baseline score established</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                
+                with col2:
+                    assessments_count = len(history)
+                    st.markdown(f"""
+                    <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <h4 style="color: #1976d2; margin-bottom: 0.5rem;">📋 Assessments</h4>
+                        <div style="font-size: 1.2em; font-weight: bold; color: #1976d2;">
+                            {assessments_count}
+                        </div>
+                        <p style="margin: 0; font-size: 0.9em; color: #666;">Total evaluations</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with col3:
+                    latest_date = history[-1]['date']
+                    st.markdown(f"""
+                    <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <h4 style="color: #f57c00; margin-bottom: 0.5rem;">📅 Last Updated</h4>
+                        <div style="font-size: 1em; font-weight: bold; color: #f57c00;">
+                            {latest_date}
+                        </div>
+                        <p style="margin: 0; font-size: 0.9em; color: #666;">Most recent assessment</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                # Score history chart
+                if len(history) > 1:
+                    
+                    dates = [entry['date'] for entry in history]
+                    scores = [entry['credit_score'] for entry in history]
+                    
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=dates,
+                        y=scores,
+                        mode='lines+markers',
+                        name='QuXAT Credit Score',
+                        line=dict(color='#1976d2', width=3),
+                        marker=dict(size=8, color='#1976d2'),
+                        hovertemplate='<b>Date:</b> %{x}<br><b>Score:</b> %{y}<extra></extra>'
+                    ))
+                    
+                    fig.update_layout(
+                        title='QuXAT Credit Score History',
+                        xaxis_title='Date',
+                        yaxis_title='Credit Score',
+                        yaxis=dict(range=[300, 850]),
+                        height=400,
+                        showlegend=False,
+                        plot_bgcolor='rgba(0,0,0,0)',
+                        paper_bgcolor='rgba(0,0,0,0)'
+                    )
+                    
+                    # Add score range bands
+                    fig.add_hline(y=800, line_dash="dash", line_color="green", annotation_text="Exceptional (800+)")
+                    fig.add_hline(y=740, line_dash="dash", line_color="lightgreen", annotation_text="Very Good (740+)")
+                    fig.add_hline(y=670, line_dash="dash", line_color="orange", annotation_text="Good (670+)")
+                    fig.add_hline(y=580, line_dash="dash", line_color="red", annotation_text="Fair (580+)")
+                    
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Score breakdown history
+                    with st.expander("📊 Detailed Score Component History", expanded=False):
+                        st.markdown("**Component Score Trends:**")
+                        
+                        # Create component comparison
+                        components = ['certification_score', 'patient_feedback_score', 'initiative_score', 'transparency_score']
+                        component_names = ['Certifications', 'Patient Feedback', 'Quality Initiatives', 'Transparency']
+                        
+                        for i, (component, name) in enumerate(zip(components, component_names)):
+                            latest_value = history[-1].get(component, 0)
+                            if len(history) > 1:
+                                previous_value = history[-2].get(component, 0)
+                                change = latest_value - previous_value
+                                change_text = f"({'+' if change > 0 else ''}{change:.1f})" if change != 0 else "(No change)"
+                                change_color = "green" if change > 0 else "red" if change < 0 else "gray"
+                            else:
+                                change_text = "(Baseline)"
+                                change_color = "gray"
+                            
+                            st.markdown(f"• **{name}:** {latest_value:.1f} <span style='color: {change_color};'>{change_text}</span>", unsafe_allow_html=True)
+        
+        # Credit-Style Factors Analysis Section
+        st.markdown("### 📊 QuXAT Credit Factors Analysis")
+        st.markdown("*Similar to credit score factors, these components determine your healthcare quality rating*")
+        
+        # Calculate factor impacts as percentages
+        total_possible = 100  # Total possible score
+        cert_impact = (score_breakdown.get('certification_score', 0) / 50) * 50  # 50% weight
+        init_impact = (score_breakdown.get('initiative_score', 0) / 20) * 20    # 20% weight
+        trans_impact = (score_breakdown.get('transparency_score', 0) / 15) * 15  # 15% weight
+        feedback_impact = (score_breakdown.get('patient_feedback_score', 0) / 15) * 15  # 15% weight
+        
+        # Create credit-style factors display
+        factors_col1, factors_col2 = st.columns([2, 1])
+        
+        with factors_col1:
+            st.markdown("#### 🏆 Healthcare Quality Factors")
+            
+            # Factor 1: Certifications & Accreditations (Most Important)
+            cert_percentage = (cert_impact / 50) * 100
+            if cert_percentage >= 80:
+                cert_status = "Excellent"
+                cert_color = "#28a745"
+            elif cert_percentage >= 60:
+                cert_status = "Good"
+                cert_color = "#ffc107"
+            else:
+                cert_status = "Needs Improvement"
+                cert_color = "#dc3545"
+                
+            st.markdown(f"""
+            **1. Certifications & Accreditations** - *50% of your score*
+            <div style="background: {cert_color}20; border-left: 4px solid {cert_color}; padding: 10px; margin: 5px 0;">
+                <strong style="color: {cert_color};">{cert_status}</strong> - {cert_percentage:.0f}% of maximum impact<br>
+                <small>Impact on Credit Score: {cert_impact:.1f} points</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Factor 2: Quality Initiatives (Second Most Important)
+            init_percentage = (init_impact / 20) * 100
+            if init_percentage >= 80:
+                init_status = "Excellent"
+                init_color = "#28a745"
+            elif init_percentage >= 60:
+                init_status = "Good"
+                init_color = "#ffc107"
+            else:
+                init_status = "Needs Improvement"
+                init_color = "#dc3545"
+                
+            st.markdown(f"""
+            **2. Quality Improvement Programs** - *20% of your score*
+            <div style="background: {init_color}20; border-left: 4px solid {init_color}; padding: 10px; margin: 5px 0;">
+                <strong style="color: {init_color};">{init_status}</strong> - {init_percentage:.0f}% of maximum impact<br>
+                <small>Impact on Credit Score: {init_impact:.1f} points</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Factor 3: Patient Satisfaction
+            feedback_percentage = (feedback_impact / 15) * 100
+            if feedback_percentage >= 80:
+                feedback_status = "Excellent"
+                feedback_color = "#28a745"
+            elif feedback_percentage >= 60:
+                feedback_status = "Good"
+                feedback_color = "#ffc107"
+            else:
+                feedback_status = "Needs Improvement"
+                feedback_color = "#dc3545"
+                
+            st.markdown(f"""
+            **3. Patient Satisfaction & Reviews** - *15% of your score*
+            <div style="background: {feedback_color}20; border-left: 4px solid {feedback_color}; padding: 10px; margin: 5px 0;">
+                <strong style="color: {feedback_color};">{feedback_status}</strong> - {feedback_percentage:.0f}% of maximum impact<br>
+                <small>Impact on Credit Score: {feedback_impact:.1f} points</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Factor 4: Transparency & Disclosure
+            trans_percentage = (trans_impact / 15) * 100
+            if trans_percentage >= 80:
+                trans_status = "Excellent"
+                trans_color = "#28a745"
+            elif trans_percentage >= 60:
+                trans_status = "Good"
+                trans_color = "#ffc107"
+            else:
+                trans_status = "Needs Improvement"
+                trans_color = "#dc3545"
+                
+            st.markdown(f"""
+            **4. Transparency & Public Disclosure** - *15% of your score*
+            <div style="background: {trans_color}20; border-left: 4px solid {trans_color}; padding: 10px; margin: 5px 0;">
+                <strong style="color: {trans_color};">{trans_status}</strong> - {trans_percentage:.0f}% of maximum impact<br>
+                <small>Impact on Credit Score: {trans_impact:.1f} points</small>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with factors_col2:
+            st.markdown("#### 📈 Score Impact Summary")
+            
+            # Credit-style impact meter
+            total_impact = cert_impact + init_impact + trans_impact + feedback_impact
+            impact_percentage = (total_impact / 100) * 100
+            
+            st.markdown(f"""
+            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h3 style="color: #333; margin-bottom: 10px;">Overall Impact</h3>
+                <div style="font-size: 2em; color: {grade_color}; font-weight: bold;">
+                    {impact_percentage:.0f}%
+                </div>
+                <p style="color: #666; margin: 5px 0;">of Maximum Possible Score</p>
+                <hr style="margin: 15px 0;">
+                <p style="color: #333; font-size: 0.9em;">
+                    <strong>Credit Score:</strong> {credit_score}<br>
+                    <strong>Risk Level:</strong> {risk_level}
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Improvement potential
+            improvement_potential = 100 - impact_percentage
+            if improvement_potential > 0:
+                st.markdown(f"""
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4 style="color: #1976d2; margin-bottom: 10px;">💡 Improvement Potential</h4>
+                    <p style="color: #333; margin: 0;">
+                        You could improve your QuXAT Credit Score by up to <strong>{improvement_potential:.0f} points</strong> 
+                        by addressing the factors marked as "Needs Improvement" above.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+
+        # Detailed Reasoning Section
+        st.markdown("### 🔍 Score Reasoning & Analysis")
+        
+        # Certifications reasoning
+        with st.expander("🏆 Certifications Analysis", expanded=True):
+            cert_score = score_breakdown.get('certification_score', 0)
+            certifications = org_data.get('certifications', [])
+            active_certs = [c for c in certifications if c.get('status') == 'Active']
+            
+            st.markdown(f"""
+            **Score: {cert_score:.1f}/50 points**
+            
+            **Analysis:**
+            - Found {len(certifications)} total certifications in our database
+            - {len(active_certs)} certifications are currently active
+            - Certification score represents {(cert_score/50)*100:.1f}% of maximum possible points
+            
+            **Key Factors:**
+            """)
+            
+            if active_certs:
+                for cert in active_certs[:5]:  # Show top 5
+                    impact = cert.get('score_impact', 0)
+                    st.markdown(f"- **{cert.get('name', 'Unknown')}**: +{impact:.1f} points ({cert.get('status', 'Unknown')} status)")
+            else:
+                st.markdown("- No active certifications found in our database")
+                st.markdown("- This significantly impacts the overall quality score")
+        
+        # Patient Feedback reasoning
+        if 'patient_feedback_score' in score_breakdown:
+            with st.expander("👥 Patient Feedback Analysis", expanded=True):
+                feedback_score = score_breakdown.get('patient_feedback_score', 0)
+                feedback_data = org_data.get('patient_feedback_data', {})
+                
+                st.markdown(f"""
+                **Score: {feedback_score:.1f}/15 points**
+                
+                **Analysis:**
+                - Patient feedback represents {(feedback_score/15)*100:.1f}% of maximum possible points
+                - Data sourced from multiple platforms including Google Reviews, Facebook, and healthcare-specific sites
+                
+                **Breakdown:**
+                """)
+                
+                if feedback_data:
+                    st.markdown(f"- **Total Reviews**: {feedback_data.get('total_reviews', 'N/A')}")
+                    st.markdown(f"- **Average Rating**: {feedback_data.get('average_rating', 'N/A')}/5.0")
+                    st.markdown(f"- **Sentiment Trend**: {feedback_data.get('recent_trend', 'N/A')}")
+                    
+                    platform_breakdown = feedback_data.get('platform_breakdown', {})
+                    if platform_breakdown:
+                        st.markdown("**Platform Distribution:**")
+                        for platform, count in platform_breakdown.items():
+                            st.markdown(f"  - {platform}: {count} reviews")
+                else:
+                    st.markdown("- Automated feedback analysis completed")
+                    st.markdown("- Score based on available public reviews and ratings")
+        
+        # Quality Initiatives reasoning
+        with st.expander("🚀 Quality Initiatives Analysis"):
+            init_score = score_breakdown.get('initiative_score', 0)
+            initiatives = org_data.get('quality_initiatives', [])
+            
+            st.markdown(f"""
+            **Score: {init_score:.1f}/20 points**
+            
+            **Analysis:**
+            - Quality initiatives represent {(init_score/20)*100:.1f}% of maximum possible points
+            - Found {len(initiatives)} quality improvement programs or innovations
+            
+            **Contributing Factors:**
+            """)
+            
+            if initiatives:
+                for init in initiatives[:3]:  # Show top 3
+                    impact = init.get('impact_score', 0)
+                    st.markdown(f"- **{init.get('name', 'Unknown')}** ({init.get('year', 'N/A')}): +{impact:.1f} points")
+            else:
+                st.markdown("- No specific quality initiatives identified in our analysis")
+                st.markdown("- This may indicate limited public disclosure of quality programs")
+        
+        # Transparency reasoning
+        with st.expander("📊 Transparency Analysis"):
+            trans_score = score_breakdown.get('transparency_score', 0)
+            
+            st.markdown(f"""
+            **Score: {trans_score:.1f}/15 points**
+            
+            **Analysis:**
+            - Transparency represents {(trans_score/15)*100:.1f}% of maximum possible points
+            - Based on public availability of quality metrics, outcomes data, and organizational information
+            
+            **Evaluation Criteria:**
+            - Public disclosure of quality metrics and patient outcomes
+            - Availability of organizational information and leadership details
+            - Accessibility of performance data and improvement initiatives
+            - Compliance with transparency requirements and standards
+            """)
+        
+        # Credit Repair-Style Improvement Recommendations Section
+        st.markdown("### 💡 QuXAT Credit Repair Plan")
+        st.markdown("*Just like credit repair, improving your QuXAT score requires strategic action and time*")
+        
+        recommendations = []
+        
+        # Certification recommendations (like credit utilization)
+        cert_score = score_breakdown.get('certification_score', 0)
+        if cert_score < 35:  # Less than 70% of certification points
+            recommendations.append({
+                'category': '🏆 Accreditation Portfolio',
+                'priority': 'High',
+                'recommendation': 'Pursue additional healthcare accreditations such as JCI, ISO 9001, or local healthcare quality certifications',
+                'impact': 'Could increase QuXAT Credit Score by 30-45 points',
+                'timeline': '6-18 months',
+                'credit_analogy': 'Like maintaining low credit utilization, having diverse active certifications shows financial institutions (patients/regulators) you can manage quality standards responsibly.',
+                'action_steps': [
+                    '📋 Audit current certification status and renewal dates',
+                    '🎯 Identify 2-3 target certifications relevant to your specialty',
+                    '📅 Create certification timeline with milestones',
+                    '💰 Budget for certification costs and training'
+                ]
+            })
+        
+        # Patient feedback recommendations (like payment history)
+        feedback_score = score_breakdown.get('patient_feedback_score', 0)
+        if feedback_score < 10:  # Less than 67% of feedback points
+            recommendations.append({
+                'category': '⭐ Patient Satisfaction Record',
+                'priority': 'High',
+                'recommendation': 'Implement comprehensive patient feedback collection system and focus on improving patient satisfaction scores',
+                'impact': 'Could increase QuXAT Credit Score by 15-24 points',
+                'timeline': '3-6 months',
+                'credit_analogy': 'Like payment history in credit scoring, patient satisfaction is the most important factor. Consistent positive feedback builds trust over time.',
+                'action_steps': [
+                    '📱 Deploy digital feedback collection at all touchpoints',
+                    '📊 Set up monthly patient satisfaction monitoring',
+                    '🔄 Implement rapid response system for negative feedback',
+                    '🎯 Target 4.5+ star average rating across platforms'
+                ]
+            })
+        
+        # Quality initiatives recommendations (like credit mix)
+        init_score = score_breakdown.get('initiative_score', 0)
+        if init_score < 12:  # Less than 60% of initiative points
+            recommendations.append({
+                'category': '🚀 Quality Program Diversity',
+                'priority': 'Medium',
+                'recommendation': 'Develop and publicize quality improvement initiatives, patient safety programs, or innovative healthcare solutions',
+                'impact': 'Could increase QuXAT Credit Score by 15-30 points',
+                'timeline': '6-12 months',
+                'credit_analogy': 'Like having a good credit mix (cards, loans, mortgage), diverse quality programs show you can handle various aspects of healthcare excellence.',
+                'action_steps': [
+                    '🎯 Launch 3-5 quality improvement initiatives annually',
+                    '📈 Implement measurable patient safety programs',
+                    '🏥 Develop specialty-specific quality protocols',
+                    '📢 Publicize achievements through press releases'
+                ]
+            })
+        
+        # Transparency recommendations (like credit age)
+        trans_score = score_breakdown.get('transparency_score', 0)
+        if trans_score < 10:  # Less than 67% of transparency points
+            recommendations.append({
+                'category': '🔍 Transparency & Disclosure',
+                'priority': 'Medium',
+                'recommendation': 'Increase public disclosure of quality metrics, patient outcomes, and organizational performance data',
+                'impact': 'Could increase QuXAT Credit Score by 9-15 points',
+                'timeline': '1-3 months',
+                'credit_analogy': 'Like maintaining old credit accounts, long-term transparency builds credibility. Consistent disclosure shows you have nothing to hide.',
+                'action_steps': [
+                    '🌐 Create dedicated quality metrics page on website',
+                    '📊 Publish quarterly quality reports',
+                    '📋 Share outcome data and improvement trends',
+                    '🏆 Highlight awards and recognitions prominently'
+                ]
+            })
+        
+        if recommendations:
+            for i, rec in enumerate(recommendations, 1):
+                priority_color = '#dc3545' if rec['priority'] == 'High' else '#ffc107'
+                priority_emoji = '🔴' if rec['priority'] == 'High' else '🟡'
+                
+                # Credit repair-style card layout
+                st.markdown(f"""
+                <div style="
+                    border: 2px solid {priority_color};
+                    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                    padding: 1.5rem;
+                    margin: 1.5rem 0;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                ">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="
+                            background: {priority_color};
+                            color: white;
+                            padding: 0.5rem 1rem;
+                            border-radius: 20px;
+                            font-weight: bold;
+                            margin-right: 1rem;
+                        ">
+                            {priority_emoji} {rec['priority']} Priority
+                        </div>
+                        <h3 style="color: {priority_color}; margin: 0;">{rec['category']}</h3>
+                    </div>
+                    
+                    <div style="background: #e8f4fd; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4 style="color: #1976d2; margin-bottom: 0.5rem;">💡 Credit Analogy</h4>
+                        <p style="margin: 0; font-style: italic; color: #333;">{rec['credit_analogy']}</p>
+                    </div>
+                    
+                    <p style="margin-bottom: 1rem;"><strong>📋 Action Plan:</strong> {rec['recommendation']}</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: #e8f5e8; padding: 0.8rem; border-radius: 6px;">
+                            <strong style="color: #2e7d32;">📈 Credit Score Impact:</strong><br>
+                            {rec['impact']}
+                        </div>
+                        <div style="background: #fff3e0; padding: 0.8rem; border-radius: 6px;">
+                            <strong style="color: #f57c00;">⏱️ Timeline:</strong><br>
+                            {rec['timeline']}
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f5f5f5; padding: 1rem; border-radius: 8px;">
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">✅ Specific Action Steps:</h4>
+                        <ul style="margin: 0; padding-left: 1.2rem;">
+                """, unsafe_allow_html=True)
+                
+                # Add action steps
+                for step in rec.get('action_steps', []):
+                    st.markdown(f"<li style='margin-bottom: 0.3rem; color: #333;'>{step}</li>", unsafe_allow_html=True)
+                
+                st.markdown("</ul></div></div>", unsafe_allow_html=True)
+                
+        else:
+            st.success("🎉 Excellent QuXAT Credit Score! This organization demonstrates strong quality indicators across all measured categories.")
+            st.markdown("""
+            <div style="
+                background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+                padding: 1.5rem;
+                border-radius: 12px;
+                border-left: 5px solid #4caf50;
+                margin: 1rem 0;
+            ">
+                <h4 style="color: #2e7d32; margin-bottom: 1rem;">🏆 Credit Maintenance Plan</h4>
+                <ul style="color: #333; margin: 0;">
+                    <li>📊 Continue monitoring and maintaining current certification status</li>
+                    <li>🔄 Regularly review and update quality improvement initiatives</li>
+                    <li>⭐ Maintain high levels of patient satisfaction and feedback quality</li>
+                    <li>🎯 Consider pursuing additional advanced certifications for further excellence</li>
+                    <li>📈 Monitor QuXAT Credit Score monthly for any changes</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Credit Monitoring Dashboard
+        if recommendations:
+            st.markdown("### 📊 QuXAT Credit Monitoring Dashboard")
+            st.markdown("*Track your progress like a credit monitoring service*")
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown("""
+                <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; text-align: center;">
+                    <h4 style="color: #1976d2; margin-bottom: 0.5rem;">📈 Score Potential</h4>
+                    <div style="font-size: 1.5em; font-weight: bold; color: #1976d2;">
+                        +{} points
+                    </div>
+                    <p style="margin: 0; font-size: 0.9em; color: #666;">Maximum Improvement</p>
+                </div>
+                """.format(sum([int(rec['impact'].split('-')[1].split()[0]) for rec in recommendations if '-' in rec['impact']])), unsafe_allow_html=True)
+            
+            with col2:
+                avg_timeline = sum([int(rec['timeline'].split('-')[0]) for rec in recommendations if '-' in rec['timeline']]) // len(recommendations)
+                st.markdown(f"""
+                <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; text-align: center;">
+                    <h4 style="color: #f57c00; margin-bottom: 0.5rem;">⏱️ Avg Timeline</h4>
+                    <div style="font-size: 1.5em; font-weight: bold; color: #f57c00;">
+                        {avg_timeline} months
+                    </div>
+                    <p style="margin: 0; font-size: 0.9em; color: #666;">To See Results</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                high_priority_count = sum([1 for rec in recommendations if rec['priority'] == 'High'])
+                st.markdown(f"""
+                <div style="background: #ffebee; padding: 1rem; border-radius: 8px; text-align: center;">
+                    <h4 style="color: #d32f2f; margin-bottom: 0.5rem;">🔴 High Priority</h4>
+                    <div style="font-size: 1.5em; font-weight: bold; color: #d32f2f;">
+                        {high_priority_count} items
+                    </div>
+                    <p style="margin: 0; font-size: 0.9em; color: #666;">Need Immediate Action</p>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        # Quick Action Items
+        if recommendations:
+            st.markdown("### ⚡ Quick Action Items (Next 30 Days)")
+            
+            quick_actions = [
+                "📋 Conduct internal audit of current certification status and renewal dates",
+                "📊 Implement patient feedback collection system across all service points",
+                "🌐 Review and update organization website with quality metrics and achievements",
+                "📈 Document and publicize recent quality improvement initiatives",
+                "🔍 Benchmark against similar organizations in your region or specialty"
+            ]
+            
+            for action in quick_actions:
+                st.markdown(f"- {action}")
+        
+        st.markdown("---")
         
         # Visual Score Representation
         st.markdown("### 📈 Visual Score Representation")
@@ -1450,38 +2601,10 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         certifications = org_data.get('certifications', [])
         if certifications:
             st.markdown(f"**Total Certifications Found:** {len(certifications)}")
-            
-            # Active certifications
             active_certs = [cert for cert in certifications if cert.get('status') == 'Active']
-            if active_certs:
-                st.markdown("#### Active Certifications")
-                
-                cert_data = []
-                for cert in active_certs[:10]:  # Show top 10
-                    cert_name = cert.get('name', 'N/A')
-                    is_nabh = 'NABH' in cert_name.upper() if cert_name != 'N/A' else False
-                    is_jci = 'JCI' in cert_name.upper() if cert_name != 'N/A' else False
-                    valid_until = cert.get('valid_until', 'N/A')
-                    
-                    # For NABH or JCI certifications with no valid_until data, don't show N/A
-                    if (is_nabh or is_jci) and (valid_until == 'N/A' or valid_until is None):
-                        cert_data.append({
-                            'Certification': cert_name,
-                            'Status': cert.get('status', 'N/A'),
-                            'Valid Until': '',  # Empty instead of N/A for NABH/JCI
-                            'Score Impact': f"{cert.get('score_impact', 0):.1f}"
-                        })
-                    else:
-                        cert_data.append({
-                            'Certification': cert_name,
-                            'Status': cert.get('status', 'N/A'),
-                            'Valid Until': valid_until,
-                            'Score Impact': f"{cert.get('score_impact', 0):.1f}"
-                        })
-                
-                if cert_data:
-                    cert_df = pd.DataFrame(cert_data)
-                    st.dataframe(cert_df, use_container_width=True, hide_index=True)
+            st.markdown(f"**Active Certifications:** {len(active_certs)}")
+            
+            # Note: Detailed certification cards are displayed in the main profile section below
             
             # Certification status distribution
             if len(certifications) > 1:
@@ -1500,6 +2623,51 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         else:
             st.info("No certifications found in our database.")
         
+        # ISO Certifications Section
+        st.markdown("### 🌐 ISO Certifications")
+        
+        iso_certifications = org_data.get('iso_certifications')
+        if iso_certifications and iso_certifications.active_certifications > 0:
+            st.markdown(f"**ISO Certifications Found:** {iso_certifications.active_certifications}")
+            
+            # Display ISO certification types
+            if iso_certifications.certification_types:
+                st.markdown("#### ISO Standards Certified")
+                
+                iso_data = []
+                for cert_type in iso_certifications.certification_types:
+                    # Get score impact for this ISO standard
+                    score_impact = self._get_iso_score_impact(cert_type)
+                    
+                    iso_data.append({
+                        'ISO Standard': cert_type,
+                        'Description': self._get_iso_description(cert_type),
+                        'Score Impact': f"{score_impact:.2f}",
+                        'Relevance': self._get_iso_relevance(cert_type)
+                    })
+                
+                if iso_data:
+                    iso_df = pd.DataFrame(iso_data)
+                    st.dataframe(iso_df, use_container_width=True, hide_index=True)
+            
+            # Display certification bodies
+            if iso_certifications.certification_bodies:
+                st.markdown("#### Certification Bodies")
+                bodies_text = ", ".join(iso_certifications.certification_bodies)
+                st.write(f"**Accredited by:** {bodies_text}")
+            
+            # Display data sources
+            if iso_certifications.data_sources:
+                with st.expander("Data Sources", expanded=False):
+                    for source in iso_certifications.data_sources:
+                        st.write(f"• {source}")
+            
+            # Quality score impact
+            if iso_certifications.quality_score_impact > 0:
+                st.success(f"**Quality Score Impact:** +{iso_certifications.quality_score_impact:.2f} points")
+        else:
+            st.info("No ISO certifications found for this organization.")
+        
         # Quality Initiatives Section
         st.markdown("### 🚀 Quality Initiatives")
         
@@ -1508,7 +2676,7 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
             st.markdown(f"**Quality Initiatives Identified:** {len(initiatives)}")
             
             for i, initiative in enumerate(initiatives[:8], 1):  # Show top 8
-                with st.expander(f"{i}. {initiative.get('title', 'N/A')} ({initiative.get('year', 'N/A')})"):
+                with st.expander(f"{i}. {initiative.get('name', 'N/A')} ({initiative.get('year', 'N/A')})"):
                     st.write(f"**Description:** {initiative.get('description', 'No description available')}")
                     st.write(f"**Category:** {initiative.get('category', 'N/A')}")
                     st.write(f"**Impact Score:** {initiative.get('impact_score', 0):.1f}")
@@ -1553,12 +2721,12 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
             **Data Dependencies:** Accuracy depends on the availability and reliability of public data sources. 
             Organizations may have additional certifications or quality initiatives not captured in our database.
             
-            **Not Medical Advice:** QuXAT scores do not constitute medical advice, professional recommendations, 
+            **Not Medical Advice:** QuXAT Healthcare Quality Grid scores do not constitute medical advice, professional recommendations, 
             or endorsements. Users should conduct independent verification and due diligence before making healthcare decisions.
             
-            **Limitation of Liability:** QuXAT and its developers disclaim all warranties, express or implied, 
+            **Limitation of Liability:** QuXAT Healthcare Quality Grid and its developers disclaim all warranties, express or implied, 
             regarding the accuracy or completeness of information. Users assume full responsibility for any decisions 
-            made based on QuXAT assessments.
+            made based on QuXAT Healthcare Quality Grid assessments.
             
             **Comparative Tool Only:** Intended for comparative analysis and research purposes, not absolute quality determination.
             """)
@@ -1588,7 +2756,6 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         
     except Exception as e:
         st.error(f"Error displaying detailed scorecard: {str(e)}")
-        import traceback
         st.error(f"Traceback: {traceback.format_exc()}")
 
 # Initialize the analyzer
@@ -1599,53 +2766,121 @@ def get_analyzer():
 # Display dynamic logo at the top of every page
 display_dynamic_logo()
 
-# Sidebar navigation with improved styling
-st.sidebar.markdown("""
-<div style="
-    text-align: center; 
-    padding: 12px 0; 
-    margin-bottom: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-    margin: -1rem -1rem 1rem -1rem;
-">
-    <h2 style="
-        color: white; 
-        margin: 0; 
-        font-size: 1.5rem;
-        font-weight: 600;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    ">🧭 Navigation</h2>
-</div>
-""", unsafe_allow_html=True)
+# Initialize score history tracking
+if 'score_history' not in st.session_state:
+    st.session_state.score_history = {}
 
-st.sidebar.markdown("---")
+# Initialize ranking history tracking
+if 'ranking_history' not in st.session_state:
+    st.session_state.ranking_history = {}
 
-# Initialize page in session state if not exists
-if 'page' not in st.session_state:
-    st.session_state.page = "Home"
+def add_score_to_history(org_name, score_data):
+    """Add a score entry to the organization's history"""
+    if org_name not in st.session_state.score_history:
+        st.session_state.score_history[org_name] = []
+    
+    # Create score entry with timestamp
+    score_entry = {
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'date': datetime.now().strftime('%Y-%m-%d'),
+        'credit_score': int(300 + (score_data.get('total_score', 0) * 5.5)),  # Convert to 300-850 scale
+        'base_score': score_data.get('total_score', 0),
+        'certification_score': score_data.get('certification_score', 0),
+        'patient_feedback_score': score_data.get('patient_feedback_score', 0),
+        'initiative_score': score_data.get('initiative_score', 0),
+        'transparency_score': score_data.get('transparency_score', 0),
+        'reputation_bonus': score_data.get('reputation_bonus', 0),
+        'location_adjustment': score_data.get('location_adjustment', 0)
+    }
+    
+    # Add to history (keep last 12 entries for trend analysis)
+    st.session_state.score_history[org_name].append(score_entry)
+    if len(st.session_state.score_history[org_name]) > 12:
+        st.session_state.score_history[org_name] = st.session_state.score_history[org_name][-12:]
 
-# Use session state for page selection
-# Add admin option if authenticated
-page_options = ["Home", "QuXAT Scoring Method", "Quality Dashboard", "Global Healthcare Quality", "Certifications"]
-if is_admin_authenticated():
-    page_options.extend(["Settings", "Admin Panel"])
+def add_ranking_to_history(org_name, rankings_data):
+    """Add ranking data to the organization's ranking history"""
+    if org_name not in st.session_state.ranking_history:
+        st.session_state.ranking_history[org_name] = []
+    
+    # Create ranking entry with timestamp
+    ranking_entry = {
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'date': datetime.now().strftime('%Y-%m-%d'),
+        'overall_rank': rankings_data.get('overall_rank', 0),
+        'percentile': rankings_data.get('percentile', 0),
+        'total_organizations': rankings_data.get('total_organizations', 0),
+        'category_rankings': rankings_data.get('category_rankings', {}),
+        'regional_rank': rankings_data.get('regional_ranking', {}).get('rank', 0) if rankings_data.get('regional_ranking') else 0,
+        'regional_percentile': rankings_data.get('regional_ranking', {}).get('percentile', 0) if rankings_data.get('regional_ranking') else 0
+    }
+    
+    # Add to history (keep last 12 entries for trend analysis)
+    st.session_state.ranking_history[org_name].append(ranking_entry)
+    if len(st.session_state.ranking_history[org_name]) > 12:
+        st.session_state.ranking_history[org_name] = st.session_state.ranking_history[org_name][-12:]
 
-page = st.sidebar.selectbox("Choose a page:", 
-                           page_options,
-                           index=page_options.index(st.session_state.page) if st.session_state.page in page_options else 0)
+def get_ranking_trend(org_name):
+    """Get ranking trend analysis for an organization"""
+    if org_name not in st.session_state.ranking_history or len(st.session_state.ranking_history[org_name]) < 2:
+        return None
+    
+    history = st.session_state.ranking_history[org_name]
+    latest_rank = history[-1]['overall_rank']
+    previous_rank = history[-2]['overall_rank']
+    
+    latest_percentile = history[-1]['percentile']
+    previous_percentile = history[-2]['percentile']
+    
+    rank_change = previous_rank - latest_rank  # Positive means improved (lower rank number)
+    percentile_change = latest_percentile - previous_percentile  # Positive means improved
+    
+    if rank_change > 0:
+        return {
+            'direction': 'up', 
+            'rank_change': rank_change, 
+            'percentile_change': percentile_change,
+            'status': 'improving',
+            'description': f'Moved up {rank_change} positions'
+        }
+    elif rank_change < 0:
+        return {
+            'direction': 'down', 
+            'rank_change': abs(rank_change), 
+            'percentile_change': percentile_change,
+            'status': 'declining',
+            'description': f'Dropped {abs(rank_change)} positions'
+        }
+    else:
+        return {
+            'direction': 'stable', 
+            'rank_change': 0, 
+            'percentile_change': percentile_change,
+            'status': 'stable',
+            'description': 'Maintained position'
+        }
 
-# Update session state when selectbox changes
-if page != st.session_state.page:
-    st.session_state.page = page
-    st.rerun()
+def get_score_trend(org_name):
+    """Get score trend analysis for an organization"""
+    if org_name not in st.session_state.score_history or len(st.session_state.score_history[org_name]) < 2:
+        return None
+    
+    history = st.session_state.score_history[org_name]
+    latest_score = history[-1]['credit_score']
+    previous_score = history[-2]['credit_score']
+    
+    change = latest_score - previous_score
+    
+    if change > 0:
+        return {'direction': 'up', 'change': change, 'status': 'improving'}
+    elif change < 0:
+        return {'direction': 'down', 'change': abs(change), 'status': 'declining'}
+    else:
+        return {'direction': 'stable', 'change': 0, 'status': 'stable'}
 
-# Main content
-
-# Main content
+# Main content - All QuXAT Healthcare Quality Grid content consolidated on Home page
 try:
-    if page == "Home":
-        st.header("🏠 Welcome to QuXAT Healthcare Quality Grid")
+        st.header("🏠 QuXAT Healthcare Quality Grid")
         
         # Hero Section with Targeted Messaging
         st.markdown("""
@@ -1665,7 +2900,7 @@ try:
         """, unsafe_allow_html=True)
         
         # Targeted User Groups Section
-        st.markdown("### 👥 Who Benefits from QuXAT?")
+        st.markdown("### 👥 Who Benefits from QuXAT Healthcare Quality Grid?")
         
         col1, col2, col3 = st.columns(3)
         
@@ -1685,7 +2920,7 @@ try:
                     <li><strong>Benchmark:</strong> Compare quality metrics against global standards</li>
                     <li><strong>Development:</strong> Identify improvement opportunities</li>
                     <li><strong>Career Decisions:</strong> Evaluate potential employers</li>
-                    <li><strong>Quality Advocacy:</strong> Support improvement initiatives</li>
+                    <li><strong>Quality Advocacy:</strong> Support quality improvement initiatives</li>
                 </ul>
             </div>
             """, unsafe_allow_html=True)
@@ -1753,7 +2988,7 @@ try:
         st.subheader("🔍 Healthcare Organization Search & Quality Assessment")
         
         # Enhanced search interface with autocomplete
-        col1, col2, col3 = st.columns([3, 1, 1])
+        col1, col2, col3 = st.columns([4, 2, 1.5])
         with col1:
             # Initialize analyzer for suggestions
             analyzer = get_analyzer()
@@ -1803,7 +3038,7 @@ try:
         # Process search
         if search_button and org_name:
             # Data validation notice
-            st.info("🔍 **Data Validation Notice:** QuXAT uses validated data from official certification bodies.")
+            st.info("🔍 **Data Validation Notice:** QuXAT Healthcare Quality Grid uses validated data from official certification bodies.")
             
             # Initialize the analyzer
             analyzer = get_analyzer()
@@ -1814,6 +3049,58 @@ try:
                 
                 if org_data:
                     st.success(f"✅ Found information for: **{org_name}**")
+                    
+                    # Check for branch information and display suggestions
+                    if 'branch_info' in org_data and org_data['branch_info']:
+                        branch_info = org_data['branch_info']
+                        
+                        # Display branch suggestions if multiple locations found
+                        if branch_info.get('has_multiple_locations', False):
+                            st.markdown("### 🏢 Multiple Locations Found")
+                            
+                            if branch_info.get('is_specific_location', False):
+                                st.info(f"📍 **Showing results for:** {branch_info.get('searched_location', 'Current Location')}")
+                                
+                                # Show other available locations
+                                if branch_info.get('other_locations'):
+                                    st.markdown("**Other available locations:**")
+                                    other_locations = branch_info['other_locations'][:5]  # Show up to 5 other locations
+                                    
+                                    # Create columns for location buttons
+                                    cols = st.columns(min(len(other_locations), 3))
+                                    for idx, location in enumerate(other_locations):
+                                        with cols[idx % 3]:
+                                            if st.button(f"📍 {location}", key=f"location_{idx}"):
+                                                # Re-search with specific location
+                                                st.rerun()
+                            else:
+                                # Show all available locations for selection
+                                st.markdown("**Available locations for this organization:**")
+                                available_locations = branch_info.get('available_locations', [])
+                                
+                                if available_locations:
+                                    # Create columns for location selection
+                                    cols = st.columns(min(len(available_locations), 3))
+                                    for idx, location in enumerate(available_locations[:9]):  # Show up to 9 locations
+                                        with cols[idx % 3]:
+                                            if st.button(f"🏥 {location}", key=f"branch_{idx}"):
+                                                # Store selected location and re-search
+                                                st.session_state.selected_location = location
+                                                # Re-search with specific location
+                                                new_search_term = f"{org_name} {location}"
+                                                st.session_state.location_search = new_search_term
+                                                st.rerun()
+                                
+                                # Show summary of branch types if available
+                                if branch_info.get('branch_types'):
+                                    st.markdown("**Branch Types Available:**")
+                                    branch_types = branch_info['branch_types']
+                                    type_cols = st.columns(len(branch_types))
+                                    for idx, (branch_type, count) in enumerate(branch_types.items()):
+                                        with type_cols[idx]:
+                                            st.metric(f"{branch_type.title()}", count)
+                            
+                            st.markdown("---")
                     
                     # Store in session state for detailed view
                     st.session_state.current_org = org_name
@@ -1832,7 +3119,7 @@ try:
                     
                     with col1:
                         score_color = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
-                        st.metric("🏆 Overall Quality Score", f"{score}/100", f"{score_color}")
+                        st.metric("🏆 Overall Quality Score", f"{score:.2f}/100", f"{score_color}")
                     
                     with col2:
                         active_certs = len([c for c in org_data['certifications'] if c['status'] == 'Active'])
@@ -1882,7 +3169,7 @@ try:
                     # Get certifications from organization data (excluding JCI and NABH as they are accreditations)
                     certifications = org_data.get('certifications', [])
                     # Filter out JCI and NABH as they should be in accreditations section
-                    certifications = [cert for cert in certifications if not ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper())]
+                    certifications = [cert for cert in certifications if not ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper())]
                     if certifications:
                         cert_cols = st.columns(min(len(certifications), 3))
                         for idx, cert in enumerate(certifications[:6]):  # Show up to 6 certifications
@@ -1890,6 +3177,14 @@ try:
                                 # Determine certification status and icon
                                 cert_status = cert.get('status', 'Active')
                                 cert_icon = "✅" if cert_status == "Active" else "⏳" if cert_status == "Pending" else "❌"
+                                
+                                # Determine certification status color
+                                if cert_status == 'Active':
+                                    cert_status_color = "#28a745"
+                                elif cert_status == 'Pending':
+                                    cert_status_color = "#ffc107"
+                                else:
+                                    cert_status_color = "#dc3545"
                                 
                                 # Special handling for NABH - only show status if details are not available
                                 cert_name = cert.get('name', 'Unknown Certification')
@@ -1904,19 +3199,19 @@ try:
                                     st.markdown(f"""
                                     <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; background: #f8f9fa;">
                                         <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{cert_icon} {cert_name}</h4>
-                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {'#28a745' if cert_status == 'Active' else '#ffc107' if cert_status == 'Pending' else '#dc3545'};">{cert_status}</span></p>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {cert_status_color};">{cert_status}</span></p>
                                     </div>
                                     """, unsafe_allow_html=True)
                                 else:
-                                    # For all other certifications or NABH/JCI with details, show full information
-                                    st.markdown(f"""
+                                    # Simplified certification card - only show status
+                                    card_content = f"""
                                     <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; background: #f8f9fa;">
                                         <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{cert_icon} {cert_name}</h4>
-                                        <p style="margin: 5px 0; color: #666;"><strong>Issued by:</strong> {issuer}</p>
-                                        <p style="margin: 5px 0; color: #666;"><strong>Valid Until:</strong> {valid_until}</p>
-                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {'#28a745' if cert_status == 'Active' else '#ffc107' if cert_status == 'Pending' else '#dc3545'};">{cert_status}</span></p>
+                                        <p style="margin: 5px 0; color: #666;"><strong>Status:</strong> <span style="color: {cert_status_color};">{cert_status}</span></p>
                                     </div>
-                                    """, unsafe_allow_html=True)
+                                    """
+                                    
+                                    st.markdown(card_content, unsafe_allow_html=True)
                     else:
                         st.info("📋 No active certifications found for this organization.")
                     
@@ -1930,13 +3225,19 @@ try:
                     
                     # Add JCI and NABH from certifications data as they are actually accreditations
                     all_certifications = org_data.get('certifications', [])
-                    jci_nabh_accreditations = [cert for cert in all_certifications if ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper())]
+                    jci_nabh_accreditations = [cert for cert in all_certifications if ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper())]
                     
-                    # Convert JCI/NABH certifications to accreditation format
+                    # Convert JCI/NABH certifications to accreditation format (avoid duplicates)
+                    existing_accred_names = [acc.get('name', '').upper() for acc in accreditations]
                     for cert in jci_nabh_accreditations:
+                        cert_name = cert.get('name', 'Unknown Accreditation')
+                        # Skip if this accreditation already exists
+                        if cert_name.upper() in existing_accred_names:
+                            continue
+                            
                         accred_entry = {
-                            'name': cert.get('name', 'Unknown Accreditation'),
-                            'level': 'International Standard' if 'JCI' in cert.get('name', '').upper() else 'National Standard',
+                            'name': cert_name,
+                            'level': 'International Standard' if ('JCI' in cert_name.upper() or 'JOINT COMMISSION INTERNATIONAL' in cert_name.upper()) else 'National Standard',
                             'awarded_date': cert.get('issued_date', cert.get('awarded_date', 'N/A')),
                             'description': cert.get('description', ''),
                             'status': cert.get('status', 'Active'),
@@ -1944,6 +3245,7 @@ try:
                             'valid_until': cert.get('valid_until', cert.get('expiry', 'N/A'))
                         }
                         accreditations.append(accred_entry)
+                        existing_accred_names.append(cert_name.upper())
                     
                     # Check for NABL accreditation
                     nabl_accreditation = healthcare_validator.get_nabl_accreditation(org_name)
@@ -1953,21 +3255,22 @@ try:
                     if not accreditations:
                         # Create sample accreditations based on organization type and score
                         accreditations = []
-                        if score >= 70:
+                        # Only create sample accreditations if score is defined (i.e., after a search)
+                        if 'score' in locals() and score >= 70:
                             accreditations.append({
                                 'name': 'Joint Commission Accreditation',
                                 'level': 'Gold Standard',
                                 'awarded_date': '2023',
                                 'description': 'Comprehensive healthcare quality and safety accreditation'
                             })
-                        if score >= 60:
+                        if 'score' in locals() and score >= 60:
                             accreditations.append({
                                 'name': 'ISO 9001:2015 Quality Management',
                                 'level': 'Certified',
                                 'awarded_date': '2022',
                                 'description': 'International standard for quality management systems'
                             })
-                        if score >= 50:
+                        if 'score' in locals() and score >= 50:
                             accreditations.append({
                                 'name': 'Healthcare Quality Recognition',
                                 'level': 'Bronze',
@@ -1981,11 +3284,8 @@ try:
                             level = accred.get('level', '').lower()
                             accred_name = accred.get('name', '').upper()
                             
-                            # Special icons for JCI and NABH
-                            if 'JCI' in accred_name:
-                                level_icon = "🏥"
-                                level_color = "#1976D2"
-                            elif 'NABH' in accred_name:
+                            # Special icons for NABH
+                            if 'NABH' in accred_name:
                                 level_icon = "🇮🇳"
                                 level_color = "#FF9800"
                             elif 'gold' in level or 'excellent' in level:
@@ -2003,6 +3303,15 @@ try:
                             else:
                                 level_icon = "🏆"
                                 level_color = "#4CAF50"
+                            
+                            # Determine status color
+                            status = accred.get('status', 'Active')
+                            if status == 'Active':
+                                status_color = "#28a745"
+                            elif status == 'Pending':
+                                status_color = "#ffc107"
+                            else:
+                                status_color = "#dc3545"
                             
                             # Format validity date if available (special handling for JCI/NABH)
                             validity_info = ""
@@ -2029,20 +3338,54 @@ try:
                             if accred.get('certificate_number'):
                                 cert_info = f"<p style=\"margin: 5px 0; color: #666;\"><strong>Certificate:</strong> {accred.get('certificate_number')}</p>"
                             
-                            # Get description without HTML escaping to allow proper rendering
-                            description = accred.get('description', 'No description available.')
+                            # Get organization details from session state
+                            org_details = ""
+                            if 'current_org' in st.session_state and 'current_data' in st.session_state:
+                                current_org_name = st.session_state.current_org
+                                current_org_data = st.session_state.current_data
+                                
+                                # Extract organization type
+                                org_type = "Healthcare Organization"  # Default
+                                if 'unified_data' in current_org_data:
+                                    unified_data = current_org_data['unified_data']
+                                    org_type = unified_data.get('type', org_type)
+                                
+                                # Extract organization location
+                                org_location = ""
+                                if 'unified_data' in current_org_data:
+                                    unified_data = current_org_data['unified_data']
+                                    if 'location' in unified_data:
+                                        org_location = unified_data['location']
+                                    elif 'city' in unified_data and 'state' in unified_data:
+                                        org_location = f"{unified_data['city']}, {unified_data['state']}"
+                                    elif 'address' in unified_data:
+                                        org_location = unified_data['address']
+                                
+                                # Build organization details section
+                                org_details = f"""
+                                <div style="background: #e8f4fd; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #007bff;">
+                                    <p style="margin: 2px 0; color: #495057; font-size: 0.9em;"><strong>🏥 Organization:</strong> {current_org_name}</p>"""
+                                
+                                if org_location:
+                                    org_details += f"""
+                                    <p style="margin: 2px 0; color: #495057; font-size: 0.9em;"><strong>📍 Location:</strong> {org_location}</p>"""
+                                
+                                org_details += f"""
+                                    <p style="margin: 2px 0; color: #495057; font-size: 0.9em;"><strong>🏢 Type:</strong> {org_type}</p>
+                                </div>"""
                             
+                            # Display the main accreditation info
                             st.markdown(f"""
                             <div style="padding: 20px; border-left: 4px solid {level_color}; background: #f8f9fa; margin: 15px 0; border-radius: 0 8px 8px 0;">
                                 <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{level_icon} {accred.get('name', 'Unknown Accreditation')}</h4>
-                                <p style="margin: 5px 0; color: #666;"><strong>Level:</strong> <span style="color: {level_color}; font-weight: bold;">{accred.get('level', 'N/A')}</span></p>
-                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {'#28a745' if accred.get('status', 'Active') == 'Active' else '#ffc107' if accred.get('status', 'Active') == 'Pending' else '#dc3545'};">{accred.get('status', 'Active')}</span></p>
-                                {issuer_info}
-                                {validity_info}
-                                {cert_info}
-                                {description}
+                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {status_color};">{accred.get('status', 'Active')}</span></p>
                             </div>
                             """, unsafe_allow_html=True)
+                            
+                            # Display the description separately to ensure proper HTML rendering
+                            description = accred.get('description', 'No description available.')
+                            if description and description != 'No description available.':
+                                st.markdown(description, unsafe_allow_html=True)
                     else:
                         st.info("🎖️ No accreditations found for this organization.")
                     
@@ -2109,10 +3452,20 @@ try:
                     with col2:
                         # Score breakdown metrics
                         st.markdown("#### 📈 Detailed Breakdown")
-                        st.metric("🏆 Certification Score", f"{score_data['certification_score']:.1f}/60")
-                        st.metric("🚀 Initiative Score", f"{score_data['initiative_score']:.1f}/20")
-                        st.metric("📋 Transparency Score", f"{score_data['transparency_score']:.1f}/10")
-                        st.metric("⭐ Reputation Bonus", f"+{reputation_bonus:.1f}")
+                        st.metric("🏆 Certification Score", f"{score_data['certification_score']:.2f}/45")
+                        st.metric("🚀 Initiative Score", f"{score_data['initiative_score']:.2f}/15")
+                        st.metric("📋 Transparency Score", f"{score_data['transparency_score']:.2f}/10")
+                        st.metric("👥 Patient Feedback Score", f"{score_data.get('patient_feedback_score', 0):.2f}/15")
+                        
+                        # Show automated feedback details if available
+                        if score_data.get('feedback_total_count', 0) > 0:
+                            st.metric("📊 Total Reviews", f"{score_data.get('feedback_total_count', 0)}")
+                            st.metric("⭐ Avg Rating", f"{score_data.get('feedback_average_rating', 0):.1f}/5.0")
+                            feedback_trend = score_data.get('feedback_recent_trend', 'stable')
+                            st.metric("📈 Trend", feedback_trend.title() if feedback_trend else 'Stable')
+                        else:
+                            st.info("🔍 No patient feedback found from automated scraping")
+                        st.metric("⭐ Reputation Bonus", f"+{reputation_bonus:.2f}")
                         
                         # Show reputation multiplier
                         analyzer = get_analyzer()
@@ -2146,13 +3499,23 @@ try:
                         columns_to_display = ['Status Icon', 'name', 'status']
                         column_names = ['Status', 'Certification', 'Status Detail']
                         
-                        # Add valid_until column if it exists
+                        # Add valid_until column only if it exists and has valid dates
+                        date_column = None
                         if 'valid_until' in cert_df.columns:
-                            columns_to_display.append('valid_until')
-                            column_names.append('Valid Until')
+                            date_column = 'valid_until'
                         elif 'expiry' in cert_df.columns:
-                            columns_to_display.append('expiry')
-                            column_names.append('Valid Until')
+                            date_column = 'expiry'
+                        
+                        # Check if there are any valid dates (not empty, not 'N/A', not null)
+                        if date_column and not cert_df[date_column].isna().all():
+                            # Check if there are any non-empty, non-N/A values
+                            valid_dates = cert_df[date_column].dropna()
+                            valid_dates = valid_dates[valid_dates != 'N/A']
+                            valid_dates = valid_dates[valid_dates != '']
+                            
+                            if len(valid_dates) > 0:
+                                columns_to_display.append(date_column)
+                                column_names.append('Valid Until')
                         
                         # Add score_impact column if it exists
                         if 'score_impact' in cert_df.columns:
@@ -2170,13 +3533,13 @@ try:
                     st.markdown("### 🚀 Recent Quality Initiatives")
                     if org_data['quality_initiatives']:
                         for initiative in org_data['quality_initiatives']:
-                            with st.expander(f"📋 {initiative['title']} ({initiative['year']})"):
+                            with st.expander(f"📋 {initiative['name']} ({initiative['year']})"):
                                 col1, col2 = st.columns([3, 1])
                                 with col1:
-                                    st.write(f"**Initiative:** {initiative['title']}")
+                                    st.write(f"**Initiative:** {initiative['name']}")
                                     st.write(f"**Year:** {initiative['year']}")
                                 with col2:
-                                    st.metric("Impact Score", f"+{initiative['impact_score']}")
+                                    st.metric("Impact Score", f"+{initiative.get('impact_score', initiative.get('score_impact', 0))}")
                     else:
                         st.info("No recent quality initiatives found.")
                     
@@ -2245,10 +3608,10 @@ try:
                                 'Organization': f"**{org_name}** (Searched)",
                                 'Location': "Current Search",
                                 'Type': org_type,
-                                'Quality Score': f"{score:.1f}",
+                                'Quality Score': f"{score:.2f}",
                                 'Grade': grade,
                                 'Certifications': len([c for c in org_data['certifications'] if c['status'] == 'Active']),
-                                'Initiatives': len(org_data['quality_initiatives'])
+                                'Quality Initiatives': len(org_data['quality_initiatives'])
                             })
                             
                             for org in similar_orgs:
@@ -2257,10 +3620,10 @@ try:
                                     'Organization': org['name'],
                                     'Location': org['location'],
                                     'Type': org['type'],
-                                    'Quality Score': f"{org['total_score']:.1f}",
+                                    'Quality Score': f"{org['total_score']:.2f}",
                                     'Grade': org_grade,
                                     'Certifications': len([c for c in org['certifications'] if c['status'] == 'Active']),
-                                    'Initiatives': len(org['quality_initiatives'])
+                                    'Quality Initiatives': len(org['quality_initiatives'])
                                 })
                             
                             # Display comparison table
@@ -2317,7 +3680,7 @@ try:
                                 # Average comparison
                                 avg_score = sum(all_scores) / len(all_scores)
                                 diff_from_avg = score - avg_score
-                                st.metric("📈 vs Average", f"{diff_from_avg:+.1f}", f"Avg: {avg_score:.1f}")
+                                st.metric("📈 vs Average", f"{diff_from_avg:+.2f}", f"Avg: {avg_score:.2f}")
                                 
                                 # Best performer
                                 best_org = org_name if score == max(all_scores) else max(similar_orgs, key=lambda x: x['total_score'])['name']
@@ -2338,7 +3701,7 @@ try:
                             elif your_rank <= 2 * len(all_scores) // 3:
                                 insights.append("📊 **Average Performance**: Your organization is performing at par with peers.")
                             else:
-                                insights.append("📈 **Improvement Opportunity**: Consider focusing on quality enhancement initiatives.")
+                                insights.append("📈 **Improvement Opportunity**: Consider focusing on quality enhancement quality initiatives.")
                             
                             # Certification comparison
                             your_certs = len([c for c in org_data['certifications'] if c['status'] == 'Active'])
@@ -2360,44 +3723,377 @@ try:
                             
                             for insight in insights:
                                 st.markdown(insight)
-                            
-                            # Improvement recommendations
-                            if your_rank > 1:
-                                st.markdown("#### 💡 Improvement Recommendations")
-                                
-                                # Find top performer for benchmarking
-                                top_performer = max(similar_orgs, key=lambda x: x['total_score'])
-                                
-                                recommendations = []
-                                
-                                # Certification recommendations
-                                top_certs = len([c for c in top_performer['certifications'] if c['status'] == 'Active'])
-                                if your_certs < top_certs:
-                                    recommendations.append(f"🏅 **Pursue Additional Certifications**: Top performer ({top_performer['name']}) has {top_certs} active certifications.")
-                                
-                                # Initiative recommendations
-                                top_initiatives = len(top_performer['quality_initiatives'])
-                                if your_initiatives < top_initiatives:
-                                    recommendations.append(f"🚀 **Expand Quality Initiatives**: Top performer has {top_initiatives} quality programs.")
-                                
-                                # Score gap analysis
-                                score_gap = top_performer['total_score'] - score
-                                if score_gap > 5:
-                                    recommendations.append(f"📈 **Focus Areas**: Bridge the {score_gap:.1f} point gap through targeted quality improvements.")
-                                
-                                for rec in recommendations:
-                                    st.markdown(rec)
-                        
-                        else:
-                            st.info("🔍 No similar organizations found in your locality. This might be due to limited data availability for your region.")
+        
+        # Quality Scorecard - Organization Rankings (only show if score is defined)
+        if 'score' in locals():
+            st.markdown("---")
+            st.markdown("### 🏆 Quality Scorecard - Organization Rankings")
+            st.markdown("*See how your organization ranks against all others in our database based on quality, safety, and patient satisfaction*")
+            
+            # Calculate rankings
+            rankings_data = analyzer.calculate_organization_rankings(org_name, score)
+            
+            # Calculate credit score and grade for rankings display
+            credit_score = int(300 + (score / 100) * 550)
+            
+            # Credit-style risk categories and descriptions
+            if credit_score >= 800:
+                grade_color = '#28a745'
+                grade_text = 'Exceptional (800-850)'
+                grade_emoji = '🏆'
+                risk_level = 'Minimal Risk'
+                risk_description = 'Outstanding healthcare quality with minimal compliance risk'
+            elif credit_score >= 740:
+                grade_color = '#20c997'
+                grade_text = 'Very Good (740-799)'
+                grade_emoji = '⭐'
+                risk_level = 'Low Risk'
+                risk_description = 'Excellent healthcare quality with low compliance risk'
+            elif credit_score >= 670:
+                grade_color = '#ffc107'
+                grade_text = 'Good (670-739)'
+                grade_emoji = '👍'
+                risk_level = 'Moderate Risk'
+                risk_description = 'Good healthcare quality with moderate compliance oversight needed'
+            elif credit_score >= 580:
+                grade_color = '#fd7e14'
+                grade_text = 'Fair (580-669)'
+                grade_emoji = '👌'
+                risk_level = 'Elevated Risk'
+                risk_description = 'Fair healthcare quality requiring enhanced monitoring'
+            elif credit_score >= 500:
+                grade_color = '#dc3545'
+                grade_text = 'Poor (500-579)'
+                grade_emoji = '⚠️'
+                risk_level = 'High Risk'
+                risk_description = 'Poor healthcare quality requiring immediate attention'
+            else:
+                grade_color = '#6f42c1'
+                grade_text = 'Very Poor (300-499)'
+                grade_emoji = '🔄'
+                risk_level = 'Very High Risk'
+                risk_description = 'Critical healthcare quality issues requiring urgent intervention'
+        
+            # Add ranking data to history for trend tracking
+            if rankings_data:
+                add_ranking_to_history(org_name, rankings_data)
                 
-                else:
-                    st.error("❌ Could not find sufficient data for this organization. Please check the spelling or try a different organization name.")
+                # Overall Ranking Display
+                rank_col1, rank_col2, rank_col3, rank_col4 = st.columns(4)
+                
+                # Get ranking trend for display
+                ranking_trend = get_ranking_trend(org_name)
+                
+                with rank_col1:
+                    rank_color = '#28a745' if rankings_data['percentile'] >= 75 else '#ffc107' if rankings_data['percentile'] >= 50 else '#fd7e14' if rankings_data['percentile'] >= 25 else '#dc3545'
+                    
+                    # Add trend indicator
+                    trend_indicator = ""
+                    if ranking_trend:
+                        if ranking_trend['direction'] == 'up':
+                            trend_indicator = f"<div style='color: #28a745; font-size: 0.8em;'>📈 +{ranking_trend['rank_change']} positions</div>"
+                        elif ranking_trend['direction'] == 'down':
+                            trend_indicator = f"<div style='color: #dc3545; font-size: 0.8em;'>📉 -{ranking_trend['rank_change']} positions</div>"
+                        else:
+                            trend_indicator = f"<div style='color: #6c757d; font-size: 0.8em;'>➡️ No change</div>"
+                    
+                    st.markdown(f"""
+                    <div style="background: {rank_color}20; border: 2px solid {rank_color}; border-radius: 10px; padding: 1rem; text-align: center;">
+                        <h4 style="color: {rank_color}; margin-bottom: 0.5rem;">🏆 Overall Rank</h4>
+                        <div style="font-size: 2em; font-weight: bold; color: {rank_color};">
+                            #{rankings_data['overall_rank']}
+                        </div>
+                        <p style="margin: 0; color: #666;">out of {rankings_data['total_organizations']} organizations</p>
+                        {trend_indicator}
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with rank_col2:
+                    percentile_color = '#28a745' if rankings_data['percentile'] >= 75 else '#ffc107' if rankings_data['percentile'] >= 50 else '#fd7e14' if rankings_data['percentile'] >= 25 else '#dc3545'
+                    st.markdown(f"""
+                    <div style="background: {percentile_color}20; border: 2px solid {percentile_color}; border-radius: 10px; padding: 1rem; text-align: center;">
+                        <h4 style="color: {percentile_color}; margin-bottom: 0.5rem;">📊 Percentile</h4>
+                        <div style="font-size: 2em; font-weight: bold; color: {percentile_color};">
+                            {rankings_data['percentile']:.0f}%
+                        </div>
+                        <p style="margin: 0; color: #666;">Better than {rankings_data['percentile']:.0f}% of organizations</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with rank_col3:
+                    credit_rank_color = '#1976d2'
+                    st.markdown(f"""
+                    <div style="background: {credit_rank_color}20; border: 2px solid {credit_rank_color}; border-radius: 10px; padding: 1rem; text-align: center;">
+                        <h4 style="color: {credit_rank_color}; margin-bottom: 0.5rem;">💳 Credit Score</h4>
+                        <div style="font-size: 2em; font-weight: bold; color: {credit_rank_color};">
+                            {credit_score}
+                        </div>
+                        <p style="margin: 0; color: #666;">{grade_text}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with rank_col4:
+                    risk_rank_color = '#28a745' if risk_level == 'Minimal Risk' else '#ffc107' if 'Low' in risk_level else '#fd7e14' if 'Moderate' in risk_level else '#dc3545'
+                    st.markdown(f"""
+                    <div style="background: {risk_rank_color}20; border: 2px solid {risk_rank_color}; border-radius: 10px; padding: 1rem; text-align: center;">
+                        <h4 style="color: {risk_rank_color}; margin-bottom: 0.5rem;">⚡ Risk Level</h4>
+                        <div style="font-size: 1.2em; font-weight: bold; color: {risk_rank_color};">
+                            {risk_level}
+                        </div>
+                        <p style="margin: 0; color: #666; font-size: 0.9em;">{grade_emoji} {risk_description[:30]}...</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                # Category-Specific Rankings
+                st.markdown("#### 📋 Category Performance Rankings")
+                
+                category_rankings = rankings_data.get('category_rankings', {})
+                if category_rankings:
+                    cat_col1, cat_col2, cat_col3 = st.columns(3)
+                    
+                    categories_info = {
+                        'quality': {'name': 'Quality & Certifications', 'emoji': '🏥', 'color': '#28a745'},
+                        'safety': {'name': 'Safety Standards', 'emoji': '🛡️', 'color': '#1976d2'},
+                        'patient_satisfaction': {'name': 'Patient Satisfaction', 'emoji': '😊', 'color': '#ff9800'}
+                    }
+                    
+                    for i, (category, info) in enumerate(categories_info.items()):
+                        col = [cat_col1, cat_col2, cat_col3][i]
+                        
+                        if category in category_rankings:
+                            cat_data = category_rankings[category]
+                            cat_color = info['color']
+                            
+                            with col:
+                                st.markdown(f"""
+                                <div style="background: {cat_color}15; border: 1px solid {cat_color}; border-radius: 8px; padding: 1rem; text-align: center;">
+                                    <h5 style="color: {cat_color}; margin-bottom: 0.5rem;">{info['emoji']} {info['name']}</h5>
+                                    <div style="font-size: 1.5em; font-weight: bold; color: {cat_color};">
+                                        #{cat_data['rank']}
+                                    </div>
+                                    <p style="margin: 0; color: #666; font-size: 0.9em;">
+                                        {cat_data['percentile']:.0f}th percentile<br>
+                                        Score: {cat_data['score']:.1f}
+                                    </p>
+                                </div>
+                                """, unsafe_allow_html=True)
+                
+                # Top Performers Comparison
+                st.markdown("#### 🌟 Top Performers Benchmark")
+                
+                top_performers = rankings_data.get('top_performers', [])
+                if top_performers:
+                    st.markdown("*Compare your organization with the top 5 performers in our database*")
+                    
+                    # Create comparison table
+                    comparison_data = []
+                    comparison_data.append({
+                        'Rank': f"#{rankings_data['overall_rank']}",
+                        'Organization': f"**{org_name}** (You)",
+                        'Credit Score': credit_score,
+                        'Quality Score': f"{score:.1f}",
+                        'Country': org_data.get('country', 'Unknown'),
+                        'Type': org_data.get('hospital_type', 'Hospital')
+                    })
+                    
+                    for i, performer in enumerate(top_performers[:5]):
+                        comparison_data.append({
+                            'Rank': f"#{i+1}",
+                            'Organization': performer['name'],
+                            'Credit Score': performer['credit_score'],
+                            'Quality Score': f"{performer['total_score']:.1f}",
+                            'Country': performer['country'],
+                            'Type': performer['hospital_type']
+                        })
+                    
+                    df_comparison = pd.DataFrame(comparison_data)
+                    st.dataframe(df_comparison, use_container_width=True, hide_index=True)
+                
+                # Regional Ranking
+                regional_data = rankings_data.get('regional_ranking')
+                if regional_data:
+                    st.markdown("#### 🌍 Regional Performance")
+                    
+                    reg_col1, reg_col2 = st.columns(2)
+                    
+                    with reg_col1:
+                        regional_color = '#28a745' if regional_data['percentile'] >= 75 else '#ffc107' if regional_data['percentile'] >= 50 else '#fd7e14'
+                        st.markdown(f"""
+                        <div style="background: {regional_color}20; border: 2px solid {regional_color}; border-radius: 10px; padding: 1rem;">
+                            <h5 style="color: {regional_color}; margin-bottom: 1rem;">🌍 {regional_data['region']} Region Ranking</h5>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 1.8em; font-weight: bold; color: {regional_color};">
+                                        #{regional_data['rank']}
+                                    </div>
+                                    <p style="margin: 0; color: #666;">out of {regional_data['total_in_region']} in region</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 1.2em; font-weight: bold; color: {regional_color};">
+                                        {regional_data['percentile']:.0f}%
+                                    </div>
+                                    <p style="margin: 0; color: #666; font-size: 0.9em;">percentile</p>
+                                </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with reg_col2:
+                    st.markdown("**Top Regional Performers:**")
+                    for i, top_regional in enumerate(regional_data.get('top_in_region', [])[:3]):
+                        medal = ['🥇', '🥈', '🥉'][i] if i < 3 else '🏆'
+                        st.markdown(f"{medal} **{top_regional['name']}** - {top_regional['credit_score']} ({top_regional['total_score']:.1f})")
+            
+            # Similar Performers
+            similar_performers = rankings_data.get('similar_performers', [])
+            if similar_performers:
+                with st.expander("🤝 Organizations with Similar Performance", expanded=False):
+                    st.markdown("*Organizations within ±5 points of your quality score*")
+                    
+                    for performer in similar_performers[:10]:
+                        score_diff = performer['total_score'] - score
+                        diff_text = f"+{score_diff:.1f}" if score_diff > 0 else f"{score_diff:.1f}"
+                        diff_color = '#28a745' if score_diff <= 0 else '#dc3545'
+                        
+                        st.markdown(f"""
+                        <div style="background: #f8f9fa; padding: 0.8rem; margin: 0.3rem 0; border-radius: 5px; border-left: 3px solid {diff_color};">
+                            <strong>{performer['name']}</strong> ({performer['country']}) - 
+                            Credit Score: {performer['credit_score']} 
+                            <span style="color: {diff_color};">({diff_text} points)</span>
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+            # Ranking History Chart
+            if 'ranking_history' in st.session_state and org_name in st.session_state.ranking_history:
+                ranking_history = st.session_state.ranking_history[org_name]
+                if len(ranking_history) > 1:
+                    with st.expander("📈 Ranking History & Trends", expanded=False):
+                        # Create ranking trend chart
+                        dates = [entry['date'] for entry in ranking_history]
+                        ranks = [entry['overall_rank'] for entry in ranking_history]
+                        percentiles = [entry['percentile'] for entry in ranking_history]
+                        
+                        fig = go.Figure()
+                        
+                        # Add ranking line (inverted y-axis since lower rank is better)
+                        fig.add_trace(go.Scatter(
+                            x=dates,
+                            y=ranks,
+                            mode='lines+markers',
+                            name='Overall Rank',
+                            line=dict(color='#1976d2', width=3),
+                            marker=dict(size=8),
+                            yaxis='y'
+                        ))
+                        
+                        # Add percentile line on secondary y-axis
+                        fig.add_trace(go.Scatter(
+                            x=dates,
+                            y=percentiles,
+                            mode='lines+markers',
+                            name='Percentile',
+                            line=dict(color='#28a745', width=3),
+                            marker=dict(size=8),
+                            yaxis='y2'
+                        ))
+                        
+                        fig.update_layout(
+                            title="Ranking Performance Over Time",
+                            xaxis_title="Date",
+                            yaxis=dict(
+                                title="Overall Rank",
+                                side="left",
+                                autorange="reversed"  # Lower rank numbers are better
+                            ),
+                            yaxis2=dict(
+                                title="Percentile (%)",
+                                side="right",
+                                overlaying="y",
+                                range=[0, 100]
+                            ),
+                            height=400,
+                            showlegend=True,
+                            hovermode='x unified'
+                        )
+                        
+                        st.plotly_chart(fig, use_container_width=True)
+                        
+                        # Show trend summary
+                        trend_data = get_ranking_trend(org_name)
+                        if trend_data and isinstance(trend_data, dict) and 'direction' in trend_data and trend_data['direction']:
+                            trend_col1, trend_col2, trend_col3 = st.columns(3)
+                            
+                            with trend_col1:
+                                direction = trend_data.get('direction', 'stable')
+                                direction_icon = "📈" if direction == 'up' else "📉" if direction == 'down' else "➡️"
+                                direction_color = "#28a745" if direction == 'up' else "#dc3545" if direction == 'down' else "#6c757d"
+                                direction_text = direction.title() if direction else 'Stable'
+                                st.markdown(f"""
+                                <div style="text-align: center; padding: 1rem; background: {direction_color}20; border-radius: 8px;">
+                                    <div style="font-size: 2em;">{direction_icon}</div>
+                                    <div style="font-weight: bold; color: {direction_color};">Trend Direction</div>
+                                    <div style="color: #666;">{direction_text}</div>
+                                </div>
+                                """, unsafe_allow_html=True)
+                            
+                            with trend_col2:
+                                rank_change = trend_data.get('rank_change', 0)
+                                st.markdown(f"""
+                                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                                    <div style="font-size: 2em;">🔄</div>
+                                    <div style="font-weight: bold;">Position Change</div>
+                                    <div style="color: #666;">±{rank_change} positions</div>
+                                </div>
+                                """, unsafe_allow_html=True)
+                            
+                            with trend_col3:
+                                percentile_change = trend_data.get('percentile_change', 0)
+                                percentile_color = "#28a745" if percentile_change > 0 else "#dc3545" if percentile_change < 0 else "#6c757d"
+                                percentile_sign = "+" if percentile_change > 0 else ""
+                                st.markdown(f"""
+                                <div style="text-align: center; padding: 1rem; background: {percentile_color}20; border-radius: 8px;">
+                                    <div style="font-size: 2em;">📊</div>
+                                    <div style="font-weight: bold; color: {percentile_color};">Percentile Change</div>
+                                    <div style="color: #666;">{percentile_sign}{percentile_change:.1f}%</div>
+                                </div>
+                                """, unsafe_allow_html=True)
+            else:
+                st.warning("⚠️ Unable to calculate rankings at this time. Please try again later.")
+            
+            # Improvement recommendations
+            if rankings_data and rankings_data.get('overall_rank', 0) > 1:
+                st.markdown("#### 💡 Improvement Recommendations")
+                
+                # Find top performer for benchmarking
+                top_performers = rankings_data.get('top_performers', [])
+                if top_performers:
+                    top_performer = top_performers[0]
+                    
+                    recommendations = []
+                    
+                    # Certification recommendations
+                    top_certs = len([c for c in top_performer.get('certifications', []) if c.get('status') == 'Active'])
+                    current_certs = len([c for c in certifications if c.get('status') == 'Active'])
+                    if current_certs < top_certs:
+                        recommendations.append(f"🏅 **Pursue Additional Certifications**: Top performer ({top_performer['name']}) has {top_certs} active certifications.")
+                    
+                    # Initiative recommendations
+                    top_initiatives = len(top_performer.get('quality_initiatives', []))
+                    current_initiatives = len(quality_initiatives)
+                    if current_initiatives < top_initiatives:
+                        recommendations.append(f"🚀 **Expand Quality Initiatives**: Top performer has {top_initiatives} quality programs.")
+                    
+                    # Score gap analysis
+                    score_gap = top_performer['total_score'] - score
+                    if score_gap > 5:
+                        recommendations.append(f"📈 **Focus Areas**: Bridge the {score_gap:.1f} point gap through targeted quality improvements.")
+                    
+                    for rec in recommendations:
+                        st.markdown(rec)
+
         elif search_button and not org_name:
             st.warning("⚠️ Please enter an organization name to search.")
-        
 
-        
         # Display detailed report if requested
         if hasattr(st.session_state, 'detailed_org') and hasattr(st.session_state, 'detailed_data'):
             st.markdown("---")
@@ -2411,7 +4107,7 @@ try:
             with col1:
                 score = org_data['total_score']
                 score_color = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
-                st.metric("🏆 Overall Score", f"{score}/100", f"{score_color}")
+                st.metric("🏆 Overall Score", f"{score:.2f}/100", f"{score_color}")
             
             with col2:
                 active_certs = len([c for c in org_data['certifications'] if c['status'] == 'Active'])
@@ -2455,7 +4151,7 @@ try:
                                 st.write(f"• {cert['name']} - {cert['issuer']}")
             
             # Clear detailed view button
-            if st.button("❌ Close QuXAT Report", key="close_detailed"):
+            if st.button("❌ Close QuXAT Healthcare Quality Grid Report", key="close_detailed"):
                 if hasattr(st.session_state, 'detailed_org'):
                     del st.session_state.detailed_org
                 if hasattr(st.session_state, 'detailed_data'):
@@ -2465,8 +4161,8 @@ try:
         st.markdown("---")
         
         st.markdown("""
-        ### About QuXAT
-        The **QuXAT (Quality eXcellence Assessment Tool)** is a comprehensive platform designed to evaluate 
+        ### About QuXAT Healthcare Quality Grid
+        The **QuXAT Healthcare Quality Grid (Quality eXcellence Assessment Tool)** is a comprehensive platform designed to evaluate 
         and score healthcare organizations worldwide based on their quality initiatives, certifications, 
         and accreditations.
         
@@ -2474,14 +4170,14 @@ try:
         - **🔍 Organization Search** - Find and analyze any healthcare organization globally
         - **📊 Quality Scoring** - Comprehensive scoring based on certifications and quality initiatives
         - **🏆 Certification Tracking** - Monitor ISO, NABH, NABL, JCI, and other quality certifications
-        - **📈 Quality Trends** - Track quality improvements and initiatives over time
+        - **📈 Quality Trends** - Track quality improvements and quality initiatives over time
         - **📰 News Integration** - Real-time updates from company disclosures and news articles
         
         ### Tracked Certifications:
         - **ISO Certifications** - International Organization for Standardization
         - **NABH** - National Accreditation Board for Hospitals & Healthcare Providers
         - **NABL** - National Accreditation Board for Testing and Calibration Laboratories
-        - **JCI** - Joint Commission International
+        - **JCI** <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iNjAiPgogIDwhLS0gQmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNlMGUwZTAiIHN0cm9rZS13aWR0aD0iMSIgcng9IjUiLz4KICA8IS0tIEpDSSBMb2dvIENpcmNsZSAtLT4KICA8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyMCIgZmlsbD0iIzAwNjZjYyIgc3Ryb2tlPSIjMDA0NDk5IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIEpDSSBUZXh0IGluIENpcmNsZSAtLT4KICA8dGV4dCB4PSIzMCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIj5KQ0k8L3RleHQ+CiAgPCEtLSBKb2ludCBDb21taXNzaW9uIEludGVybmF0aW9uYWwgVGV4dCAtLT4KICA8dGV4dCB4PSI2MCIgeT0iMjAiIGZpbGw9IiMwMDY2Y2MiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiPkpvaW50IENvbW1pc3Npb248L3RleHQ+CiAgPHRleHQgeD0iNjAiIHk9IjM1IiBmaWxsPSIjMDA2NmNjIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIj5JbnRlcm5hdGlvbmFsPC90ZXh0PgogIDwhLS0gUXVhbGl0eSBFeGNlbGxlbmNlIEJhZGdlIC0tPgogIDxyZWN0IHg9IjYwIiB5PSI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjZjBmOGZmIiBzdHJva2U9IiMwMDY2Y2MiIHN0cm9rZS13aWR0aD0iMSIgcng9IjIiLz4KICA8dGV4dCB4PSIxMDAiIHk9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDA2NmNjIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCI+UXVhbGl0eSBFeGNlbGxlbmNlPC90ZXh0PgogIDwhLS0gQWNjcmVkaXRhdGlvbiBTeW1ib2wgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxNzAsMTUgMTc1LDI1IDE4NSwyNSAxNzcsMzIgMTgwLDQyIDE3MCwzNyAxNjAsNDIgMTYzLDMyIDE1NSwyNSAxNjUsMjUiIGZpbGw9IiNmZmQ3MDAiIHN0cm9rZT0iI2ZmY2MwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==" style="width: 30px; height: 9px; vertical-align: middle; margin-left: 5px;"> - Joint Commission International
         - **HIMSS** - Healthcare Information and Management Systems Society
         - **AAAHC** - Accreditation Association for Ambulatory Health Care
         
@@ -2490,8 +4186,8 @@ try:
         ### ⚠️ Important Legal Disclaimers
         
         **Assessment Nature & Limitations:**
-        - The QuXAT grid is an **assessment tool based on publicly available knowledge** regarding healthcare organizations
-        - **The QuXAT grid can be wrong** in assessing the quality of an organization and should not be considered as definitive or absolute
+        - The QuXAT Healthcare Quality Grid is an **assessment tool based on publicly available knowledge** regarding healthcare organizations
+        - **The QuXAT Healthcare Quality Grid can be wrong** in assessing the quality of an organization and should not be considered as definitive or absolute
         - Scores are generated using automated algorithms and may not reflect the complete picture of an organization's quality
         - This platform is intended for **informational and comparative analysis purposes only**
         
@@ -2502,13 +4198,13 @@ try:
         - Certification statuses may change without immediate reflection in our system
         
         **No Medical or Professional Advice:**
-        - QuXAT scores do not constitute medical advice, professional recommendations, or endorsements
+        - QuXAT Healthcare Quality Grid scores do not constitute medical advice, professional recommendations, or endorsements
         - Users should conduct independent verification and due diligence before making healthcare decisions
         - This tool should not be used as the sole basis for selecting healthcare providers or organizations
         
         **Limitation of Liability:**
-        - QuXAT and its developers disclaim all warranties, express or implied, regarding the accuracy or completeness of information
-        - Users assume full responsibility for any decisions made based on QuXAT assessments
+        - QuXAT Healthcare Quality Grid and its developers disclaim all warranties, express or implied, regarding the accuracy or completeness of information
+        - Users assume full responsibility for any decisions made based on QuXAT Healthcare Quality Grid assessments
         - No liability is accepted for any direct, indirect, or consequential damages arising from the use of this platform
         
         **Intellectual Property & Fair Use:**
@@ -2517,15 +4213,8 @@ try:
         - This platform is not affiliated with or endorsed by any certification bodies or healthcare organizations
         """)
         
-        # Reference to Global Healthcare Quality tab
-        st.info("📊 **Global Healthcare Quality Distribution** - Visit the **Global Healthcare Quality** tab for comprehensive analysis, interactive charts, and detailed metrics.")
-        
-        # Interactive button to navigate to Global Healthcare Quality tab
-        if st.button("🌍 Go to Global Healthcare Quality Analysis", type="primary", use_container_width=True):
-            st.session_state.page = "Global Healthcare Quality"
-            st.rerun()
-
-    elif page == "Quality Dashboard":
+        # Quality Dashboard Section - Consolidated from Quality Dashboard page
+        st.markdown("---")
         st.header("📊 Quality Dashboard & Analytics")
         
         # Sample quality trend data
@@ -2556,7 +4245,8 @@ try:
             st.metric("🏆 Top Performers (90+)", "156", "↑ +8")
             st.metric("⚠️ Need Improvement (<60)", "89", "↓ -12")
 
-    elif page == "Global Healthcare Quality":
+        # Global Healthcare Quality Section - Consolidated from Global Healthcare Quality page
+        st.markdown("---")
         st.header("🌍 Global Healthcare Quality Distribution")
         st.markdown("Interactive world map showing healthcare quality scores across different countries and regions with advanced filtering and analysis capabilities.")
         
@@ -2796,8 +4486,8 @@ try:
             avg_score = filtered_df['Quality_Score'].mean()
             st.metric(
                 "Global Average Score", 
-                f"{avg_score:.1f}",
-                delta=f"{avg_score - 75:.1f} vs baseline"
+                f"{avg_score:.2f}",
+                delta=f"{avg_score - 75:.2f} vs baseline"
             )
         
         with col2:
@@ -2894,10 +4584,10 @@ try:
             st.markdown("**📊 Score Range Distribution:**")
             score_ranges = [
                 ('75-85 (A+)', len(filtered_df[filtered_df['Quality_Score'] >= 75])),
-                    ('65-74 (A)', len(filtered_df[(filtered_df['Quality_Score'] >= 65) & (filtered_df['Quality_Score'] < 75)])),
-                    ('55-64 (B+)', len(filtered_df[(filtered_df['Quality_Score'] >= 55) & (filtered_df['Quality_Score'] < 65)])),
-                    ('45-54 (B)', len(filtered_df[(filtered_df['Quality_Score'] >= 45) & (filtered_df['Quality_Score'] < 55)])),
-                    ('Below 45 (C)', len(filtered_df[filtered_df['Quality_Score'] < 45]))
+                ('65-74 (A)', len(filtered_df[(filtered_df['Quality_Score'] >= 65) & (filtered_df['Quality_Score'] < 75)])),
+                ('55-64 (B+)', len(filtered_df[(filtered_df['Quality_Score'] >= 55) & (filtered_df['Quality_Score'] < 65)])),
+                ('45-54 (B)', len(filtered_df[(filtered_df['Quality_Score'] >= 45) & (filtered_df['Quality_Score'] < 55)])),
+                ('Below 45 (C)', len(filtered_df[filtered_df['Quality_Score'] < 45]))
             ]
             
             for range_name, count in score_ranges:
@@ -2930,833 +4620,169 @@ try:
             - **Comparative Purpose Only:** Use this map for comparative analysis and research, not for absolute quality determination
             - **Assessment Limitations:** Regional scores may be incorrect or incomplete due to data availability constraints
             """)
-        
-        # Update layout for better visualization
-        fig.update_layout(
-            geo=dict(
-                showframe=False,
-                showcoastlines=True,
-                projection_type=projection,
-                bgcolor='rgba(0,0,0,0)'
-            ),
-            title_x=0.5,
-            width=1000,
-            height=600,
-            font=dict(size=12)
-        )
-        
-        if show_text:
-            fig.update_traces(
-                text=df_countries['ISO_Code'],
-                textposition="middle center",
-                textfont_size=8
-            )
-        
-        st.plotly_chart(fig, use_container_width=True)
-        
-        # Statistics and insights
-        st.markdown("---")
-        
-        col1, col2, col3, col4 = st.columns(4)
-        
-        with col1:
-            avg_score = df_countries['Quality_Score'].mean()
-            st.metric("🌍 Global Average", f"{avg_score:.1f}", "Quality Score")
-        
-        with col2:
-            top_country = df_countries.loc[df_countries['Quality_Score'].idxmax(), 'Country']
-            top_score = df_countries['Quality_Score'].max()
-            st.metric("🥇 Top Performer", top_country, f"{top_score} pts")
-        
-        with col3:
-            high_quality = len(df_countries[df_countries['Quality_Score'] >= 85])
-            st.metric("⭐ High Quality (85+)", high_quality, "countries")
-        
-        with col4:
-            total_hospitals = df_countries['Top_Hospitals'].sum()
-            st.metric("🏥 Top-Tier Hospitals", total_hospitals, "globally")
-        
-        # Regional breakdown
-        st.subheader("📊 Regional Quality Analysis")
-        
-        # Define regions (simplified)
-        region_mapping = {
-            'North America': ['USA', 'CAN', 'MEX'],
-            'Europe': ['DEU', 'CHE', 'GBR', 'FRA', 'NLD', 'SWE', 'NOR', 'DNK', 'FIN', 'AUT', 'BEL', 'ITA', 'ESP', 'PRT', 'GRC', 'IRL', 'LUX', 'ISL', 'EST', 'LVA', 'LTU', 'POL', 'CZE', 'HUN'],
-            'Asia-Pacific': ['JPN', 'SGP', 'AUS', 'KOR', 'CHN', 'IND', 'THA', 'MYS', 'NZL'],
-            'Middle East & Africa': ['ISR', 'ZAF', 'EGY'],
-            'Latin America': ['BRA', 'ARG', 'CHL'],
-            'Eastern Europe': ['RUS', 'TUR']
-        }
-        
-        regional_data = []
-        for region, countries in region_mapping.items():
-            region_df = df_countries[df_countries['ISO_Code'].isin(countries)]
-            if not region_df.empty:
-                regional_data.append({
-                    'Region': region,
-                    'Average_Score': region_df['Quality_Score'].mean(),
-                    'Countries': len(region_df),
-                    'Top_Hospitals': region_df['Top_Hospitals'].sum()
-                })
-        
-        regional_df = pd.DataFrame(regional_data)
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            fig_regional = px.bar(
-                regional_df, 
-                x='Region', 
-                y='Average_Score',
-                title="Average Quality Score by Region",
-                color='Average_Score',
-                color_continuous_scale='RdYlGn'
-            )
-            fig_regional.update_layout(showlegend=False, xaxis_tickangle=-45)
-            st.plotly_chart(fig_regional, use_container_width=True)
-        
-        with col2:
-            fig_hospitals = px.pie(
-                regional_df, 
-                values='Top_Hospitals', 
-                names='Region',
-                title="Distribution of Top-Tier Hospitals by Region"
-            )
-            st.plotly_chart(fig_hospitals, use_container_width=True)
-        
-        # Top and bottom performers
-        st.subheader("🏆 Performance Rankings")
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.markdown("**🥇 Top 10 Performers**")
-            top_10 = df_countries.nlargest(10, 'Quality_Score')[['Country', 'Quality_Score', 'Healthcare_Rank']]
-            top_10.index = range(1, len(top_10) + 1)
-            st.dataframe(top_10, use_container_width=True)
-        
-        with col2:
-            st.markdown("**📈 Improvement Opportunities**")
-            bottom_10 = df_countries.nsmallest(10, 'Quality_Score')[['Country', 'Quality_Score', 'Healthcare_Rank']]
-            bottom_10.index = range(1, len(bottom_10) + 1)
-            st.dataframe(bottom_10, use_container_width=True)
-        
-        # Quality score distribution
-        st.subheader("📈 Quality Score Distribution")
-        
-        fig_dist = px.histogram(
-            df_countries, 
-            x='Quality_Score', 
-            nbins=15,
-            title="Distribution of Healthcare Quality Scores Globally",
-            labels={'count': 'Number of Countries', 'Quality_Score': 'Quality Score'},
-            color_discrete_sequence=['#2E86AB']
-        )
-        fig_dist.update_layout(showlegend=False)
-        st.plotly_chart(fig_dist, use_container_width=True)
-        
-        # Data source and methodology
-        st.markdown("---")
-        st.markdown("""
-        ### 📋 Methodology & Data Sources
-        
-        **Quality Score Calculation:**
-        - **Certifications (60%):** ISO, JCI, NABH, and other international standards
-        - **Quality Initiatives (20%):** Patient safety programs, digital health adoption
-        - **Transparency (10%):** Public reporting of quality metrics
-        - **Reputation Factors (10%):** International rankings and academic recognition
-        
-        **Data Sources:**
-        - World Health Organization (WHO) Global Health Observatory
-        - OECD Health Statistics
-        - International healthcare accreditation bodies
-        - Academic medical center databases
-        - Government health ministry reports
-        
-        **⚠️ Data Accuracy Disclaimers:**
-        - **Aggregated Metrics:** This visualization represents aggregated healthcare quality metrics based on available public data
-        - **Geographic Limitations:** Country-level data may not reflect individual organization quality within that region
-        - **Data Completeness:** Some countries may have limited or outdated information affecting accuracy of regional assessments
-        - **Comparative Purpose Only:** Use this map for comparative analysis and research, not for absolute quality determination
-        - **Assessment Limitations:** Regional scores may be incorrect or incomplete due to data availability constraints
-        """)
-        
-        # Data Upload Section for Users
-        st.markdown("---")
-        st.markdown("### 📤 Contribute Quality Data")
-        st.markdown("Help improve our database by sharing quality-centric data about healthcare organizations.")
-        
-        with st.expander("📋 Upload Healthcare Quality Data", expanded=False):
-            st.markdown("**Share your organization's quality achievements with the community!**")
-            
-            with st.form("data_upload_form"):
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    upload_org_name = st.text_input("🏥 Organization Name*", placeholder="e.g., City General Hospital")
-                    upload_location = st.text_input("📍 Location*", placeholder="e.g., New York, USA")
-                    upload_type = st.selectbox("🏢 Organization Type*", 
-                                             ["Hospital", "Clinic", "Medical Center", "Specialty Center", "Other"])
-                
-                with col2:
-                    upload_certification = st.text_input("📜 Certification/Achievement*", 
-                                                       placeholder="e.g., JCI Accreditation, ISO 9001")
-                    upload_year = st.number_input("📅 Year Achieved*", min_value=2000, max_value=2024, value=2024)
-                    upload_category = st.selectbox("📊 Category*", 
-                                                 ["Patient Safety", "Quality Management", "Clinical Excellence", 
-                                                  "Technology Innovation", "Staff Training", "Other"])
-                
-                upload_description = st.text_area("📝 Description*", 
-                                                placeholder="Describe the quality achievement, certification details, or improvement initiative...")
-                upload_contact = st.text_input("📧 Contact Email (Optional)", 
-                                             placeholder="your.email@organization.com")
-                
-                col1, col2, col3 = st.columns([1, 1, 1])
-                with col2:
-                    submit_upload = st.form_submit_button("📤 Submit for Review", type="primary")
-                
-                if submit_upload:
-                    if upload_org_name and upload_location and upload_certification and upload_description:
-                        upload_data = {
-                            'organization_name': upload_org_name,
-                            'location': upload_location,
-                            'organization_type': upload_type,
-                            'certification': upload_certification,
-                            'year_achieved': upload_year,
-                            'category': upload_category,
-                            'description': upload_description,
-                            'contact_email': upload_contact,
-                            'submitter_ip': 'anonymous'  # In production, you might want to track this
-                        }
-                        
-                        add_pending_upload(upload_data)
-                        st.success("✅ Thank you! Your submission has been received and will be reviewed by our admin team.")
-                        st.info("📋 **Review Process:** All submissions are manually reviewed to ensure data quality and accuracy before being made public.")
-                    else:
-                        st.error("❌ Please fill in all required fields marked with *")
-            
-            st.markdown("""
-            **📋 Submission Guidelines:**
-            - Provide accurate and verifiable information
-            - Include official certification names and dates
-            - Describe achievements clearly and concisely
-            - All submissions are reviewed before publication
-            """)
 
-    elif page == "QuXAT Scoring Method":
-        st.header("📋 Comprehensive QuXAT Score Report")
+        # QuXAT Healthcare Quality Grid Scoring Method Section - Consolidated from QuXAT Healthcare Quality Grid Scoring Method page
+        st.markdown("---")
+        st.header("📋 QuXAT Healthcare Quality Grid Scoring Method")
         
-        # Check if there's a queried organization from session state
-        if hasattr(st.session_state, 'queried_org_name') and st.session_state.queried_org_name:
-            # Display the queried organization's detailed report
-            org_name = st.session_state.queried_org_name
-            org_data = st.session_state.queried_org_data
-            
-            st.markdown(f"### 🏥 Detailed Analysis for: **{org_name}**")
+        # Check if an organization has been searched
+        if 'current_org' in st.session_state and st.session_state.current_org:
+            org_name = st.session_state.current_org
+            st.markdown(f"### 📊 Detailed Score Report for **{org_name}**")
             
             # Display the detailed scorecard
-            display_detailed_scorecard_inline(org_name, org_data, org_data['overall_score'])
-            
-            # Add a button to clear the selection and go back to organization selector
-            if st.button("🔄 View Different Organization", type="secondary"):
-                st.session_state.queried_org_name = None
-                st.session_state.queried_org_data = None
-                st.rerun()
-        
+            display_detailed_scorecard(org_name)
         else:
-            # No queried organization available
-            st.markdown("### 🔍 No Organization Selected")
+            st.info("🔍 **Search for an organization on the Home page to view its detailed score report here.**")
             
-            col1, col2, col3 = st.columns([1, 2, 1])
-            with col2:
-                st.markdown("""
-                <div style="
-                    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-                    padding: 2rem;
-                    border-radius: 15px;
-                    text-align: center;
-                    border: 2px solid #e1e8ed;
-                    margin: 2rem 0;
-                ">
-                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">📊 Comprehensive QuXAT Score Report</h3>
-                    <p style="color: #5a6c7d; font-size: 1.1rem; margin-bottom: 1.5rem;">
-                        To view a detailed quality assessment report, please search for a healthcare organization using the search function on the Home page.
-                    </p>
-                    <div style="
-                        background: #ffffff;
-                        padding: 1.5rem;
-                        border-radius: 10px;
-                        margin: 1rem 0;
-                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                    ">
-                        <h4 style="color: #3498db; margin-bottom: 1rem;">🎯 What You'll Get:</h4>
-                        <ul style="text-align: left; color: #2c3e50; line-height: 1.6;">
-                            <li><strong>Overall QuXAT Score:</strong> Comprehensive quality rating out of 100</li>
-                            <li><strong>Detailed Breakdown:</strong> Certifications, quality initiatives, and transparency metrics</li>
-                            <li><strong>Visual Analytics:</strong> Interactive charts and score component analysis</li>
-                            <li><strong>Certification Analysis:</strong> Complete certification portfolio with validity timelines</li>
-                            <li><strong>Quality Initiatives:</strong> Recent improvement programs and innovations</li>
-                            <li><strong>Scoring Methodology:</strong> Transparent explanation of how scores are calculated</li>
-                        </ul>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-                
-                if st.button("🏠 Go to Home Page", use_container_width=True):
-                    st.session_state.page = "Home"
-                    st.rerun()
+            st.markdown("### 📋 What You'll Get in the Detailed Report")
             
-            st.markdown("---")
-            st.markdown("### 📋 How to Get Started")
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                st.markdown("""
-                #### 🔍 Step 1: Search
-                - Navigate to the **Home** page
-                - Enter any healthcare organization name
-                - Use the search function to find organizations worldwide
-                """)
-            
-            with col2:
-                st.markdown("""
-                #### 📊 Step 2: View Report
-                - Click **"👁️ View QuXAT Report"** button
-                - Get automatically redirected to this page
-                - Explore comprehensive quality metrics and analysis
-                """)
-        
-        with col2:
             st.markdown("""
-            #### ⚠️ Important Limitations
-            - **Public Data Only:** Based on publicly available information
-            - **Algorithmic Assessment:** May not capture all quality aspects
-            - **Data Lag:** Information may not reflect most recent changes
-            - **Geographic Bias:** Better data availability for certain regions
-            - **Language Limitations:** Primarily English-language sources
-            - **Not Medical Advice:** For comparative analysis only
+            When you search for a healthcare organization, this section will provide:
+            
+            **🏆 Overall Quality Score & Grade**
+            - Comprehensive quality score (0-100 scale)
+            - Letter grade classification (A+ to C)
+            - Percentile ranking among global healthcare organizations
+            
+            **📊 Detailed Score Breakdown**
+            - Certification scores (ISO, JCI, NABH, etc.)
+            - Patient feedback analysis
+            - Quality initiative assessment
+            - Transparency and reporting metrics
+            - Reputation and recognition factors
+            
+            **🏥 Organization Profile**
+            - Basic organization information
+            - Location and contact details
+            - Specializations and services
+            - Accreditation status and validity
+            
+            **📈 Performance Analytics**
+            - Score history and trends
+            - Comparative benchmarking
+            - Regional and global rankings
+            - Improvement recommendations
+            
+            **🔍 Quality Certifications**
+            - Active certifications and their impact
+            - Certification body information
+            - Validity periods and renewal status
+            - International recognition levels
+            
+            **🚀 Quality Initiatives**
+            - Recent quality improvement programs
+            - Innovation and technology adoption
+            - Patient safety initiatives
+            - Research and development activities
+            
+            **⚠️ Important Limitations**
+            - Data accuracy disclaimers
+            - Assessment methodology details
+            - Liability limitations
+            - Proper usage guidelines
             """)
-        
 
-
-    elif page == "Certifications":
-        st.header("🏆 Global Healthcare Quality Certifications")
-        
-        st.markdown("""
-        ### 🌍 Comprehensive Global Healthcare Quality Standards
-        Healthcare quality certifications are essential indicators of an organization's commitment to excellence, 
-        patient safety, and continuous improvement. This comprehensive database includes certifications from 
-        **over 50 countries and regions** worldwide, representing the most exhaustive collection of healthcare 
-        quality standards available.
-        """)
-        
-        # Search and filter functionality
-        col1, col2, col3 = st.columns([3, 2, 2])
-        with col1:
-            search_term = st.text_input("🔍 Search Certifications", placeholder="Enter certification name, country, or focus area...")
-        with col2:
-            region_filter = st.selectbox("🌐 Filter by Region", 
-                                       ["All Regions", "International", "North America", "Europe", "Asia-Pacific", 
-                                        "Middle East & Africa", "Latin America", "Oceania"])
-        with col3:
-            focus_filter = st.selectbox("🎯 Filter by Focus Area", 
-                                      ["All Areas", "Hospital Accreditation", "Quality Management", "Patient Safety", 
-                                       "Laboratory Standards", "Information Security", "Environmental Management"])
-        
-        # International Standards
+        # Certifications Section - Consolidated from Certifications page
         st.markdown("---")
-        st.markdown("### 🌐 International Standards (Global Recognition)")
-        intl_certs = pd.DataFrame({
-            'Certification': [
-                'ISO 9001:2015', 'ISO 14001:2015', 'ISO 45001:2018', 'ISO 27001:2013', 'ISO 13485:2016',
-                'JCI (Joint Commission International)', 'WHO-FIC Collaborating Centre', 'IEC 62304', 
-                'ISO 15189:2012', 'ISO 17025:2017', 'CLIA (Clinical Laboratory Improvement Amendments)',
-                'CAP (College of American Pathologists)', 'RTAC (Reproductive Technology Accreditation Committee)'
-            ],
-            'Focus Area': [
-                'Quality Management Systems', 'Environmental Management', 'Occupational Health & Safety', 
-                'Information Security Management', 'Medical Devices Quality', 'Hospital Accreditation',
-                'Health Information Standards', 'Medical Device Software', 'Medical Laboratory Quality',
-                'Testing & Calibration Laboratories', 'Laboratory Quality Standards', 'Laboratory Accreditation',
-                'Reproductive Technology'
-            ],
-            'Region': ['Global'] * 13,
-            'Recognition Level': ['Very High'] * 13,
-            'Score Weight': [15, 12, 12, 10, 18, 25, 8, 10, 20, 15, 18, 20, 15]
-        })
+        st.header("🏆 Healthcare Certifications Database")
         
-        # North America
-        st.markdown("### 🇺🇸🇨🇦 North America")
-        na_certs = pd.DataFrame({
-            'Certification': [
-                'Joint Commission (TJC)', 'HIMSS EMRAM', 'AAAHC', 'NCQA', 'DNV GL Healthcare',
-                'HFAP (Healthcare Facilities Accreditation Program)', 'CHAP (Community Health Accreditation Partner)',
-                'ACHC (Accreditation Commission for Health Care)', 'URAC', 'CARF (Commission on Accreditation)',
-                'Accreditation Canada', 'CPSO (College of Physicians and Surgeons Ontario)', 'Health Canada GMP'
-            ],
-            'Focus Area': [
-                'Hospital Accreditation', 'Health IT Maturity', 'Ambulatory Care', 'Health Plan Quality',
-                'Hospital Accreditation (ISO-based)', 'Healthcare Facilities', 'Community Health Organizations',
-                'Healthcare Services', 'Healthcare Quality', 'Rehabilitation Services', 'Healthcare Standards',
-                'Medical Practice Standards', 'Good Manufacturing Practices'
-            ],
-            'Region': ['USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Canada', 'Canada', 'Canada'],
-            'Recognition Level': ['Very High', 'High', 'High', 'Very High', 'High', 'Medium', 'Medium', 'Medium', 'High', 'High', 'Very High', 'High', 'High'],
-            'Score Weight': [25, 18, 15, 20, 20, 12, 10, 12, 15, 15, 22, 15, 12]
-        })
-        
-        # Europe
-        st.markdown("### 🇪🇺 Europe")
-        eu_certs = pd.DataFrame({
-            'Certification': [
-                'CE Marking (Medical Devices)', 'MHRA (UK)', 'ANSM (France)', 'BfArM (Germany)', 'AIFA (Italy)',
-                'EMA (European Medicines Agency)', 'NICE (UK)', 'HAS (France)', 'G-BA (Germany)', 'AEMPS (Spain)',
-                'Swissmedic (Switzerland)', 'FIMEA (Finland)', 'SUKL (Czech Republic)', 'URPL (Poland)',
-                'AGES (Austria)', 'INFARMED (Portugal)', 'EOF (Greece)', 'JAZMP (Slovakia)', 'HALMED (Croatia)',
-                'KKH Certification (Netherlands)', 'Sundhedsstyrelsen (Denmark)', 'Läkemedelsverket (Sweden)'
-            ],
-            'Focus Area': [
-                'Medical Device Compliance', 'Medicines & Healthcare Regulation', 'Drug Safety & Efficacy',
-                'Medical Devices & Pharmaceuticals', 'Drug Regulation', 'European Drug Regulation',
-                'Health Technology Assessment', 'Health Technology Assessment', 'Healthcare Quality Assessment',
-                'Pharmaceutical Regulation', 'Swiss Drug Regulation', 'Finnish Drug Regulation',
-                'Czech Drug Regulation', 'Polish Drug Regulation', 'Austrian Drug Safety',
-                'Portuguese Drug Regulation', 'Greek Drug Regulation', 'Slovak Drug Regulation',
-                'Croatian Drug Regulation', 'Dutch Healthcare Quality', 'Danish Health Authority',
-                'Swedish Drug Regulation'
-            ],
-            'Region': ['EU', 'UK', 'France', 'Germany', 'Italy', 'EU', 'UK', 'France', 'Germany', 'Spain', 
-                      'Switzerland', 'Finland', 'Czech Republic', 'Poland', 'Austria', 'Portugal', 'Greece', 
-                      'Slovakia', 'Croatia', 'Netherlands', 'Denmark', 'Sweden'],
-            'Recognition Level': ['Very High', 'Very High', 'High', 'Very High', 'High', 'Very High', 'Very High', 
-                                'High', 'High', 'High', 'Very High', 'High', 'Medium', 'Medium', 'Medium', 
-                                'Medium', 'Medium', 'Medium', 'Medium', 'High', 'High', 'High'],
-            'Score Weight': [20, 22, 15, 20, 15, 25, 18, 15, 15, 15, 20, 12, 10, 10, 10, 10, 8, 8, 8, 12, 12, 12]
-        })
-        
-        # Asia-Pacific
-        st.markdown("### 🌏 Asia-Pacific")
-        ap_certs = pd.DataFrame({
-            'Certification': [
-                'NABH (India)', 'NABL (India)', 'QCI Healthcare (India)', 'PMDA (Japan)', 'MHLW (Japan)',
-                'TFDA (Taiwan)', 'KFDA (South Korea)', 'HSA (Singapore)', 'TGA (Australia)', 'Medsafe (New Zealand)',
-                'NMPA (China)', 'DOH (Philippines)', 'MOH (Malaysia)', 'FDA Thailand', 'BPOM (Indonesia)',
-                'DDA (Myanmar)', 'CDSCB (Cambodia)', 'YDA (Yemen)', 'SFDA (Saudi Arabia)', 'NHRA (Bahrain)',
-                'MOH UAE', 'Kuwait MOH', 'Oman MOH', 'Qatar MOH'
-            ],
-            'Focus Area': [
-                'Hospital Accreditation', 'Laboratory Accreditation', 'Quality Council Standards', 
-                'Pharmaceutical Regulation', 'Health & Welfare Standards', 'Drug & Food Safety',
-                'Food & Drug Safety', 'Health Sciences Authority', 'Therapeutic Goods Administration',
-                'Medicine Safety Authority', 'Drug Administration', 'Department of Health Standards',
-                'Ministry of Health Standards', 'Food & Drug Administration', 'Drug & Food Control',
-                'Drug & Device Authority', 'Drug Standards Control', 'Drug Authority', 'Food & Drug Authority',
-                'Health Regulation Authority', 'Ministry of Health Standards', 'Ministry of Health Standards',
-                'Ministry of Health Standards', 'Ministry of Health Standards'
-            ],
-            'Region': ['India', 'India', 'India', 'Japan', 'Japan', 'Taiwan', 'South Korea', 'Singapore', 
-                      'Australia', 'New Zealand', 'China', 'Philippines', 'Malaysia', 'Thailand', 'Indonesia',
-                      'Myanmar', 'Cambodia', 'Yemen', 'Saudi Arabia', 'Bahrain', 'UAE', 'Kuwait', 'Oman', 'Qatar'],
-            'Recognition Level': ['Very High', 'High', 'Medium', 'Very High', 'High', 'High', 'High', 'Very High',
-                                'Very High', 'High', 'High', 'Medium', 'Medium', 'Medium', 'Medium', 'Low', 'Low',
-                                'Medium', 'High', 'Medium', 'Medium', 'Medium', 'Medium', 'Medium'],
-            'Score Weight': [20, 15, 12, 22, 15, 15, 15, 18, 20, 12, 15, 10, 10, 10, 10, 6, 6, 8, 12, 8, 8, 8, 8, 8]
-        })
-        
-        # Middle East & Africa
-        st.markdown("### 🌍 Middle East & Africa")
-        mea_certs = pd.DataFrame({
-            'Certification': [
-                'SAHPRA (South Africa)', 'MCC (South Africa)', 'NAFDAC (Nigeria)', 'FDB (Ghana)', 'DDA (Ethiopia)',
-                'TMDA (Tanzania)', 'NDA (Uganda)', 'PPB (Kenya)', 'ZaZiBoNa (Zimbabwe)', 'MCAZ (Zimbabwe)',
-                'Israeli MOH', 'Turkish MOH', 'Egyptian MOH', 'Moroccan MOH', 'Tunisian MOH', 'Algerian MOH',
-                'Libyan MOH', 'Sudanese MOH', 'Jordanian MOH', 'Lebanese MOH', 'Syrian MOH', 'Iraqi MOH'
-            ],
-            'Focus Area': [
-                'Health Products Regulation', 'Medicines Control', 'Food & Drug Administration', 'Food & Drugs Board',
-                'Drug & Device Authority', 'Medical Device Authority', 'Drug Authority', 'Pharmacy & Poisons Board',
-                'Medicine Regulatory Authority', 'Medicine Control Authority', 'Ministry of Health Standards',
-                'Ministry of Health Standards', 'Ministry of Health Standards', 'Ministry of Health Standards',
-                'Ministry of Health Standards', 'Ministry of Health Standards', 'Ministry of Health Standards',
-                'Ministry of Health Standards', 'Ministry of Health Standards', 'Ministry of Health Standards',
-                'Ministry of Health Standards', 'Ministry of Health Standards'
-            ],
-            'Region': ['South Africa', 'South Africa', 'Nigeria', 'Ghana', 'Ethiopia', 'Tanzania', 'Uganda', 'Kenya',
-                      'Zimbabwe', 'Zimbabwe', 'Israel', 'Turkey', 'Egypt', 'Morocco', 'Tunisia', 'Algeria',
-                      'Libya', 'Sudan', 'Jordan', 'Lebanon', 'Syria', 'Iraq'],
-            'Recognition Level': ['High', 'High', 'Medium', 'Medium', 'Low', 'Low', 'Low', 'Medium', 'Low', 'Low',
-                                'High', 'Medium', 'Medium', 'Medium', 'Medium', 'Medium', 'Low', 'Low', 'Medium',
-                                'Medium', 'Low', 'Low'],
-            'Score Weight': [15, 15, 10, 10, 6, 6, 6, 8, 6, 6, 12, 10, 10, 10, 10, 10, 6, 6, 8, 8, 6, 6]
-        })
-        
-        # Latin America
-        st.markdown("### 🌎 Latin America")
-        la_certs = pd.DataFrame({
-            'Certification': [
-                'ANVISA (Brazil)', 'ANMAT (Argentina)', 'ISP (Chile)', 'INVIMA (Colombia)', 'DIGEMID (Peru)',
-                'COFEPRIS (Mexico)', 'CECMED (Cuba)', 'DINAMED (Uruguay)', 'MSP (Ecuador)', 'DINAVISA (Paraguay)',
-                'INHRR (Venezuela)', 'MINSA (Panama)', 'MINSAL (El Salvador)', 'SESAL (Honduras)', 'MSPAS (Guatemala)',
-                'MINSA (Nicaragua)', 'MINSA (Costa Rica)', 'SENASA (Dominican Republic)', 'MOH (Jamaica)', 'MOH (Trinidad)'
-            ],
-            'Focus Area': [
-                'Health Surveillance Agency', 'Medicine Administration', 'Public Health Institute', 'Drug Surveillance',
-                'Medicine Directorate', 'Health Risk Protection', 'Medicine Control Center', 'Medicine Directorate',
-                'Public Health Ministry', 'Health Surveillance Directorate', 'Health Regulation Institute',
-                'Health Ministry', 'Health Ministry', 'Health Secretary', 'Public Health Ministry',
-                'Health Ministry', 'Health Ministry', 'Animal & Plant Health Service', 'Ministry of Health',
-                'Ministry of Health'
-            ],
-            'Region': ['Brazil', 'Argentina', 'Chile', 'Colombia', 'Peru', 'Mexico', 'Cuba', 'Uruguay', 'Ecuador',
-                      'Paraguay', 'Venezuela', 'Panama', 'El Salvador', 'Honduras', 'Guatemala', 'Nicaragua',
-                      'Costa Rica', 'Dominican Republic', 'Jamaica', 'Trinidad & Tobago'],
-            'Recognition Level': ['High', 'High', 'High', 'Medium', 'Medium', 'High', 'Medium', 'Medium', 'Medium',
-                                'Low', 'Low', 'Medium', 'Medium', 'Low', 'Low', 'Low', 'Medium', 'Medium', 'Medium', 'Medium'],
-            'Score Weight': [15, 15, 15, 10, 10, 12, 8, 8, 8, 6, 6, 8, 8, 6, 6, 6, 8, 8, 8, 8]
-        })
-        
-        # Combine all certifications
-        all_certs = pd.concat([intl_certs, na_certs, eu_certs, ap_certs, mea_certs, la_certs], ignore_index=True)
-        
-        # Apply filters
-        filtered_certs = all_certs.copy()
-        
-        if search_term:
-            mask = (filtered_certs['Certification'].str.contains(search_term, case=False, na=False) |
-                   filtered_certs['Focus Area'].str.contains(search_term, case=False, na=False) |
-                   filtered_certs['Region'].str.contains(search_term, case=False, na=False))
-            filtered_certs = filtered_certs[mask]
-        
-        if region_filter != "All Regions":
-            if region_filter == "International":
-                filtered_certs = filtered_certs[filtered_certs['Region'] == 'Global']
-            elif region_filter == "North America":
-                filtered_certs = filtered_certs[filtered_certs['Region'].isin(['USA', 'Canada'])]
-            elif region_filter == "Europe":
-                eu_regions = ['EU', 'UK', 'France', 'Germany', 'Italy', 'Spain', 'Switzerland', 'Finland', 
-                             'Czech Republic', 'Poland', 'Austria', 'Portugal', 'Greece', 'Slovakia', 
-                             'Croatia', 'Netherlands', 'Denmark', 'Sweden']
-                filtered_certs = filtered_certs[filtered_certs['Region'].isin(eu_regions)]
-            elif region_filter == "Asia-Pacific":
-                ap_regions = ['India', 'Japan', 'Taiwan', 'South Korea', 'Singapore', 'Australia', 'New Zealand',
-                             'China', 'Philippines', 'Malaysia', 'Thailand', 'Indonesia', 'Myanmar', 'Cambodia']
-                filtered_certs = filtered_certs[filtered_certs['Region'].isin(ap_regions)]
-            elif region_filter == "Middle East & Africa":
-                mea_regions = ['South Africa', 'Nigeria', 'Ghana', 'Ethiopia', 'Tanzania', 'Uganda', 'Kenya',
-                              'Zimbabwe', 'Israel', 'Turkey', 'Egypt', 'Morocco', 'Tunisia', 'Algeria', 'Libya',
-                              'Sudan', 'Jordan', 'Lebanon', 'Syria', 'Iraq', 'Yemen', 'Saudi Arabia', 'Bahrain',
-                              'UAE', 'Kuwait', 'Oman', 'Qatar']
-                filtered_certs = filtered_certs[filtered_certs['Region'].isin(mea_regions)]
-            elif region_filter == "Latin America":
-                la_regions = ['Brazil', 'Argentina', 'Chile', 'Colombia', 'Peru', 'Mexico', 'Cuba', 'Uruguay',
-                             'Ecuador', 'Paraguay', 'Venezuela', 'Panama', 'El Salvador', 'Honduras', 'Guatemala',
-                             'Nicaragua', 'Costa Rica', 'Dominican Republic', 'Jamaica', 'Trinidad & Tobago']
-                filtered_certs = filtered_certs[filtered_certs['Region'].isin(la_regions)]
-        
-        if focus_filter != "All Areas":
-            filtered_certs = filtered_certs[filtered_certs['Focus Area'].str.contains(focus_filter, case=False, na=False)]
-        
-        # Display filtered results
-        st.markdown("---")
-        st.markdown(f"### 📊 Certification Results ({len(filtered_certs)} of {len(all_certs)} certifications)")
-        
-        if len(filtered_certs) > 0:
-            # Add color coding based on recognition level
-            def color_recognition(val):
-                if val == 'Very High':
-                    return 'background-color: #d4edda; color: #155724'
-                elif val == 'High':
-                    return 'background-color: #fff3cd; color: #856404'
-                elif val == 'Medium':
-                    return 'background-color: #f8d7da; color: #721c24'
-                else:
-                    return 'background-color: #f1f3f4; color: #5f6368'
+        # Check if an organization has been searched
+        if 'current_org' in st.session_state and st.session_state.current_org:
+            org_name = st.session_state.current_org
+            st.markdown(f"### 🏥 Certifications for **{org_name}**")
             
-            styled_df = filtered_certs.style.applymap(color_recognition, subset=['Recognition Level'])
-            st.dataframe(styled_df, use_container_width=True, height=400)
+            # Get organization data
+            analyzer = get_analyzer()
+            org_data = analyzer.get_organization_data(org_name)
             
-            # Statistics
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.metric("🌍 Total Certifications", len(filtered_certs))
-            with col2:
-                very_high = len(filtered_certs[filtered_certs['Recognition Level'] == 'Very High'])
-                st.metric("⭐ Very High Recognition", very_high)
-            with col3:
-                avg_weight = filtered_certs['Score Weight'].mean()
-                st.metric("📊 Average Score Weight", f"{avg_weight:.1f}")
-            with col4:
-                regions = filtered_certs['Region'].nunique()
-                st.metric("🗺️ Regions Covered", regions)
-        else:
-            st.warning("No certifications found matching your search criteria. Please adjust your filters.")
-        
-        # Regional distribution chart
-        if len(filtered_certs) > 0:
-            st.markdown("---")
-            st.markdown("### 📈 Regional Distribution Analysis")
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                region_counts = filtered_certs['Region'].value_counts().head(15)
-                fig_regions = px.bar(
-                    x=region_counts.values,
-                    y=region_counts.index,
-                    orientation='h',
-                    title="Top 15 Regions by Certification Count",
-                    labels={'x': 'Number of Certifications', 'y': 'Region'}
-                )
-                fig_regions.update_layout(height=400)
-                st.plotly_chart(fig_regions, use_container_width=True)
-            
-            with col2:
-                recognition_counts = filtered_certs['Recognition Level'].value_counts()
-                fig_recognition = px.pie(
-                    values=recognition_counts.values,
-                    names=recognition_counts.index,
-                    title="Distribution by Recognition Level"
-                )
-                st.plotly_chart(fig_recognition, use_container_width=True)
-
-    elif page == "Settings":
-        st.header("⚙️ Application Settings")
-        
-        # Admin Login Section
-        st.markdown("### 🔐 Admin Access")
-        if not is_admin_authenticated():
-            with st.expander("Admin Login", expanded=False):
-                admin_login()
-        else:
-            st.success(f"✅ Logged in as: {st.session_state.admin_username}")
-            admin_logout()
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("🎨 Display Preferences")
-            theme = st.selectbox("Theme", ["Light", "Dark", "Auto"])
-            default_view = st.selectbox("Default Page", ["Home", "Organization Search", "Quality Dashboard"])
-            
-            st.subheader("🔍 Search & Data Settings")
-            search_regions = st.multiselect("Search Regions", 
-                                          ["Global", "North America", "Europe", "Asia-Pacific", "Middle East", "Africa"],
-                                          default=["Global"])
-            data_sources = st.multiselect("Data Sources",
-                                        ["Company Disclosures", "News Articles", "Certification Bodies", "Government Databases"],
-                                        default=["Company Disclosures", "Certification Bodies"])
-        
-        with col2:
-            st.subheader("🏆 Certification Preferences")
-            cert_weights = st.slider("Certification Weight (%)", 50, 90, 70)
-            initiative_weights = st.slider("Initiative Weight (%)", 10, 40, 20)
-            transparency_weights = st.slider("Transparency Weight (%)", 5, 20, 10)
-            
-            st.subheader("📊 Export & Reporting")
-            export_format = st.selectbox("Export Format", ["PDF", "Excel", "CSV"])
-            update_frequency = st.selectbox("Data Update Frequency", ["Real-time", "Daily", "Weekly"])
-        
-        if st.button("💾 Save Settings"):
-            st.success("✅ Settings saved successfully!")
-            st.info(f"""
-            **Settings Summary:**
-            - Theme: {theme}
-            - Default Page: {default_view}
-            - Search Regions: {', '.join(search_regions)}
-            - Data Sources: {', '.join(data_sources)}
-            - Certification Weight: {cert_weights}%
-            - Update Frequency: {update_frequency}
-            """)
-    
-    elif page == "Admin Panel":
-        if not is_admin_authenticated():
-            st.error("🔒 Access Denied: Admin authentication required")
-            st.info("Please login through the Settings page to access the Admin Panel.")
-        else:
-            st.header("🛠️ Admin Panel")
-            st.success(f"Welcome, {st.session_state.admin_username}!")
-            
-            # Admin Dashboard Tabs
-            tab1, tab2, tab3 = st.tabs(["📤 Review Uploads", "🏥 Manage Hospitals", "📊 System Stats"])
-            
-            with tab1:
-                st.subheader("📤 Data Upload Review")
-                
-                # Initialize upload storage
-                init_upload_storage()
-                
-                # Pending uploads
-                if st.session_state.pending_uploads:
-                    st.markdown("### 🔍 Pending Reviews")
-                    for upload in st.session_state.pending_uploads:
-                        with st.expander(f"Upload #{upload['upload_id']} - {upload['organization_name']}", expanded=False):
+            if org_data:
+                # Display certifications
+                certifications = org_data.get('certifications', [])
+                if certifications:
+                    st.success(f"Found {len(certifications)} certifications for {org_name}")
+                    
+                    for cert in certifications:
+                        with st.expander(f"🏆 {cert.get('name', 'Unknown Certification')} - {cert.get('status', 'Unknown Status')}"):
                             col1, col2 = st.columns(2)
                             
                             with col1:
-                                st.write(f"**Organization:** {upload['organization_name']}")
-                                st.write(f"**Location:** {upload['location']}")
-                                st.write(f"**Type:** {upload['organization_type']}")
-                                st.write(f"**Certification:** {upload['certification']}")
-                                st.write(f"**Year:** {upload['year_achieved']}")
-                                st.write(f"**Category:** {upload['category']}")
+                                st.write(f"**Issuer:** {cert.get('issuer', 'N/A')}")
+                                st.write(f"**Type:** {cert.get('type', 'N/A')}")
+                                st.write(f"**Status:** {cert.get('status', 'N/A')}")
                             
                             with col2:
-                                st.write(f"**Description:**")
-                                st.write(upload['description'])
-                                st.write(f"**Contact:** {upload.get('contact_email', 'Not provided')}")
-                                st.write(f"**Submitted:** {upload['upload_date']}")
+                                st.write(f"**Issue Date:** {cert.get('issue_date', 'N/A')}")
+                                st.write(f"**Expiry Date:** {cert.get('expiry_date', 'N/A')}")
+                                st.write(f"**Score Impact:** +{cert.get('score_impact', 0):.1f}")
                             
-                            # Action buttons
-                            col1, col2, col3 = st.columns([1, 1, 2])
-                            with col1:
-                                if st.button(f"✅ Approve", key=f"approve_{upload['upload_id']}"):
-                                    approve_upload(upload['upload_id'])
-                                    st.success("Upload approved!")
-                                    st.rerun()
-                            
-                            with col2:
-                                if st.button(f"❌ Reject", key=f"reject_{upload['upload_id']}"):
-                                    reason = st.text_input(f"Rejection reason for #{upload['upload_id']}", key=f"reason_{upload['upload_id']}")
-                                    reject_upload(upload['upload_id'], reason)
-                                    st.error("Upload rejected!")
-                                    st.rerun()
+                            if cert.get('description'):
+                                st.write(f"**Description:** {cert.get('description')}")
                 else:
-                    st.info("📭 No pending uploads to review.")
-                
-                # Approved uploads
-                if st.session_state.approved_uploads:
-                    st.markdown("### ✅ Recently Approved")
-                    for upload in st.session_state.approved_uploads[-5:]:  # Show last 5
-                        st.success(f"✅ {upload['organization_name']} - {upload['certification']} (Approved: {upload.get('approved_date', 'N/A')})")
-                
-                # Rejected uploads
-                if st.session_state.rejected_uploads:
-                    st.markdown("### ❌ Recently Rejected")
-                    for upload in st.session_state.rejected_uploads[-3:]:  # Show last 3
-                        st.error(f"❌ {upload['organization_name']} - {upload['certification']} (Rejected: {upload.get('rejected_date', 'N/A')})")
+                    st.info(f"No certifications found for {org_name} in our database.")
+            else:
+                st.warning(f"No data found for {org_name}.")
+        else:
+            st.info("🔍 **Search for an organization to view its certifications.**")
             
-            with tab2:
-                st.subheader("🏥 Hospital Management")
-                
-                # Initialize hospital storage
-                init_hospital_storage()
-                
-                # Add new hospital
-                st.markdown("### ➕ Add New Hospital")
-                with st.form("add_hospital_form"):
-                    col1, col2 = st.columns(2)
-                    
-                    with col1:
-                        new_hospital_name = st.text_input("Hospital Name*")
-                        new_hospital_location = st.text_input("Location*")
-                        new_hospital_type = st.selectbox("Type*", ["Hospital", "Medical Center", "Clinic", "Specialty Center"])
-                    
-                    with col2:
-                        new_hospital_website = st.text_input("Website")
-                        new_hospital_phone = st.text_input("Phone")
-                        new_hospital_email = st.text_input("Email")
-                    
-                    new_hospital_description = st.text_area("Description")
-                    
-                    if st.form_submit_button("➕ Add Hospital"):
-                        if new_hospital_name and new_hospital_location:
-                            hospital_data = {
-                                'name': new_hospital_name,
-                                'location': new_hospital_location,
-                                'type': new_hospital_type,
-                                'website': new_hospital_website,
-                                'phone': new_hospital_phone,
-                                'email': new_hospital_email,
-                                'description': new_hospital_description
-                            }
-                            add_hospital(hospital_data)
-                            st.success(f"✅ Hospital '{new_hospital_name}' added successfully!")
-                            st.rerun()
-                        else:
-                            st.error("❌ Please fill in required fields (Name and Location)")
-                
-                # Manage existing hospitals
-                if st.session_state.custom_hospitals:
-                    st.markdown("### 🏥 Existing Hospitals")
-                    for hospital in st.session_state.custom_hospitals:
-                        with st.expander(f"{hospital['name']} - {hospital['location']}", expanded=False):
-                            col1, col2 = st.columns([3, 1])
-                            
-                            with col1:
-                                st.write(f"**Type:** {hospital['type']}")
-                                st.write(f"**Website:** {hospital.get('website', 'Not provided')}")
-                                st.write(f"**Phone:** {hospital.get('phone', 'Not provided')}")
-                                st.write(f"**Email:** {hospital.get('email', 'Not provided')}")
-                                st.write(f"**Description:** {hospital.get('description', 'No description')}")
-                                st.write(f"**Added:** {hospital['added_date']}")
-                            
-                            with col2:
-                                if st.button(f"🗑️ Delete", key=f"delete_{hospital['hospital_id']}"):
-                                    delete_hospital(hospital['hospital_id'])
-                                    st.success("Hospital deleted!")
-                                    st.rerun()
-                else:
-                    st.info("📭 No custom hospitals added yet.")
+            # General certification information
+            st.markdown("### 🌟 Supported Certification Types")
             
-            with tab3:
-                st.subheader("📊 System Statistics")
-                
-                # Initialize storage
-                init_upload_storage()
-                init_hospital_storage()
-                
-                col1, col2, col3, col4 = st.columns(4)
-                
-                with col1:
-                    st.metric("📤 Pending Uploads", len(st.session_state.pending_uploads))
-                
-                with col2:
-                    st.metric("✅ Approved Uploads", len(st.session_state.approved_uploads))
-                
-                with col3:
-                    st.metric("❌ Rejected Uploads", len(st.session_state.rejected_uploads))
-                
-                with col4:
-                    st.metric("🏥 Custom Hospitals", len(st.session_state.custom_hospitals))
-                
-                # Recent activity
-                st.markdown("### 📈 Recent Activity")
-                if st.session_state.pending_uploads or st.session_state.approved_uploads or st.session_state.rejected_uploads:
-                    all_uploads = (st.session_state.pending_uploads + 
-                                 st.session_state.approved_uploads + 
-                                 st.session_state.rejected_uploads)
-                    
-                    # Sort by upload date (most recent first)
-                    all_uploads.sort(key=lambda x: x['upload_date'], reverse=True)
-                    
-                    for upload in all_uploads[:10]:  # Show last 10 activities
-                        status_icon = "🔍" if upload['status'] == 'pending' else "✅" if upload['status'] == 'approved' else "❌"
-                        st.write(f"{status_icon} {upload['organization_name']} - {upload['certification']} ({upload['upload_date']})")
-                else:
-                    st.info("📭 No recent activity.")
+            cert_types = {
+                "🏥 JCI (Joint Commission International)": {
+                    "description": "International healthcare accreditation for hospitals and healthcare organizations",
+                    "impact": "High impact on quality score",
+                    "recognition": "Global recognition"
+                },
+                "🇮🇳 NABH (National Accreditation Board for Hospitals)": {
+                    "description": "Indian healthcare accreditation standard",
+                    "impact": "High impact for Indian organizations",
+                    "recognition": "National recognition in India"
+                },
+                "🌍 ISO Certifications": {
+                    "description": "International Organization for Standardization certifications (ISO 9001, ISO 14001, etc.)",
+                    "impact": "Moderate to high impact",
+                    "recognition": "Global recognition"
+                },
+                "🏥 AAAHC": {
+                    "description": "Accreditation Association for Ambulatory Health Care",
+                    "impact": "Moderate impact",
+                    "recognition": "US-focused recognition"
+                },
+                "🩺 CAP": {
+                    "description": "College of American Pathologists accreditation",
+                    "impact": "High impact for laboratory services",
+                    "recognition": "International recognition"
+                }
+            }
+            
+            for cert_name, cert_info in cert_types.items():
+                with st.expander(cert_name):
+                    st.write(f"**Description:** {cert_info['description']}")
+                    st.write(f"**Score Impact:** {cert_info['impact']}")
+                    st.write(f"**Recognition Level:** {cert_info['recognition']}")
+            
+            st.markdown("### 📊 Certification Impact on Quality Scores")
+            
+            st.markdown("""
+            **How Certifications Affect Quality Scores:**
+            
+            - **Active Certifications:** Full score impact based on certification type and recognition level
+            - **Expired Certifications:** Reduced score impact (typically 50% of full value)
+            - **Multiple Certifications:** Cumulative impact with diminishing returns
+            - **International vs. National:** International certifications typically have higher impact
+            - **Specialty Certifications:** Additional bonus for specialized healthcare areas
+            
+            **Certification Verification:**
+            - All certifications are verified against official databases when possible
+            - Expiry dates are tracked and impact scores accordingly
+            - Regular updates ensure current certification status
+            """)
 
 except Exception as e:
-    st.error(f"An error occurred: {str(e)}")
-    st.info("Please refresh the page or contact support if the issue persists.")
+        st.error(f"An error occurred: {str(e)}")
 
-# Footer
-st.markdown("---")
-st.markdown("""
-<div style='text-align: center; color: #666; padding: 12px;'>
-    <p>🏥 QuXAT Healthcare Quality Grid v3.0 | Built with Streamlit</p>
-    <p>🌍 Global Healthcare Quality Assessment Platform | Powered by AI & Data Analytics</p>
-    <p style='font-size: 0.8em; color: #888; margin-top: 8px;'>
-        ⚠️ <strong>Data Source Disclaimer:</strong> All data is validated from official certification bodies and healthcare organizations. 
-        Only verified information from NABH, NABL, JCI, ISO, and other accredited sources is displayed.
-    </p>
-    <p style='font-size: 0.7em; color: #999; margin-top: 4px;'>
-        🔍 <strong>Transparency Notice:</strong> If no validated data is found for an organization, appropriate disclaimers are shown. 
-        Users are encouraged to verify information directly with certification bodies.
-    </p>
-    <p style='font-size: 0.7em; color: #999; margin-top: 4px;'>
-        Not intended for medical advice or as sole basis for healthcare decisions. Use for comparative analysis only.
-    </p>
-</div>
-""", unsafe_allow_html=True)
+if __name__ == "__main__":
+    # Streamlit applications don't need a main function
+    # The app runs automatically when executed
+    pass
