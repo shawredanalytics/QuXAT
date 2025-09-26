@@ -1,0 +1,1400 @@
+{
+  "monthly_accreditations": [
+    {
+      "year": 2022,
+      "month": 1,
+      "month_name": "January",
+      "date": "2022-01-01",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 34,
+          "cumulative": 34
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 31,
+          "cumulative": 31
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 26,
+          "cumulative": 26
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 37,
+          "cumulative": 37
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 15,
+          "cumulative": 15
+        }
+      },
+      "total_accreditations": 143
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "month_name": "January",
+      "date": "2022-01-31",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 32,
+          "cumulative": 66
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 35,
+          "cumulative": 66
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 18,
+          "cumulative": 44
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 27,
+          "cumulative": 64
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 15,
+          "cumulative": 30
+        }
+      },
+      "total_accreditations": 127
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "month_name": "March",
+      "date": "2022-03-02",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 57,
+          "cumulative": 123
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 44,
+          "cumulative": 110
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 30,
+          "cumulative": 74
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 25,
+          "cumulative": 89
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 25,
+          "cumulative": 55
+        }
+      },
+      "total_accreditations": 181
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "month_name": "April",
+      "date": "2022-04-01",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 60,
+          "cumulative": 183
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 50,
+          "cumulative": 160
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 25,
+          "cumulative": 99
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 29,
+          "cumulative": 118
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 27,
+          "cumulative": 82
+        }
+      },
+      "total_accreditations": 191
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "month_name": "May",
+      "date": "2022-05-01",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 56,
+          "cumulative": 239
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 38,
+          "cumulative": 198
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 29,
+          "cumulative": 128
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 32,
+          "cumulative": 150
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 26,
+          "cumulative": 108
+        }
+      },
+      "total_accreditations": 181
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "month_name": "May",
+      "date": "2022-05-31",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 40,
+          "cumulative": 279
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 33,
+          "cumulative": 231
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 33,
+          "cumulative": 161
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 26,
+          "cumulative": 176
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 25,
+          "cumulative": 133
+        }
+      },
+      "total_accreditations": 157
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "month_name": "June",
+      "date": "2022-06-30",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 39,
+          "cumulative": 318
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 32,
+          "cumulative": 263
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 21,
+          "cumulative": 182
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 39,
+          "cumulative": 215
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 14,
+          "cumulative": 147
+        }
+      },
+      "total_accreditations": 145
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "month_name": "July",
+      "date": "2022-07-30",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 38,
+          "cumulative": 356
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 24,
+          "cumulative": 287
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 19,
+          "cumulative": 201
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 32,
+          "cumulative": 247
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 13,
+          "cumulative": 160
+        }
+      },
+      "total_accreditations": 126
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "month_name": "August",
+      "date": "2022-08-29",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 35,
+          "cumulative": 391
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 30,
+          "cumulative": 317
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 20,
+          "cumulative": 221
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 29,
+          "cumulative": 276
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 17,
+          "cumulative": 177
+        }
+      },
+      "total_accreditations": 131
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "month_name": "September",
+      "date": "2022-09-28",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 64,
+          "cumulative": 455
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 61,
+          "cumulative": 378
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 36,
+          "cumulative": 257
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 38,
+          "cumulative": 314
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 34,
+          "cumulative": 211
+        }
+      },
+      "total_accreditations": 233
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "month_name": "October",
+      "date": "2022-10-28",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 59,
+          "cumulative": 514
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 52,
+          "cumulative": 430
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 29,
+          "cumulative": 286
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 40,
+          "cumulative": 354
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 29,
+          "cumulative": 240
+        }
+      },
+      "total_accreditations": 209
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "month_name": "November",
+      "date": "2022-11-27",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 66,
+          "cumulative": 580
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 43,
+          "cumulative": 473
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 25,
+          "cumulative": 311
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 33,
+          "cumulative": 387
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 22,
+          "cumulative": 262
+        }
+      },
+      "total_accreditations": 189
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "month_name": "December",
+      "date": "2022-12-27",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 54,
+          "cumulative": 634
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 47,
+          "cumulative": 520
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 22,
+          "cumulative": 333
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 30,
+          "cumulative": 417
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 26,
+          "cumulative": 288
+        }
+      },
+      "total_accreditations": 179
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "month_name": "January",
+      "date": "2023-01-26",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 42,
+          "cumulative": 676
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 52,
+          "cumulative": 572
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 27,
+          "cumulative": 360
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 40,
+          "cumulative": 457
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 21,
+          "cumulative": 309
+        }
+      },
+      "total_accreditations": 182
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "month_name": "February",
+      "date": "2023-02-25",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 52,
+          "cumulative": 728
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 47,
+          "cumulative": 619
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 27,
+          "cumulative": 387
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 50,
+          "cumulative": 507
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 22,
+          "cumulative": 331
+        }
+      },
+      "total_accreditations": 198
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "month_name": "March",
+      "date": "2023-03-27",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 72,
+          "cumulative": 800
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 62,
+          "cumulative": 681
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 27,
+          "cumulative": 414
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 40,
+          "cumulative": 547
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 34,
+          "cumulative": 365
+        }
+      },
+      "total_accreditations": 235
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "month_name": "April",
+      "date": "2023-04-26",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 70,
+          "cumulative": 870
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 51,
+          "cumulative": 732
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 41,
+          "cumulative": 455
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 31,
+          "cumulative": 578
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 38,
+          "cumulative": 403
+        }
+      },
+      "total_accreditations": 231
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "month_name": "May",
+      "date": "2023-05-26",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 59,
+          "cumulative": 929
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 54,
+          "cumulative": 786
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 33,
+          "cumulative": 488
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 30,
+          "cumulative": 608
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 31,
+          "cumulative": 434
+        }
+      },
+      "total_accreditations": 207
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "month_name": "June",
+      "date": "2023-06-25",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 42,
+          "cumulative": 971
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 44,
+          "cumulative": 830
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 27,
+          "cumulative": 515
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 45,
+          "cumulative": 653
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 20,
+          "cumulative": 454
+        }
+      },
+      "total_accreditations": 178
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "month_name": "July",
+      "date": "2023-07-25",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 47,
+          "cumulative": 1018
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 28,
+          "cumulative": 858
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 22,
+          "cumulative": 537
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 31,
+          "cumulative": 684
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 19,
+          "cumulative": 473
+        }
+      },
+      "total_accreditations": 147
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "month_name": "August",
+      "date": "2023-08-24",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 50,
+          "cumulative": 1068
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 48,
+          "cumulative": 906
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 28,
+          "cumulative": 565
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 32,
+          "cumulative": 716
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 26,
+          "cumulative": 499
+        }
+      },
+      "total_accreditations": 184
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "month_name": "September",
+      "date": "2023-09-23",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 86,
+          "cumulative": 1154
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 80,
+          "cumulative": 986
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 32,
+          "cumulative": 597
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 56,
+          "cumulative": 772
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 41,
+          "cumulative": 540
+        }
+      },
+      "total_accreditations": 295
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "month_name": "October",
+      "date": "2023-10-23",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 57,
+          "cumulative": 1211
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 78,
+          "cumulative": 1064
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 47,
+          "cumulative": 644
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 58,
+          "cumulative": 830
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 27,
+          "cumulative": 567
+        }
+      },
+      "total_accreditations": 267
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "month_name": "November",
+      "date": "2023-11-22",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 72,
+          "cumulative": 1283
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 53,
+          "cumulative": 1117
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 37,
+          "cumulative": 681
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 37,
+          "cumulative": 867
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 28,
+          "cumulative": 595
+        }
+      },
+      "total_accreditations": 227
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "month_name": "December",
+      "date": "2023-12-22",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 62,
+          "cumulative": 1345
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 65,
+          "cumulative": 1182
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 31,
+          "cumulative": 712
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 40,
+          "cumulative": 907
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 26,
+          "cumulative": 621
+        }
+      },
+      "total_accreditations": 224
+    },
+    {
+      "year": 2024,
+      "month": 1,
+      "month_name": "January",
+      "date": "2024-01-21",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 54,
+          "cumulative": 1399
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 45,
+          "cumulative": 1227
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 33,
+          "cumulative": 745
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 47,
+          "cumulative": 954
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 28,
+          "cumulative": 649
+        }
+      },
+      "total_accreditations": 207
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "month_name": "February",
+      "date": "2024-02-20",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 62,
+          "cumulative": 1461
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 56,
+          "cumulative": 1283
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 37,
+          "cumulative": 782
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 47,
+          "cumulative": 1001
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 32,
+          "cumulative": 681
+        }
+      },
+      "total_accreditations": 234
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "month_name": "March",
+      "date": "2024-03-21",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 78,
+          "cumulative": 1539
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 83,
+          "cumulative": 1366
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 37,
+          "cumulative": 819
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 41,
+          "cumulative": 1042
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 36,
+          "cumulative": 717
+        }
+      },
+      "total_accreditations": 275
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "month_name": "April",
+      "date": "2024-04-20",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 65,
+          "cumulative": 1604
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 63,
+          "cumulative": 1429
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 44,
+          "cumulative": 863
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 37,
+          "cumulative": 1079
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 36,
+          "cumulative": 753
+        }
+      },
+      "total_accreditations": 245
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "month_name": "May",
+      "date": "2024-05-20",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 67,
+          "cumulative": 1671
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 67,
+          "cumulative": 1496
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 37,
+          "cumulative": 900
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 45,
+          "cumulative": 1124
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 30,
+          "cumulative": 783
+        }
+      },
+      "total_accreditations": 246
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "month_name": "June",
+      "date": "2024-06-19",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 65,
+          "cumulative": 1736
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 47,
+          "cumulative": 1543
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 33,
+          "cumulative": 933
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 51,
+          "cumulative": 1175
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 21,
+          "cumulative": 804
+        }
+      },
+      "total_accreditations": 217
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "month_name": "July",
+      "date": "2024-07-19",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 59,
+          "cumulative": 1795
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 46,
+          "cumulative": 1589
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 29,
+          "cumulative": 962
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 52,
+          "cumulative": 1227
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 19,
+          "cumulative": 823
+        }
+      },
+      "total_accreditations": 205
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "month_name": "August",
+      "date": "2024-08-18",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 50,
+          "cumulative": 1845
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 54,
+          "cumulative": 1643
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 28,
+          "cumulative": 990
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 45,
+          "cumulative": 1272
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 27,
+          "cumulative": 850
+        }
+      },
+      "total_accreditations": 204
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "month_name": "September",
+      "date": "2024-09-17",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 70,
+          "cumulative": 1915
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 82,
+          "cumulative": 1725
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 43,
+          "cumulative": 1033
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 58,
+          "cumulative": 1330
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 34,
+          "cumulative": 884
+        }
+      },
+      "total_accreditations": 287
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "month_name": "October",
+      "date": "2024-10-17",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 86,
+          "cumulative": 2001
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 77,
+          "cumulative": 1802
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 47,
+          "cumulative": 1080
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 62,
+          "cumulative": 1392
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 32,
+          "cumulative": 916
+        }
+      },
+      "total_accreditations": 304
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "month_name": "November",
+      "date": "2024-11-16",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 75,
+          "cumulative": 2076
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 85,
+          "cumulative": 1887
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 44,
+          "cumulative": 1124
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 60,
+          "cumulative": 1452
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 29,
+          "cumulative": 945
+        }
+      },
+      "total_accreditations": 293
+    }
+  ],
+  "certification_breakdown": [
+    {
+      "certification_type": "JCI",
+      "name": "Joint Commission International",
+      "total_accreditations": 2076,
+      "percentage": 27.7,
+      "average_monthly": 57.7,
+      "growth_rate": 15.0
+    },
+    {
+      "certification_type": "NABH",
+      "name": "National Accreditation Board for Hospitals",
+      "total_accreditations": 1887,
+      "percentage": 25.2,
+      "average_monthly": 52.4,
+      "growth_rate": 25.0
+    },
+    {
+      "certification_type": "CAP",
+      "name": "College of American Pathologists",
+      "total_accreditations": 1124,
+      "percentage": 15.0,
+      "average_monthly": 31.2,
+      "growth_rate": 12.0
+    },
+    {
+      "certification_type": "ISO",
+      "name": "ISO Healthcare Standards",
+      "total_accreditations": 1452,
+      "percentage": 19.4,
+      "average_monthly": 40.3,
+      "growth_rate": 18.0
+    },
+    {
+      "certification_type": "AAAHC",
+      "name": "Accreditation Association for Ambulatory Health Care",
+      "total_accreditations": 945,
+      "percentage": 12.6,
+      "average_monthly": 26.2,
+      "growth_rate": 20.0
+    }
+  ],
+  "regional_distribution": [
+    {
+      "region": "North America",
+      "total_accreditations": 1871,
+      "percentage": 25.0,
+      "monthly_average": 52.0
+    },
+    {
+      "region": "Europe",
+      "total_accreditations": 1646,
+      "percentage": 22.0,
+      "monthly_average": 45.7
+    },
+    {
+      "region": "Asia-Pacific",
+      "total_accreditations": 2245,
+      "percentage": 30.0,
+      "monthly_average": 62.4
+    },
+    {
+      "region": "Middle East & Africa",
+      "total_accreditations": 898,
+      "percentage": 12.0,
+      "monthly_average": 24.9
+    },
+    {
+      "region": "Latin America",
+      "total_accreditations": 823,
+      "percentage": 11.0,
+      "monthly_average": 22.9
+    }
+  ],
+  "yearly_summary": [
+    {
+      "year": 2022,
+      "total_accreditations": 2192,
+      "monthly_average": 182.7,
+      "growth_from_previous": 0
+    },
+    {
+      "year": 2023,
+      "total_accreditations": 2575,
+      "monthly_average": 214.6,
+      "growth_from_previous": 17.5
+    },
+    {
+      "year": 2024,
+      "total_accreditations": 2717,
+      "monthly_average": 226.4,
+      "growth_from_previous": 5.5
+    }
+  ],
+  "growth_metrics": {
+    "overall_growth_rate": 24.0,
+    "compound_annual_growth_rate": 11.3,
+    "total_accreditations_3_years": 7484,
+    "peak_month": {
+      "year": 2024,
+      "month": 10,
+      "month_name": "October",
+      "date": "2024-10-17",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 86,
+          "cumulative": 2001
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 77,
+          "cumulative": 1802
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 47,
+          "cumulative": 1080
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 62,
+          "cumulative": 1392
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 32,
+          "cumulative": 916
+        }
+      },
+      "total_accreditations": 304
+    },
+    "lowest_month": {
+      "year": 2022,
+      "month": 7,
+      "month_name": "July",
+      "date": "2022-07-30",
+      "certifications": {
+        "JCI": {
+          "name": "Joint Commission International",
+          "count": 38,
+          "cumulative": 356
+        },
+        "NABH": {
+          "name": "National Accreditation Board for Hospitals",
+          "count": 24,
+          "cumulative": 287
+        },
+        "CAP": {
+          "name": "College of American Pathologists",
+          "count": 19,
+          "cumulative": 201
+        },
+        "ISO": {
+          "name": "ISO Healthcare Standards",
+          "count": 32,
+          "cumulative": 247
+        },
+        "AAAHC": {
+          "name": "Accreditation Association for Ambulatory Health Care",
+          "count": 13,
+          "cumulative": 160
+        }
+      },
+      "total_accreditations": 126
+    }
+  },
+  "metadata": {
+    "generated_date": "2025-09-25T20:05:00.383225",
+    "data_period": "2022-2024",
+    "total_months": 36
+  }
+}

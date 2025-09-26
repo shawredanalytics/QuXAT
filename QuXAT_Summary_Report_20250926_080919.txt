@@ -1,0 +1,46 @@
+================================================================================
+QuXAT HEALTHCARE ORGANIZATION RANKING REPORT
+================================================================================
+Generated on: 2025-09-26 08:09:19
+
+OVERALL STATISTICS
+----------------------------------------
+Total Organizations Ranked: 1,588
+Average Score: 33.76
+Highest Score: 70.00
+Lowest Score: 0.00
+
+TOP 10 HEALTHCARE ORGANIZATIONS
+----------------------------------------
+Rank   Score    Percentile   Organization
+--------------------------------------------------------------------------------
+1      70.0     100.00      % Fortis Memorial Research Institute
+1      70.0     100.00      % Max Super Speciality Hospital
+1      70.0     100.00      % Fortis Hospital
+1      70.0     100.00      % Manipal Hospital
+1      70.0     100.00      % Max Hospital
+1      70.0     100.00      % Apollo Hospitals
+1      70.0     100.00      % Institute of liver & Biliary Sciences, Vasant Kunj
+1      70.0     100.00      % Queens NRI Hospital (A Unit of Ms Chalasani Hospital Pvt. Ltd.)
+1      70.0     100.00      % Upasani Super Speciality Hospital Private Limited
+1      70.0     100.00      % Dhanalakshmi Srinivasan Medical College and Hospital
+
+COUNTRY-WISE BREAKDOWN
+----------------------------------------
+Country              Count    Avg Score    Best Score
+------------------------------------------------------------
+India                1552     33.03        70.00
+Singapore            5        65.00        65.00
+Thailand             3        65.00        65.00
+Malaysia             2        65.00        65.00
+South Korea          3        65.00        65.00
+Saudi Arabia         2        65.00        65.00
+UAE                  4        65.00        65.00
+Qatar                2        65.00        65.00
+Jordan               1        65.00        65.00
+Lebanon              1        65.00        65.00
+Turkey               4        65.00        65.00
+Switzerland          2        65.00        65.00
+Brazil               3        65.00        65.00
+Colombia             2        65.00        65.00
+Argentina            2        65.00        65.00

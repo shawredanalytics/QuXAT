@@ -27,6 +27,264 @@ class HealthcareDataValidator:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
         
+        # Cache for validated data (expires after 24 hours)
+        self.validation_cache = {}
+        self.cache_expiry = timedelta(hours=24)
+    
+    def _extract_quality_initiatives_from_website(self, org_name: str) -> List[Dict]:
+        """
+        Extract quality initiatives from organization website
+        """
+        try:
+            # Get organization website URL
+            website_url = self._get_organization_website(org_name)
+            if not website_url:
+                logger.info(f"No website found for {org_name}")
+                return []
+            
+            # Scrape quality initiatives from website
+            initiatives = self._scrape_quality_initiatives(website_url, org_name)
+            logger.info(f"Found {len(initiatives)} quality initiatives from website for {org_name}")
+            return initiatives
+            
+        except Exception as e:
+            logger.error(f"Error extracting quality initiatives from website for {org_name}: {str(e)}")
+            return []
+    
+    def _get_organization_website(self, org_name: str) -> Optional[str]:
+        """
+        Get organization website URL through search or known mappings
+        """
+        # Known website mappings for major healthcare organizations
+        website_mappings = {
+            'apollo hospitals': 'https://www.apollohospitals.com',
+            'fortis healthcare': 'https://www.fortishealthcare.com',
+            'max healthcare': 'https://www.maxhealthcare.in',
+            'medanta': 'https://www.medanta.org',
+            'aiims delhi': 'https://www.aiims.edu',
+            'manipal hospitals': 'https://www.manipalhospitals.com',
+            'narayana health': 'https://www.narayanahealth.org',
+            'dr lal pathlabs': 'https://www.lalpathlabs.com',
+            'srl diagnostics': 'https://www.srldiagnostics.com',
+            'metropolis healthcare': 'https://www.metropolisindia.com',
+            'mayo clinic': 'https://www.mayoclinic.org',
+            'cleveland clinic': 'https://my.clevelandclinic.org',
+            'johns hopkins': 'https://www.hopkinsmedicine.org',
+            'massachusetts general hospital': 'https://www.massgeneral.org',
+            'mount sinai': 'https://www.mountsinai.org'
+        }
+        
+        org_key = org_name.lower().strip()
+        
+        # Check for exact matches first
+        if org_key in website_mappings:
+            return website_mappings[org_key]
+        
+        # Check for partial matches
+        for org_key_db, website in website_mappings.items():
+            if org_key_db in org_key or org_key in org_key_db:
+                return website
+        
+        return None
+    
+    def _scrape_quality_initiatives(self, website_url: str, org_name: str) -> List[Dict]:
+        """
+        Scrape quality initiatives from organization website
+        """
+        initiatives = []
+        
+        try:
+            # Set up headers to mimic a real browser
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1'
+            }
+            
+            # Try multiple potential pages for quality initiatives
+            potential_pages = [
+                f"{website_url}/quality",
+                f"{website_url}/quality-initiatives",
+                f"{website_url}/about/quality",
+                f"{website_url}/patient-safety",
+                f"{website_url}/quality-care",
+                f"{website_url}/accreditation",
+                f"{website_url}/certifications",
+                f"{website_url}/about-us",
+                website_url  # Main page as fallback
+            ]
+            
+            for page_url in potential_pages:
+                try:
+                    response = requests.get(page_url, headers=headers, timeout=10)
+                    if response.status_code == 200:
+                        soup = BeautifulSoup(response.content, 'html.parser')
+                        page_initiatives = self._extract_initiatives_from_page(soup, org_name)
+                        initiatives.extend(page_initiatives)
+                        
+                        # If we found initiatives, we can stop searching
+                        if page_initiatives:
+                            break
+                            
+                except requests.RequestException as e:
+                    logger.debug(f"Failed to access {page_url}: {str(e)}")
+                    continue
+                
+                # Add delay between requests to be respectful
+                time.sleep(1)
+            
+        except Exception as e:
+            logger.error(f"Error scraping quality initiatives from {website_url}: {str(e)}")
+        
+        return initiatives
+    
+    def _extract_initiatives_from_page(self, soup: BeautifulSoup, org_name: str) -> List[Dict]:
+        """
+        Extract quality initiatives from a webpage using various patterns
+        """
+        initiatives = []
+        
+        # Quality-related keywords to search for
+        quality_keywords = [
+            'quality initiative', 'quality program', 'quality improvement',
+            'patient safety', 'quality care', 'excellence program',
+            'accreditation', 'certification', 'quality assurance',
+            'clinical excellence', 'quality management', 'continuous improvement',
+            'patient experience', 'quality standards', 'best practices'
+        ]
+        
+        try:
+            # Search for text containing quality keywords
+            text_content = soup.get_text().lower()
+            
+            # Look for structured content (lists, sections, etc.)
+            for keyword in quality_keywords:
+                if keyword in text_content:
+                    # Find elements containing the keyword
+                    elements = soup.find_all(text=re.compile(keyword, re.IGNORECASE))
+                    
+                    for element in elements[:3]:  # Limit to first 3 matches per keyword
+                        parent = element.parent if element.parent else element
+                        
+                        # Try to extract initiative details
+                        initiative_text = self._clean_text(parent.get_text())
+                        if len(initiative_text) > 20 and len(initiative_text) < 500:
+                            
+                            initiative = {
+                                'name': self._extract_initiative_name(initiative_text, keyword),
+                                'description': initiative_text[:200] + '...' if len(initiative_text) > 200 else initiative_text,
+                                'impact_score': self._calculate_web_impact_score(keyword, initiative_text),
+                                'year': datetime.now().year,
+                                'category': self._categorize_initiative(keyword),
+                                'source': 'Organization Website',
+                                'extracted_from': keyword
+                            }
+                            
+                            initiatives.append(initiative)
+            
+            # Remove duplicates based on similarity
+            unique_initiatives = self._remove_similar_initiatives(initiatives)
+            
+        except Exception as e:
+            logger.error(f"Error extracting initiatives from page: {str(e)}")
+        
+        return unique_initiatives[:5]  # Limit to top 5 initiatives
+    
+    def _clean_text(self, text: str) -> str:
+        """Clean and normalize text content"""
+        # Remove extra whitespace and newlines
+        text = re.sub(r'\s+', ' ', text.strip())
+        # Remove special characters but keep basic punctuation
+        text = re.sub(r'[^\w\s\-\.,;:()]', '', text)
+        return text
+    
+    def _extract_initiative_name(self, text: str, keyword: str) -> str:
+        """Extract a meaningful name for the initiative"""
+        # Try to find a title-like phrase near the keyword
+        sentences = text.split('.')
+        for sentence in sentences:
+            if keyword.lower() in sentence.lower():
+                # Take the first part of the sentence as the name
+                name = sentence.strip()[:80]
+                if name:
+                    return name
+        
+        # Fallback: create a name based on the keyword
+        return f"{keyword.title()} Program"
+    
+    def _calculate_web_impact_score(self, keyword: str, text: str) -> int:
+        """Calculate impact score based on keyword importance and text content"""
+        base_scores = {
+            'quality initiative': 12,
+            'quality program': 12,
+            'patient safety': 15,
+            'clinical excellence': 14,
+            'accreditation': 10,
+            'certification': 8,
+            'quality improvement': 11,
+            'excellence program': 13
+        }
+        
+        base_score = base_scores.get(keyword, 8)
+        
+        # Boost score based on text content indicators
+        boost_keywords = ['international', 'award', 'recognition', 'excellence', 'innovation', 'advanced']
+        for boost_keyword in boost_keywords:
+            if boost_keyword.lower() in text.lower():
+                base_score += 2
+        
+        return min(base_score, 20)  # Cap at 20
+    
+    def _categorize_initiative(self, keyword: str) -> str:
+        """Categorize initiative based on keyword"""
+        categories = {
+            'quality initiative': 'Quality Improvement',
+            'quality program': 'Quality Management',
+            'patient safety': 'Patient Safety',
+            'clinical excellence': 'Clinical Excellence',
+            'accreditation': 'Accreditation',
+            'certification': 'Certification',
+            'quality improvement': 'Quality Improvement',
+            'excellence program': 'Excellence Program',
+            'quality care': 'Quality Care',
+            'quality assurance': 'Quality Assurance'
+        }
+        
+        return categories.get(keyword, 'Quality Initiative')
+    
+    def _remove_similar_initiatives(self, initiatives: List[Dict]) -> List[Dict]:
+        """Remove similar initiatives to avoid duplicates"""
+        unique_initiatives = []
+        
+        for initiative in initiatives:
+            is_similar = False
+            for existing in unique_initiatives:
+                # Check for similarity in names
+                if self._text_similarity(initiative['name'], existing['name']) > 0.7:
+                    is_similar = True
+                    break
+            
+            if not is_similar:
+                unique_initiatives.append(initiative)
+        
+        return unique_initiatives
+    
+    def _text_similarity(self, text1: str, text2: str) -> float:
+        """Calculate simple text similarity"""
+        words1 = set(text1.lower().split())
+        words2 = set(text2.lower().split())
+        
+        if not words1 or not words2:
+            return 0.0
+        
+        intersection = words1.intersection(words2)
+        union = words1.union(words2)
+        
+        return len(intersection) / len(union) if union else 0.0
+        
         # Official certification body URLs
         self.certification_sources = {
             'NABH': {
@@ -71,7 +329,12 @@ class HealthcareDataValidator:
         cache_key = f"cert_{org_name.lower().strip()}"
         if self._is_cache_valid(cache_key):
             logger.info(f"Using cached data for {org_name}")
-            return self.validation_cache[cache_key]['data']
+            cached_data = self.validation_cache[cache_key]['data']
+            # Ensure cached data is not None
+            if cached_data is None:
+                logger.warning(f"Cached data is None for {org_name}, regenerating...")
+            else:
+                return cached_data
         
         validated_data = {
             'organization': org_name,
@@ -118,88 +381,12 @@ class HealthcareDataValidator:
         Validate NABH certification from official NABH database
         """
         try:
-            # For demonstration - in real implementation, this would scrape NABH website
-            # Currently returning None to indicate no validated data found
-            logger.info(f"Checking NABH database for {org_name}")
+            # NABH validation disabled - only use validated certifications from official sources
+            # The hardcoded data below is for demonstration only and should not be used for scoring
+            logger.info(f"NABH validation disabled for {org_name} - only validated official sources allowed")
             
-            # Expanded known organizations with validated NABH data
-            known_nabh_orgs = {
-                'apollo hospitals': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-12-31',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-001',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                },
-                'fortis healthcare': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-08-15',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-002',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                },
-                'max healthcare': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-10-20',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-003',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                },
-                'medanta': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-11-30',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-004',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                },
-                'aiims delhi': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-09-15',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-005',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                },
-                'manipal hospitals': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-07-25',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-006',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                },
-                'narayana health': {
-                    'name': 'National Accreditation Board for Hospitals & Healthcare Providers (NABH)',
-                    'status': 'Active',
-                    'valid_until': '2025-06-10',
-                    'score_impact': 25,
-                    'certificate_number': 'NABH-2023-007',
-                    'accreditation_level': 'Full NABH',
-                    'issuer': 'NABH'
-                }
-            }
-            
-            org_key = org_name.lower().strip()
-            
-            # Check for exact matches first
-            if org_key in known_nabh_orgs:
-                return [known_nabh_orgs[org_key]]
-            
-            # Check for partial matches
-            for hospital_key, data in known_nabh_orgs.items():
-                if hospital_key in org_key or org_key in hospital_key:
-                    return [data]
-            
+            # NOTE: In production, this would connect to the official NABH database API
+            # Currently returning empty list to prevent simulated results
             return []
             
         except Exception as e:
@@ -212,164 +399,12 @@ class HealthcareDataValidator:
         Returns both certification and accreditation data for NABL
         """
         try:
-            logger.info(f"Checking NABL database for {org_name}")
+            # NABL validation disabled - only use validated certifications from official sources
+            # The hardcoded data below is for demonstration only and should not be used for scoring
+            logger.info(f"NABL validation disabled for {org_name} - only validated official sources allowed")
             
-            # Expanded known organizations with validated NABL data
-            known_nabl_orgs = {
-                'satya scan kakinada': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-08-15',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5025',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-08-15',
-                        'valid_until': '2025-08-15',
-                        'certificate_number': 'TC-5025',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
-                    }
-                },
-                'satya scan': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-08-15',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5025',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-08-15',
-                        'valid_until': '2025-08-15',
-                        'certificate_number': 'TC-5025',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
-                    }
-                },
-                'dr lal pathlabs': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-12-31',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5001',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-01-01',
-                        'valid_until': '2025-12-31',
-                        'certificate_number': 'TC-5001',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for comprehensive medical testing services'
-                    }
-                },
-                'srl diagnostics': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-11-20',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5002',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-11-20',
-                        'valid_until': '2025-11-20',
-                        'certificate_number': 'TC-5002',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for diagnostic testing services'
-                    }
-                },
-                'metropolis healthcare': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-10-15',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5003',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-10-15',
-                        'valid_until': '2025-10-15',
-                        'certificate_number': 'TC-5003',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for healthcare diagnostic services'
-                    }
-                },
-                'thyrocare': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-09-30',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5004',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-09-30',
-                        'valid_until': '2025-09-30',
-                        'certificate_number': 'TC-5004',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for specialized diagnostic testing'
-                    }
-                },
-                'quest diagnostics': {
-                    'certification': {
-                        'name': 'NABL Certification',
-                        'status': 'Active',
-                        'valid_until': '2025-08-25',
-                        'score_impact': 15,
-                        'certificate_number': 'TC-5005',
-                        'scope': 'Medical Testing Laboratory',
-                        'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
-                        'type': 'Laboratory Certification'
-                    },
-                    'accreditation': {
-                        'name': 'NABL Laboratory Accreditation',
-                        'level': 'ISO/IEC 17025:2017 Accredited',
-                        'awarded_date': '2023-08-25',
-                        'valid_until': '2025-08-25',
-                        'certificate_number': 'TC-5005',
-                        'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical diagnostic services'
-                    }
-                }
-            }
-            
-            org_key = org_name.lower().strip()
-            
-            # Check for exact matches first
-            if org_key in known_nabl_orgs:
-                nabl_data = known_nabl_orgs[org_key]
-                return [nabl_data['certification']]  # Return certification data for the main certification list
-            
-            # Check for partial matches
-            for lab_key, data in known_nabl_orgs.items():
-                if lab_key in org_key or org_key in lab_key:
-                    return [data['certification']]  # Return certification data for the main certification list
-            
+            # NOTE: In production, this would connect to the official NABL database API
+            # Currently returning empty list to prevent simulated results
             return []
             
         except Exception as e:
@@ -381,77 +416,12 @@ class HealthcareDataValidator:
         Get NABL accreditation data for the accreditations section
         """
         try:
-            # Use the same data structure as _validate_nabl_certification
-            known_nabl_orgs = {
-                'satya scan kakinada': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-08-15',
-                    'valid_until': '2025-08-15',
-                    'certificate_number': 'TC-5025',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
-                },
-                'satya scan': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-08-15',
-                    'valid_until': '2025-08-15',
-                    'certificate_number': 'TC-5025',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical testing services'
-                },
-                'dr lal pathlabs': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-01-01',
-                    'valid_until': '2025-12-31',
-                    'certificate_number': 'TC-5001',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for comprehensive medical testing services'
-                },
-                'srl diagnostics': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-11-20',
-                    'valid_until': '2025-11-20',
-                    'certificate_number': 'TC-5002',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for diagnostic testing services'
-                },
-                'metropolis healthcare': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-10-15',
-                    'valid_until': '2025-10-15',
-                    'certificate_number': 'TC-5003',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for healthcare diagnostic services'
-                },
-                'thyrocare': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-09-30',
-                    'valid_until': '2025-09-30',
-                    'certificate_number': 'TC-5004',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for specialized diagnostic testing'
-                },
-                'quest diagnostics': {
-                    'name': 'NABL Laboratory Accreditation',
-                    'level': 'ISO/IEC 17025:2017 Accredited',
-                    'awarded_date': '2023-08-25',
-                    'valid_until': '2025-08-25',
-                    'certificate_number': 'TC-5005',
-                    'description': 'National Accreditation Board for Testing and Calibration Laboratories accreditation for medical diagnostic services'
-                }
-            }
+            # NABL accreditation disabled - only use validated accreditations from official sources
+            # The hardcoded data below is for demonstration only and should not be used for scoring
+            logger.info(f"NABL accreditation disabled for {org_name} - only validated official sources allowed")
             
-            org_key = org_name.lower().strip()
-            
-            # Check for exact matches first
-            if org_key in known_nabl_orgs:
-                return known_nabl_orgs[org_key]
-            
-            # Check for partial matches
-            for lab_key, data in known_nabl_orgs.items():
-                if lab_key in org_key or org_key in lab_key:
-                    return data
-            
+            # NOTE: In production, this would connect to the official NABL database API
+            # Currently returning None to prevent simulated results
             return None
             
         except Exception as e:
@@ -461,80 +431,25 @@ class HealthcareDataValidator:
     def _validate_jci_certification(self, org_name: str) -> List[Dict]:
         """
         Validate JCI certification from official JCI database
+        NOTE: JCI validation is currently disabled to prevent automatic assignment of simulated certifications.
+        Only validated certifications from official JCI sources will be used in scoring.
         """
         try:
-            logger.info(f"Checking JCI database for {org_name}")
+            logger.info(f"JCI validation disabled for {org_name} - only validated official sources allowed")
             
-            # Expanded JCI accredited organizations
-            known_jci_orgs = {
-                'mayo clinic': {
-                    'name': 'Joint Commission International (JCI)',
-                    'status': 'Active',
-                    'valid_until': '2025-12-31',
-                    'score_impact': 35,
-                    'certificate_number': 'JCI-2023-001',
-                    'accreditation_type': 'Hospital Accreditation',
-                    'issuer': 'JCI'
-                },
-                'cleveland clinic': {
-                    'name': 'Joint Commission International (JCI)',
-                    'status': 'Active',
-                    'valid_until': '2025-10-15',
-                    'score_impact': 35,
-                    'certificate_number': 'JCI-2023-002',
-                    'accreditation_type': 'Hospital Accreditation',
-                    'issuer': 'JCI'
-                },
-                'johns hopkins': {
-                    'name': 'Joint Commission International (JCI)',
-                    'status': 'Active',
-                    'valid_until': '2025-11-30',
-                    'score_impact': 35,
-                    'certificate_number': 'JCI-2023-003',
-                    'accreditation_type': 'Hospital Accreditation',
-                    'issuer': 'JCI'
-                },
-                'singapore general hospital': {
-                    'name': 'Joint Commission International (JCI)',
-                    'status': 'Active',
-                    'valid_until': '2025-09-20',
-                    'score_impact': 35,
-                    'certificate_number': 'JCI-2023-004',
-                    'accreditation_type': 'Hospital Accreditation',
-                    'issuer': 'JCI'
-                },
-                'bumrungrad international hospital': {
-                    'name': 'Joint Commission International (JCI)',
-                    'status': 'Active',
-                    'valid_until': '2025-08-15',
-                    'score_impact': 35,
-                    'certificate_number': 'JCI-2023-005',
-                    'accreditation_type': 'Hospital Accreditation',
-                    'issuer': 'JCI'
-                },
-                'apollo hospitals chennai': {
-                    'name': 'Joint Commission International (JCI)',
-                    'status': 'Active',
-                    'valid_until': '2025-07-10',
-                    'score_impact': 35,
-                    'certificate_number': 'JCI-2023-006',
-                    'accreditation_type': 'Hospital Accreditation',
-                    'issuer': 'JCI'
-                }
-            }
+            # JCI validation is disabled to prevent automatic assignment of simulated certifications
+            # Only validated certifications from official JCI sources should be used
             
-            org_key = org_name.lower().strip()
-            
-            # Check for exact matches first
-            if org_key in known_jci_orgs:
-                return [known_jci_orgs[org_key]]
-            
-            # Check for partial matches
-            for hospital_key, data in known_jci_orgs.items():
-                if hospital_key in org_key or org_key in hospital_key:
-                    return [data]
-            
+            # TODO: Implement real JCI API integration when available
+            # For now, return empty list to prevent simulated results
             return []
+            
+            # DISABLED: Hardcoded JCI data that was causing automatic assignment
+            # known_jci_orgs = {
+            #     'mayo clinic': {...},
+            #     'cleveland clinic': {...},
+            #     etc.
+            # }
             
         except Exception as e:
             logger.error(f"Error validating JCI certification: {str(e)}")
@@ -577,9 +492,12 @@ class HealthcareDataValidator:
     
     def validate_quality_initiatives(self, org_name: str) -> Dict:
         """
-        Validate quality initiatives from official sources and news
+        Validate quality initiatives from official sources, news, and organization websites
         """
         logger.info(f"Validating quality initiatives for: {org_name}")
+        
+        # First try to extract from organization website
+        web_initiatives = self._extract_quality_initiatives_from_website(org_name)
         
         # Expanded quality initiatives database with real healthcare organizations
         known_initiatives = {
@@ -685,23 +603,35 @@ class HealthcareDataValidator:
         org_key = org_name.lower().strip()
         initiatives = []
         
+        # Combine web-scraped initiatives with known initiatives
+        if web_initiatives:
+            initiatives.extend(web_initiatives)
+        
         # Check for exact matches first
         if org_key in known_initiatives:
-            initiatives = known_initiatives[org_key]
+            initiatives.extend(known_initiatives[org_key])
         else:
             # Check for partial matches
             for org_key_db, org_initiatives in known_initiatives.items():
                 if org_key_db in org_key or org_key in org_key_db:
-                    initiatives = org_initiatives
+                    initiatives.extend(org_initiatives)
                     break
+        
+        # Remove duplicates based on initiative name
+        unique_initiatives = []
+        seen_names = set()
+        for initiative in initiatives:
+            if initiative['name'] not in seen_names:
+                unique_initiatives.append(initiative)
+                seen_names.add(initiative['name'])
         
         return {
             'organization': org_name,
-            'initiatives': initiatives,
+            'initiatives': unique_initiatives,
             'validation_timestamp': datetime.now().isoformat(),
-            'data_sources': ['Official Press Releases', 'Healthcare Industry Reports'],
-            'validation_status': 'validated' if initiatives else 'no_official_data_available',
-            'note': 'Quality initiatives validated from official sources' if initiatives else 'Quality initiatives validation requires official press releases or announcements'
+            'data_sources': ['Organization Website', 'Official Press Releases', 'Healthcare Industry Reports'],
+            'validation_status': 'validated' if unique_initiatives else 'no_official_data_available',
+            'note': 'Quality initiatives validated from official sources and organization website' if unique_initiatives else 'Quality initiatives validation requires official press releases or announcements'
         }
     
 

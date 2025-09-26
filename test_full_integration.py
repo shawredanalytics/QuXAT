@@ -85,19 +85,24 @@ def test_full_integration():
             print(f"   - Location Adjustment: {score_breakdown['location_adjustment']}/5")
             print(f"   - TOTAL SCORE: {score_breakdown['total_score']}/85")
             
-            # Determine grade
+            # Determine grade (normalized to 100-point scale)
             total_score = score_breakdown['total_score']
-            if total_score >= 75:
-                grade = "A+"
-            elif total_score >= 65:
-                grade = "A"
-            elif total_score >= 55:
-                grade = "B+"
-            elif total_score >= 45:
-                grade = "B"
-            else:
-                grade = "C"
+            normalized_score = (total_score / 85) * 100  # Convert from 85-point to 100-point scale
             
+            if normalized_score >= 90:
+                grade = "A+"
+            elif normalized_score >= 80:
+                grade = "A"
+            elif normalized_score >= 70:
+                grade = "B+"
+            elif normalized_score >= 60:
+                grade = "B"
+            elif normalized_score >= 50:
+                grade = "C"
+            else:
+                grade = "F"
+            
+            print(f"   - NORMALIZED SCORE: {normalized_score:.1f}/100")
             print(f"   - GRADE: {grade}")
             
         else:

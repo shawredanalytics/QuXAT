@@ -122,7 +122,12 @@ class ISOCertificationScraper:
         cache_key = f"iso_{org_name.lower().strip()}_{location.lower().strip()}"
         if self._is_cache_valid(cache_key):
             logger.info(f"Using cached ISO data for {org_name}")
-            return self.certification_cache[cache_key]['data']
+            cached_data = self.certification_cache[cache_key]['data']
+            # Ensure cached data is not None
+            if cached_data is None:
+                logger.warning(f"Cached ISO data is None for {org_name}, regenerating...")
+            else:
+                return cached_data
         
         all_certifications = []
         data_sources_used = []
@@ -274,90 +279,30 @@ class ISOCertificationScraper:
         Simulate IAF CertSearch API response
         In production, this would be replaced with actual API calls
         """
-        # Known healthcare organizations with ISO certifications
-        known_orgs = {
-            'apollo hospitals': [
-                {
-                    'standard': 'ISO 9001:2015',
-                    'certification_body': 'Bureau Veritas Certification',
-                    'certificate_number': 'IN-BVC-9001-2023-001',
-                    'issue_date': datetime(2023, 1, 15),
-                    'expiry_date': datetime(2026, 1, 14),
-                    'scope': 'Healthcare Services and Hospital Management',
-                    'status': 'Valid',
-                    'accreditation_body': 'NABCB'
-                },
-                {
-                    'standard': 'ISO 14001:2015',
-                    'certification_body': 'TUV SUD',
-                    'certificate_number': 'IN-TUV-14001-2023-002',
-                    'issue_date': datetime(2023, 3, 20),
-                    'expiry_date': datetime(2026, 3, 19),
-                    'scope': 'Environmental Management in Healthcare Facilities',
-                    'status': 'Valid',
-                    'accreditation_body': 'NABCB'
-                }
-            ],
-            'fortis healthcare': [
-                {
-                    'standard': 'ISO 9001:2015',
-                    'certification_body': 'DNV GL',
-                    'certificate_number': 'IN-DNV-9001-2023-003',
-                    'issue_date': datetime(2023, 2, 10),
-                    'expiry_date': datetime(2026, 2, 9),
-                    'scope': 'Multi-specialty Healthcare Services',
-                    'status': 'Valid',
-                    'accreditation_body': 'NABCB'
-                },
-                {
-                    'standard': 'ISO 27001:2013',
-                    'certification_body': 'BSI Group',
-                    'certificate_number': 'IN-BSI-27001-2023-004',
-                    'issue_date': datetime(2023, 4, 5),
-                    'expiry_date': datetime(2026, 4, 4),
-                    'scope': 'Information Security Management for Healthcare IT Systems',
-                    'status': 'Valid',
-                    'accreditation_body': 'UKAS'
-                }
-            ],
-            'max healthcare': [
-                {
-                    'standard': 'ISO 9001:2015',
-                    'certification_body': 'SGS India',
-                    'certificate_number': 'IN-SGS-9001-2023-005',
-                    'issue_date': datetime(2023, 1, 25),
-                    'expiry_date': datetime(2026, 1, 24),
-                    'scope': 'Healthcare and Medical Services',
-                    'status': 'Valid',
-                    'accreditation_body': 'NABCB'
-                },
-                {
-                    'standard': 'ISO 45001:2018',
-                    'certification_body': 'Intertek',
-                    'certificate_number': 'IN-ITK-45001-2023-006',
-                    'issue_date': datetime(2023, 5, 15),
-                    'expiry_date': datetime(2026, 5, 14),
-                    'scope': 'Occupational Health and Safety in Healthcare Operations',
-                    'status': 'Valid',
-                    'accreditation_body': 'NABCB'
-                }
-            ]
-        }
+        # DISABLED: Hardcoded ISO data that was causing automatic assignment
+        # The hardcoded data below is for demonstration only and should not be used for scoring
+        # Only validated certifications from official sources should be used
         
-        org_key = org_name.lower().strip()
+        # known_orgs = {
+        #     'apollo hospitals': [...],
+        #     'fortis healthcare': [...],
+        #     'max healthcare': [...]
+        # }
+        
+        # org_key = org_name.lower().strip()
         
         # Check for exact matches
-        if org_key in known_orgs:
-            return known_orgs[org_key]
+        # if org_key in known_orgs:
+        #     return known_orgs[org_key]
         
         # Check for partial matches
-        for hospital_key, certs in known_orgs.items():
-            if hospital_key in org_key or org_key in hospital_key:
-                return certs
+        # for hospital_key, certs in known_orgs.items():
+        #     if hospital_key in org_key or org_key in hospital_key:
+        #         return certs
         
         # Generate random certifications for demonstration
-        if random.random() < 0.3:  # 30% chance of having certifications
-            return self._generate_random_certifications(org_name)
+        # if random.random() < 0.3:  # 30% chance of having certifications
+        #     return self._generate_random_certifications(org_name)
         
         return []
     
@@ -365,18 +310,20 @@ class ISOCertificationScraper:
         """
         Simulate certification body database response
         """
+        # DISABLED: Random certification generation that was causing automatic assignment
         # This would be replaced with actual web scraping in production
-        if random.random() < 0.2:  # 20% chance of additional certifications
-            return self._generate_random_certifications(org_name, max_certs=2)
+        # if random.random() < 0.2:  # 20% chance of additional certifications
+        #     return self._generate_random_certifications(org_name, max_certs=2)
         return []
     
     def _simulate_iso_survey_data(self, org_name: str) -> List[Dict]:
         """
         Simulate ISO survey database response
         """
+        # DISABLED: Random certification generation that was causing automatic assignment
         # This would be replaced with actual data extraction in production
-        if random.random() < 0.15:  # 15% chance of survey data
-            return self._generate_random_certifications(org_name, max_certs=1)
+        # if random.random() < 0.15:  # 15% chance of survey data
+        #     return self._generate_random_certifications(org_name, max_certs=1)
         return []
     
     def _generate_random_certifications(self, org_name: str, max_certs: int = 3) -> List[Dict]:

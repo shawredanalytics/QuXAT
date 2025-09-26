@@ -1788,8 +1788,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "india",
@@ -2008,8 +2008,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "india",
@@ -2139,8 +2139,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "india",
@@ -3980,8 +3980,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "india",
@@ -5720,8 +5720,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "apollo",
@@ -6192,8 +6192,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "india",
@@ -14578,6 +14578,8 @@
     ],
     "data_source": "NABH",
     "last_updated": "2025-09-22T12:41:05.755231",
+    "total_score": 18,
+    "certification_score": 18,
     "quality_indicators": {
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
@@ -15120,18 +15122,6 @@
         "remarks": "Renewed on 5th Edition",
         "score_impact": 18.0,
         "source": "NABH Portal"
-      },
-      {
-        "name": "Joint Commission International (JCI)",
-        "type": "JCI Accreditation",
-        "status": "Active",
-        "accreditation_date": "2018-11-10",
-        "expiry_date": "",
-        "accreditation_no": "",
-        "reference_no": "",
-        "remarks": "JCI Accredited",
-        "score_impact": 20.0,
-        "source": "JCI Database"
       }
     ],
     "data_source": "NABH",
@@ -15140,8 +15130,8 @@
       "nabh_accredited": true,
       "accreditation_level": "5th Edition",
       "accreditation_valid": true,
-      "jci_accredited": true,
-      "international_accreditation": true
+      "jci_accredited": false,
+      "international_accreditation": false
     },
     "search_keywords": [
       "unit",
@@ -15155,7 +15145,9 @@
       "hospital",
       "nri"
     ],
-    "region": "Asia-Pacific"
+    "region": "Asia-Pacific",
+    "total_score": 18,
+    "certification_score": 18
   },
   {
     "name": "DM WIMS Hospital",

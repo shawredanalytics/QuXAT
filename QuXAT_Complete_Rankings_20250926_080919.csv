@@ -1,0 +1,1589 @@
+overall_rank,name,country,region,hospital_type,total_score,percentile,certification_score,quality_initiatives_score,patient_feedback_score,certification_count
+1,Fortis Memorial Research Institute,India,Asia-Pacific,Multi-specialty Hospital,70.0,100.0,70.0,0,0,2
+1,Asansol Healthworld Pvt. Ltd.,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Vasantha Subramanian Hospitals India Pvt. Ltd.,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,SS Hospital,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Rashtrasant Tukdoji Cancer Hospital and Research Centre,India,Asia-Pacific,Cancer Specialty,70.0,100.0,70.0,0,0,2
+1,Dhanalakshmi Srinivasan Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,70.0,100.0,70.0,0,0,2
+1,Upasani Super Speciality Hospital Private Limited,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,City Hospital,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,"Institute of liver & Biliary Sciences, Vasant Kunj",India,Asia-Pacific,Teaching Hospital,70.0,100.0,70.0,0,0,2
+1,Apollo Hospitals,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Max Hospital,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Manipal Hospital,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Fortis Hospital,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Max Super Speciality Hospital,India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+1,Queens NRI Hospital (A Unit of Ms Chalasani Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,70.0,100.0,70.0,0,0,2
+16,Medicana International Istanbul,Turkey,Europe,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Hamad Medical Corporation,Qatar,Middle East,Public Hospital System,65.0,99.06,65.0,0,0,1
+16,Sidra Medicine,Qatar,Middle East,Women and Children Hospital,65.0,99.06,65.0,0,0,1
+16,King Hussein Cancer Center,Jordan,Middle East,Cancer Center,65.0,99.06,65.0,0,0,1
+16,American University of Beirut Medical Center,Lebanon,Middle East,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,Anadolu Medical Center,Turkey,Europe,Private Hospital,65.0,99.06,65.0,0,0,1
+16,AcÄ±badem Healthcare Group,Turkey,Europe,Hospital Network,65.0,99.06,65.0,0,0,1
+16,Memorial Healthcare Group,Turkey,Europe,Hospital Network,65.0,99.06,65.0,0,0,1
+16,Hirslanden Private Hospital Group,Switzerland,Europe,Private Hospital Network,65.0,99.06,65.0,0,0,1
+16,Hospital Italiano de Buenos Aires,Argentina,Americas,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Hospital SÃ­rio-LibanÃªs,Brazil,Americas,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Hospital AlemÃ£o Oswaldo Cruz,Brazil,Americas,Private Hospital,65.0,99.06,65.0,0,0,1
+16,FundaciÃ³n Cardioinfantil,Colombia,Americas,Cardiac Hospital,65.0,99.06,65.0,0,0,1
+16,Hospital Pablo TobÃ³n Uribe,Colombia,Americas,General Hospital,65.0,99.06,65.0,0,0,1
+16,Hospital BritÃ¡nico de Buenos Aires,Argentina,Americas,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Al Zahra Hospital Dubai,UAE,Middle East,Private Hospital,65.0,99.06,65.0,0,0,1
+16,General Hospital,India,Asia-Pacific,General Hospital,65.0,99.06,65.0,0,0,1
+16,CARE Hospital,India,Asia-Pacific,General Hospital,65.0,99.06,65.0,0,0,1
+16,University Hospital Zurich,Switzerland,Europe,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,Mediclinic City Hospital,UAE,Middle East,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Hospital Israelita Albert Einstein,Brazil,Americas,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Cleveland Clinic Abu Dhabi,UAE,Middle East,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,American Hospital Dubai,UAE,Middle East,Private Hospital,65.0,99.06,65.0,0,0,1
+16,National University Hospital Singapore,Singapore,Asia-Pacific,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,Mount Elizabeth Hospital,Singapore,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Gleneagles Hospital Singapore,Singapore,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Raffles Hospital,Singapore,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Apollo Hospitals Chennai,India,Asia-Pacific,Multi-specialty Hospital,65.0,99.06,65.0,0,0,1
+16,Max Super Speciality Hospital Saket,India,Asia-Pacific,Multi-specialty Hospital,65.0,99.06,65.0,0,0,1
+16,Medanta The Medicity,India,Asia-Pacific,Multi-specialty Hospital,65.0,99.06,65.0,0,0,1
+16,Manipal Hospital Bangalore,India,Asia-Pacific,Multi-specialty Hospital,65.0,99.06,65.0,0,0,1
+16,Singapore General Hospital,Singapore,Asia-Pacific,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,Bangkok Hospital,Thailand,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Bumrungrad International Hospital,Thailand,Asia-Pacific,International Hospital,65.0,99.06,65.0,0,0,1
+16,King Faisal Specialist Hospital,Saudi Arabia,Middle East,Specialty Hospital,65.0,99.06,65.0,0,0,1
+16,Samsung Medical Center,South Korea,Asia-Pacific,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,Asan Medical Center,South Korea,Asia-Pacific,Academic Medical Center,65.0,99.06,65.0,0,0,1
+16,King Abdulaziz Medical City,Saudi Arabia,Middle East,Medical City,65.0,99.06,65.0,0,0,1
+16,Pantai Hospital Kuala Lumpur,Malaysia,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Prince Court Medical Centre,Malaysia,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Samitivej Hospital,Thailand,Asia-Pacific,Private Hospital,65.0,99.06,65.0,0,0,1
+16,Seoul National University Hospital,South Korea,Asia-Pacific,Academic Medical Center,65.0,99.06,65.0,0,0,1
+58,Apple Indore Hospital and Research Center (A Unit of Friends Unity Hospital and Research Centre Private Limited),India,Asia-Pacific,General Hospital,40.0,96.41,40.0,0,0,1
+59,Nirvan Hospital Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Public Health Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medhansh Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sunflag Global Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mar Sleeva Medicity Palai,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ramdevrao Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SP Fort Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Surya Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Zydus Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Barala Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medicover Hospitals (A Unit of Sahrudaya Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cosmos Hospital ( A Unit of Emerging Project Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sevenhills Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Thiraviam Orthopaedic Hospital,India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Prakhar Hospital Pvt. Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ujala Cygnus Brightstar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Government Medical College And Associated Hospitals,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Smt. Jayaben Mody Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mother Vannini Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Epitome Kidney Urology Institute & Lions Hospital (A Unit of Intregrated Kidney Solution Pvt. Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Asian City Hospital (A Unit of Blue Sapphire Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Suyash Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rajasthan Medical Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,J. Watumull Global Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asian Vivekanand Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Oncology & Super Specialty Wing - Dr. Ram Manohar Lohia Institute Of Medical Sciences (Dr. RMLIMS),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Velammal Medical College Hospital & Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,SKS Hospital & Postgraduate Medical Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Frontline Hospital And Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,COSH (Christudas Orthopaedic Speciality Hospital),India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Sri Venkateshwaraa Medical College Hospital and Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Vijay Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Peacock Hospitals Pvt Ltd., Tiruvallur",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Birsa Munda Government Medical College, Shahdol",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Omega Hospitals ( A unit of Hyderabad Institute Of Oncology Pvt Ltd),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Jaiprakash Hospital & Research Center Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Popular Medicare Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"M/s Shree Pragati FoundationS-Hira Mongi Navneet Hospital, Mulund West",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rohini Medicare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ram Ratan Hospital (Managed & Operated By Fortis Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Ramnath Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maa Hospitals Pvt. Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Newera Hospital & Research Institute (A Unit of Newera Hospitals Pvt. Ltd.) - (Earlier Certificate issued in the Name of New Era Hospital & Research Institute),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Silverstreak Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dhanvantri Jeevan Rekha Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,GBH General and GBH Memorial Cancer Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Ethos Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Adesh Medical College And Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Tarak Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Index Medical College Hospital & Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"Ujala Cygnus Central Hospital, Haldwani (Nanital)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gujarat Kidney and Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Radhe Multispeciality Hospital (A Unit Of Madhav Shyam Multispeciality Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"N Z Health & Medicare Center (Zeel Multi Speciality Hospital), Sagwara",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Lifeline Hospital Medical & Research Centre, Raigad",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Imbichibava Memorial Co-Operative Hospitaland Research Centre Society Ltd. No.M-841, Alathiyur Post, Tirur Malappuram",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ashutosh Hospital & Trauma Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Polaris Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Infinity Care Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Udai Omni Hospitals Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kanba Hospital - Unit Of Lakhani Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Starcare Hospital Kozhikode Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nemcare Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Accord Superspeciality Hospital (A Unit of SCL Healthcare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Parul Sevashram Hospital (Parul Institute of Medical Sciences & Research),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Hannah Joseph Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nidaan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ujala Hospital (A Unit of Ujala Healthcare Services Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vasavi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,B T Savani Kidney Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medipoint Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fatima Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gujarat Adani Institute Of Medical Sciences (G.K.General Hospital),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,St. Josephs Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ashwini Trauma Centre (Unit Of Cuttack Hospitals Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mittal Bhilai Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Raj Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apple Maitreya Hospital, Surat",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medway Hospitals (A Unit of United Alliance Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Smita Memorial Hospital And Research Centre (A Unit Of Advani Olickal Health Care Services Pvt Ltd),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Super-Speciality Hospital, Netaji Subhash Chandra Bose Medical College",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Noble Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Baby Memorial Hospital Ltd. - (Earlier Certificate issued in the Name of Chazhikattu Hospital Private Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sevarth Sansthan Seth Bimal Kumar Jain Trauma & Physiotherapy Dharmarth Samiti,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mai Khadija Hospital And Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maheshwari Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"SLG Hospitals, (A Unit of Sree Lakshmi Gayathri Hospitals Private Limited)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Sai Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Malik Radix Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sarvodaya Hospital (A Unit of Anshu Hospitals Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jay Prabha Medanta Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Synergy Multispeciality Hospital Private Limited - (Earlier Certificate issued in the Name of Synergy Multispeciality Hospital, LLP)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Dr. Manjeet Institute of Critical Care,",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sushila Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kailash Deepak Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amrita Institute of Medical Sciences and Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Rainbow Childrens Medicare Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bengal Faith Hospital (A Unit of Bengal Faith Healthcare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Kamakshi Memorial Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri. B.M. Patil Medical College Hospital and Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Adamt Kothiya Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sun Medical and Research Centre (A Unit of Trichur Heart Hospital Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Sri Narayani Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Malankara Orthodox Syrian Church Medical Mission,India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,S.A.I Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Arihant Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Marble City Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanjeevani Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saxena Multispeciality Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Good Samaritan Cancer and General Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,DSM Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Charnock Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ananta Institute of Medical Sciences & Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Maharishi Markandeshwar College of Medical Science and Research,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanjivani Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,NKS Hospital (A Unit of Bram Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Smt. S. R. Mehta & Sir K. P. Cardiac Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Malik Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sudha Hospital & Medical Research Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ortho-one Orthopaedic Speciality Centre (A Unit of Spine Arthroscopic and Joint Replacement Centre Pvt. Ltd.),India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Tagore Hospital and Research Institute (A Unit of Maya Kanwar Ba Mahila Vikas Samiti),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Malabar Institute of Medical Sciences Ltd. (Aster Mother Hospital),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Renova Nigl Hospitals (A Unit of Tejaswini Health Care Services Pvt.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Swastik Multispeciality Hospital LLP,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shrimad Rajchandra Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Hayat Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shrimant Rajmata Vijyaraje Scindia Government Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,IIMT Life Line Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gian Sagar Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Eternal Hospital (A Unit of Eternal Care Foundation),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nazareth Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Spectra Hospitals (A Unit of Nano Hospitals Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Omni Hospital (A Unit of Incor Padmachandra Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nyle Institute of Medical Sciences Private Limited,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shija Hospitals & Research Institute Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Jaswant Rai Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Marwar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanghi Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Balaji Metro Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Samanvay Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Park Hospital (A Unit of Park Medicity World Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Superspeciality Hospital, JAH Campus",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Eras Lucknow Medical Collage & Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lifeline Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sun Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Kauvery Medical Care India Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shoor Multi-Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,JR Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gerdi Gutperle Agasthiyar Muni Child Care Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medicover Kle Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Delhi Hospital and Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vasundhara Hospital Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,NTC Hospitals & NTC Institute of Medical Sciences (NIMS),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Vishesh Jupiter Hospital (Unit of Jupiter Hospital Projects Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Guru Nanak Dev Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Princess Durru Shehvar Childrenâ€™s & General Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Udayananda Health Care Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Arpana Hospital (A Unit of Arpana Research and Charities Trust),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Guru Ram Dass Institute of Medical Sciences and Research,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Kamla Nagar Hospital (A Unit of K. N. Hospital Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Monilek Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SRM Medical College Hospital and Research Centre (A Unit of SRM Institute of Science and Technology),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Jeevan Rekha Hospital & Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Government Hospital for Mental Care,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,United Medicity Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Param Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Hasija Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,People's General Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"The Oxford Medical College, Hospital And Research Centre",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Vasavi Medical & Research Centre (Vasavi Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jeevan Anmol Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Holy Heart Super Specialty & Trauma Center,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Medicover Hospital, Aurangabad",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St.Joseph Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kunal Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cygnus Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CHL Charitable Trust,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mahatma Gandhi Medical College And Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Saraswathy Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Institute of Medical Sciences and Research Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sree Mookambika Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Arora Neuro Centre,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Niramaya Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Divine Heart & Multispecialty Hospital (A Unit of Divine Heart Hospital & Research Centre Pvt. Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Delhi Heart Institute & Multispeciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Muthu Meenakshi Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Guru Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bharat Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Naruvi Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,IQRAA International Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Advanta Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Flores Hospital (A Unit of Mridula Healthcare Pvt. Ltd.) - (Earlier Certificate issued in the Name of Flores Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Heritage Healthcare Private Limited - (Earlier Certificate issued in the Name of Heritage Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster RV Hospital ( A Unit of Aster DM Healthcare Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Manorama Hospitex Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Swagat Super Speciality Surgical Institute & NH,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"Rainbow Children's Medicare Pvt. Ltd., Medchal",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KJMH Lifecare Private Limited - (Earlier Certificate issued in the Name of K J Multispecialty Hospital),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,SKR Hospital & Trauma Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Career Institute Of Medical Sciences (C.I.M.S),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Supreme Hospitals Private Limited - (Earlier Certificate issued in the Name of Supreme Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tata Main Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bharati Vidyapeeth (Deemed To Be University) Medical College And Hospital Sangli,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Brahmchaitanya Superspeciality Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ivory Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sunrise Hospitals (A Unit of NS Health Care Services Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aartham Multi Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Shree Jagannath Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lotus Hospitals and Research Centre Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lokmanya H S S,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"GMR Varalakshmi Care Hospital, Srikakulam",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kshetrapal Hospital Multi Speciality And Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KMC Hospital Attavar Mangalore,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"NIMS Medicity, Thiruvananthapuram",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Horizon Prime Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chirayu Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jubilee Mission Medical College And Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Institute Of Human Behaviour And Allied Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Unity Trauma Center and ICU,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CKS Hospital (A Unit of CKS Medicare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Zydus Hospitals And Health Care Research Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Ram Murti Smarak Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"GCS Medical College, Hospital & Research Centre",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Hospitals (Unit of HCG Sun Hospitals LLP),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CKRD Memorial Hospital And Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shivalik Medical Centre Pvt. Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prolife Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amar Medical & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apollo Hospitals, Tondiarpet",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tirumala Medicover Hospital (Sahrudaya Health Care Vizianagaram Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MGM Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Solapur Cancer Center,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Shri Mahant Indiresh Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saraswati Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sarvodya Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KIMS Super Speciality Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kasturi Medical Centre Pvt. Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Neuro One Hospital, Trichy",India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Kota Heart Institute & Research Center,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Health City Hospital (A Unit of North East Health City Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Miri Piri Institute of Medical Sciences & Research (Chritable Trust), Markanda, Kurukshetra",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,American Oncology Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Ashwini Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kauvery Hospitals (Bengaluru) Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Manakula Vinayagar Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,R.L. Jalappa Hospital And Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Deep Nursing Home & Children Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sewak Sabha Charitable Trust Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medanta Lucknow (A Unit of Global Health Limited) - (Earlier Certificate issued in the Name Medanta Lucknow (A Unit of Medanta Holdings Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Narayana Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,BIG Apollo Spectra Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. Thomas Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sahayog Hospital (A Unit Of Ramade Memorial Medicare Reasearch Institute Llp,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,S N Super Speciality Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asian Noble Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nutema Healthcare Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Radhakrishna Hospital And Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Omega Hospitals (A Unit Of Kurnool Institute Of Oncology),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Health1 Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Gujarat Cancer & Research Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Unique Hospital Multispeciality & Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Oscar Super Speciality Hospital & Trauma Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gupta Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ajanta Hospital & IVF Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Clearmedi Radiant Hospital, Mysore",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ashwini Sahakari Rugnalaya ANI Sanshodhan Kendra NIY,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Medicity Rudrapur,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Konaseema Institute of Medical Sciences And Research Foundation Hospital, Amalapuram (Under Mother Theressa Educational Society, Amalapuram), Konaseema",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Guru Nanak Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gokul Hospital - Kuvadva Road,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"BBR Super Speciality Hospital, Medchal",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Oriana Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MAGJ Hospital Mookkannoor,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Siddhi Vinayak Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Imperial Hospital And Research Centre Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Surya Kiran Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tata Medical Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Reach Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chauhan Multispeciality & Trauma Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Raj Jindal Hospital And Research Center Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pranayam Lung & Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Seth Mannulal Jagannath Das Trust Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SGVP Holistic Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SJM Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saroj Gupta Cancer Centre & Research Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Rotary Ambala Cancer and General Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,ACI Cumballa Hill Multi Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Anand Orthopaedic Centre, Thanesar",India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Prakash Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"HCG Curie City Cancer Centre, Vijaywada",India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Avitis Super Specialty Hospitals Pvt. Ltd.,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Star Synergy Hospital (A Unit Of Saurashtra Medicare LLP),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. KNS Memorial Institute of Medical Sciences - (Earlier Certificate issued in the Name of Mayo Institute of Medical Sciences),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"Sai Hospital, Haldwani (Nanital)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Vadamalayan Hospital (P) Ltd.,",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Life Line Hospital & Research Centre, Azamgarh",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Shalby Hospital, Indore",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sonia Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Healing Tree Hospital (A Unit Of Manjusha Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Guru Teg Bahadur Sahib Charitable Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Aurobindo Institute Of Medical Sciences (SAIMS Hospital),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"BMRC Hospitals Ltd., North 24 Parganas",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Moga Medicity Superspeciality Hospital (A Unit Of Moga Medicity Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jeevan Rekha Critical Care And Trauma Hospital Research And Training Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Neyyar Medicity,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ramaiah Medical College Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Jivraj Mehta Smarak Health Foundation & Bakeri Medical Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,S K Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Shri Ram Singh Multi Speciality Hospital, Gautam Buddha Nagar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Atreya Hospital (A Unit Of DMRI),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Balaji Aarogyam Hospital Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pulse Multispeciality Hospital & Research Centre ( A Unit Of Raja Bhrathari Healthcare Pvt Ltd .),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sri Sharanya Nursing Home and Critical Care Centre, Warangal",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saveera Institute of Medical Sciences Private Limited,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"Krishna Institute of Medical Sciences Ltd., Prakasam",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Positron Hospital(A Unit Of Mk Super Speciality Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Acharya Vinoba Bhave Rural Hospital Sawangi Meghe Wardha,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aarbee Institute Of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sidharth Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jyoti Nursing Home Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sharma Medicare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dhanwantri Hospital and Research Center (A Unit of Dhanvantri Life Care Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,New Korba Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"KIMS Hospitals, Gachibowli",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rathi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vinayaka Mission Super Speciality Hospitals Pvt. Ltd. - VIMS Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Zydus Sitapur Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Hakeem Abdul Hameed Centenary Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bombay Hospital & Medical Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CC Shroff Memorial Hospital (A Unit of Nandini Ramesh Gandhi Public Charitable Trust),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Regency Renal Sciences Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maitreya Medicare Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Supercare Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saideep Healthcare & Research Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kims-Kingsway Hospitals (A Unit of SPANV Medisearch Lifesciences Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr Sanjay Multi Speciality Hospital Pvt. Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Khandelwal Hospital & Urology Center Pvt.Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster Narayanadri Hospital (A Unit of Aster DM Healthcare Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,M.A.J. Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kumaran Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vivekananda Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr S S Tantia Medical College Hospital and Research Centre (Jansewa Hospital),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Andromeda Cancer Hospital (A Unit of Andromeda Hospitals and Healthcare Private Limited),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Navjeevan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vrudam Institute of Medical Science,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shaheed Kartar Singh Sarabha Charitable Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,M/s Sankalpa Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Swami Bhumanand Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chandan Hospital (Unit of Chandan Superspeciality Hospital Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nalbari Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SRK Max Hospital (A Unit of Shri Ram Krishana Healthcare Pvt Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Sankalp Medical and Research Institute Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Plus Medicare Hospitals Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yatharth Super Speciality Hospital (A Unit of Pristine Infracon Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maa Kauvery (A Unit of KMC Speciality Hospitals (India) Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,VY Institute of Medical Science Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Hari Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Krishna Heart & General Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Pulse Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kailash Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Hospitals (A Unit of Odisha Multispeciality Hospital & Trauma Care Centre Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Accord Multispecialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Asian Institute of Medical Sciences (AIMS Hospital),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Universal Super Speciality Hospital Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Renova Neelima Hospitals (A Unit of Manaswini Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aayush NRI LEPL Healthcare Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aayush Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dhayal Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Accord Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Esic Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Mittal Institute of Medical Science,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Radhika Super Speciality & Advance Trauma Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Super Speciality Hospital & IVF Centre ( A Unit of Goyal Institute of Medical Sciences Pvt. Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Kullolli Institute of Health Services,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Yashodhara Superspeciality Hospital Pvt. Ltd. Solapur Unit II,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Anant Heart Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Velmed Hospital (A Unit of Bharat Heart & Super Speciality Hospitals Pvt. Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Gitam Institute of Medical Sciences & Research (Deemed To Be University),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Waluj Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sudha Surgical Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,IBM Hospital and Trauma Centre (A Unit of Gaurav Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,B.R. Shastri Hospital ( A Unit of Aryabhatta Academic Society),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,East Coast Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Popular Medicare Limited Unit Mirzapur,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vivanta Critical Care Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Raju Neuro & Multi Speciality Hospital,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Renova Century Hospitals (A Unit of Bhargavi Healthcare Services Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apex Hospitals, Mulund",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Parivar Super Speciality Hospital and Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Delta Hospitals (Unit of Rajamahendri Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lifeline Superspeciality Hospital & Heart Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Scai Superspeciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Srikara Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Anand Heart & Multispeciality Hospital (A Unit of Prem Malhotra Heathcare Pvt. Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Maitri Hospital (A Unit of Singhvi Medicare and Research Centre Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Archana Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,S.B. Mittal Memorial Heart and Critical Care Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Rajkot Cancer Society,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Malabar Medical College Hospital & Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,The Kidney Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Vedanta Multi Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Hospital Rourkela (Managing IPGI and SSH),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. Stephen's Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mahendra Gayatri Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gayatri Hospital (A Unit of AAS Medicare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ojas Multispeciality Hospital LLP,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vishnoi Hospital and Surgical Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Institute of Medical Sciences and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,S.P. Multi Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Kauvery Medical Care (India) Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ravindra Maternity & General Hospital,India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Felix Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Zynova Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,AAIHMS Hospital and Research Centre Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Le Crest Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Arihant Multispeciality Hospital (A Unit of Kusumgar Healthcare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shantived Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Mahavir Jain Hospital & Pratap J Aashar Cardiac Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,KIMS Hospital Kurnool Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prudence Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maharaja Agrasen Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vyas Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Swatantra Hospitals Multi Specialities Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fortis Hospital (A Unit of Hospitalia Eastern Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jaipur Hospital (A Unit of Sharma East India Hospital and Medical Research Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Midas Hospital (A Unit of Midas Multispecialty Hospital Private Limited),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Healing Hands Clinic Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Aastha Cancer Centre (A Unit of HCG Medi-Surge Hospitals Pvt. Ltd.),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Priyanka Hospital & Cardiac Center (A Unit of Priyanka Heart Care Foundation Society),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Daya Royal Hospital & Trauma Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,M/s Nehru Memorial Techno Global Hospital (A Unit of Techno India Technologies Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Karpaga Vinayaga Institute of Medical Sciences and Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Vardhan Hospital (A Unit of Vardhan Raj Hospital Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sentini Health Care India Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narayan Swaroop Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MVJ Medical College & Research Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Purushottam Das Savitri Devi Cancer Care and Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Spar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,JMG Morning Star Hsopital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Triveni Health Care (A Unit of Jamdar Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ashirwad Maternity Home,India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Shri Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SAS Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Ram Manohar Lohia Hospital & Atal Bihari Vajpayee Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Vinayak Medicare Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medicant Hospital and Research Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ohri Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Advanced Superspeciality Hospital (A Unit of Advanced Healthcare and Research Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tantia General Hospital-EEG Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SDM College of Medical Sciences & Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,VIMS Hospital (Managed by Nishil Infracon Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nirmala Medical Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster PMF Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narayan Heart and Neuro Superspeciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Amara Hospital (A Unit of G2 Health Care Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Padmini Care (A Unit of DRIEMS Institute of Health Sciences and Hospital),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Hope and Heal Cancer Hospital and Research Center Pvt. Ltd.,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Junagadh Aayush Hospital LLP,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yashoda Healthcare Services Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Institute of Nephro Urology,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,GS Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Precision Urology Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vineeta Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Savita Superspeciality Hospital ( A Unit of Solace Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Virat Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sai Sukhda Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Excelcare Hospital (A Unit of Asclepius Hospitals & Health Care Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tender Palm Hospital (Healthplus Research and Medicenter LLP),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shreyas Medicare Sanchalit Maniben Nagarji Mehta (Valwada) Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,IGKC Multispecialty Hospital (A Unit of Institute of Gastro and Kidney Care Pvt. Ltd.),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Marble City Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Innocent Hearts Superspeciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Nanda Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ganga Narayan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sparsh Hospital (A Unit of Shiva and Shiva Orthopaedic Hospital Pvt. Ltd.),India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Hope Hospital (Unit of Al Hope Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Capital Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sids Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Samford Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asha Kiran- The Criti Care Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Specialty Hospital (A Unit of Muthoot Hospital Pvt. Ltd.),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Meenakshi Super Speciality Hospital (Run By Sunmed Healthcare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. K.M.Cherian Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Srishti Medicare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Credence Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Brijesh Banger Memorial Hospital (A Unit of Jeevan Jyoti Seva Society),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ganga Amrit Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kinder Hospitals (A Unit of Kindorama Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Icon Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. Martha's Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saviour Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aryavart Hospital (A Unit of Shreya Medicare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KVR Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SMT. SMS Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kles Dr. Prabhakar Kore Hospital & Medical Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sadvichar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Wellsun Medicity,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kashvi Multi Speciality Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rishab Multi-Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Harish Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cimar-the Women's Hospital,India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Kulkarni Uro Surgery Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sarvodaya Institute of Medicine and Surgery Private Limited,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Ambay Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rajnish Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Guwahati Metro Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Baby Memorial Hospital (A Unit of Genesis Institute of Medical Sciences Pvt. Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Surya Childrens Medicare Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Woodlands Multispeciality Hospital Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Sage Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Ranthambhore Sevika Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saraswati Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Spes Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Oswal Aayush Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhatia Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Parmar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tula Hospital (A Unit of Bothanzi Medicals Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dana Shivam Heart and Super Speciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Symbiosis University Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cancer Treatment Services Hyderabad Pvt. Ltd. - At Babina Specialty Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Jeevan Jyoti Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Parvati Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Terna Speciality Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mehta Multispeciality Hospitals India Pvt. Ltd. - Global Campus,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Balaji Institute of Medical Science,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Jagannath Gupta Institute of Medical Sciences and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,T.N.K.H.N.U. Charity Fund Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sachkhand Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Father Muller Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,B. Lal Hospital & Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Akanksha Hospital- Unit of Sat Kaival Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shriram Super Speciality Surgical Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prakriya Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Manipal Hospitals (East) India Private Limited (MHEIPL) - (Earlier Certificate issued in the Name of AMRI Hospitals Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ujala Cygnus Kashmir Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mangalam Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sadguru Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medicover Women and Child Hospitals (A Unit of Sahrudaya Healthcare Pvt. Ltd.) - (Earlier Certificate issued in the name of Medicover Women and Child Hospitals (A Unit of Suyosha Healthcare Pvt. Ltd.),India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Manglamplus Medicity LLP,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medipolis Life Care LLP,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cauvery Heart and Multi Speciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Jaipur National University Institute for Medical Sciences and Research Centre (JNUIMSRC),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Med Card Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kailash Cancer Hospital and Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Kaluram Memorial Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lata Mangeshkar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Hospital Mansarovar,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prashanthi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mediversal Multi Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,NIMS Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Galaxy Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Noblecare Superspecility Hospital and Trauma Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Agarwal Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sadbhavna Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sir Ivan Stedeford Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Life Kare Multispecialty & Super Speciality Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Medicover Hospitals (Sahrudaya Health Care Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KMCT Medical College Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Mark Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vinayaka Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Hans Foundation General Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Ram Super Speciality Surgical Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanjeevani Hospital (A Unit of Oasis Medicare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kamla Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Atlanta Mediworld Multi Speciality Hospital & Research Centre (A Unit of RRM Services),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. Ann's Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Viveka Super Speciality Hospital & Research Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,UNM Children Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,G G Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maxwell Super Multi Speciality Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sapthagiri Institute of Medical Sciences and Research Center Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sharbati Surgical and Maternity Home,India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Srinivas Institute of Medical Sciences and Research Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sree Gokulam Medical College and Research Foundation,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Philadelphia Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Skyline Hospital (A Unit of Apex Hospitals Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Victor Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,N P Rawal Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Marwari Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kothari Medical & Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Tx Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. G. M. Taori Central India Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dr Rai Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Alluri Sitarama Raju Academy of Medical Sciences,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,RS Gaur Global Multispeciality Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amar Jain Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Panchsheel Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Liberty Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Balaji Super Speciality Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pushpagiri Medical College Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,PP Maniya Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,WMF's Villoo Poonawalla Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saveetha Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,RJN Apollo Spectra Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Laxmi Narayan Memorial Hospital (A Venture of Fortuna Medicare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sagar Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kolhapur Cancer Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Suvira Hospital (A Unit of Suvira Super Hospitals Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rainbow Hospital (A Unit of B.L. Aggarwal Health Care Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St Anns Jubille Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jai Clinic and Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rhythm Heart Institute (Unit of Synergy Lifecare Pvt. Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,M/s. DVC Hospital & Research Centre (A Unit of Sri Dhulipala Veeraiah Chowdary Memorial Trust),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ankura Hospital for Women & Children (A Unit of Ankura Hospitals LB Nagar Pvt. Ltd.),India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Kauvery Hospital (A Unit of Sri Kauvery Medical Care India Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mavjat Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nirali Hospital (A Unit of Nirali Memorial Medical Trust),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Christian Medical College, Ranipet Campus",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Aarvy Healthcare,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Sai Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mani Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mary Queens Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SRM Institute for Medical Science,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Nivik Neuro Trauma And Multispeciality Hospital,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Narayan Memorial Hospital (A Unit of Narayan Health Services Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pushpanjali Hospital & Research Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asian Vascular Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mehar Hospital (A Unit of Mehar Mediserve LLP),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Desun Hospital (A Unit of PN Memorial Neurocentre and Research Institute Limited),India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,MGM Cancer Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Mamatha Academy of Medical Sciences Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,K.K. Patel Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jan Hospital Pali (A Unit of Level 5 Health LLP),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Agrawal Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aarogyam Superspeciality Hospital and Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,GSLTrust Cancer Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Dr. Chandramma Dayananda Sagar Institute of Medical Education and Research,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Gandhi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bharat Vikash Parishad Hospital & Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rohilkhand Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Jiet Medical College and Hospital (A Unit of Arun Shanti Education Trust),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Ayushman Bhav Health Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Kims Kollam Multispeciality Hospital India Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pal Balaji Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MPCT Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Renova Sowmya Cancer Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,V One Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SRG Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Numed Superspeciality Hospital (A Unit of Apy Mediservices Pvt Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,We Care Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Care and Cure Multispeciality Hospital (Unit of NK Remedies Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kinder Women's Hospital and Fertility Centre (A Unit of Kindorama Healthcare Pvt. Ltd.),India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Ujala Cygnus Rainbow Hospital (A Unit of Cygnus Medicare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dhukia Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lakshmi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Green City Hospital (A Unit of Aar Aar Medical Services Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Arpa Medcity Hospital & Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Bhale Ram Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Paras Hec Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Trust Multi Speciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sidarth Hospitals (A Unit of Uma Gowri Hospitals Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanjiban Hospital (A Unit of Chikitsabrati Udyog),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jaiswal Hospital and Neuro Institute,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,KRIMS Hospital (Ketki Research Institute of Medical Science),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Golden Heart Hospital (A Unit of Mediflex Hospital Associates LLP),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Pacific Institute of Medical Sciences (A Unit of Sai Tirupati University),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Solar Hospital : Grace GPS Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Manthan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,ESIC Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,R R Healthcare,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Xenia Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aryaa Neuro Spine & Super Speciality Hospital Pvt. Ltd.,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Anand Hospital (A Unit of Anand Nirogdham Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aravali Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Divya Prastha Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medline Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kauvery Hospital Medical Services Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Integral Hospital-integral Institute of Medical Sciences & Research,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,All is Well Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pacific Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Hamidia Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sunshine Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Giriraj Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prathima Cancer Hospital Pvt. Ltd.,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Lokpriya Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,PRK Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shifa Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Surat Institute of Medical Science LLP,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,MMRRDI Seth Nandlal Dhoot Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narinder Mohan Hospital & Heart Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Pranaam Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Caritas Hospital and Institute of Health Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"UN Mehta Institute of Cardiology & Research Centre,",India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Narayana Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narayana Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,M.G.S. Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhagirathi Neotia Woman & Child Care Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apple Saraswati Multi Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sohana Hospital (A Multi Super Specialty Hospital) A Unit of Sri Guru Harkrishan Sahib (c) Eye Hospital Trust,India,Asia-Pacific,Eye Specialty,36.0,96.35,36.0,0,0,1
+59,B.A.P.S. Shastriji Maharaj Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ruby General Hospital Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Malthi Manipal Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Manavata Cancer Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,"Muthoot Healthcare Private Limited, Kozhencherry",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aayush NRI LEPL Health Care Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Indus Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CHL-Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sumitra Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Madras Medical Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Himachal Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medipulse Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,DM WIMS Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yatharth Wellness Hospital & Trauma Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Belle Vue Clinic,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"MIMHANS, Neurosciences Hospital",India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,The Calcutta Medical Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Brahmananda Naryana Multispeciaity Hospita,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Krishna Shalby Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Specialty Hospital (A Unit of Jaypee Healthcare Limited) - (Earlier Certificate issued in the Name of Jaypee Hospital),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Rainbow Institute of Medical Sciences Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Wockhardt Hospital Ltd. - Unit Adams Wylie Memorial,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sakra World Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Narayana Multispecialty Hospital, Sector-3, Opposite HSR Club, HSR Layout",India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Mahatma Gandhi Cancer Hospital & Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Elite Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sunshine Global hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Global Specialty Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Capitol Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster Aaadhar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"MGM New Bombay Hospital, Vashi",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prakash Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Synergy Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Ananthapuri Hospitals and Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Santokba Durlabhji Memorial Hospital Cum Medical Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Baderia Metroprime Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Meenakshi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bethany Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tagore Hospital & Heart Care Centre Pvt. Ltd.,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Surbhi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Hosmat Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Fernandez Hospital, Bogulkunta",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kokilaben Dhirubhai Ambani Hospital & Medical Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Raja Diagnostic Centre and Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apollo Hospitals, Hyderguda",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rao Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Continental Hospitals Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Ramesh Cardiac and Multispecialty Hospital Private Limited - Main Branch,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Krishna Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kidney Hospital & Lifeline Medical Institutions,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Speciality Hospital (A Unit of Starlit Medical Centre Private Limited) - (Earlier Certificate issued in the name of Sahara Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shanti Gopal Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apollo Speciality Hospitals, Vanagaram",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Ruby Hall Clinic, Wanowarie",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Olive Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Livasa Hospital, Nawanshahr (A Unit of Ivy Healthcare Infrastructure Private Limited) - (Earlier Certificate issued in the name of IVY Hospital (IVY Healthcare Infrastructure Private Limited)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chirayu Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Bhailal Amin General Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fernandez Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sitaram Bhartia Institute of Science & Research,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"Shree Balaji Medicover Hospitals (A Unit of Sahrudaya Balaji Health Care Pvt. Ltd.), Sangareddy",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Billroth Hospitals Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster Medcity,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sai Sanjeevini Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,NHS Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asian Institute of Nephrology & Urology,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Rainbow Childrenâ€™s Medicare Limited - (Earlier Certificate issued in the Name of Rainbow Hospital For Women Aand Children),India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Maharaja Agarsen Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhagwan Mahaveer Cancer Hospital & Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Lourdes Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Government (CL & SC) Spine Institute and Physiotherapy College,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Ganadhipati Purushottam Shekhawati Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,American Oncology Institute (A Unit Of Cancer Treatment Services Hyderabad Pvt. Ltd.),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,"Dayanand Medical College & Hospital, Tagore Nagar",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Breach Candy Hospital Trust,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Believers Churuch Medical College Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Manipal Hospitals (East) India Private Limited - (Earlier Certificate issued in the Name of AMRI Hospitals Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Brij Lal Hospital & Research Centre Pvt. Ltd., Haldwani (Nanital)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanghamitra Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sharda Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"AMRI Hospital, Mukundapur",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sree Rama Devi Multispeciality Hospital, Bhavani Nagar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,S.L. Raheja (A Fortis Associate) Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Parvathy Ortho Hospital Pvt. Ltd., Chengalpet",India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Bansal Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sahyadri Speciality Hospital, Nagar Road",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Daya General Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narmada Trauma Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Guardian Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sainath Hospital, Pune",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kinder Womens Hospital and Fertility Centre Private Limited,India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Krishna Institute of Medical Sciences Ltd. (KIMS),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Ernakulum Medical Centre (P) Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Manipal Northside Hospital, Malleshwaram",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,EMC Super Speciality Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Manipal Hospital, Whitefield",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Citizens Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sunshine Global Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"NU hospitals Pvt. Ltd, Rajajinagar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Global Hospital & Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,SAL Hospital & Medical Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Kalyani Kidney Care Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,BAPS Yogiji Maharaj Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Siddhanta Redcross Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Madhuraj Hospital Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sarvodaya Multispeciality & Cancer Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,P.D. Hinduja Sindhi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Metro Hospital and Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,My Hospital Super Speciality Care (A Unit of Chandigarh Healthcare (P) Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Ramakrishna Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Polakulath Narayanan Renai Medicity,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cygnus MLS Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Choithram Hospital and Research Centre,",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medanta Superspeciality Hospital (A Unit of Global Health Limited) - (Earlier Certificate issued in the Name of Medanta-Indore (A unit of Global Health Pvt. Ltd.)),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr Ramesh Cardiac Multispeciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Manipal Hospital, North Goa",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mittal Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Indiana Hospital & Heart Institute Pvt Ltd.,",India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Bhaktivedanta Hospital and Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Rungta Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. Philomenaâ€™s Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MP Birla Hospirtal & Priyamvada Birla Cancer Research Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Jawaharlal Nehru Cancer Hospital & Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Mata Chanan Devi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Santevita Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mehta Multispeciality Hospital India Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Metro MAS Heart Care & Multispecialty Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Manipal Hospital (A Unit of Manipal Hospitals, (East) India Pvt. Ltd.) - (Earlier Certificate issued in the Name of AMRI Hospital Ltd.)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,LHDM and Dr Prem Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Institute of Neurosciences,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Park Hospital (A unit of Aggarwal Hospital and Research Services Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,S.R. Kalla Memorial Gastro & General Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narayana Hrudalaya Surgical Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Metromed International Cardiac Centre Pvt. Ltd.,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Rajagiri Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Felix Hospital, Sector-137, Noida Extension",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Paras HMRI Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sahyadri Narayana Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Hindu Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ozone Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bharath Hospital and Institute of Oncology (A Unit of Sada Sharada Tumor and Research Institute),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Manipal Hospitals (Bengaluru) Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Swasthya Hospital Medical Resaerch Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Wockhardt Hospitals Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Livasa Hospital, Hoshiarpur (A Unit of Ivy Healthcare Infrastructure Private Limited) - (Earlier Certificate issued in the name of Ivy Healthcare Infrastructure Pvt. Ltd.)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sancheti Institute for Orthopaedic and Rehabilitation,India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,United CIIGMA Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amandeep Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Eternal Heart Care Centre & Research Institute Pvt.Ltd.,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Saifee Hospital, Maharishi Karve Marg",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Krishna Hospital & Medical Research Centre, Karad",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,METAS of Seventh Day Adventist Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Joshi Superspeciality & Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhardwaj Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pawana Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jabalpur Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Alchemist Hospital Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sentini Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KIMS Al Shifa Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Fortis Health Management Ltd.,Nagarabhavi",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,V.G.M. Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fortis Escorts Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Star Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rainbow Children's Medicare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Metro Hospital & Cancer Institute, Preet Vihar",India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Medanta â€“ The Medicity,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Delhi Heart and Lung Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Metro Hospital & Heart Institute, Sec. 11 and 12",India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Max Super Specialty Hospital, Patparganj (Run by Balaji Medical and Diagnostic Research Center)",India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Lilavati Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vijaya Medical & Educational Trust,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Primus Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Holy Family Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yashoda Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Max Super Specialty Hospital, Vaisali",India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Jeewan Nursing Home & Hospital, Pusa Road",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Indraprastha Medical Corporation Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Yashoda Super Speciality Hospital, Kaushambi",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster MIMS Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Yashoda Healthcare Services Limited, Malakpet - (Earlier Certificate issued in the Name of Yashoda Super Speciality Hospitall)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,RLKC Hospital- Metro Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Medical Trust Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Balaji Action Medical Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Rabindranath Tagore International Institute of Cardiac Sciences (Unit of Narayana Hrudayalaya Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Bankers Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Sahyadri Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,National Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Care Hospital (A Unit of Quality Care India Ltd.) - (Earlier Certificate issued in the name of CARE Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Park Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Krishna Institute of Medical Sciences Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Bangalore Baptist Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ganga Care Hospital Ltd. (Care Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jeewan Mala Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Desun Hospital & Heart Institute (A Unit of P. N. Memorial Neurocentre & Research Institute Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Dr. Balabhai Nanavati Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asian Institute of Medical Sciences (A Unit of Blue Sapphire Healthcares Pvt. Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sarvodaya Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mazumdar Shaw Medical Centre (Unit of Narayana Hrudayalaya Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gleneagles HealthCity Chennai (A Unit of Gleneagles Healthcare India Private Limited) - (Earlier Certificate issued in the Name of Gleneagles Global Hospitals and Health City),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr B.L. Kapur Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Frontier Lifeline Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chacha Nehru Bal Chikitsalaya,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dharamshila Narayana Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MGM SevenHills Hospital (A Unit of MGM Health Care Pvt. Ltd.) - (Earlier Certificate issued in the Name of SevenHills Healthcare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Escorts Fortis Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sir Ganga Ram Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Escorts Heart Institute & Research Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Baby Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lakeshore Hospital & Research Centre Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Manipal Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sagar Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr L H Hiranandani Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Narayana Institute of Cardiac Sciences (Unit of Narayana Hrudayalaya Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Moolchand Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Speciality Hospital ( A Unit of Devki Devi Foundation),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kerala Institute of Medical Sciences (KIMS),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Malabar Institute of Medical Sciences Ltd. (Aster MIMS),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,B.M. Birla Heart Research Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Kailash Hospital & Research Centre Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,G. Kuppuswami Naidu Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sterling Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amrita Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,PSG Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Batra Hospital & Medical Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Holy Spirit Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,K.G. Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fortis Hospitals Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shalby Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Artemis Health Institute (A Unit of Artemis Medicare Services Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Care Hospitals (Quality Care India Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ruby Hall Clinic,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kasturba Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fortis Flt. Lt. Rajan Dhall Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Godrej Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,N.M. Virani Wockhardt Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,P D Hinduja National Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Wockhardt Hospitals Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Paras Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Speciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Fortis Hospitals Limited, Neelam Bata Road, NIT",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jupiter Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nidhi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Livasa Hospital (A Unit of Ivy Health and Life Sciences Private Limited) (Earlier Certificate issued in the name of Ivy Hospital Mohali (A Unit of Ivy Health & Life Sciences Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bombay Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Advanced Surat Trauma and Orthopaedic Surgery Hospital,India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,"Holy Family Hospital, New Delhi",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Tertiary Teaching Hospitals of Christian Medical College,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sacred Heart Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Apollo Hospitals Enterprises Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Downtown Hospital Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhagwati Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri B.D. Mehta Mahavir Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Apollo BGS Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhatia Global Hospital & Endosurgery Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Vadamalayan Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jehangir Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Soni Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sathya Kidney Centre & Super Speciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Hospitals ( A Unit of Healthcare Global Enterprises Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gleneagles BGS Hospital (A Unit of Gleneagles Healthcare India Private Limited) - (Earlier Certificate issued in the name of BGS Gleneagles Global Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Zydus Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Care Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Dhanalakshmi Hospital Pvt. Ltd, Kannur, Kerala",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Peerless Hospitex Hospital & Research Centre Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sundaram Medical Foundation,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shanti Memorial Hospital Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shree Krishna Hospital & Pramukhswami Medical College,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Smt. RB Shah Mahavir Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Fortis Healthcare Limited, Mulund - (Earlier Certificate issued in the name of Fortis Hospitals Ltd.)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,St. Isabelâ€™s Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jaslok Hospital & Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tirath Ram Shah Charitable Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chandni Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Goyal Hospital & Urology Centre, Krishna Nagar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Omni Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,PRS Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Criticare Asia Multispecialty Hospital and Research Center,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,MIOT Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Indus Hospitals (A Unit of Vasugan Medical Specialities Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Speciality Hospital (A Unit of Hometrail Buildtech Private Limited) - (Earlier Certificate issued in the Name of Max Super Specialty Hospital),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,KIMS Bellerose Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Heart & General Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Max Superspecility Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Yashoda Healthcare Services Limited, Somajiguda - (Earlier Certificate issued in the Name of Yashoda Super Specaility Hospital)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,GBH - American Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Yashoda Super Speciality Hospital, Nehru Nagar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rajiv Gandhi Cancer Institute & Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Kovai Medical Centre and Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhandari Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,GEM Hospital & Research Centre Private Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Guru Nanak Care Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aster Prime Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Healthcare Global Enterprises Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Fortis Hospital, Bannerghatta Road",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Omega Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Smart Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kamineni Hospitals Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Indian Spinal Injuries Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Metro Hospital & Heart Institute,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Fortis Hospital, Shalimar Bagh",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Metro Heart Institute with Multispeciality,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Usha Mullapudi Cardiac Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Ramaiah Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Basavatarakam Indo-American Cancer Institute & Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,NU Hospitals Private Limited.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Noble Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saroj Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,EMS Memorial Co-Operative Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Fortis Hospitals Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Hiranandani Hospital (A fortis associate hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gleneagles Aware Hospital (A Unit of Gleneagles Healthcare India Pvt. Ltd.) - (Earlier Certificate issued in the Name of Aware Global Hospitals),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Johal Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aditya Birla Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Manipal Hospitals EM Bypass (A Unit of Manipal Hospitals Eastern India Private Limited) - (Earlier Certificate issued in the Name of Medica Superspecialty Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Care Institute of Medical Sciences (CIMS),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Nirmal Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Ramachandra Medical Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ganga Medical Centre and Hospitals Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ramkrishna Care Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nagarjuna Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Grecian Super Specialty Hospital (A Unit of RGS Healthcare Ltd.),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"A.J. Hospital & Research Centre,",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Malla Reddy Narayana Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,PES Institute of Medical Science & Research Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Jeyasekharan Hospital & Nursing Home,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Parkash Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Dr. D.Y.Patil Medical College, Hospital and Research Centre",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dr Rela Institute & Medical Centre (A Unit Of JR Super Speciality Hospitals Pvt. Ltd),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"Sevasadan Lifeline Superspeciality Hospital, Sangli",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maharishi Markandeshawar Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. KNS Memorial Hospital Pvt. Ltd. (Earlier Certificate issued in the name of Mayo Medical Centre Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,JJ Institute of Medical Sciences Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sanjivani Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,ILS Hospitals Dumdum Unit Of GPT Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sum Ultimate Medicare,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,National Institute Of Mental Health And Neuro Sciences,India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,MGM Healthcare Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Madhukar Rainbow Childrens Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kokilaben Dhirubhai Ambani Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vedanta Medical Research Foundation (Balco Medical Centre),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chandan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Regency Hospital Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cosmopolitan Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Jales Life Care Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Malabar Institute Of Medical Science Limited, Edakkad",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Kaddam Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medicover Hospitals (A Unit of Sahrudaya Healthcare Pvt. Ltd.) - (Earlier Certificate issued in the Name of Medicover Hospitals (A Unit of Sahrudaya Healthcare Kurnool Pvt. Ltd.)),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aureus Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Asha Hospital (A Unit of Asha Institute of Medical Sciences & Research Centre Pvt. Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Cygnus J.K Hindu Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cygnus Superspecaility Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,ILS Hospitals Agartala (Unit of GPT Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Panda Cancer Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,"Brahm Shakti Sanjivani Super Speciality Hospital, Jhajjar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Surya Mother & Child Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Deep Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Isha multispeciality hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amandeep Medicity,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Smt. Rasilaben Sevantilal Shah Venus Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Reach Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Seven Star Hospital ( A Unit of Nagpur Institute of Surgical Sciences and Research Centre pvt.Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,B C M Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Anand Surgical Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SMVS Swaminarayan Hospital and Research Foundation,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Park Hospital, Behror",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,BAPS Pramukh Swami Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Virk Hospital Pvt. Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apex Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tricolour Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Tulip MultispecilityHospital Pvt.Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chennai Noble Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ruban Memorial Hospital(Unit Of Ruban Patliputra Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kiran Multi Super Speciality Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo CVHF Heart Institute (A Unit Of Apollo CVHF Ltd.),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Shrimann Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jupiter Lifeline Hospitals Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chandra Laxmi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Swastik Multispeciality Hospital & Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bai Jerbai Wadia Hospital for Children,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prashanth Hospitals (A unit of Prashanth Fertility Research Centre Pvt Ltd),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Synergy Super Speciality Hospital (A Unit of Saurashtra Medicare LLP),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ayushman Hospital & Health Services,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Shalby Limited, Naroda",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Galaxy Care Multispeciality Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Malabar Cancer Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Kauvery Hospital (A Unit of Sri Kauvery Medical Care (India) Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jaipur Golden Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Preethi Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MGM Hospital & Research Center Pvt. Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Capital Hospitals (A Unit Of Capital Tree Health Care Pvt Ltd),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Anup Institute Of Orthopaedics & Rehabilitation,India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Orchid Medical Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mitera Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sir Ganga Ram City Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yashoda Superspeciality Hospital And Cancer Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Nelson Hospital (A Unit of SMD Hospitals Pvt. Ltd.) - (Earlier Certificate issued in the Name of Nelson Mother & Child Care Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cygnus Maharaja Aggarsain Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kusum Dhirajlal (KD) Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Sai Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Unity Hospital ( Unity Care and Health Services Private Ltd ),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhagwan Mahavir Medica Superpecialty Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amcare Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MGM Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Ashoka Medicover Hospitals (A Unit Of Sahrudaya Health Care Pvt Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sterling Cancer Hospital,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Pace Hospitals(A Unit of OMRV Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pushpanjali Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sidhu Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Saket Medicare & Research Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mukat Hospital and Heart Institute (A Unit of City Clinic Private Limited),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,SSB Heart And Multispecialty Hospital (A Unit of SSB Central Hospital and Research Center Limited),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Sadhu Vaswani Missionâ€™s Medical Complex,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kothari Medical Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Krishna Hospital & Research Centre, Haldwani (Nanital)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pawan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Leonard Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"St.Thomas Hospital, Changanassery",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Holy Cross Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mann Multispecialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Medigram The Super Speciality , Hospital, A Unit Of Saharanpur Institute Of Medical Sciences",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Healthworld Hospitals A Unit Of Parashmani Medical Centre Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG EKO Cancer Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Akashdeep Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sparsh Hospital (A Unit Of Shiva & Shiva Orthopaedic Hospital Private Limited),India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,Gurukripa Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bombay Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vasal Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Omega Hospitals ( A Unit Of Vizag Specialty Hospitals),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Satguru Partap Singh Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vikram Aura Hospitals - (Earlier Certificate issued in the Name of Fortis Lafemme Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Adlux Hospital (A Unit Of Adlux Medicity & Convention Centre Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Siddaganga Hospital (A Unit of Sree Siddaganga Math SSMCRI),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,BS Heartcare & Multispeciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,N. C. Jindal Institute Of Medical Care & Research,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,DHS Multispecialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Kailashi Super Speciality Hospital,Meerut",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ranjit Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Royal Care Super Speciality Hospital Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Lifeline Hospital, Pune",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Omega Hospitals (Guntur Institute Of Oncology),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Shree Aggarsain International Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Healthway Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Charak Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Riddhivinayak Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sri Venkateswara Institute Of Medical Sciences, Chittoor",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Mahavir Jaipuria Rajasthan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SGT Medical College Hospital and Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Raghoji Kidney Hospital & Research Center Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo DRDO Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,R J Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Indus Jaipur Hospital (A Unit Sharma Memorial Hospital & Research Institute),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,M.B Multispeciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Surya Children's Medicare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhagwan Das Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KIMS ICON Hospital ( A Unit of ICON Krishi Institute of Medical Sciences Pvt. Ltd.),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,BIMR Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kamineni Health Services Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Best Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Morris Mathias Hospital, Kanyakumari",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Manwatkar Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Haria L.G. Rotary Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Oxygen Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mallige Hospital (Mallige Medical Centre Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bansal Hospital (A Unit of Sagarshree Hospital and Research Institute Private Limited) - (Earlier Certificate issued in the name of Sagarshree Hospital & Research Institute Pvt. Ltd.).,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,SGL Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Siddh Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Gujarat Research & Medical Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Avron Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,IMS & SUM Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ford Hospital & Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. Hedgewar Rugnalaya,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sushrut Hospital and Research Centre (A Unit of Chembur Hospital Project Trust),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Inodaya Hospitals( A Unit of Godavarthy Narasimha Murthy Health Care Pvt.Ltd),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,EPIC Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Paras JK Hospital (A Unit of Paras Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Suyash Institute Of Medical Science Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Suchirayu Healthcare Solution Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vikash Multi Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Gaba Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Armaan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Guru Ram Dass Charitable Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Neotia Getwel Healthcare Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jeevan Jyoti Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Dr. D. Y. Patil Hospital And Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Justice K. S. Hegde Charitable Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yatharth Superspeciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Shankara Cancer Hospital And Research Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,"Vidharba Institute of Medical Sciences, Mohan Nagar",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Dayanand Hospital & Critical Care Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Bhavani Multispecialty Hospital & Research Institute,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Apollomedics Super Speciality Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MGM (Mohanlal Gupta Memorial) Hospital and Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Travancore Medical College Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Gangasheel Advanced Medical Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,KD Ganesha (A Group of KD Ganesha Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sunrise Institute Of Medical Science, Vazhakkala Village",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Rainbow Children's Medicare Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,QRG Medicare Private Limited - (Earlier Certificate issued in the Name of QRG Medicare Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Chirayu Health & Medicare Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Nayyar Heart Institute & Super Speciality Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,The Corporate Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Eden Critical Care Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Andhra Hospitals (Bhavanipuram) Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amritdhara-My Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Landmark Hospitals, Kukatpally",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sparsh Super Speciality Hospital, Yeashwanthpur",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prayag Hospital & Research Centre (P) Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,New Ruby Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Goyal Hospital & Research Centre Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amala Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shri Mata Vaishno Devi Narayana Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Navin Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,People Tree Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amaltas Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Nova Hospital Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Hospitals Enterprise Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aakash Healthcare Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Maharaja Agrasen Hospital, Dwarka",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kanchi Kamakoti Childs Trust Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Abrol Medical Centre Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kamala Nehru Memorial Hospital Regional Cancer Centre,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Usha Prime Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Koshys Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mahatama Gandhi Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Shekhar Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Livasa Hospital, Amritsar (A Unit of Ivy Health and Life Sciences Private Limited) - (Earlier Certificate issued in the name of Ivy Health & Life Sciences Pvt. Ltd.)",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhartimaiya Memorial Foundation (Bharat Cancer Hospital & Nirali Memorial Radiation Centre),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Narayana Multispeciality Hospital Jaipur (A Unit of Narayana Hrudayalaya Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sapra Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vinayak Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Asian Heart Institute and Research Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Citi Neuro Centre, Banjara Hills",India,Asia-Pacific,Neurological Specialty,36.0,96.35,36.0,0,0,1
+59,Narmada Apna Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CareBest Superspeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Aadhar Health Institue (A Unit of VLCOM Healthcare Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Poona Hospital And Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Neo Hospital (A Unit of Muskan Medical Centre Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yashoda Hospital and Cancer Institute (A Unit of Yashoda Hospital and Research Centre Limited),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Virinchi Hospitals (A Unit of Virinchi Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rukmani Birla Hospital (A unit of The Calcutta Medical Research Institute),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Narayana Superspeciality Hospital (Unit of MMRHL),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,LISIE Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Avanti Institute of Cardiology Pvt. Ltd,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,"Avee Hospital (A Unit of Kastura Medicos Ltd.) - (Earlier Certificate issued in the name of Aarogya Hospital), Vaishali",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Solanki Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Pancham Hospitals (A Unit of Pancham Hospitals Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Little flower and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kamalnayan Bajaj Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yatharth Wellness Super Speciality Hospital and Heart Centre,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Spandan Multipsecilaity Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sanjeev Bansal Cygnus Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CIMAR The Womenâ€™s Hospital (Unit of Edappal Hospitals Pvt. Ltd.),India,Asia-Pacific,Women & Child Specialty,36.0,96.35,36.0,0,0,1
+59,Rajarajeshwari Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Scudder Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jain Social Federationâ€™s Anandrishiji Hospital and Medical Research Centre - (Earlier Certificate issued in the Name of Jain Social Federations Anandrishiji Hospital & Cardiac Surgery Centre),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Vivekananda Polyclinic & Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Care Hospitals - Malakpet (A Unit of Quality Care India Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"KIMS Hospital Enterprises Pvt. Ltd., Kondapur",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,O.P Jindal Institute of Cancer & Cardiac Research,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Fortune Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Max Super Speciality Hospital (A Unit of Alexis Multispeciality Hospital Pvt. Ltd.) - (Earlier Certificate issued in the name of Alexis Multispecialty Hospital),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Mohandai Oswal Hospital, G.T Road, Sherpur Bypass",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mayom Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sir H.N. Reliance Foundation Hospital and Research Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apollo KH Hospital, Melvisharam",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Indus International Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Manipal Hospitals, Whitefield",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Geetanjali Medical College & Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Pinnacle Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Care Hospitals (A Unit of Quality Care India Limited), Hi-Tech City, Gachibowli",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Medicover Hospitals (A Unit of Abhayanjaneya Health Care Pvt.Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Healthcare Global Enterprises Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Apollo Hospitals, Seshadripuram",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Venkateshwar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Yenepoya Institute of Medical Sciences & Research Pvt. Ltd.,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,SMT Paarvati Devi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Orange City Hospital & Research Institute,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,North East Health Care Private Limited (Earlier Certificate issued in the name of W-Pratiksha Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,SRCC Childrens Hospital - Managed by Narayana Health,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,B.P Poddar Hospital & Medical Research Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shah Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Speciality Hospitals(A Unit of Apollo Hospitals Enterprise Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,KMC Hospital (A Unit Of Manipal Health Enterprises Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rainbow Children's Medicare Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ojas Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sehgal Neo Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Global Hospital - Superspeciality & Transplant Centre,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. Gregorios Medical Mission Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Vydehi Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Omni RK Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,MMI Naryana Multispeciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Lokmanya Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ahmedabad Institute Of Medical Services (AIMS),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,"St.Theresa's Hospital, Erragada",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mata Roop Rani Maggo Hospital & IVF Centre - (Earlier Certificate issued in the name of Mata Roop Rani Maggo and Mahindru Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Sahyadri Super Speciality Hospital, Hadapsar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Deenanath Mangeshkar Hospital and Research Center,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Global Heart And Super Specialty Hospital,India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Kalra Hospital SRCNC Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Bhagwan Mahaveer Jain Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shanti Devi Gi Institute And Advanced Endoscopy Centre,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Pinnacle Cancer Centre (A Unit of HCG Pinnacle Oncology Pvt Ltd.),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,MVR Cancer & Research Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Sukhda Multi Speciality Hospital (A Unit of Vandam Healthcare Pvt. Ltd),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Meditrina Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,AIG Hospitals ( A Unit of Asian Institute Of Gastroenterology Private Limited),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Anant Nursing Home Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,GG Hospital (A Unit of Paragon Hospital Kerala Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mahatma Gandhi Institute Of Medical Sciences,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Aashka Hospitals Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Himalayan Hospital ( A Constituent unit of Swami Rama Himalayan University),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,The Signature Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,FIMS Hospital (Frank Institute of Medical Sciences),India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,PIOS Medilinks Pvt. Ltd. Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shubham Hospital (A Unit of Shubham Medicare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,St. John's Medical College Hospital,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Sagar Hospitals-DSI,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Geetanjali Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Apollo Rajshree Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Kainos Super Speciality Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"CARE Hospitals, Khordha",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Maharishi Markandeshwar Institute of Medical Sciences & Research,India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Medicover Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cancer Hospital & Research Institute,India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,Healing Touch Super Specialty Hospital (A Unit of Blue Heavens Health Care Pvt. Ltd.),India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,"Sterling Ram Krishna Speciality Hospital, Gandhidham",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Ashish Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cytecare Hospitals Private Limited,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Rangadore Memorial Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,HCG NCHRI Cancer Centre (A unit of HCG NCHRI Oncology LLP),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,"Fortis Hospitals Ltd., Cunningham",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gangamai Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Kauvery Hospital Chennai, Sri Kavery Medical Care Trichy Ltd., Mylapore",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Malabar Hospitals (Private) Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jeewan Hospital & Nursing Home Pvt. Ltd. Jeewan Nagar,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Jagadguru Sri Shivarathreeshwara Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Gleneagles Hospital - Lakdikapul (A Unit of Gleneagles Healthcare India Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Marudhar Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Yenepoya Medical College Hospital, Deralakatte",India,Asia-Pacific,Teaching Hospital,36.0,96.35,36.0,0,0,1
+59,Kauvery Hospital - Heartcity (A Unit of Sri Kauvery Medical Care (India) Limited) - (Previously Known as Kauvery Heartcity - Unit of Sri Kavery Medical Care (Trichy) Limited),India,Asia-Pacific,Cardiac Specialty,36.0,96.35,36.0,0,0,1
+59,Sahyadri Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,36.0,96.35,36.0,0,0,1
+59,Omni Hospitals (A Unit of INCOR Group),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Human Care Medical Charitable Trust,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,"Deepak Hospital, Sarabha Nagar",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shanmuga Hospital Limited - (Earlier Certificate issued in the Name of Shanmuga Hospital Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Q1 Hospitals (A Unit of Q1 Bone & Joint Hospital),India,Asia-Pacific,Orthopedic Specialty,36.0,96.35,36.0,0,0,1
+59,"S. L. Minda Memorial Hospital, Unit - Moga Devi Minda Charitable Trust, Adampur",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Amandeep Hospitals Pvt. Ltd. - (Earlier Certificate issued in the Name of Amandeep Hospital),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Shankus Hospitals,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prathima Hospitals (A Unit of Mamatha Medi Care Private Limited),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Premier Hospital Pvt Ltd,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Meitra Hospital (A Unit of premium Medical healthcare providers pvt ltd),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Annai Arul Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,CMC Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Prathima Hospitals (A Unit of Sri Sai Balaji Healthcare (I) Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Sri Chandra Sekara Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Neelam Hospital (A unit of Neelam Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Cancer Institute (WIA),India,Asia-Pacific,Cancer Specialty,36.0,96.35,36.0,0,0,1
+59,"Andhra Hospitals, Suryaraopet",India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Patel Hospital Pvt. Ltd.,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+59,Mahajan Hospital,India,Asia-Pacific,General Hospital,36.0,96.35,36.0,0,0,1
+1417,Suretech Hospital & Research Centre Ltd.,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Ayursundra Superspecialty Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Bhagirathi Neotia woman and Child Care Centre,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Jai Hind Healthcare,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Guru Nanak Mission Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Krupamayi Hospitals,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Aadicura Superspeciality Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Ahmedabad Bariatrics and Cosmetics Private Limited,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Government Hospital for Chest and Communicable Diseases,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Top Stars Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Medicover Hospitals (A Unit of Sahrudaya Health Care Pvt. Ltd.),India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Kamla Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Ukar Super Speciality Hospital (A Unit of Ukar Healthcare Pvt. Ltd.) - (Earlier Certificate issued in the Name of Navin Hospital),India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Super Speciality Hospital.Shyam Shah Medical College,India,Asia-Pacific,Teaching Hospital,30.0,10.83,30.0,0,0,1
+1417,Sparsh Neuro & Superspeciality Hospital,India,Asia-Pacific,Neurological Specialty,30.0,10.83,30.0,0,0,1
+1417,Lotus Hospitals for Women & Children,India,Asia-Pacific,Women & Child Specialty,30.0,10.83,30.0,0,0,1
+1417,Utkal Healthcare Private Limited,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Harshitha Hospital (P) Ltd.,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,"Sparsh Hospital for Accidents Orthopedics, Plastic & Maxillo Facial Surgery",India,Asia-Pacific,Orthopedic Specialty,30.0,10.83,30.0,0,0,1
+1417,Max Super Specialty Hospital (A Unit of Max Healthcare Institute Limited) Shalimar Bagh,India,Asia-Pacific,Multi Specialty,30.0,10.83,30.0,0,0,1
+1417,Meditrina Institute of Medical Sciences,India,Asia-Pacific,Teaching Hospital,30.0,10.83,30.0,0,0,1
+1417,Shanti Mukund Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Mission of Mercy Hospital and Research Centre,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Kailash Hospitals Ltd.,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Sardar Vallabhbhai Patel Rotary General Hospital - (Earlier Certificate issued in the Name of Sardar Patel Hospital and Heart Institute),India,Asia-Pacific,Cardiac Specialty,30.0,10.83,30.0,0,0,1
+1417,Gunjkar Multispeciality Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,Medicover Hospital (A Unit of Sahrudaya Healthcare Pvt. Ltd.),India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1417,American Oncology Institute (A Unit Of Cancer Treatment Services Hyderabad Private Limited),India,Asia-Pacific,Cancer Specialty,30.0,10.83,30.0,0,0,1
+1417,LN Medical College & J.K. Hospital,India,Asia-Pacific,Teaching Hospital,30.0,10.83,30.0,0,0,1
+1417,Tristar Hospital,India,Asia-Pacific,General Hospital,30.0,10.83,30.0,0,0,1
+1447,HCG Cancer Centre,India,Asia-Pacific,Cancer Specialty,0.0,8.94,0.0,0,0,0
+1447,Aastha Kidney & Superspeciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,City Hospital & Research Centre (P) Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,L N Medical College and J K Hospital,India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Manu Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,T. S. Misra Medical College and Hospital,India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Health Hospitals,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Nayati Multi Super Speciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"GNRC Institute of Medical Science, North",India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Uppal Neuro Hospital,India,Asia-Pacific,Neurological Specialty,0.0,8.94,0.0,0,0,0
+1447,Kamineni Health Care Private Limited,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Neelkanth Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"SVS Institute of Neurosciences, Kachiguda",India,Asia-Pacific,Neurological Specialty,0.0,8.94,0.0,0,0,0
+1447,Delhi Heart Institute & Multispecialty Hospital,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Dr. Karam Singh Memorial,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,KMC Hospital & Research Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Srikara Hospitals, Madinaguda",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Ashwini Sahakari Rugnalaya Sanshodhan Kendra NIY,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Surya Global Hospitals,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Vadodara Institute for Reconstructive Orthopaedics Care,India,Asia-Pacific,Orthopedic Specialty,0.0,8.94,0.0,0,0,0
+1447,Medeor Hospital Limited,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Rockland Hospital, Dwarka",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Archana Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Supraja Hospitals,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Kalinga Hospital, Chandrasekharpur",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Bristlecone Hospitals (Erstwhile Titan Hospitals),India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Aster CMI Hospital, Sahakara Nagar",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Shalby Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Global Hospital (A Unit of Sood Hospital Pvt. Ltd.),India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Santom Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Narad Multispecialty Hospital & Trauma Centre,India,Asia-Pacific,Multi Specialty,0.0,8.94,0.0,0,0,0
+1447,Military Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Vedanta Hospitals,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,MGM Medical College Hospital and Medical Center Research Institute,India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,"Rainbow Children's Hospital and Birthright by Rainbow (A Unit of Rainbow Medicare Pvt. Ltd.), Marthalli",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Jamdar Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Life Kare Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Laxmi Narasimha Hospital, Warangal Urban",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Khetarpal Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,St. Joseph's Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Ekashilaa Hospitals (A Unit of Kakathiyan Medical Services Pvt. Ltd.),India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Shivam Hospital Unit Of R R Hospitals Pvt. Ltd., Bahadurgarh",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Dr. Ravindra Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Ravindra Hospital & Heart Centre,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Siddhartha Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Kalyan Multispeciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,M.J. Naidu Super Speciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,ABH Healthcare Private Limited (Earlier Certificate issued in the name of Anil Baghi Hospital),India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,ANU Institute of Neuro & Cardiac Sciences (A Unit of Sri Anu Hospitals Pvt. Ltd.),India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,"Aaryan Institute of Medical Science, Kutch",India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,LBS Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Chandan Neuro Sciences Hospital,India,Asia-Pacific,Neurological Specialty,0.0,8.94,0.0,0,0,0
+1447,Metro Umkal Hospital and Heart Institute,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Apollo Childerns Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Care & Cure Medicity Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,PBMA'S H V Desai Eye Hospital,India,Asia-Pacific,Eye Specialty,0.0,8.94,0.0,0,0,0
+1447,Global Heart and General Hospital Private Limited,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Sant Parmanand Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Bharati Vidyapeeth University Medical College Hospital & Research Centre,India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Aditya Super Speciality Hospital And Research Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Kaizen Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Cosmo Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Charusat Hospital, Charusat Healthcare and Research Foundation",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Indo US Superspeciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Nathan Super Speciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Neelima Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Orison Super Speciality Hospital Infertility & Trauma Centre (A Unit of Conjoint Healthcare Pvt. Ltd.),India,Asia-Pacific,Orthopedic Specialty,0.0,8.94,0.0,0,0,0
+1447,Al Arif Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Apollo Speciality Hospitals, OMR",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Artemis Hospital, Dwarka",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Muljibhai Patel Urological Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Shivam Multisuperspeciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Regency Hospital Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Aditya Care Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Pushpawati Singhania Research Institute for Liver, Renal & Digestive Diseases",India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Govt. Women & Children's Hospital,India,Asia-Pacific,Women & Child Specialty,0.0,8.94,0.0,0,0,0
+1447,Action Cancer Hospital,India,Asia-Pacific,Cancer Specialty,0.0,8.94,0.0,0,0,0
+1447,Sunshine Hospitals,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Khandelwal Hospital & Urology Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,N.M. Wadia Institite of Cardiology,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Sree Renga Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Nusi Wockhardt Hospital, Goa, Panaji (Panjim)",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,IMS and SUM Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Chord Road HospitalPvt Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Medical Research Foundation,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Kumaran Hospitals (P) Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Taluk Head Quarters Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Medanta Abdur Razzaque Ansari Memorial Weavers Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Narayana Nethralaya (NN1),India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Institute of Human Behaviour & Allied Sciences (IHBAS),India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Global Longlife Hospital & Research Pvt. Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Nethradhama Superspeciality Eye Hospital,India,Asia-Pacific,Eye Specialty,0.0,8.94,0.0,0,0,0
+1447,"Rockland Hospital, Qutub Institutional Area",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Apollo Hospitals International Limited,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Mehta Childernâ€™s Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,District Govt. Head Quarters Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Medical Research Foundation - Sankara Nethralaya,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,L.V. Prasad Eye Institute,India,Asia-Pacific,Eye Specialty,0.0,8.94,0.0,0,0,0
+1447,Baroda Heart Institute & Research Centre,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Vikram Hospital Private Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Metro Hospital & Heart Institute, Lajpat Nagar",India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Hospital for Mental Health,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Government. Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Sun Medical & Research Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Mallya Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Prasad Hospitals,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Regional Cancer Centre,India,Asia-Pacific,Cancer Specialty,0.0,8.94,0.0,0,0,0
+1447,Silver Line Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Sankara Eye Hospital,India,Asia-Pacific,Eye Specialty,0.0,8.94,0.0,0,0,0
+1447,Hartej Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Nalluri Nursing Home,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Oxford hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Greater Kailash Hospital Pvt Ltd,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Sri Kara Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Sri Jayadeva Institute of Cardiovascular Sciences & Research,India,Asia-Pacific,Cardiac Specialty,0.0,8.94,0.0,0,0,0
+1447,Nikos Hospital & Research Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Samved Medicare,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Max Multisprecilaity Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Century Super Speciality Hospitals Pvt. Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Sri Sathya Sai institute Of Higher Medical Sciences, Ananthpur",India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,SMRC's V.M. Salgaocar Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Narayana Multispeciality Hospital, Whitefield",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Cygnus Superspeciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,RG Stone Urology and Laproscopy Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Manipal Super Speciality Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Father Muller Medical College Hospital,India,Asia-Pacific,Teaching Hospital,0.0,8.94,0.0,0,0,0
+1447,Meerut Kidney Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,PVS Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Jain Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"Institute for Communicative and Cognitive Neurosciences, Shoranur",India,Asia-Pacific,Neurological Specialty,0.0,8.94,0.0,0,0,0
+1447,Bhagat Chandra Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Seven Hills Healthcare Pvt. Ltd.,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,"The Deccan Hospitals, Somajiguda",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Medicover Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Deepak Memorial Hospital & Medical Research Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Sai Vani Super Specialty Hospital,India,Asia-Pacific,Multi Specialty,0.0,8.94,0.0,0,0,0
+1447,KIMS-Sunshine Hospitals (A Unit of Sarvejana Healthcare Private Limited),India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,QRG Central Hospital & Research Centre,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,North Star Hospital,India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Vadodara Institute of Neurological Sciences,India,Asia-Pacific,Neurological Specialty,0.0,8.94,0.0,0,0,0
+1447,"Aditya Hospital, Boggulakunta",India,Asia-Pacific,General Hospital,0.0,8.94,0.0,0,0,0
+1447,Orthonova Joint & Trauma Hospital Pvt. Ltd.,India,Asia-Pacific,Orthopedic Specialty,0.0,8.94,0.0,0,0,0

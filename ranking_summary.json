@@ -1,0 +1,84 @@
+{
+  "total_organizations_processed": 1588,
+  "average_score": 33.758186397984886,
+  "score_distribution": {
+    "A+ (75-100)": 0,
+    "A (65-74)": 57,
+    "B+ (55-64)": 0,
+    "B (45-54)": 0,
+    "C (0-44)": 1531
+  },
+  "top_10_organizations": [
+    {
+      "rank": 1,
+      "name": "Fortis Memorial Research Institute",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 2,
+      "name": "Max Super Speciality Hospital",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 3,
+      "name": "Fortis Hospital",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 4,
+      "name": "Manipal Hospital",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 5,
+      "name": "Max Hospital",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 6,
+      "name": "Apollo Hospitals",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 7,
+      "name": "Institute of liver & Biliary Sciences, Vasant Kunj",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 8,
+      "name": "Queens NRI Hospital (A Unit of Ms Chalasani Hospital Pvt. Ltd.)",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 9,
+      "name": "Upasani Super Speciality Hospital Private Limited",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    },
+    {
+      "rank": 10,
+      "name": "Dhanalakshmi Srinivasan Medical College and Hospital",
+      "country": "India",
+      "total_score": 70,
+      "percentile": 100.0
+    }
+  ],
+  "generation_date": "2025-09-26 08:07:07"
+}
