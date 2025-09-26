@@ -1,0 +1,64 @@
+name: Deploy to Streamlit Cloud
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Validate deployment files
+      run: |
+        echo "Validating deployment configuration..."
+        python -c "
+import os
+required_files = ['streamlit_app.py', 'requirements.txt', 'runtime.txt', '.streamlit/config.toml']
+missing_files = [f for f in required_files if not os.path.exists(f)]
+if missing_files:
+    print(f'Missing required files: {missing_files}')
+    exit(1)
+else:
+    print('All required deployment files present')
+"
+    
+    - name: Test Streamlit app
+      run: |
+        echo "Testing Streamlit app startup..."
+        timeout 30s streamlit run streamlit_app.py --server.headless true --server.port 8501 &
+        sleep 10
+        curl -f http://localhost:8501 || echo "App startup test completed"
+    
+    - name: Generate deployment info
+      run: |
+        python deploy_to_streamlit.py --no-commit
+    
+    - name: Upload deployment artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: deployment-info
+        path: |
+          deployment_info.json
+          *.csv
+          *.json
+    
+    - name: Deployment notification
+      run: |
+        echo "🚀 QuXAT Healthcare Quality Grid is ready for Streamlit Cloud deployment!"
+        echo "📱 App URL: https://quxatscore.streamlit.app/"
+        echo "🔗 Deploy at: https://share.streamlit.io/"

@@ -1,0 +1,14 @@
+{
+  "app_name": "quxatscore",
+  "repository": "shawredanalytics/QuXAT",
+  "branch": "main",
+  "main_file": "streamlit_app.py",
+  "streamlit_cloud_url": "https://share.streamlit.io/",
+  "auto_open_browser": true,
+  "auto_commit": true,
+  "deployment_checks": {
+    "validate_files": true,
+    "test_app_startup": true,
+    "check_git_status": true
+  }
+}
