@@ -1,0 +1,114 @@
+{
+  "ranking_system_info": {
+    "system_type": "Unique Sequential Ranking",
+    "tie_breaking_criteria": [
+      "Total QuXAT Score (Primary)",
+      "Certification Count (Secondary)",
+      "Organization Name Alphabetical (Tertiary)"
+    ],
+    "generation_timestamp": "2025-09-26T15:51:17.160992"
+  },
+  "organization_statistics": {
+    "total_organizations": 1588,
+    "unique_ranks_assigned": 1588,
+    "rank_range": [
+      1,
+      1588
+    ]
+  },
+  "score_statistics": {
+    "average_score": 16.183375314861028,
+    "median_score": 16.800000000000004,
+    "highest_score": 55.0,
+    "lowest_score": 0,
+    "score_distribution": {
+      "A+ (75-100)": 0,
+      "A (65-74)": 0,
+      "B+ (55-64)": 14,
+      "B (45-54)": 0,
+      "C (0-44)": 1574
+    }
+  },
+  "top_10_organizations": [
+    {
+      "rank": 1,
+      "name": "Apollo Hospitals",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 100.0
+    },
+    {
+      "rank": 2,
+      "name": "Asansol Healthworld Pvt. Ltd.",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.93702770780857
+    },
+    {
+      "rank": 3,
+      "name": "City Hospital",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.87405541561712
+    },
+    {
+      "rank": 4,
+      "name": "Dhanalakshmi Srinivasan Medical College and Hospital",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.81108312342569
+    },
+    {
+      "rank": 5,
+      "name": "Fortis Hospital",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.74811083123426
+    },
+    {
+      "rank": 6,
+      "name": "Fortis Memorial Research Institute",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.68513853904281
+    },
+    {
+      "rank": 7,
+      "name": "Institute of liver & Biliary Sciences, Vasant Kunj",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.62216624685138
+    },
+    {
+      "rank": 8,
+      "name": "Manipal Hospital",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.55919395465995
+    },
+    {
+      "rank": 9,
+      "name": "Max Hospital",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.49622166246851
+    },
+    {
+      "rank": 10,
+      "name": "Max Super Speciality Hospital",
+      "country": "India",
+      "total_score": 55.0,
+      "certification_count": 2,
+      "percentile": 99.43324937027708
+    }
+  ]
+}

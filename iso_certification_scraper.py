@@ -328,35 +328,11 @@ class ISOCertificationScraper:
     
     def _generate_random_certifications(self, org_name: str, max_certs: int = 3) -> List[Dict]:
         """
-        Generate random ISO certifications for demonstration
+        Generate random ISO certifications for demonstration - DISABLED for production use
+        This function is permanently disabled to prevent generation of unvalidated certification data
         """
-        standards = ['ISO 9001:2015', 'ISO 14001:2015', 'ISO 45001:2018', 'ISO 27001:2013']
-        cert_bodies = ['Bureau Veritas', 'TUV SUD', 'DNV GL', 'BSI Group', 'SGS', 'Intertek']
-        accred_bodies = ['NABCB', 'UKAS', 'ANAB', 'DAkkS']
-        
-        certifications = []
-        num_certs = random.randint(1, max_certs)
-        
-        for i in range(num_certs):
-            standard = random.choice(standards)
-            cert_body = random.choice(cert_bodies)
-            
-            issue_date = datetime.now() - timedelta(days=random.randint(30, 1095))
-            expiry_date = issue_date + timedelta(days=1095)  # 3 years validity
-            
-            certification = {
-                'standard': standard,
-                'certification_body': cert_body,
-                'certificate_number': f'CERT-{random.randint(100000, 999999)}',
-                'issue_date': issue_date,
-                'expiry_date': expiry_date,
-                'scope': f'Healthcare Services - {org_name}',
-                'status': 'Valid' if expiry_date > datetime.now() else 'Expired',
-                'accreditation_body': random.choice(accred_bodies)
-            }
-            certifications.append(certification)
-        
-        return certifications
+        logger.warning(f"Random certification generation disabled for {org_name} - no simulated data will be created")
+        return []  # Always return empty list to prevent simulated data generation
     
     def _deduplicate_certifications(self, certifications: List[ISOCertification]) -> List[ISOCertification]:
         """

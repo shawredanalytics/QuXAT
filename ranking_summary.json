@@ -1,84 +1,84 @@
 {
   "total_organizations_processed": 1588,
-  "average_score": 33.758186397984886,
+  "average_score": 16.183375314861028,
   "score_distribution": {
     "A+ (75-100)": 0,
-    "A (65-74)": 57,
-    "B+ (55-64)": 0,
+    "A (65-74)": 0,
+    "B+ (55-64)": 14,
     "B (45-54)": 0,
-    "C (0-44)": 1531
+    "C (0-44)": 1574
   },
   "top_10_organizations": [
     {
       "rank": 1,
-      "name": "Fortis Memorial Research Institute",
+      "name": "Apollo Hospitals",
       "country": "India",
-      "total_score": 70,
+      "total_score": 55.0,
       "percentile": 100.0
     },
     {
       "rank": 2,
-      "name": "Max Super Speciality Hospital",
+      "name": "Asansol Healthworld Pvt. Ltd.",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.93702770780857
     },
     {
       "rank": 3,
-      "name": "Fortis Hospital",
+      "name": "City Hospital",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.87405541561712
     },
     {
       "rank": 4,
-      "name": "Manipal Hospital",
+      "name": "Dhanalakshmi Srinivasan Medical College and Hospital",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.81108312342569
     },
     {
       "rank": 5,
-      "name": "Max Hospital",
+      "name": "Fortis Hospital",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.74811083123426
     },
     {
       "rank": 6,
-      "name": "Apollo Hospitals",
+      "name": "Fortis Memorial Research Institute",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.68513853904281
     },
     {
       "rank": 7,
       "name": "Institute of liver & Biliary Sciences, Vasant Kunj",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.62216624685138
     },
     {
       "rank": 8,
-      "name": "Queens NRI Hospital (A Unit of Ms Chalasani Hospital Pvt. Ltd.)",
+      "name": "Manipal Hospital",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.55919395465995
     },
     {
       "rank": 9,
-      "name": "Upasani Super Speciality Hospital Private Limited",
+      "name": "Max Hospital",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.49622166246851
     },
     {
       "rank": 10,
-      "name": "Dhanalakshmi Srinivasan Medical College and Hospital",
+      "name": "Max Super Speciality Hospital",
       "country": "India",
-      "total_score": 70,
-      "percentile": 100.0
+      "total_score": 55.0,
+      "percentile": 99.43324937027708
     }
   ],
-  "generation_date": "2025-09-26 08:07:07"
+  "generation_date": "2025-09-26 15:51:09"
 }

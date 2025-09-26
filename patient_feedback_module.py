@@ -59,6 +59,54 @@ class PatientFeedbackAnalyzer:
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
+        
+        # Initialize data validator for organization validation
+        try:
+            from data_validator import HealthcareDataValidator
+            self.validator = HealthcareDataValidator()
+            self.validation_enabled = True
+            logger.info("Data validation enabled for patient feedback")
+        except ImportError:
+            logger.warning("Data validator not available - validation disabled")
+            self.validator = None
+            self.validation_enabled = False
+    
+    def _validate_organization(self, org_name: str) -> bool:
+        """
+        Validate if the organization is a legitimate healthcare organization
+        
+        Args:
+            org_name: Name of the healthcare organization
+            
+        Returns:
+            bool: True if organization is validated, False otherwise
+        """
+        if not self.validation_enabled:
+            logger.warning(f"Validation disabled - allowing data generation for {org_name}")
+            return True
+            
+        try:
+            # Use the data validator to check if organization has valid certifications
+            validation_result = self.validator.validate_organization_certifications(org_name)
+            
+            # Check if organization has any valid certifications or is in official databases
+            has_certifications = len(validation_result.get('certifications', [])) > 0
+            has_data_sources = len(validation_result.get('data_sources', [])) > 0
+            validation_completed = validation_result.get('validation_status') == 'completed'
+            
+            if has_certifications or has_data_sources:
+                logger.info(f"Organization {org_name} validated with certifications/data sources")
+                return True
+            elif validation_completed:
+                logger.info(f"Organization {org_name} validated but no certifications found")
+                return True
+            else:
+                logger.warning(f"Organization {org_name} could not be validated")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error validating organization {org_name}: {str(e)}")
+            return False
     
     def get_patient_feedback_data(self, organization_name: str, location: str = "") -> List[PatientFeedback]:
         """
@@ -72,6 +120,11 @@ class PatientFeedbackAnalyzer:
             List of PatientFeedback objects
         """
         logger.info(f"Scraping feedback for: {organization_name}")
+        
+        # Validate organization before generating any data
+        if not self._validate_organization(organization_name):
+            logger.warning(f"Organization {organization_name} failed validation - no feedback data generated")
+            return []
         
         all_feedback = []
         
@@ -118,7 +171,7 @@ class PatientFeedbackAnalyzer:
         feedback_list = []
         
         try:
-            # Generate simulated Google reviews
+            # Generate simulated Google reviews only for validated organizations
             simulated_reviews = self._generate_simulated_google_reviews(org_name)
             
             for review_data in simulated_reviews:

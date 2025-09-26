@@ -1,0 +1,12 @@
+{
+  "total_organizations": 1588,
+  "total_ranks": 1588,
+  "unique_ranks": 1588,
+  "is_unique": true,
+  "duplicate_ranks": [],
+  "rank_gaps": [],
+  "expected_rank_range": [
+    1,
+    1588
+  ]
+}

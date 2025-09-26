@@ -139,30 +139,42 @@ class BatchScoringSystem:
         logger.info(f"Completed scoring for {processed} organizations")
     
     def calculate_unique_rankings(self):
-        """Calculate rankings for all organizations with proper tie handling"""
-        logger.info("Calculating rankings with proper tie handling...")
+        """Calculate unique rankings for all organizations with tie-breaking"""
+        logger.info("Calculating unique rankings with tie-breaking...")
         
-        # Sort organizations by total score (descending)
-        sorted_orgs = sorted(self.scored_organizations, key=lambda x: x['total_score'], reverse=True)
+        # Sort organizations with multiple criteria for unique ranking:
+        # 1. Total score (descending) - primary criterion
+        # 2. Certification count (descending) - first tie-breaker
+        # 3. Organization name (ascending) - final tie-breaker for complete uniqueness
+        sorted_orgs = sorted(
+            self.scored_organizations, 
+            key=lambda x: (
+                -x['total_score'],  # Negative for descending order
+                -x.get('certification_count', 0),  # Negative for descending order
+                x['name'].lower()  # Ascending alphabetical order
+            )
+        )
         
-        # Assign ranks with proper tie handling
+        # Assign unique sequential ranks
         for i, org in enumerate(sorted_orgs):
-            score = org['total_score']
+            # Each organization gets a unique rank from 1 to N
+            unique_rank = i + 1
             
-            # Count organizations with strictly higher scores
-            higher_score_count = sum(1 for other_org in sorted_orgs if other_org['total_score'] > score)
+            # Assign rank and calculate percentile based on unique position
+            org['overall_rank'] = unique_rank
+            org['percentile'] = ((len(sorted_orgs) - unique_rank + 1) / len(sorted_orgs)) * 100
             
-            # Rank is the count of organizations with higher scores + 1
-            rank = higher_score_count + 1
-            
-            # Assign rank and calculate percentile
-            org['overall_rank'] = rank
-            org['percentile'] = ((len(sorted_orgs) - rank + 1) / len(sorted_orgs)) * 100
+            # Add tie-breaking information for transparency
+            org['tie_breaking_info'] = {
+                'primary_score': org['total_score'],
+                'certification_count': org.get('certification_count', 0),
+                'alphabetical_position': org['name']
+            }
         
-        # Update the scored organizations with rankings
+        # Update the scored organizations with unique rankings
         self.scored_organizations = sorted_orgs
         
-        logger.info(f"Assigned rankings to {len(sorted_orgs)} organizations with proper tie handling")
+        logger.info(f"Assigned unique rankings to {len(sorted_orgs)} organizations using tie-breaking criteria")
     
     def generate_ranking_statistics(self):
         """Generate comprehensive ranking statistics"""
