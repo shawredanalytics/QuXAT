@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "app": {
+    "name": "quxatscore",
+    "repository": "shawredanalytics/QuXAT",
+    "branch": "main",
+    "main_module": "streamlit_app.py",
+    "python_version": "3.11"
+  },
+  "deployment": {
+    "auto_deploy": true,
+    "build_command": "pip install -r requirements.txt",
+    "start_command": "streamlit run streamlit_app.py",
+    "environment_variables": {
+      "STREAMLIT_SERVER_HEADLESS": "true",
+      "STREAMLIT_SERVER_PORT": "8501",
+      "STREAMLIT_BROWSER_GATHER_USAGE_STATS": "false"
+    }
+  },
+  "monitoring": {
+    "health_check_url": "https://quxatscore.streamlit.app/",
+    "uptime_monitoring": true,
+    "error_tracking": true
+  },
+  "notifications": {
+    "email_notifications": true,
+    "slack_webhook": null,
+    "discord_webhook": null
+  }
+}

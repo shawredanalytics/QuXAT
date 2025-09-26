@@ -1,0 +1,16 @@
+{
+  "app_name": "quxatscore",
+  "repository": "shawredanalytics/QuXAT",
+  "branch": "main",
+  "streamlit_cloud_api": "https://share.streamlit.io/api/v1",
+  "webhook_events": [
+    "push",
+    "pull_request"
+  ],
+  "auto_deploy": true,
+  "notification_settings": {
+    "email_notifications": true,
+    "slack_webhook": null,
+    "discord_webhook": null
+  }
+}

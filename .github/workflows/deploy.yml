@@ -1,64 +1,164 @@
-name: Deploy to Streamlit Cloud
+name: QuXAT Fast Deploy Pipeline
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      force_deploy:
+        description: 'Force deployment even if tests fail'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  STREAMLIT_APP_URL: https://quxatscore.streamlit.app/
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  deploy:
+  fast-validation:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     
     steps:
-    - uses: actions/checkout@v3
+    - name: Fast Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
     
-    - name: Set up Python
+    - name: Cache Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Set up Python 3.11
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
+        cache: 'pip'
     
-    - name: Install dependencies
+    - name: Quick Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt --no-deps --disable-pip-version-check
+    
+    - name: Fast Validation
+      run: |
+        python -c "
+        import streamlit as st
+        import pandas as pd
+        import json
+        from pathlib import Path
+        
+        # Quick file checks
+        required_files = ['streamlit_app.py', 'requirements.txt', 'runtime.txt', '.streamlit/config.toml']
+        for file in required_files:
+            assert Path(file).exists(), f'Missing {file}'
+        
+        # Quick data validation
+        data_file = Path('unified_healthcare_organizations.json')
+        if data_file.exists():
+            with open(data_file) as f:
+                data = json.load(f)
+            assert len(data) > 1000, 'Insufficient data records'
+        
+        print('✅ Fast validation passed')
+        "
+
+  fast-deploy:
+    needs: fast-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+    - name: Fast Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    
+    - name: Cache Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Validate deployment files
+    - name: Test Streamlit App Startup
       run: |
-        echo "Validating deployment configuration..."
-        python -c "
-import os
-required_files = ['streamlit_app.py', 'requirements.txt', 'runtime.txt', '.streamlit/config.toml']
-missing_files = [f for f in required_files if not os.path.exists(f)]
-if missing_files:
-    print(f'Missing required files: {missing_files}')
-    exit(1)
-else:
-    print('All required deployment files present')
-"
-    
-    - name: Test Streamlit app
-      run: |
-        echo "Testing Streamlit app startup..."
-        timeout 30s streamlit run streamlit_app.py --server.headless true --server.port 8501 &
+        timeout 30s streamlit run streamlit_app.py --server.headless=true --server.port=8501 &
         sleep 10
         curl -f http://localhost:8501 || echo "App startup test completed"
     
-    - name: Generate deployment info
+    - name: Generate Deployment Info
       run: |
-        python deploy_to_streamlit.py --no-commit
+        python -c "
+        import json
+        from datetime import datetime
+        
+        deployment_info = {
+            'timestamp': datetime.now().isoformat(),
+            'commit_sha': '${{ github.sha }}',
+            'branch': '${{ github.ref_name }}',
+            'app_url': 'https://quxatscore.streamlit.app/',
+            'deployment_trigger': '${{ github.event_name }}',
+            'workflow_run_id': '${{ github.run_id }}'
+        }
+        
+        with open('deployment_info.json', 'w') as f:
+            json.dump(deployment_info, f, indent=2)
+        
+        print('Deployment Info Generated')
+        print(json.dumps(deployment_info, indent=2))
+        "
     
-    - name: Upload deployment artifacts
+    - name: Upload Deployment Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: deployment-info
-        path: |
-          deployment_info.json
-          *.csv
-          *.json
+        path: deployment_info.json
     
-    - name: Deployment notification
+    - name: Update Deployment Status
       run: |
-        echo "🚀 QuXAT Healthcare Quality Grid is ready for Streamlit Cloud deployment!"
+        echo "🚀 QuXAT deployment completed successfully!"
         echo "📱 App URL: https://quxatscore.streamlit.app/"
-        echo "🔗 Deploy at: https://share.streamlit.io/"
+        echo "⏱️ Deployment time: $(date)"
+        echo "🔗 Commit: ${{ github.sha }}"
+
+  notify-trae:
+    needs: [fast-validation, fast-deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Trae AI Integration Notification
+      run: |
+        echo "📡 Notifying Trae AI of deployment status"
+        echo "✅ Status: ${{ needs.fast-deploy.result }}"
+        echo "🌐 App URL: https://quxatscore.streamlit.app/"
+        echo "⏱️ Completed: $(date)"

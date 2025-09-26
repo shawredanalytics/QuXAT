@@ -1,0 +1,12 @@
+{
+  "step_1": "Go to https://share.streamlit.io/",
+  "step_2": "Sign in with your GitHub account",
+  "step_3": "Deploy app from repository: shawredanalytics/QuXAT",
+  "step_4": "Enable automatic deployments in app settings",
+  "step_5": "Configure webhook in GitHub repository settings",
+  "webhook_url": "https://hooks.streamlit.io/github/quxatscore",
+  "webhook_events": [
+    "push",
+    "pull_request"
+  ]
+}

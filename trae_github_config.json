@@ -1,0 +1,18 @@
+{
+  "repository": "shawredanalytics/QuXAT",
+  "owner": "shawredanalytics",
+  "repo_name": "QuXAT",
+  "branch": "main",
+  "app_name": "quxatscore",
+  "streamlit_url": "https://quxatscore.streamlit.app/",
+  "github_token": null,
+  "fast_deploy": {
+    "skip_tests": false,
+    "auto_commit": true,
+    "auto_push": true,
+    "trigger_workflow": true,
+    "open_browser": true
+  },
+  "deployment_message_template": "\ud83d\ude80 Fast deploy from Trae AI - {timestamp}",
+  "workflow_file": ".github/workflows/deploy.yml"
+}

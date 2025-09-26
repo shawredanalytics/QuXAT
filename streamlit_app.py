@@ -32,6 +32,7 @@ import matplotlib.patches as patches
 from PIL import Image as PILImage
 import io
 import base64
+# Live deployment test - 20250926_164146
 warnings.filterwarnings('ignore')
 
 # Page configuration
