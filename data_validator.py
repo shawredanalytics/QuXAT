@@ -3,6 +3,7 @@ Healthcare Data Validation Module
 Validates certification data from official sources like NABH, NABL, JCI, and ISO
 """
 
+import os
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -364,6 +365,12 @@ class HealthcareDataValidator:
                 validated_data['certifications'].extend(jci_result)
                 validated_data['data_sources'].append('JCI Official Database')
             
+            # Validate ISO certification
+            iso_result = self._validate_iso_certification(org_name)
+            if iso_result:
+                validated_data['certifications'].extend(iso_result)
+                validated_data['data_sources'].append('ISO Certification Database')
+            
             validated_data['validation_status'] = 'completed'
             
             # Cache the results
@@ -431,28 +438,101 @@ class HealthcareDataValidator:
     def _validate_jci_certification(self, org_name: str) -> List[Dict]:
         """
         Validate JCI certification from official JCI database
-        NOTE: JCI validation is currently disabled to prevent automatic assignment of simulated certifications.
-        Only validated certifications from official JCI sources will be used in scoring.
+        Uses validated JCI data from official sources only.
         """
         try:
-            logger.info(f"JCI validation disabled for {org_name} - only validated official sources allowed")
+            logger.info(f"Validating JCI certification for {org_name}")
             
-            # JCI validation is disabled to prevent automatic assignment of simulated certifications
-            # Only validated certifications from official JCI sources should be used
+            # Load JCI accredited organizations from validated data file
+            jci_file_path = os.path.join(os.path.dirname(__file__), 'jci_accredited_organizations.json')
             
-            # TODO: Implement real JCI API integration when available
-            # For now, return empty list to prevent simulated results
-            return []
+            if not os.path.exists(jci_file_path):
+                logger.warning(f"JCI data file not found: {jci_file_path}")
+                return []
             
-            # DISABLED: Hardcoded JCI data that was causing automatic assignment
-            # known_jci_orgs = {
-            #     'mayo clinic': {...},
-            #     'cleveland clinic': {...},
-            #     etc.
-            # }
+            with open(jci_file_path, 'r', encoding='utf-8') as f:
+                jci_organizations = json.load(f)
+            
+            # Check if organization matches any JCI accredited organization
+            org_name_lower = org_name.lower().strip()
+            jci_certifications = []
+            
+            for jci_org in jci_organizations:
+                jci_name_lower = jci_org['name'].lower().strip()
+                
+                # Check for exact match or partial match
+                if (org_name_lower == jci_name_lower or 
+                    org_name_lower in jci_name_lower or 
+                    jci_name_lower in org_name_lower):
+                    
+                    # Only include if verification is not required or if it's from verified source
+                    if not jci_org.get('verification_required', True):
+                        certification = {
+                            'name': 'JCI Accreditation',
+                            'issuer': 'Joint Commission International',
+                            'type': 'Healthcare Accreditation',
+                            'status': 'Active',
+                            'accreditation_date': jci_org.get('accreditation_date', 'Unknown'),
+                            'region': jci_org.get('region', 'Unknown'),
+                            'country': jci_org.get('country', 'Unknown'),
+                            'source': 'JCI Official Database',
+                            'verification_status': 'Verified',
+                            'organization_type': jci_org.get('type', 'Healthcare Organization')
+                        }
+                        jci_certifications.append(certification)
+                        logger.info(f"Found JCI accreditation for {org_name}")
+                    else:
+                        logger.info(f"JCI organization {jci_org['name']} requires verification - skipping")
+            
+            return jci_certifications
             
         except Exception as e:
             logger.error(f"Error validating JCI certification: {str(e)}")
+            return []
+    
+    def _validate_iso_certification(self, org_name: str) -> List[Dict]:
+        """
+        Validate ISO certification using the ISO certification scraper
+        """
+        try:
+            logger.info(f"Validating ISO certification for {org_name}")
+            
+            # Import the ISO scraper
+            from iso_certification_scraper import get_iso_certifications
+            
+            # Get ISO certifications for the organization
+            iso_summary = get_iso_certifications(org_name)
+            
+            if not iso_summary or iso_summary.active_certifications == 0:
+                logger.info(f"No active ISO certifications found for {org_name}")
+                return []
+            
+            # Convert ISO certifications to the standard format
+            iso_certifications = []
+            
+            # Note: The ISO scraper returns a summary, but we need individual certifications
+            # For now, we'll create a summary certification entry
+            if iso_summary.active_certifications > 0:
+                certification = {
+                    'name': f'ISO Certifications ({iso_summary.active_certifications} active)',
+                    'issuer': 'International Organization for Standardization',
+                    'type': 'Quality Management System',
+                    'status': 'Active',
+                    'certification_types': iso_summary.certification_types,
+                    'certification_bodies': iso_summary.certification_bodies,
+                    'quality_score_impact': iso_summary.quality_score_impact,
+                    'source': 'ISO Certification Database',
+                    'verification_status': 'Verified',
+                    'last_updated': iso_summary.last_updated.isoformat() if iso_summary.last_updated else 'Unknown',
+                    'data_sources': iso_summary.data_sources
+                }
+                iso_certifications.append(certification)
+                logger.info(f"Found {iso_summary.active_certifications} active ISO certifications for {org_name}")
+            
+            return iso_certifications
+            
+        except Exception as e:
+            logger.error(f"Error validating ISO certification: {str(e)}")
             return []
     
     def _is_cache_valid(self, cache_key: str) -> bool:
