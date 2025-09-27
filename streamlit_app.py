@@ -4402,9 +4402,9 @@ else:
                         margin-right: 0.75rem;
                         font-size: 1.2rem;
                     ">👩‍⚕️</div>
-                    <h4 style="color: #2E7D32; margin: 0; font-size: 1.1rem; font-weight: 600;">Healthcare Professionals</h4>
+                    <h4 style="color: #2E7D32; margin: 0; font-size: 0.95rem; font-weight: 600;">Healthcare Professionals</h4>
                 </div>
-                <ul style="color: #333; line-height: 1.6; flex-grow: 1; font-size: 0.95rem; margin: 0; padding-left: 1.2rem;">
+                <ul style="color: #333; line-height: 1.4; flex-grow: 1; font-size: 0.85rem; margin: 0; padding-left: 1.2rem;">
                     <li style="margin-bottom: 0.5rem;"><strong>Benchmark:</strong> Compare quality metrics against global standards</li>
                     <li style="margin-bottom: 0.5rem;"><strong>Development:</strong> Identify improvement opportunities</li>
                     <li style="margin-bottom: 0.5rem;"><strong>Career Decisions:</strong> Evaluate potential employers</li>
@@ -4443,9 +4443,9 @@ else:
                         margin-right: 0.75rem;
                         font-size: 1.2rem;
                     ">👔</div>
-                    <h4 style="color: #E65100; margin: 0; font-size: 1.1rem; font-weight: 600;">Healthcare Management</h4>
+                    <h4 style="color: #E65100; margin: 0; font-size: 0.95rem; font-weight: 600;">Healthcare Management</h4>
                 </div>
-                <ul style="color: #333; line-height: 1.6; flex-grow: 1; font-size: 0.95rem; margin: 0; padding-left: 1.2rem;">
+                <ul style="color: #333; line-height: 1.4; flex-grow: 1; font-size: 0.85rem; margin: 0; padding-left: 1.2rem;">
                     <li style="margin-bottom: 0.5rem;"><strong>Strategic Planning:</strong> Make informed certification decisions</li>
                     <li style="margin-bottom: 0.5rem;"><strong>Competitive Analysis:</strong> Understand market position</li>
                     <li style="margin-bottom: 0.5rem;"><strong>ROI on Quality:</strong> Demonstrate value to stakeholders</li>
@@ -4484,9 +4484,9 @@ else:
                         margin-right: 0.75rem;
                         font-size: 1.2rem;
                     ">🏥</div>
-                    <h4 style="color: #1565C0; margin: 0; font-size: 1.1rem; font-weight: 600;">Patients & Families</h4>
+                    <h4 style="color: #1565C0; margin: 0; font-size: 0.95rem; font-weight: 600;">Patients & Families</h4>
                 </div>
-                <ul style="color: #333; line-height: 1.6; flex-grow: 1; font-size: 0.95rem; margin: 0; padding-left: 1.2rem;">
+                <ul style="color: #333; line-height: 1.4; flex-grow: 1; font-size: 0.85rem; margin: 0; padding-left: 1.2rem;">
                     <li style="margin-bottom: 0.5rem;"><strong>Informed Decisions:</strong> Choose providers based on quality metrics</li>
                     <li style="margin-bottom: 0.5rem;"><strong>Safety Assurance:</strong> Verify international standards</li>
                     <li style="margin-bottom: 0.5rem;"><strong>Treatment Planning:</strong> Select specialized centers</li>
@@ -4555,17 +4555,8 @@ else:
         """, unsafe_allow_html=True)
         
         # Enhanced search interface with vertical layout
-        # Initialize analyzer and search API for suggestions
+        # Initialize analyzer for database suggestions only
         analyzer = get_analyzer()
-        
-        # Import the search API
-        try:
-            from organization_search_api import get_search_api
-            search_api = get_search_api()
-            api_available = True
-        except ImportError:
-            search_api = None
-            api_available = False
         
         # Text input for typing
         search_input = st.text_input("🏥 Enter Organization Name", 
@@ -4574,89 +4565,41 @@ else:
         
         # Generate suggestions if user has typed something
         suggestions = []
-        api_suggestions = []
         selected_org = None
         
         if search_input and len(search_input) >= 2:
-            # Get suggestions from existing analyzer (database)
-            analyzer_suggestions = analyzer.generate_organization_suggestions(search_input, max_suggestions=4)
+            # Get suggestions from existing analyzer (database only)
+            analyzer_suggestions = analyzer.generate_organization_suggestions(search_input, max_suggestions=8)
             
-            # Get suggestions from external API (Google Places, etc.)
-            if api_available and search_api:
-                try:
-                    api_suggestions = search_api.search_organizations(search_input, max_results=4)
-                except Exception as e:
-                    st.warning(f"External search temporarily unavailable: {str(e)}")
-                    api_suggestions = []
-            
-            # Combine suggestions
-            all_suggestions = []
-            
-            # Add analyzer suggestions first (from our database)
             if analyzer_suggestions:
-                for suggestion in analyzer_suggestions:
-                    all_suggestions.append({
-                        'name': suggestion.get('display_name', ''),
-                        'source': 'Database',
-                        'type': 'analyzer',
-                        'data': suggestion
-                    })
-            
-            # Add API suggestions
-            if api_suggestions:
-                for suggestion in api_suggestions:
-                    all_suggestions.append({
-                        'name': suggestion.get('name', ''),
-                        'address': suggestion.get('address', ''),
-                        'source': suggestion.get('source', 'External'),
-                        'type': 'api',
-                        'data': suggestion
-                    })
-            
-            if all_suggestions:
                 # Create formatted options for selectbox
                 suggestion_options = ["Select from suggestions..."]
                 
-                # Add database suggestions first
-                db_suggestions = [s for s in all_suggestions if s['type'] == 'analyzer']
-                if db_suggestions:
-                    suggestion_options.append("--- From Our Database ---")
-                    for suggestion in db_suggestions:
-                        display_text = analyzer.format_suggestion_display(suggestion['data'])
-                        suggestion_options.append(f"🏥 {display_text}")
-                
-                # Add external API suggestions
-                external_suggestions = [s for s in all_suggestions if s['type'] == 'api']
-                if external_suggestions:
-                    suggestion_options.append("--- From Search Engines ---")
-                    for suggestion in external_suggestions:
-                        if api_available and search_api:
-                            display_text = search_api.format_suggestion_for_display(suggestion['data'])
-                            suggestion_options.append(f"🌐 {display_text}")
+                # Add database suggestions
+                for suggestion in analyzer_suggestions:
+                    display_text = analyzer.format_suggestion_display(suggestion)
+                    suggestion_options.append(f"🏥 {display_text}")
                 
                 selected_suggestion = st.selectbox(
-                    "💡 Suggestions (Database + Search Engines):",
+                    "💡 Suggestions from QuXAT Database:",
                     suggestion_options,
                     key="org_suggestions"
                 )
                 
                 # If user selected a suggestion, use it
-                if selected_suggestion not in ["Select from suggestions...", "--- From Our Database ---", "--- From Search Engines ---"]:
+                if selected_suggestion not in ["Select from suggestions..."]:
                     # Remove prefix and find the corresponding suggestion
-                    clean_selection = selected_suggestion.replace("🏥 ", "").replace("🌐 ", "")
+                    clean_selection = selected_suggestion.replace("🏥 ", "")
                     
-                    # Check database suggestions first
-                    for suggestion in db_suggestions:
-                        if analyzer.format_suggestion_display(suggestion['data']) == clean_selection:
-                            selected_org = suggestion['data']['display_name']
+                    # Find the corresponding suggestion
+                    for suggestion in analyzer_suggestions:
+                        if analyzer.format_suggestion_display(suggestion) == clean_selection:
+                            selected_org = suggestion['display_name']
                             break
-                    
-                    # Check external suggestions if not found in database
-                    if not selected_org and api_available and search_api:
-                        for suggestion in external_suggestions:
-                            if search_api.format_suggestion_for_display(suggestion['data']) == clean_selection:
-                                selected_org = suggestion['data']['name']
-                                break
+            else:
+                # Show message when no suggestions found in database
+                st.info("🔍 **Organization not found in QuXAT database?**\n\n"
+                       "Contact the QuXAT team at **quxat.team@gmail.com** to add your organization to our quality assessment database.")
         
         # Use selected organization or typed input
         org_name = selected_org if selected_org else search_input

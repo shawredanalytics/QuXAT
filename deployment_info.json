@@ -1,10 +1,19 @@
 {
-  "timestamp": "2025-09-27T09:20:16.014976",
   "app_name": "quxatscore",
-  "repository": "shawredanalytics/QuXAT",
+  "repository": "https://github.com/shawredanalytics/QuXAT.git",
   "branch": "main",
   "main_file": "streamlit_app.py",
-  "app_url": "https://quxatscore.streamlit.app/",
-  "deployment_url": "https://share.streamlit.io/deploy?repository=shawredanalytics/QuXAT&branch=main&mainModule=streamlit_app.py&appName=quxatscore",
-  "streamlit_cloud_dashboard": "https://share.streamlit.io/"
+  "deployment_url": "https://quxatscore.streamlit.app/",
+  "streamlit_cloud_url": "https://share.streamlit.io/",
+  "deployment_timestamp": "2025-09-27T10:49:00.377238",
+  "deployment_steps": [
+    "1. Go to https://share.streamlit.io/",
+    "2. Sign in with GitHub account",
+    "3. Click 'New app' or 'Create app'",
+    "4. Repository: shawredanalytics/QuXAT",
+    "5. Branch: main",
+    "6. Main file path: streamlit_app.py",
+    "7. App URL: quxatscore",
+    "8. Click 'Deploy!'"
+  ]
 }
