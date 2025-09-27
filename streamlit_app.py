@@ -4196,15 +4196,15 @@ elif page == "📊 Quality Dashboard & Analytics":
     with col1:
         st.metric(
             label="🏥 Total Organizations",
-            value="2,847",
-            delta="↗️ +127 this month"
+            value="7,067",
+                delta="↗️ +532 dental facilities"
         )
     
     with col2:
         st.metric(
-            label="🌍 Countries Covered",
-            value="89",
-            delta="↗️ +3 new regions"
+            label="🏥 NABH Hospitals",
+            value="4,561",
+                delta="↗️ +2,161 updated"
         )
     
     with col3:
@@ -6013,7 +6013,7 @@ else:
         
         with col2:
             st.subheader("📊 Key Metrics")
-            st.metric("🏥 Total Organizations", "1,247", "↑ +23")
+            st.metric("🏥 Total Organizations", "7,067", "↑ +2,161")
             st.metric("📊 Average Score", "81.2", "↑ +2.1")
             st.metric("🏆 Top Performers (90+)", "156", "↑ +8")
             st.metric("⚠️ Need Improvement (<60)", "89", "↓ -12")

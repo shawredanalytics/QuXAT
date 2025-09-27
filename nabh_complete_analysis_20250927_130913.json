@@ -1,0 +1,79 @@
+{
+  "analysis_date": "2025-09-27T13:09:13.481254",
+  "main_page_analysis": null,
+  "search_functionality_tests": [
+    {
+      "params": {
+        "state": "Maharashtra"
+      },
+      "status_code": 200,
+      "result_count": 2,
+      "page_title": "Find an Accredited Healthcare Organisation - National Accreditation Board for Hospitals and Healthcare Providers (NABH)"
+    },
+    {
+      "params": {
+        "category": "Hospital"
+      },
+      "status_code": 200,
+      "result_count": 2,
+      "page_title": "Find an Accredited Healthcare Organisation - National Accreditation Board for Hospitals and Healthcare Providers (NABH)"
+    },
+    {
+      "params": {
+        "search": "hospital"
+      },
+      "status_code": 200,
+      "result_count": 2,
+      "page_title": "Find an Accredited Healthcare Organisation - National Accreditation Board for Hospitals and Healthcare Providers (NABH)"
+    },
+    {
+      "params": {
+        "q": "mumbai"
+      },
+      "status_code": 200,
+      "result_count": 2,
+      "page_title": "Find an Accredited Healthcare Organisation - National Accreditation Board for Hospitals and Healthcare Providers (NABH)"
+    },
+    {
+      "params": {
+        "location": "Delhi"
+      },
+      "status_code": 200,
+      "result_count": 2,
+      "page_title": "Find an Accredited Healthcare Organisation - National Accreditation Board for Hospitals and Healthcare Providers (NABH)"
+    },
+    {
+      "params": {
+        "type": "hospital"
+      },
+      "status_code": 200,
+      "result_count": 2,
+      "page_title": "Find an Accredited Healthcare Organisation - National Accreditation Board for Hospitals and Healthcare Providers (NABH)"
+    }
+  ],
+  "sample_data_extraction": [
+    {
+      "element_tag": "div",
+      "element_class": [
+        "search-box-hospitals",
+        "location",
+        "w-100",
+        "d-flex",
+        "align-items-center"
+      ],
+      "element_id": "",
+      "text_content": "Allow LocationDetect current location using GPS",
+      "data_attributes": {}
+    },
+    {
+      "element_tag": "div",
+      "element_class": [
+        "map-hospital"
+      ],
+      "element_id": "map",
+      "text_content": "",
+      "data_attributes": {}
+    }
+  ],
+  "recommendations": []
+}

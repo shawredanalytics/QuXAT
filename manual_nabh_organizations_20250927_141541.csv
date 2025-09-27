@@ -1,0 +1,2 @@
+name,state,city,country,accreditation_level,accreditation_category,valid_from,valid_until,certificate_number,address,phone,email,website,source,scraped_date,nabh_url
+Allow Location Detect current location using GPS,Unknown,Unknown,India,Unknown,Unknown,,,,,,,,NABH Official Directory,2025-09-27T14:14:41.687806,https://nabh.co/find-a-healthcare-organisation/

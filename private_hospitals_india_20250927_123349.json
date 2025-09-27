@@ -1,0 +1,5414 @@
+[
+  {
+    "name": "Hospital",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/index.htm",
+    "scraped_date": "2025-09-27T12:16:49.128099",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "05 Feb 2026",
+        "reference_no": "H-2006-0015"
+      },
+      "jci": {
+        "status": "Accredited",
+        "accreditation_date": "2019-01-15",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Punjab",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/index.htm",
+    "scraped_date": "2025-09-27T12:16:52.263477",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "15 Jun 2028",
+        "reference_no": "H-2008-0060"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Sahibzada Ajit Singh Nagar",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/sahibzada-ajit-singh-nagar/index.htm",
+    "scraped_date": "2025-09-27T12:16:55.045635",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Bawa Dental Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/bawa-dental-clinic-sahibzada-ajit-singh-nagar-punjab-82666.htm",
+    "scraped_date": "2025-09-27T12:16:58.636757",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Chhina Dental Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/chhina-dental-clinic-sahibzada-ajit-singh-nagar-punjab-54343.htm",
+    "scraped_date": "2025-09-27T12:17:01.407135",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Gumber's Dental Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/dr-gumbers-dental-clinic-sahibzada-ajit-singh-nagar-punjab-81935.htm",
+    "scraped_date": "2025-09-27T12:17:04.310478",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Agarwal Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/agarwal-clinic-sahibzada-ajit-singh-nagar-punjab-22803.htm",
+    "scraped_date": "2025-09-27T12:17:08.341121",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Grecian Super Specialty Hospital",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/grecian-super-specialty-hospital-sahibzada-ajit-singh-nagar-punjab-13513.htm",
+    "scraped_date": "2025-09-27T12:17:11.894229",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "13 Sep 2029",
+        "reference_no": "H-2011-0484"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "I- Med Hospital",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/i-med-hospital-sahibzada-ajit-singh-nagar-punjab-18713.htm",
+    "scraped_date": "2025-09-27T12:17:15.403564",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Kahlons Dental Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/kahlons-dental-clinic-sahibzada-ajit-singh-nagar-punjab-54416.htm",
+    "scraped_date": "2025-09-27T12:17:18.907186",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ivy Hospital",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/ivy-hospital-sahibzada-ajit-singh-nagar-punjab-13542.htm",
+    "scraped_date": "2025-09-27T12:17:22.344511",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "11 Dec 2027",
+        "reference_no": "H-2009-0118"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Pawan Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/pawan-clinic-sahibzada-ajit-singh-nagar-punjab-53222.htm",
+    "scraped_date": "2025-09-27T12:17:26.096945",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Life Line Clinic",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/life-line-clinic-sahibzada-ajit-singh-nagar-punjab-29600.htm",
+    "scraped_date": "2025-09-27T12:17:29.784740",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "View All",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/sahibzada-ajit-singh-nagar/index.htm",
+    "scraped_date": "2025-09-27T12:17:32.587266",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Abohar",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/abohar/index.htm",
+    "scraped_date": "2025-09-27T12:17:35.380238",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Amritsar",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/amritsar/index.htm",
+    "scraped_date": "2025-09-27T12:17:37.458584",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "09 Jun 2027",
+        "reference_no": "H-2009-0350"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Anandpur Sahib",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/anandpur-sahib/index.htm",
+    "scraped_date": "2025-09-27T12:17:39.540632",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Balachaur",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/balachaur/index.htm",
+    "scraped_date": "2025-09-27T12:17:41.850560",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Banga",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/banga/index.htm",
+    "scraped_date": "2025-09-27T12:17:44.532785",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "04 Jun 2026",
+        "reference_no": "H-2006-0007"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Barnala",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/barnala/index.htm",
+    "scraped_date": "2025-09-27T12:17:46.671056",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Batala",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/batala/index.htm",
+    "scraped_date": "2025-09-27T12:17:48.732377",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Bathinda",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/bathinda/index.htm",
+    "scraped_date": "2025-09-27T12:17:51.788707",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "11 Jun 2027",
+        "reference_no": "H-2013-0708"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Beas",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/beas/index.htm",
+    "scraped_date": "2025-09-27T12:17:53.793553",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Chandigarh",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/punjab/chandigarh/index.htm",
+    "scraped_date": "2025-09-27T12:17:55.854496",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "10 Apr 2027",
+        "reference_no": "H-2015-1017"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/index.htm",
+    "scraped_date": "2025-09-27T12:18:14.421786",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "29 Oct 2025",
+        "reference_no": "H-2006-0008"
+      },
+      "jci": {
+        "status": "Accredited",
+        "accreditation_date": "2019-01-15",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Hospital Directory",
+    "state": "ACE Heart & Vascular Institute",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/index.htm",
+    "scraped_date": "2025-09-27T12:18:20.861253",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Delhi",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/index.htm",
+    "scraped_date": "2025-09-27T12:19:58.320023",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "05 Feb 2026",
+        "reference_no": "H-2006-0015"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "New Delhi",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/new-delhi/index.htm",
+    "scraped_date": "2025-09-27T12:20:01.337546",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "05 Feb 2026",
+        "reference_no": "H-2006-0015"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "OSSAM Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/ossam-clinic-new-delhi-delhi-25774.htm",
+    "scraped_date": "2025-09-27T12:20:04.938902",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "SRL Diagnostics CLINIC DEE31",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/srl-diagnostics-clinic-dee31-new-delhi-delhi-25782.htm",
+    "scraped_date": "2025-09-27T12:20:09.595412",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Tranquility - The Mind Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tranquility-the-mind-clinic-new-delhi-delhi-25789.htm",
+    "scraped_date": "2025-09-27T12:20:12.841959",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Nidhi Gupta Physiotherapy Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/dr-nidhi-gupta-physiotherapy-clinic-new-delhi-delhi-25796.htm",
+    "scraped_date": "2025-09-27T12:20:16.680604",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Tamaria Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamaria-clinic-new-delhi-delhi-25804.htm",
+    "scraped_date": "2025-09-27T12:20:26.312748",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "New Smyle Dentral Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/new-smyle-dentral-clinic-new-delhi-delhi-27138.htm",
+    "scraped_date": "2025-09-27T12:20:29.614695",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Doctor Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/doctor-clinic-new-delhi-delhi-35951.htm",
+    "scraped_date": "2025-09-27T12:20:33.263657",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Apollo Hospitals Enterprise Ltd. (A unit of Apollo Farmacy)",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/apollo-hospitals-enterprise-ltd-a-unit-of-apollo-farmacy-new-delhi-delhi-56457.htm",
+    "scraped_date": "2025-09-27T12:20:36.543447",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Aman X-ray & Ultrasound Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/aman-x-ray-ultrasound-clinic-new-delhi-delhi-33398.htm",
+    "scraped_date": "2025-09-27T12:20:40.550062",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Verma Clinic",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/verma-clinic-new-delhi-delhi-55170.htm",
+    "scraped_date": "2025-09-27T12:20:43.682550",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "East Delhi",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/east-delhi/index.htm",
+    "scraped_date": "2025-09-27T12:20:47.978984",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ghaziabadd",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/ghaziabadd/index.htm",
+    "scraped_date": "2025-09-27T12:20:50.476237",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Greater Kailash",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/greater-kailash/index.htm",
+    "scraped_date": "2025-09-27T12:20:53.122625",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "06 Nov 2021",
+        "reference_no": "H-2014-0813"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Gujranwala Town",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/gujranwala-town/index.htm",
+    "scraped_date": "2025-09-27T12:20:55.173026",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Janakpuri",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/janakpuri/index.htm",
+    "scraped_date": "2025-09-27T12:20:57.273647",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Karol Bagh",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/karol-bagh/index.htm",
+    "scraped_date": "2025-09-27T12:20:59.290572",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Kondli",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/kondli/index.htm",
+    "scraped_date": "2025-09-27T12:21:01.894210",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Krishna Nagar",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/krishna-nagar/index.htm",
+    "scraped_date": "2025-09-27T12:21:04.704561",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "11 Jun 2027",
+        "reference_no": "H-2009-0225"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Mangolpuri",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/mangolpuri/index.htm",
+    "scraped_date": "2025-09-27T12:21:07.302811",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Mayur Vihar Phase-3",
+    "state": "Al-hayat Multispeciality Hospital & Gynae Care",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/delhi/mayur-vihar-phase-3/index.htm",
+    "scraped_date": "2025-09-27T12:21:10.295290",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "West Bengal",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/index.htm",
+    "scraped_date": "2025-09-27T12:26:03.001210",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "29 Oct 2025",
+        "reference_no": "H-2006-0008"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Kolkata",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/kolkata/index.htm",
+    "scraped_date": "2025-09-27T12:26:04.965804",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "29 Oct 2025",
+        "reference_no": "H-2006-0008"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Peerless Hospital",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/peerless-hospital-kolkata-west-bengal-28917.htm",
+    "scraped_date": "2025-09-27T12:26:08.441247",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Urban Primary Health Centre Ward 113 KMC",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/urban-primary-health-centre-ward-113-kmc-kolkata-west-bengal-97158.htm",
+    "scraped_date": "2025-09-27T12:26:12.196705",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Swami Vivekananda's Charitable Dispensary",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/swami-vivekanandas-charitable-dispensary-kolkata-west-bengal-97161.htm",
+    "scraped_date": "2025-09-27T12:26:15.257764",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "North Suburban Hospital",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/north-suburban-hospital-kolkata-west-bengal-97163.htm",
+    "scraped_date": "2025-09-27T12:26:18.926453",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ashoka Poly Clinic And Nursing Home",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/ashoka-poly-clinic-and-nursing-home-kolkata-west-bengal-48006.htm",
+    "scraped_date": "2025-09-27T12:26:25.780828",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Dutta's Multi-Speciality Clinic",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/dr-duttas-multi-speciality-clinic-kolkata-west-bengal-81914.htm",
+    "scraped_date": "2025-09-27T12:26:28.969045",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Sambhunath Pandit Hospital",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/sambhunath-pandit-hospital-kolkata-west-bengal-97170.htm",
+    "scraped_date": "2025-09-27T12:26:35.881617",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Bidhan Nagar Sub Divisional Hospital",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/bidhan-nagar-sub-divisional-hospital-kolkata-west-bengal-97173.htm",
+    "scraped_date": "2025-09-27T12:26:40.175319",
+    "hospital_type": "Eye Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Adra",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/adra/index.htm",
+    "scraped_date": "2025-09-27T12:26:44.922757",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "21 Dec 2025",
+        "reference_no": "H-2013-0773"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Alipurduar",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/alipurduar/index.htm",
+    "scraped_date": "2025-09-27T12:26:47.656824",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Asansol",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/asansol/index.htm",
+    "scraped_date": "2025-09-27T12:26:49.663498",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "27 Aug 2029",
+        "reference_no": "HCO-05-2024-03723"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ashoknagar Kalyangarh",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/ashoknagar-kalyangarh/index.htm",
+    "scraped_date": "2025-09-27T12:26:52.215102",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Bagula",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/bagula/index.htm",
+    "scraped_date": "2025-09-27T12:26:54.905805",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Balurghat",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/balurghat/index.htm",
+    "scraped_date": "2025-09-27T12:26:57.736728",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Bangaon",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/bangaon/index.htm",
+    "scraped_date": "2025-09-27T12:27:00.557102",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Bankura",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/bankura/index.htm",
+    "scraped_date": "2025-09-27T12:27:02.757786",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Barakar",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/barakar/index.htm",
+    "scraped_date": "2025-09-27T12:27:04.817634",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Barasat",
+    "state": "AMRI Hospital",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/west-bengal/barasat/index.htm",
+    "scraped_date": "2025-09-27T12:27:07.673743",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Tamil Nadu",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/index.htm",
+    "scraped_date": "2025-09-27T12:29:10.212974",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "11 Mar 2027",
+        "reference_no": "H-2007-0036"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Coimbatore",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/coimbatore/index.htm",
+    "scraped_date": "2025-09-27T12:29:12.940141",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "11 Mar 2027",
+        "reference_no": "H-2007-0036"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Subam Clinic",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/subam-clinic-coimbatore-tamil-nadu-12236.htm",
+    "scraped_date": "2025-09-27T12:29:16.738373",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Onecare Medical Center",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/onecare-medical-center-coimbatore-tamil-nadu-79927.htm",
+    "scraped_date": "2025-09-27T12:29:19.548592",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "D. J. Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/d-j-hospital-coimbatore-tamil-nadu-1587.htm",
+    "scraped_date": "2025-09-27T12:29:22.920082",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ranga Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/ranga-hospital-coimbatore-tamil-nadu-6306.htm",
+    "scraped_date": "2025-09-27T12:29:26.604165",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Gem Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/gem-hospital-coimbatore-tamil-nadu-17017.htm",
+    "scraped_date": "2025-09-27T12:29:30.046705",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "08 Jun 2026",
+        "reference_no": "H-2011-0539"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr Gem Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/dr-gem-hospital-coimbatore-tamil-nadu-81921.htm",
+    "scraped_date": "2025-09-27T12:29:33.427880",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "JD Dental Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/jd-dental-hospital-coimbatore-tamil-nadu-74049.htm",
+    "scraped_date": "2025-09-27T12:29:37.329782",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Shree Lavnya Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/shree-lavnya-hospital-coimbatore-tamil-nadu-5181.htm",
+    "scraped_date": "2025-09-27T12:29:41.090721",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Saravana Hospital",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/saravana-hospital-coimbatore-tamil-nadu-34394.htm",
+    "scraped_date": "2025-09-27T12:29:45.200924",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Eye 2 Eye Optics  Clinic",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/eye-2-eye-optics-clinic-coimbatore-tamil-nadu-18667.htm",
+    "scraped_date": "2025-09-27T12:29:50.980302",
+    "hospital_type": "Eye Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Arakkonam",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/arakkonam/index.htm",
+    "scraped_date": "2025-09-27T12:29:55.966896",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ariyalur",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/ariyalur/index.htm",
+    "scraped_date": "2025-09-27T12:29:58.583819",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Aruppukkottai",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/aruppukkottai/index.htm",
+    "scraped_date": "2025-09-27T12:30:00.706348",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Chengalpattu",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/chengalpattu/index.htm",
+    "scraped_date": "2025-09-27T12:30:03.501592",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Chennai",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/chennai/index.htm",
+    "scraped_date": "2025-09-27T12:30:06.585250",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "15 Feb 2026",
+        "reference_no": "H-2008-0086"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Chidambaram",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/chidambaram/index.htm",
+    "scraped_date": "2025-09-27T12:30:09.098227",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Cuddalore",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/cuddalore/index.htm",
+    "scraped_date": "2025-09-27T12:30:11.836150",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Devakottai",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/devakottai/index.htm",
+    "scraped_date": "2025-09-27T12:30:14.770273",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dharapuram",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/dharapuram/index.htm",
+    "scraped_date": "2025-09-27T12:30:17.480095",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dharmapuri",
+    "state": "Bala Physiotheraphy Clinic",
+    "country": "India",
+    "source": "Medindia",
+    "url": "https://www.medindia.net/directories/hospitals/tamil-nadu/dharmapuri/index.htm",
+    "scraped_date": "2025-09-27T12:30:19.390140",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Wockhardt Hospitals (formerly known as Umrao Hospital)",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.937294",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Jinendra K Jain",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.947198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Rajiv Prakash Manek",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.947198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Mangala Patil",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.947198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Ashutosh Baghel",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.947198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Mayuresh Deepak Pradhan",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.949205",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Badshah Khan",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.949205",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Pratik Tibdewal",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.949205",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Aditi Agrawal",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.949205",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Imran Shaikh",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:09.949205",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Prathamesh Teje",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.086098",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Pankaj Totala",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.086098",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Lokesh Kumar",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.086098",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Devendra Satpute",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.086098",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Nilesh Giri",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.086098",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Gore Jinal Dhansukh",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.088105",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Siddhesh Tryambake",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.088105",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Rahul Kallianpur",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.088105",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Manish Mali",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:18.088105",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Manipal Hospital Varthur Road (formerly Columbia Asia Hospital)",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.217381",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Kavya Perla",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Pramod J",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Praveen C R",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Prakash Mahadevappa",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Rockey Katheria",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. D Vijaya Meenakshi",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Aasima Boxwalla",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Ashwini Neelakanthi",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Chethan J V",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:27.229422",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Devaraj R",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.759384",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Anish Behl",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.759384",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Venkata Simha P",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.759384",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Naveen Jayaram Anvekar",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.759384",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Srinivas Nalloor",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.759384",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. S. Adhikari",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.761393",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Avinash R",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.761393",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Aumir Moin",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.761393",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. K A Prahlad",
+    "city": "Mysore",
+    "state": "Karnataka",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:32.761393",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Mehta's Hospitals",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.309595",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Dilip Kumar R",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Adhiti K",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Kabilan Saminathan",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Sarala Jayaraman",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Amilthan",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. M Divya",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Vaitheeswaran",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Geethanjali E",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Priya Kannappan",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:44.324198",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Motherhood Hospital",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.194926",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Ramya Jayaram",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Abineya AR",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Srividya Krishna Moorthy",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Saranya",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Karthik B",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Shobana S",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Motherhood Fertility and IVF - Coimbatore",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "GP Hospital",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Prasanna Vadakkepat",
+    "city": "Coimbatore",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:51.200488",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Hegde Hospital",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.735069",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Prashant Hegde",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Vandana Hegde",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Soumya H R",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Lavanya. B",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. B C Mounica",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ms. Jyoshna Diwan",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Jasmine Ramesh Salkar",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Akshita Agarwal",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Tanvir Hospital",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Arshi Raunaq Singh",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:32:56.743059",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Kavitha Reddy Dental Hospital",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.983161",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Kavitha Reddy",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.985168",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Partha Dental Skin Hair",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.985168",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Karam Sujitha",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Priyanka Janagam",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Partha Dental  Skin Hair",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Sharon Kagitha",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Kakatiya Superspeciality Dental Hospital",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Sudhakar Kolla",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. K.Tulasi",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Sharat Laser Eye Hospital",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "Eye Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Chilukuri Sharat Babu",
+    "city": "Warangal",
+    "state": "Telangana",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:01.987173",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Padmasri Hospital & IVF Centre",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Sudha Padmasri P",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. CHANDU VAMSI KRISHNA",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Apollo Health City",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Anitha Kolukula",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Abdul D Khan",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Tippala Anusha",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.086673",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Sesha Mohan Debta",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.098118",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. M Ganesh Kumar",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.098118",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Pradeep Kumar Palakonda",
+    "city": "Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:07.098118",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Manipal Hospital",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.838464",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full",
+        "valid_until": "19 Dec 2026",
+        "reference_no": "H-2007-0039"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Ch Manoj Kumar",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Jagadeesh. N",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Krishna Reddy",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Hema Sowjanya",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Murali Krishna Nallamothu",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Vuppu Ravi Kanth",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. G. V. Reddy",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. Lakshmi Prasuna",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Dr. M.Sarada",
+    "city": "Vijayawada",
+    "state": "Andhra Pradesh",
+    "country": "India",
+    "source": "Practo",
+    "scraped_date": "2025-09-27T12:33:11.841977",
+    "hospital_type": "General Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Unknown",
+        "level": null
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Unknown"
+      },
+      "iso": {
+        "certifications": []
+      },
+      "government_empanelments": []
+    }
+  },
+  {
+    "name": "Ms. Rama Bijapurkar",
+    "city": "Ms",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Excellence Report",
+    "city": "Apollo Excellence Report",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Honors List",
+    "city": "Honors List",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Business Responsibility and Sustainability Report 2024",
+    "city": "Business Responsibility and Sustainability Report",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Business Responsibility and Sustainability Report 2025",
+    "city": "Business Responsibility and Sustainability Report",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Circular Inviting Unsecured Deposits",
+    "city": "Circular Inviting Unsecured Deposits",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Composite Scheme of Arrangement",
+    "city": "Composite Scheme of Arrangement",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "SAP Reorganisation 2018",
+    "city": "SAP Reorganisation",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Apollo in the News",
+    "city": "Apollo in the News",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Press Releases",
+    "city": "Press Releases",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Apollo Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Apollo Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:16.164262",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Access Lab Reports",
+    "city": "Access Lab Reports",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.426463",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Old Airport Road - Bengaluru",
+    "city": "Old Airport Road",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Whitefield - Bengaluru",
+    "city": "Whitefield",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Manipal Clinic - Brookefield - Bengaluru",
+    "city": "Manipal Clinic",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Jayanagar - Bengaluru",
+    "city": "Jayanagar",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Manipal Clinic - Jayanagar - Bengaluru",
+    "city": "Manipal Clinic",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Malleshwaram - Bengaluru",
+    "city": "Malleshwaram",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Yeshwanthpur - Bengaluru",
+    "city": "Yeshwanthpur",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Hebbal - Bengaluru",
+    "city": "Hebbal",
+    "state": "Unknown",
+    "country": "India",
+    "hospital_chain": "Manipal Hospitals",
+    "hospital_type": "Multi-specialty Hospital",
+    "source": "Manipal Hospitals Website",
+    "scraped_date": "2025-09-27T12:33:35.428212",
+    "certifications": {
+      "nabh": {
+        "status": "Likely Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Possible"
+      },
+      "nabl": {
+        "status": "Likely"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  }
+]

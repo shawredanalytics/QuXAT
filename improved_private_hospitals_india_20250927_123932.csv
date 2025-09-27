@@ -1,0 +1,12 @@
+state,hospital_type,country,scraped_date,name,source,jci_status,city,nabh_status,url
+Telangana,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Hyderabad,Apollo Hospitals Website,Accredited,Hyderabad,Accredited,https://www.apollohospitals.com
+Karnataka,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Bangalore,Apollo Hospitals Website,Accredited,Bangalore,Accredited,https://www.apollohospitals.com
+Delhi,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Delhi,Apollo Hospitals Website,Accredited,New Delhi,Accredited,https://www.apollohospitals.com
+Maharashtra,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Mumbai,Apollo Hospitals Website,Accredited,Mumbai,Accredited,https://www.apollohospitals.com
+West Bengal,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Kolkata,Apollo Hospitals Website,Accredited,Kolkata,Accredited,https://www.apollohospitals.com
+Gujarat,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Ahmedabad,Apollo Hospitals Website,Accredited,Ahmedabad,Accredited,https://www.apollohospitals.com
+Maharashtra,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Apollo Hospitals Pune,Apollo Hospitals Website,Accredited,Pune,Accredited,https://www.apollohospitals.com
+Delhi,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Manipal Hospital Delhi,Manipal Hospitals Website,Unknown,New Delhi,Accredited,https://www.manipalhospitals.com
+Goa,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Manipal Hospital Goa,Manipal Hospitals Website,Unknown,Panaji,Accredited,https://www.manipalhospitals.com
+Rajasthan,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Manipal Hospital Jaipur,Manipal Hospitals Website,Unknown,Jaipur,Accredited,https://www.manipalhospitals.com
+Maharashtra,Multi-specialty Hospital,India,2025-09-27T12:39:32.091560,Manipal Hospital Pune,Manipal Hospitals Website,Unknown,Pune,Accredited,https://www.manipalhospitals.com

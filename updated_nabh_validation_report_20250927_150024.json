@@ -1,0 +1,57 @@
+{
+  "validation_date": "2025-09-27T15:00:24.727888",
+  "input_file": "updated_nabh_entry_level_hospitals_20250927_145838.json",
+  "validation_version": "2.0",
+  "statistics": {
+    "total_input": 567,
+    "valid_hospitals": 567,
+    "invalid_hospitals": 0,
+    "duplicates_removed": 0,
+    "data_quality_issues": 0,
+    "status_corrections": 0
+  },
+  "data_distribution": {
+    "by_state": {
+      "Uttar Pradesh": 75,
+      "Madhya Pradesh": 33,
+      "Maharashtra": 78,
+      "Gujarat": 33,
+      "Rajasthan": 16,
+      "Karnataka": 65,
+      "Kerala": 16,
+      "Delhi": 13,
+      "Telangana": 19,
+      "Chhattisgarh": 10,
+      "Tamil Nadu": 89,
+      "Pondicherry": 3,
+      "Haryana": 19,
+      "Punjab": 20,
+      "Unknown": 1,
+      "Andhra Pradesh": 26,
+      "West Bengal": 19,
+      "Bihar": 9,
+      "Jharkhand": 7,
+      "Odisha": 4,
+      "Uttarakhand": 5,
+      "Goa": 1,
+      "Assam": 5,
+      "Himachal Pradesh": 1
+    },
+    "by_certification_status": {
+      "Application Closed": 531,
+      "Under Review": 36
+    },
+    "by_quality_score": {
+      "excellent": 566,
+      "good": 1,
+      "fair": 0,
+      "poor": 0
+    }
+  },
+  "quality_metrics": {
+    "avg_quality_score": 99.95590828924162,
+    "hospitals_with_dates": 567,
+    "hospitals_with_location": 566,
+    "hospitals_with_complete_data": 566
+  }
+}

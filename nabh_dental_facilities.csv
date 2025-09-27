@@ -1,0 +1,533 @@
+reference_no,name,accreditation_no,valid_from,valid_upto,remarks,accreditation_type,facility_type,country,status,extracted_date
+D-2010-0001,"Maulana Azad Inst of Dental Sciences, New Delhi, Delhi, India",D-2011-0001,22 Jul 2024,21 Jul 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.352049
+D-2011-0005,"Air Force Institute of Dental Sciences, Bangalore, Karnataka, India",D-2012-0002,19 Aug 2024,18 Aug 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.352049
+D-2016-0075,"Dental Life , Srinivaspuri  , New Delhi, Delhi, India",D-2013-0003,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2010-0002,"Deshmukh Dental Clinic, Jabalpur, Madhya Pradesh, India",D-2013-0004,24 Jun 2022,23 Jun 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2014-0012,"Goel's Multispeciality Dental Clinic & Implant Centre , New Delhi, Delhi, India",D-2015-0005,02 Sep 2021,01 Sep 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2014-0034,"Vaishali Dental Care, Jabalpur, Madhya Pradesh, India",D-2015-0006,22 Sep 2025,21 Sep 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.352049
+D-2014-0042,"Crystal Dental Centre, Vasant Vihar, New Delhi, Delhi, India",D-2015-0007,11 Jan 2023,10 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.352049
+D-2015-0047,"Dr. Gupta's Dental Specialities Centre, Chennai, Tamil Nadu, India",D-2015-0008,07 Nov 2024,06 Nov 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.352049
+D-2015-0059,"Muskaan Dentals, Gurgaon, Haryana, India",D-2015-0009,07 Nov 2024,06 Nov 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.352049
+D-2015-0056,"Bhandari Dental Clinic, Pune, Maharashtra, India",D-2016-0010,16 Mar 2016,15 Mar 2019,Accreditation Expired,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2014-0014,"Bibhuti Bhusan Meorial Dental Hospital & Research Centre, Bhubneshwar, Orissa, India",D-2016-0011,26 Aug 2022,25 Aug 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2014-0041,"Dr. Kathuria Multispeciality Dental Clinic, New Delhi, Delhi, India",D-2016-0012,03 Nov 2019,02 Nov 2022,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2015-0066,"Dr Ramani's Dental Practice, Jaipur, Rajasthan, India",D-2016-0013,16 Mar 2016,15 Mar 2019,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.352049
+D-2014-0039,"Indus Hygiea (Unit of Indus Speciality Care) - (Earlier Certificate issued in the Name of Indus Hygiea), Mohali, Punjab, India",D-2016-0014,16 Apr 2025,15 Apr 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.356270
+D-2014-0043,"Jindal Rehablitation & Dental Centre , Meerut, Uttar Pradesh, India",D-2016-0015,25 Nov 2020,24 Nov 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0081,"Dental Life, Aliganj , New Delhi, Delhi, India",D-2016-0016,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0079,"Dental Life, Chitragupta  , New Delhi, Delhi, India",D-2016-0017,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0080,"Dental Life, Kalibari , New Delhi, Delhi, India",D-2016-0018,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0087,"Dental Life, Sadiq Nagar  , New Delhi, Delhi, India",D-2016-0019,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0077,"Dental Life, Pushp Vihar , New Delhi, Delhi, India",D-2016-0020,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0076,"Dental Life, Zakir hussain , New Delhi, Delhi, India",D-2016-0021,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0078,"Dental Life, RK Puram  , New Delhi, Delhi, India",D-2016-0022,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0085,"Dental Life, Motibagh , New Delhi, Delhi, India",D-2016-0023,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0083,"Dental Life, Chanakyapuri  , New Delhi, Delhi, India",D-2016-0024,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0082,"Dental Life, Faridabad, Haryana, India",D-2016-0025,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0084,"Dental Life, Kalkaji , Delhi, Delhi, India",D-2016-0026,22 Apr 2016,21 Apr 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0086,"Dental Life, Gurgaon, Haryana, India",D-2016-0027,10 May 2016,09 May 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2015-0051,"Dr. Futela's Dental Centre, Gurgaon, Haryana, India",D-2016-0028,10 May 2016,09 May 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2014-0010,"Leela Dental Clinic, New Delhi, Delhi, India",D-2016-0029,10 May 2016,09 May 2019,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2014-0019,"Dr. Shweta's Dental Clinic, New Delhi, Delhi, India",D-2016-0030,03 Jul 2025,02 Jul 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.356270
+D-2016-0071,"My Dentist (Total Dental Care Pvt. Ltd.), Gokuldham, Mumbai, Maharashtra, India",D-2016-0031,03 Jul 2016,02 Jul 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2016-0088,"Triveni Dental (A Unit of Triveni wellness Pvt. Ltd.), Bhiwani, Haryana, India",D-2016-0032,07 Sep 2022,06 Sep 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2015-0067,"Dr. Ashok's Dentistree, Delhi, Delhi, India",D-2016-0033,27 Sep 2022,26 Sep 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2014-0026,"Delhi Dental And Medical Centre, New Delhi, Delhi, India",D-2016-0034,10 Nov 2016,09 Nov 2019,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.356270
+D-2015-0058,"Kotilingams Dental Clinic, Guntur, Andhra Pradesh, India",D-2016-0035,10 Nov 2022,09 Nov 2025,Renewal Under Process,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.356270
+D-2014-0035,"Khare Dental Clinic & Implant Centre, Nagpur, Maharashtra, India",D-2016-0036,22 Dec 2022,21 Dec 2025,Renewal Under Process,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.356270
+D-2016-0099,"Jain Dental Centre, Delhi, Delhi, India",D-2016-0037,22 Dec 2022,21 Dec 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0102,"Dr. Sanjay Kalra's Multispeciality Dental Clinic, Panchkula, Haryana, India",D-2017-0038,01 Jul 2021,30 Jun 2024,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2014-0033,"Dr. Bhim Sain's Family Dental Clinic and Dental Laboratory, Gurgaon, Haryana, India",D-2017-0039,11 Apr 2023,10 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0100,"Chhabaria's Oral Maxillo Facial Surgery and Dental Clinic, Ahmedabad, Gujarat, India",D-2017-0040,11 Apr 2017,10 Apr 2020,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2016-0108,"Aashu Dental & Multispeciality Clinic, Ahmedabad, Gujarat, India",D-2017-0041,11 Apr 2023,10 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2015-0068,"Star Dental Clinic, Delhi, Delhi, India",D-2017-0042,22 May 2017,21 May 2020,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2016-0105,"Max Multispeciality Centre, Panchsheel Park, Delhi, Delhi, India",D-2017-0043,15 Sep 2022,14 Sep 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2016-0111,"Muskaan Dentals - (Earlier Certificate issued in the Name of Sudarshan Poly Dental Centre), Gurgaon, Haryana, India",D-2017-0044,19 Aug 2024,18 Aug 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0103,"Anu's Dental Clinic, Hyderabad, Telangana, India",D-2017-0045,26 Aug 2024,25 Aug 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0098,"Singhvi Dental Care  , Jodhpur, Rajasthan, India",D-2017-0046,07 Mar 2024,06 Mar 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2017-0119,"R.P.S Memorial Multispeciality Dental Clinic, Delhi, Delhi, India",D-2017-0047,06 Aug 2023,05 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0073,"Kakarla Multi Speciality Dental Hospital, Tirupati, Andhra Pradesh, India",D-2017-0048,15 Nov 2023,14 Nov 2027,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0107,"Creative Smiles Dental solutions Multispecialty Dental Clininc, Thane, Maharashtra, India",D-2017-0049,15 Nov 2017,14 Nov 2020,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2017-0120,"Gupta Multispeciality Dental Clinic, Delhi, Delhi, India",D-2017-0050,15 Nov 2023,14 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2017-0122,"Facio Dental Super Speciality Clinic, Delhi, Delhi, India",D-2017-0051,15 Nov 2023,14 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2016-0106,"HealthySmile Dental Clinic And Orthodontic Centre, Jabalpur, Madhya Pradesh, India",D-2018-0052,08 Jan 2024,07 Jan 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.360476
+D-2017-0121,"Shree Sai Samarth Dental Clinic & Implant Centre, Pune, Maharashtra, India",D-2018-0053,08 Jan 2018,07 Jan 2021,Accreditation Expired,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2017-0123,"K K Hitech Dental Clinic, Piler, Chittor, Andhra Pradesh, India",D-2018-0054,08 Jan 2018,07 Jan 2021,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2017-0125,"Dr. Rimo Multispeciality Dental Clinic, Chennai, Tamil Nadu, India",D-2018-0055,08 Jan 2021,07 Jan 2024,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2017-0130,"Happysmiles Dental Clinic, Pune, Maharashtra, India",D-2018-0056,08 Jan 2018,07 Jan 2021,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2017-0133,"Grace Dental Clinic, Gurgaon, Haryana, India",D-2018-0057,08 Jan 2018,07 Jan 2021,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.360476
+D-2017-0134,"The Healing Touch Dental Care, Delhi, Delhi, India",D-2018-0058,18 Feb 2024,17 Feb 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2017-0141,"Muskaan Dentals, Gurgaon, Haryana, India",D-2018-0059,17 Feb 2024,16 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2016-0112,"Foundation , Ballabhgarh, Haryana, India",D-2018-0060,11 Mar 2018,10 Mar 2021,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+DC-2018-0145,"Dr. Goyal's The Dental Solutions, Thane, Maharashtra, India",D-2018-0061,24 Aug 2023,23 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+DC-2018-0146,"Swastik Dental Care, Pune, Maharashtra, India",D-2018-0062,16 Jun 2018,15 Jun 2021,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+D-2016-0109,"Devanshi Dental Centre, Nagpur, Maharashtra, India",D-2018-0063,22 Jul 2018,21 Jul 2021,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+D-2017-0124,"Sri Guru Harkrishan Sahib ( C ) Eye Hospital Trust- Sohana ( Dental Department), Sohana, Punjab, India",D-2018-0064,22 Jul 2021,21 Jul 2024,Voluntary Withdrawal of Accreditation w.e.f. 24th August 2023,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+D-2017-0129,"32 Pearls Multispeciality Dental Clinic & Implant Centre, Ahmedabad, Gujarat, India",D-2018-0065,13 Feb 2025,12 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2017-0136,"Oral Care Dental Health & Orthodontic Centre, Delhi, Delhi, India",D-2018-0066,22 Jul 2024,21 Jul 2028,Accreditation Renewed,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+DC-2018-0151,"Sarada Dental Care, Challapalli, Andhra Pradesh, India",D-2018-0067,20 Oct 2022,19 Oct 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2017-0135,"Dr. Sachin Mittal's Advanced Dentistry, Hisar, Haryana, India",D-2018-0068,16 Sep 2024,15 Sep 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2017-0118,"Vijaya Super Speciality Dental & Maxillo facial Trauma Care Centre, Rajahmundry, Andhra Pradesh, India",D-2018-0069,27 Oct 2024,26 Oct 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+DC-2018-0155,"Urban Tooth Dental Clinic, Thane, Maharashtra, India",D-2018-0070,27 Oct 2018,26 Oct 2021,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+DC-2018-0161,"Advanced Dental Clinic & Oral Surgical Center, Pune, Maharashtra, India",D-2018-0071,20 Dec 2024,19 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2017-0138,"FMS Dental Pvt. Ltd., Hyderabad, Telangana, India",D-2018-0072,27 Jan 2023,26 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+DC-2018-0152,"Sujay's Dental Care, Bangalore, Karnataka, India",D-2018-0073,20 Dec 2018,19 Dec 2021,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+D-2017-0126,"Kommineni Super Speciality Dental Hospital, Tirupati, Andhra Pradesh, India",D-2019-0074,13 Jan 2025,12 Jan 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+DC-2018-0165,"Sri Sai Appolo Dental Hospital, Ananthapur, Andhra Pradesh, India",D-2019-0075,13 Jan 2022,12 Jan 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+D-2017-0137,"Nemaly Facial And Multispeciality Dental Hospital, Madanapalle, Chittor, Andhra Pradesh, India",D-2019-0076,13 Jan 2019,12 Jan 2022,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+DC-2018-0156,"Pranu Dental Hospital, Tirupati, Andhra Pradesh, India",D-2019-0077,24 Feb 2022,23 Feb 2025,Forced Withdrawal of Accreditation w.e.f. 4th July 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.364660
+DC-2018-0163,"Sanil Multispeciality Dental Clinic, Jabalpur, Madhya Pradesh, India",D-2019-0078,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+D-2017-0132,"S N Dental Clinic, Balaramapuram, Trivandrum, Kerala, India",D-2019-0079,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.364660
+DC-2018-0148,"Confident Dental Care, Bangalore, Karnataka, India",D-2019-0080,31 Mar 2022,30 Mar 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0158,"Jyoti Dental Care Center, Ghaziabad, Uttar Pradesh, India",D-2019-0081,29 Apr 2025,28 Apr 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2018-0154,"Dental Folks, Delhi, Delhi, India",D-2019-0082,29 Apr 2025,28 Apr 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2018-0183,"Therapeuo Dental and Multispeciality Clinic, Mumbai, Maharashtra, India",D-2019-0083,29 Apr 2019,28 Apr 2022,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0185,"Dr. Kochar's House of Smiles, Chandigarh, Punjab, India",D-2019-0084,27 Jul 2022,26 Jul 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0176,"The Caring Touch, New Delhi, Delhi, India",D-2019-0085,27 Jul 2022,26 Jul 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0184,"Kushi Dental Care, Chittor, Andhra Pradesh, India",D-2019-0086,26 Aug 2022,25 Aug 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0172,"Dentapple Dental Clinic & Implant Centre, New Delhi, Delhi, India",D-2019-0087,26 Aug 2019,25 Aug 2022,Voluntary Withdrawal w.e.f. 23rd Feb 2022,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0180,"Dr. Preet's Dental & Orthodontic Clinic Dental Implant Research Centre, Delhi, Delhi, India",D-2019-0088,24 Sep 2022,23 Sep 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0177,"Usha Smile Care , Sikar, Rajasthan, India",D-2019-0089,03 Nov 2019,02 Nov 2022,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0194,"Dr. Ahluwalia Dental Care Centre, Ambala, Haryana, India",D-2019-0090,03 Nov 2022,02 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+D-2017-0128,"Dr. Gupta's Dental and Braces Clinic, Delhi, Delhi, India",D-2019-0091,03 Dec 2019,02 Dec 2022,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0201,"K C Multispeciality Dental Clinic, Srikakulam, Andhra Pradesh, India",D-2020-0092,11 Jan 2023,10 Jan 2026,Renewal Under Process,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+D-2018-0187,"Adhiparasakthi Dental College & Hospital, Kanchipuram, Tamil Nadu, India",D-2020-0093,11 Jan 2023,10 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+D-2017-0113,"Government Dental College & Hospital, Ahmedabad, Gujarat, India",D-2020-0094,11 Jan 2020,10 Jan 2023,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0211,"Indira Multispeciality Dental Hospital, Nellore, Andhra Pradesh, India",D-2020-0095,11 Jan 2023,10 Jan 2026,"Accreditation under Suspension w.e.f . June 11, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0210,"Happy Dental Hospital, Nellore, Andhra Pradesh, India",D-2020-0096,11 Jan 2023,10 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0204,"Kamala Dental Speciality Hospital, Thiruvananthapuram, Kerala, India",D-2020-0097,11 Jan 2023,10 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+D-2017-0127,"Retrofit (Navkar Dental Clinic), Vadodara, Gujarat, India",D-2020-0098,20 May 2020,19 May 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0203,"Leela Super Speciality Dental Hospital, Kakinada, Andhra Pradesh, India",D-2020-0099,20 May 2023,19 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0208,"H Dental , Hyderabad, Telangana, India",D-2020-0100,20 May 2020,19 May 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0212,"Kapil Dental Clinic and Implant Center, New Delhi, Delhi, India",D-2020-0101,20 May 2023,19 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0215,"Integrated Dental Concepts, Mumbai, Maharashtra, India",D-2020-0102,20 May 2020,19 May 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0228,"Apple Dental Care (A Unit of M/S Apple Oral and Dental Private Limited), Vijayawada, Andhra Pradesh, India",D-2020-0103,20 May 2023,19 May 2026,Forced Withdrawal of Accreditation w.e.f. 21st August 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0230,"Mittal Dental Clinic , Ambala, Haryana, India",D-2020-0104,20 May 2023,19 May 2026,Forced Withdrawal of Accreditation w.e.f. 12th Jan 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0249,"Apple International Dental Hospital , Visakhapatnam, Andhra Pradesh, India",D-2020-0105,20 May 2023,19 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2018-0189,"Manavi Medico Dental Centre , Aurangabad, Maharashtra, India",D-2020-0106,20 May 2023,19 May 2026,Voluntary Withdrawal of Accreditation w.e.f. 1st May 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2018-0164,"Jays Dental Care - A Unit of Jays Dental Pvt. Ltd., Chennai, Tamil Nadu, India",D-2020-0107,01 Aug 2023,31 Jul 2027,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0200,"Dental Square , Jabalpur, Madhya Pradesh, India",D-2020-0108,01 Aug 2023,31 Jul 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0197,"Dental House, Jabalpur, Madhya Pradesh, India",D-2020-0109,22 Sep 2020,21 Sep 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2018-0179,"Dr. Saigals Dental Clinic and Implant Centre, Ghaziabad, Uttar Pradesh, India",D-2020-0110,22 Sep 2023,21 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0217,"The Tooth Clinic , Ludhiana, Punjab, India",D-2020-0111,22 Sep 2023,21 Sep 2027,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0237,"Divis Dental Specialties & Oral Implant Centre , Nellore, Andhra Pradesh, India",D-2020-0112,22 Sep 2023,21 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0220,"Gupta's Dental Clinic & Implant Center, Durgapuri Chowck, Shahdara, New Delhi, Delhi, India",D-2020-0113,25 Nov 2023,24 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2019-0229,"Goel Dental, Malviya Nagar, New Delhi, Delhi, India",D-2020-0114,25 Nov 2020,24 Nov 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0219,"Japjee Family Dental Clinic, Mohali, Punjab, India",D-2020-0115,25 Nov 2020,24 Nov 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2020-0259,"JJ Dental Clinic , Kakinada, Andhra Pradesh, India",D-2020-0116,25 Nov 2020,24 Nov 2023,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+DC-2019-0235,"Dr. Aggarwals Aesthetic & Dental Center, Jodhpur, Rajasthan, India",D-2021-0117,14 Jan 2024,13 Jan 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.368689
+DC-2018-0143,"Tathastu Superspeciality Dental Clinic, Bhopal, Madhya Pradesh, India",D-2021-0118,13 Feb 2021,12 Feb 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.368689
+D-2019-0192,"Sharad Pawar Dental College and Hospital, Wardha, Maharashtra, India",D-2021-0119,13 Feb 2024,12 Feb 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0254,"Care 32 Family Dental Care Centre, Mumbai, Maharashtra, India",D-2021-0120,13 Feb 2024,12 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0256,"Sharan Dental Specialities , Bangalore, Karnataka, India",D-2021-0121,13 Feb 2024,12 Feb 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0261,"32 Dentz Clinic, Noida, Uttar Pradesh, India",D-2021-0122,13 Feb 2024,12 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0269,"Sri Satya Sai Gokul Dental Clinic, Kadapa, Andhra Pradesh, India",D-2021-0123,11 Mar 2021,10 Mar 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2019-0224,"Tulsi Dental Clinic , Ajmer, Rajasthan, India",D-2021-0124,11 Mar 2024,10 Mar 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0216,"Datun Dental Care, Bareilly, Uttar Pradesh, India",D-2021-0125,25 Mar 2021,24 Mar 2024,Application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2019-0232,"KP'S Multispeciality Dental Hospital, Vuyyuru, Vijayawada, Andhra Pradesh, India",D-2021-0126,15 Apr 2021,14 Apr 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2019-0247,"Confydentz Dental & Maxillo Facial Center, Guntur, Andhra Pradesh, India",D-2021-0127,15 Apr 2024,14 Apr 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0267,"Geetha Mullapudi International Hi Technology Dental Hospital, Rajahmundry, Andhra Pradesh, India",D-2021-0128,15 Apr 2021,14 Apr 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2020-0283,"The Dentist Clinic, Karnal, Haryana, India",D-2021-0129,15 Apr 2021,14 Apr 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2018-0169,"Smaran Advance Dental Clinic, Pune, Maharashtra, India",D-2021-0130,29 Apr 2021,28 Apr 2024,Accreditation Expired and application closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2018-0181,"City Dental Centre , Patna, Bihar, India",D-2021-0131,29 Apr 2024,28 Apr 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0191,"Mazhuvenchery Speciality Dental Clinic, Ernakulam, Aluva, Kerala, India",D-2021-0132,29 Apr 2024,28 Apr 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0253,"Dr. Sudhakar's Dental World, Kurnool, Nandyal, Andhra Pradesh, India",D-2021-0133,29 Apr 2024,28 Apr 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0244,"Kristam Dental Care, Anantapur, Andhra Pradesh, India",D-2021-0134,06 May 2024,05 May 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2018-0187,"Panwar Dental Clinic & Implant Centre, Panchkula, Haryana, India",D-2021-0135,06 May 2024,05 May 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+D-2020-0266,"Dr. D.Y. Patil Dental College and Hospital, Pune, Maharashtra, India",D-2021-0136,13 May 2024,12 May 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0252,"S S Dental Hospital, Visakhapatnam, Andhra Pradesh, India",D-2021-0137,13 May 2024,12 May 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0240,"Sri Smiles Super Speciality Dental Hospital, West Godavari, Tanuku, Andhra Pradesh, India",D-2021-0138,29 May 2024,28 May 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0234,"Dr. Sridhar International Dental Hospital, Vijayawada, Andhra Pradesh, India",D-2021-0139,11 Jun 2024,10 Jun 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0268,"Ambuja Dental Clinic & Implant Centre , Thiruvallur, Tamil Nadu, India",D-2021-0140,17 Jun 2024,16 Jun 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2018-0144,"Denta Zone India Private Limited, Lucknow, Uttar Pradesh, India",D-2021-0141,24 Jun 2021,23 Jun 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+D-2017-0114,"Denasia Dental Clinic, Bhopal, Madhya Pradesh, India",D-2021-0142,12 Jul 2021,11 Jul 2024,Not Recommended for Renewal of accreditation,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2020-0262,"Varun Dental Care, Vizianagaram, Andhra Pradesh, India",D-2021-0143,22 Jul 2021,21 Jul 2024,Forced Withdrawal of Accreditation w.e.f. 4th July 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2020-0258,"Lalitha Dental Speciality Centre, Bangalore, Karnataka, India",D-2021-0144,29 Jul 2024,28 Jul 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2021-0332,"Smile Care Dental Clinic, Bhopal, Madhya Pradesh, India",D-2021-0145,05 Aug 2021,04 Aug 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+D-2020-0275,"Rajarajeswari Dental College and Hospital, Bangalore, Karnataka, India",D-2021-0146,19 Aug 2024,18 Aug 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2019-0226,"Cure One Dental Clinic, Bhopal, Madhya Pradesh, India",D-2021-0147,19 Aug 2021,18 Aug 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2019-0251,"Agarwal Multispeciality Dental Clinic implant & Laser Centre , Ahmedabad, Gujarat, India",D-2021-0148,19 Aug 2021,18 Aug 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2020-0284,"Dental Saviours , Gurgaon, Haryana, India",D-2021-0149,19 Aug 2024,18 Aug 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0270,"CDC Dental Network Pvt. Ltd., Gurgaon, Haryana, India",D-2021-0150,19 Aug 2021,18 Aug 2024,Voluntary Withdrawal of Accreditation w.e.f. 12th October 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2021-0330,"Paul Dental Orthodontic Implant and Laser Centre, Delhi, Delhi, India",D-2021-0151,26 Aug 2021,25 Aug 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2018-0166,"Smiles Dental Specialities, Bangalore, Karnataka, India",D-2021-0152,16 Sep 2021,15 Sep 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2020-0273,"Prakash Dental Clinic , Lucknow, Uttar Pradesh, India",D-2021-0153,16 Sep 2021,15 Sep 2024,Accreditation under Suspension w.e.f.17th August 2024 & Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.373021
+DC-2021-0336,"Dr. Jindal's Dental & Oral Health Clinic, Zirakpur , Mohali, Punjab, India",D-2021-0154,16 Sep 2024,15 Sep 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2020-0294,"Cure 32 Dental Clinic and Implant Centre, Rohtak, Haryana, India",D-2021-0155,14 Oct 2024,13 Oct 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.373021
+DC-2021-0303,"K. B. Dental Clinic, New Delhi, Delhi, India",D-2021-0156,14 Oct 2021,13 Oct 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.377038
+DC-2021-0314,"Smile Super Speciality Dental Hospital, Nellore, Andhra Pradesh, India",D-2021-0157,14 Oct 2024,13 Oct 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+DC-2021-0317,"Deswal Super Specialty Dental Hospital and Implant Centre, Bhiwani, Haryana, India",D-2021-0158,14 Oct 2024,13 Oct 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+DC-2020-0286,"Modi Multi Speciality Dental Clinic, Ahmedabad, Gujarat, India",D-2021-0159,11 Nov 2021,10 Nov 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.377038
+DC-2018-0182,"Dentinova Dental Care Centre, New Delhi, Delhi, India",D-2021-0160,25 Nov 2024,24 Nov 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+DC-2019-0207,"Venkata Sai Multispeciality Dental Hospital, Kurnool, Andhra Pradesh, India",D-2021-0161,25 Nov 2024,24 Nov 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+D-2018-0189,"Saveetha Dental College & Hospitals, Chennai, Tamil Nadu, India",D-2021-0162,01 Dec 2024,30 Nov 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+DC-2021-0302,"Dadaji Dental Clinic, Rajnandgaon, Chattisgarh, India",D-2021-0163,01 Dec 2021,30 Nov 2024,Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.377038
+DC-2021-0341,"Nemaly Facial Surgical and Multispeciality Dental Center, Chittor, Andhra Pradesh, India",D-2021-0164,01 Dec 2021,30 Nov 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.377038
+DC-2020-0282,"Haripriya Dantha Vaidyasala, Chittoor, Tirupati, Andhra Pradesh, India",D-2021-0165,09 Dec 2024,08 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+DC-2019-0236,"Pariseema Multi Speciality Dental Clinic , Ahmedabad, Gujarat, India",D-2021-0166,16 Dec 2021,15 Dec 2024,Voluntary Withdrawal of Accreditation w.e.f. 2nd July 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.377038
+DC-2020-0300,"Royal Dental Clinic, Gurgaon, Haryana, India",D-2021-0167,16 Dec 2024,15 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.377038
+DC-2021-0323,"Delhi 32 Dental Centre , New Delhi, Delhi, India",D-2021-0168,16 Dec 2021,15 Dec 2024,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.377038
+DC-2018-0171,"Bhandari Dental & Medical Clinic, Panchkula, Haryana, India",D-2021-0169,23 Dec 2021,22 Dec 2024,Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2020-0278,"City Dental Hospital , Rajkot, Gujarat, India",D-2021-0170,23 Dec 2024,22 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.379047
+DC-2020-0279,"Apple Dental Care , Guntur, Andhra Pradesh, India",D-2021-0171,23 Dec 2024,22 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.379047
+DC-2021-0313,"Smile Dental Clinics, Guntur, Andhra Pradesh, India",D-2021-0172,23 Dec 2021,22 Dec 2024,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2021-0327,"Sri Kamakshi Sai Dental Clinic, Tirupati, Andhra Pradesh, India",D-2021-0173,23 Dec 2024,22 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.379047
+DC-2021-0319,"Armaan Dental Clinic & Smile Centre, Bhiwani, Haryana, India",D-2021-0174,30 Dec 2021,29 Dec 2024,Accreditation under Suspension w.e.f.17th Aug 2024 and Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2020-0272,"Dyanamic Dental Care Clinic, Lucknow, Uttar Pradesh, India",D-2021-0175,30 Dec 2021,29 Dec 2024,Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2020-0263,"Amaravathi Dental Hospital , Guntur, Andhra Pradesh, India",D-2021-0176,30 Dec 2021,29 Dec 2024,Forced Withdrawal of Accreditation w.e.f. 30th January 2025,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2021-0339,"Jahnavee Dental Care, Ahmedabad, Gujarat, India",D-2021-0177,30 Dec 2024,29 Dec 2028,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.379047
+D-2019-0201,"I.T.S Dental College, Hospital & Research Centre, Greater Noida, Uttar Pradesh, India",D-2022-0178,20 Jan 2025,19 Jan 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.379047
+DC-2019-0248,"Dr.Bhiruds Sweet Smile Dental clinic, Pune, Maharashtra, India",D-2022-0179,20 Jan 2022,19 Jan 2025,Forced Withdrawal of Accreditation w.e.f. 18th Nov 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2020-0264,"Sri Dental Care, Eluru, Andhra Pradesh, India",D-2022-0180,20 Jan 2022,19 Jan 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.379047
+DC-2020-0265,"Apple Dental Care, Prakasam, Ongole, Andhra Pradesh, India",D-2022-0181,20 Jan 2022,21 Jan 2025,Forced Withdrawal w.e.f. 26th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+D-2021-0276,"I.T.S Centre For Dental Studies & Research, Ghaziabad, Uttar Pradesh, India",D-2022-0182,20 Jan 2025,19 Jan 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2019-0198,"Moses Dental Care , Adoor, Kerala, India",D-2022-0183,27 Jan 2022,26 Jan 2025,Not Recommended w.e.f 23rd Jan 2025),NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2021-0306,"My Smile Dental Clinic , Bhopal, Madhya Pradesh, India",D-2022-0184,27 Jan 2025,26 Jan 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2020-0297,"Yadav Dental Clinic, Kosli, Rewari, Haryana, India",D-2022-0185,05 Feb 2025,04 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2020-0281,"Malik Dental clinic and Implant Centre, Raipur, Chattisgarh, India",D-2022-0186,10 Feb 2025,09 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2021-0318,"Dant Chikitsa Kendra, Bhopal, Madhya Pradesh, India",D-2022-0187,10 Feb 2025,09 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2018-0190,"Sri Sampath Vinayaka Rupa Multispeciality Dental Clinic, Srikakulam, Andhra Pradesh, India",D-2022-0188,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2019-0250,"Smile N Shine Dental care centre, Gurgaon, Haryana, India",D-2022-0189,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2020-0280,"Shirdi Sai 4Ds Dental & Poly Clinic , Visakhapatnam, Andhra Pradesh, India",D-2022-0190,24 Feb 2022,23 Feb 2025,Forced Withdrawal of Accreditation w.e.f. 18th Nov 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2020-0287,"Dr. Anil Yadav Dental Clinic, Gurgaon, Haryana, India",D-2022-0191,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2021-0316,"The Dental Specialists, Hyderabad, Telangana, India",D-2022-0192,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2021-0351,"Dentem (GT Denta Care LLP ), New Delhi, Delhi, India",D-2022-0193,24 Feb 2025,23 Feb 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.381054
+DC-2021-0359,"Ashwin Dental Care Clinic, Thane, Maharashtra, India",D-2022-0194,24 Feb 2022,23 Feb 2025,Voluntary Withdrawal w.e.f. 29th August 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2019-0239,"Sushruta Dentalaya , Ranchi, Jharkhand, India",D-2022-0195,23 Mar 2022,22 Mar 2025,Forced Withdrawal of Accreditation w.e.f. 18th Nov 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2020-0285,"Kosmic Dental Clinic , Lucknow, Uttar Pradesh, India",D-2022-0196,23 Mar 2022,22 Mar 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2021-0305,"Vinayak Dental Clinic, New Delhi, Delhi, India",D-2022-0197,23 Mar 2022,22 Mar 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2021-0335,"Apple Dental Specialities, Vizianagaram, Andhra Pradesh, India",D-2022-0198,23 Mar 2022,22 Mar 2025,Forced Withdrawal of Accreditation w.e.f. 13th March 2025,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.381054
+DC-2021-0342,"Sri Sai Chandra Dental Care, Guntur, Andhra Pradesh, India",D-2022-0199,23 Mar 2022,22 Mar 2025,Forced Withdrawal of Accreditation w.e.f. 18th Nov 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0347,"Vinayak Dental Hospital And Orthodontic Centre, Dausa, Rajasthan, India",D-2022-0200,23 Mar 2022,22 Mar 2025,Forced Withdrawal of Accreditation w.e.f. 18th Nov 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0350,"Dr. Kamal Vilekars Multispeciality Dental Hospital, Srikakulam, Andhra Pradesh, India",D-2022-0201,23 Mar 2022,22 Mar 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0370,"S N Dental Clinic, Ananthpur, Karnataka, India",D-2022-0202,23 Mar 2022,22 Mar 2025,Forced Withdrawal of Accreditation w.e.f. 24th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0372,"Fortino Dental, New Delhi, Delhi, India",D-2022-0203,23 Mar 2025,22 Mar 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.383060
+DC-2021-0334,"Metro Dental Lounge, Bangalore, Karnataka, India",D-2022-0204,05 May 2022,04 May 2025,Forced Withdrawal of Accreditation w.e.f. 18th Nov 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2020-0298,"TATHASTU SUPERSPECIALITY DENTAL CLINIC, Bhopal, Madhya Pradesh, India",D-2022-0205,05 May 2022,04 May 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0358,"Devanshi Dental Institute & Research Centre, Nagpur, Maharashtra, India",D-2022-0206,05 May 2022,04 May 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2018-0147,"Saluja Dento Max Fac Centre/ Saluja Dental Clinic, Kanpur, Uttar Pradesh, India",D-2022-0207,05 May 2025,04 May 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.383060
+DC-2021-0373,"Ayush Dental , East Godavari, Andhra Pradesh, India",D-2022-0208,05 May 2022,04 May 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2018-0162,"Dental Square, Ernakulam, Kerala, India",D-2022-0209,05 May 2025,04 May 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.383060
+DC-2019-0214,"Dr Rajesh Dental Lounge, Alappuzha, Kerala, India",D-2022-0210,05 May 2022,04 May 2025,Forced Withdrawal of Accreditation w.e.f. 1st March 2025,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0385,"Arora Multispeciality Dental Implant and Laser Center, Durg, Bhilai, Chattisgarh, India",D-2022-0211,05 May 2025,04 May 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.383060
+DC-2022-0399,"Stars Dental Clinic, New Delhi, Delhi, India",D-2022-0212,05 May 2025,04 May 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.383060
+DC-2021-0333,"Meghnand Dental Care and Implant Centre, Nashik, Maharashtra, India",D-2022-0213,07 Jul 2022,06 Jul 2025,Forced Withdrawal of Accreditation w.e.f. 11th March 2025,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2019-0227,"Bajpai Dental Hospital & Maxillo Facial research Center , Prayagraj, Uttar Pradesh, India",D-2022-0214,07 Jul 2022,06 Jul 2025,Forced Withdrawal of Accreditation w.e.f. 17th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0325,"Sri Sai Dental Hospital, Krishnankoil, Tamil Nadu, India",D-2022-0215,07 Jul 2022,06 Jul 2025,Forced Withdrawal of Accreditation w.e.f. 14th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+D-2017-0142,"Star Dental Hospital & Root Canal Centre, Chittoor, Tirupati, Andhra Pradesh, India",D-2022-0216,07 Jul 2022,06 Jul 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0340,"Vijaya Super Speciality Dental Clinic, Kadapa, Andhra Pradesh, India",D-2022-0217,07 Jul 2022,06 Jul 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.383060
+DC-2021-0363,"Gandhi Dental Clinic, Hisar, Haryana, India",D-2022-0218,07 Jul 2022,06 Jul 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0379,"365 Dentistry, New Delhi, Delhi, India",D-2022-0219,07 Jul 2025,06 Jul 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.385065
+DC-2021-0308,"Precigem Dental World, Mumbai, Maharashtra, India",D-2022-0220,28 Jul 2022,27 Jul 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0356,"Kothamas Dental Care, Guntur, Andhra Pradesh, India",D-2022-0221,04 Aug 2022,03 Aug 2025,Forced Withdrawal of Accreditation w.e.f. 14th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0376,"Rohini Dental Clinic & Orthodontic Center ( A Unit Of Kapil Medical Pvt. Ltd.), New Delhi, Delhi, India",D-2022-0222,04 Aug 2022,03 Aug 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0368,"Facedental Inte Rnational Clinic, Pune, Maharashtra, India",D-2022-0223,04 Aug 2022,03 Aug 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0324,"Jay Dental care and advance orthodontic centre, Patna, Bihar, India",D-2022-0224,04 Aug 2022,03 Aug 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0345,"Girish Multispecialty Hospital, Ananthpur, Karnataka, India",D-2022-0225,25 Aug 2022,24 Aug 2025,Forced Withdrawal of Accreditation w.e.f. 14th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2019-0222,"Multispeciality Dental Clinic , Nagpur, Maharashtra, India",D-2022-0226,25 Aug 2022,24 Aug 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2021-0331,"Annapoorna International Dental Care, Krishna, Machilipatnam, Andhra Pradesh, India",D-2022-0227,25 Aug 2022,24 Aug 2025,Application Closed,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.385065
+DC-2019-0243,"Confident Dental Care , Bangalore, Karnataka, India",D-2022-0228,25 Aug 2022,24 Aug 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2022-0404,"Takkar Dental Clinic, Panchkula, Haryana, India",D-2022-0229,25 Aug 2025,24 Aug 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.387071
+DC-2019-0233,"Jayam Super Speciality Dental Hospital, Anantapur, Andhra Pradesh, India",D-2022-0230,15 Sep 2022,14 Sep 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2021-0343,"Krishna Sai Dental Care, Vijayawada, Krishna, Andhra Pradesh, India",D-2022-0231,15 Sep 2022,14 Sep 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2022-0387,"Advanced Dental and implant clinic, Faridabad, Haryana, India",D-2022-0232,15 Sep 2025,14 Sep 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.387071
+DC-2021-0348,"Dr. Goyals Dental And Orthopaedic Centre, New Delhi, Delhi, India",D-2022-0233,22 Sep 2022,21 Sep 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2020-0296,"Maharishi Vashisht Sevadham Dental Hospital , Jind, Haryana, India",D-2022-0234,22 Sep 2022,21 Sep 2025,,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2021-0382,"Smirk Dental and Implant centre, New Delhi, Delhi, India",D-2022-0235,22 Sep 2022,21 Sep 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2021-0361,"Balaji Dental Hospital, Ananthpur, Karnataka, India",D-2022-0236,22 Sep 2022,21 Sep 2025,Forced Withdrawal of Accreditation w.e.f. 14th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2021-0381,"Smile Makers Oral and Dental Health Care Center, Ahmednagar, Maharashtra, India",D-2022-0237,22 Sep 2022,21 Sep 2025,Forced Withdrawal of Accreditation w.e.f. 14th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.387071
+DC-2022-0392,"Kalyani Dental Hospital, Medchal, Hyderabad, Telangana, India",D-2022-0238,22 Sep 2022,21 Sep 2025,Renewal Under Process,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.389076
+DC-2022-0409,"Dr. Agarwal's Dental Speciality Centre, Lucknow, Uttar Pradesh, India",D-2022-0239,22 Sep 2022,21 Sep 2025,Forced Withdrawal of Accreditation w.e.f. 22nd December 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.389076
+DC-2022-0396,"Tooth Point, Mohali, Zirakpur, Chandigarh, India",D-2022-0240,22 Sep 2025,21 Sep 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2022-0419,"Meraki Dental Studio, New Delhi, Delhi, India",D-2022-0241,22 Sep 2022,21 Sep 2025,Forced Withdrawal of Accreditation w.e.f.14th Dec 2024,NABH_Dental,Dental,India,Expired,2025-09-27T16:03:54.389076
+DC-2021-0329,"Dr. G.Konda Reddy Super Speciality Dental Hospital, Nellore, Andhra Pradesh, India",D-2022-0242,29 Sep 2022,28 Sep 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2021-0357,"Saritha Dental Clinic LLP, Medchal, Telangana, India",D-2022-0243,29 Sep 2022,28 Sep 2025,Forced Withdrawal of Accreditation w.e.f. 1st May 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2022-0408,"Sri Ganesh Super Speciality Dental Hospital, East Godavari , Rajahmundry, Andhra Pradesh, India",D-2022-0244,20 Oct 2022,19 Oct 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2019-0223,"Happy Tooth Dental Care And Diagnostic Center, Ranchi, Jharkhand, India",D-2022-0245,20 Oct 2022,19 Oct 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2021-0322,"White Dental Lounge, Ahmedabad, Gujarat, India",D-2022-0246,20 Oct 2022,19 Oct 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2022-0405,"Sapphire Dental Care, Gurgaon, Haryana, India",D-2022-0247,03 Nov 2025,02 Nov 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2022-0393,"Goyals Dental & Orthodontics Centre, Faridabad, Haryana, India",D-2022-0248,03 Nov 2022,02 Nov 2025,Voluntary Withdrawal w.e.f. 27th April 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.389076
+DC-2021-0366,"Munjal Dental Institute & Treatment Centre , Ambala, Haryana, India",D-2022-0249,03 Nov 2022,02 Nov 2025,Forced Withdrawal of Accreditation w.e.f. 28th April 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2021-0355,"Shiva Dental Clinic, Jhajjar, Haryana, India",D-2022-0250,03 Nov 2022,02 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2022-0388,"Yash Dental Orthodontic and Aesthetic Centre, New Delhi, Delhi, India",D-2022-0251,03 Nov 2022,02 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2021-0377,"Dr. Bhim Sains Family Dental Clinic Pvt. Ltd., Gurgaon, Haryana, India",D-2022-0252,03 Nov 2022,02 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2022-0429,"Thind Dental Clinic, Ludhiana, Punjab, India",D-2022-0253,10 Nov 2022,09 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2021-0375,"Shataayu Dental Clinic, Indore, Madhya Pradesh, India",D-2022-0254,10 Nov 2022,09 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2021-0354,"Srian Dental Hospital, Kurnool, Andhra Pradesh, India",D-2022-0255,10 Nov 2022,09 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2021-0353,"Sri Ramana Cosmetic Dental Clinic Ceramic Implant Centre, Kurnool, Andhra Pradesh, India",D-2022-0256,10 Nov 2022,09 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2022-0430,"Malik Dental Clinic, Rohtak, Haryana, India",D-2022-0257,01 Dec 2022,30 Nov 2025,Renewal Under Process,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2022-0425,"Apple Dental (A Unit Of M/s Apple Oral And Dental Pvt. Ltd.), Nellore, Andhra Pradesh, India",D-2022-0258,01 Dec 2022,30 Nov 2025,Forced Withdrawal of Accreditation w.e.f. 22nd August 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.391082
+DC-2022-0406,"Smile Cure Dental Clinic, Delhi, Delhi, India",D-2022-0259,01 Dec 2022,30 Nov 2025,Voluntary Withdrawal of Accreditation w.e.f. 1st July 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2022-0391,"Muskan Dental Care, West Patel Nagal, Delhi, Delhi, India",D-2022-0260,01 Dec 2022,30 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2021-0349,"Jaaneja Multispeciality Dental Centre, New Delhi, Delhi, India",D-2022-0261,01 Dec 2022,30 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2021-0311,"Stars Dental Clinic, New Delhi, Delhi, India",D-2022-0262,01 Dec 2022,30 Nov 2025,"Accreditation under Suspension w.e.f . August 01, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2022-0424,"Malatamba Dental Hospital, Visakhapatnam, Andhra Pradesh, India",D-2022-0263,01 Dec 2022,30 Nov 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2022-0448,"Jardosh Dental Clinic, Ahmedabad, Gujarat, India",D-2022-0264,01 Dec 2025,30 Nov 2029,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2022-0421,"Om Super-Speciality Dental Clinic, Jind, Haryana, India",D-2022-0265,01 Dec 2022,30 Nov 2025,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2019-0231,"Care International Dental & Implant Centre, Nellore, Andhra Pradesh, India",D-2022-0266,08 Dec 2022,07 Dec 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2021-0374,"Babulalji Pahadiya Dental Hospital, Dausa, Rajasthan, India",D-2022-0267,08 Dec 2022,07 Dec 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2022-0403,"Agrawal Dental And Oral Care, Bhopal, Madhya Pradesh, India",D-2022-0268,08 Dec 2022,07 Dec 2025,Voluntary Withdrawal of Accreditation w.e.f. 5th February 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.393087
+DC-2021-0369,"Dental Implant & Smile Rehabilitation center, Kolhapur, Maharashtra, India",D-2022-0269,15 Dec 2022,14 Dec 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2022-0390,"Focus Dental, New Delhi, Delhi, India",D-2022-0270,15 Dec 2022,14 Dec 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2020-0288,"Santosh Dental Hospital, Gurgaon, Haryana, India",D-2022-0271,28 Dec 2022,27 Dec 2025,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2022-0410,"Urban Dental Skin Clinic Bhopal, Bhopal, Madhya Pradesh, India",D-2022-0272,28 Dec 2022,27 Dec 2025,Forced Withdrawal of Accreditation w.e.f. 26th June 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2021-0328,"Vijay Dental Clinic, Guntur, Andhra Pradesh, India",D-2023-0273,05 Jan 2023,04 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2021-0367,"Aastha Dental Clinic and Implant Centre, Shimla, Himachal Pradesh, India",D-2023-0274,05 Jan 2023,04 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2021-0309,"Prakash Speciality Dental Hospital , Ananthpur, Karnataka, India",D-2023-0275,27 Jan 2023,26 Jan 2026,Forced Withdrawal of Accreditation w.e.f. 12th January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2021-0346,"Smile 4 Suree Dental Clinic, New Delhi, Delhi, India",D-2023-0276,27 Jan 2023,26 Jan 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2021-0360,"Ruchita Dental Clinic, Ananthpur, Karnataka, India",D-2023-0277,27 Jan 2023,26 Jan 2026,Forced Withdrawal of Accreditation w.e.f. 11th September 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2022-0437,"Smriti Raj Dentistry, Dwarka, Delhi, Delhi, India",D-2023-0278,02 Feb 2023,01 Feb 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.395093
+DC-2021-0384,"Dr. Somendra Dentalcare Centre, Jaipur, Rajasthan, India",D-2023-0279,09 Feb 2023,08 Feb 2026,"Accreditation under Suspension w.e.f . September 01, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0411,"Priya Dental Clinic, Mumbai, Maharashtra, India",D-2023-0280,09 Feb 2023,08 Feb 2026,Forced Withdrawal of Accreditation w.e.f. 13th January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0462,"Jain Multi Speciality Dental Clinic, Raipur, Chattisgarh, India",D-2023-0281,09 Feb 2023,08 Feb 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0458,"New Crown Dental Clinic, Bhopal, Madhya Pradesh, India",D-2023-0282,02 Mar 2023,01 Mar 2026,Forced Withdrawal of Accreditation w.e.f. 13th January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0455,"Happy Tooth Multispeciality Dental Clinic, Ranchi, Jharkhand, India",D-2023-0283,02 Mar 2023,01 Mar 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0450,"Naveen Dental Clinic, Tirupati, Andhra Pradesh, India",D-2023-0284,02 Mar 2023,01 Mar 2026,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0432,"Apple Dental - A Unit Of M/s Apple Oral And Dental Pvt. Ltd., Rajahmundry, Andhra Pradesh, India",D-2023-0285,02 Mar 2023,01 Mar 2026,Forced Withdrawal of Accreditation w.e.f. 9th January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0449,"Tuskers Multispeciality Dental Care, Ahmedabad, Gujarat, India",D-2023-0286,23 Mar 2023,22 Mar 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0438,"Dental Destination, Faridabad, Haryana, India",D-2023-0287,23 Mar 2023,22 Mar 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0454,"Balaji Dental Centre, Paschim vihar, Delhi, Delhi, India",D-2023-0288,23 Mar 2023,22 Mar 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0453,"Smile Savers Dental Clinic, Ghaziabad, Uttar Pradesh, India",D-2023-0289,23 Mar 2023,22 Mar 2026,Voluntary Withdrawal of Accreditation w.e.f. 9th July 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0428,"Dental Park - Dental & Maxillofacial Centre, Ghaziabad, Uttar Pradesh, India",D-2023-0290,23 Mar 2023,22 Mar 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0463,"Apple International Dental, Vijayawada, Andhra Pradesh, India",D-2023-0291,30 Mar 2023,29 Mar 2026,"Accreditation under Suspension w.e.f . July 10, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0423,"Smile Super Speciality Dental Hospital, Kurnool, Andhra Pradesh, India",D-2023-0292,30 Mar 2023,29 Mar 2026,Forced Withdrawal of Accreditation w.e.f. 13th January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0466,"Smile N Shine Orthodontic Care Pvt. Ltd., Pune, Maharashtra, India",D-2023-0293,30 Mar 2023,29 Mar 2026,Forced Withdrawal of Accreditation w.e.f. 11th March 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.397103
+DC-2022-0461,"Star Dental Experts, Eluru, Andhra Pradesh, India",D-2023-0294,06 Apr 2023,05 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0389,"Satyam Dental Clinic & Implant Centre, Jaipur, Rajasthan, India",D-2023-0295,06 Apr 2023,05 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0420,"Gupta Dental Hospital, Dausa, Rajasthan, India",D-2023-0296,13 Apr 2023,12 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0439,"Smile Bright Multispeciality Dental Clinic, Delhi, Delhi, India",D-2023-0297,13 Apr 2023,12 Apr 2026,Forced Withdrawal of Accreditation w.e.f. 12th February 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2021-0386,"Sri Krishna Dental Clinic, Guntur, Andhra Pradesh, India",D-2023-0298,13 Apr 2023,12 Apr 2026,"Accreditation under Suspension w.e.f . July 10, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0442,"Jyoti Dental and Diagnostic, Ghaziabad, Uttar Pradesh, India",D-2023-0299,20 Apr 2023,19 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0422,"You Dent Hospital, Jaipur, Rajasthan, India",D-2023-0300,27 Apr 2023,26 Apr 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2023-0477,"Bhede Multispeciality Dental Clinic, Nagpur, Maharashtra, India",D-2023-0301,04 May 2023,03 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0431,"Jain Dental Centre, Ghaziabad, Uttar Pradesh, India",D-2023-0302,18 May 2023,17 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2021-0380,"Deep Dental , Mohali, Punjab, India",D-2023-0303,25 May 2023,24 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0441,"Centre for Smile Dental and Heart Clinic, Faridabad, Haryana, India",D-2023-0304,25 May 2023,24 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0456,"The Dream Smile Dental Clinic, Delhi, Delhi, India",D-2023-0305,25 May 2023,24 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2023-0481,"Sai Dento Care, Bangalore, Karnataka, India",D-2023-0306,25 May 2023,24 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2023-0472,"Dr. Amit Sharma Super Speciality Dental Hospital, Jaipur, Rajasthan, India",D-2023-0307,01 Jun 2023,31 May 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.399625
+DC-2022-0467,"OM Sai Dental Clinic, Delhi, Delhi, India",D-2023-0308,08 Jun 2023,07 Jun 2026,Voluntary Withdrawal of Accreditation w.e.f. 4th July 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0476,"Identity Multy Specialty Dental Hospital & Research Center, Kadapa, Andhra Pradesh, India",D-2023-0309,08 Jun 2023,07 Jun 2026,Forced Withdrawal of Accreditation w.e.f. 6th August 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0433,"Apple Dental (A Unit Of M/S Apple Oral And Dental Pvt. Ltd.), Ananthapur, Andhra Pradesh, India",D-2023-0310,15 Jun 2023,14 Jun 2026,Forced Withdrawal of Accreditation w.e.f. 23rd January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0485,"Rainbow Dental Care, Prakasam, Ongole, Andhra Pradesh, India",D-2023-0311,15 Jun 2023,14 Jun 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0452,"Shashi Dental Center, Delhi, Delhi, India",D-2023-0312,22 Jun 2023,21 Jun 2026,Voluntary Withdrawal of Accreditation w.e.f. 9th October 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0474,"Smile And Shine Dental, Visakhapatnam, Andhra Pradesh, India",D-2023-0313,22 Jun 2023,21 Jun 2026,Renewed on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0451,"Dr. Mallick Dental Centre Llp, Pitam Pura , Delhi, Delhi, India",D-2023-0314,22 Jun 2023,21 Jun 2026,Forced Withdrawal of Accreditation w.e.f. 11th March 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0480,"Sampoorna Advanced Dental Centre, Bangalore, Karnataka, India",D-2023-0315,28 Jun 2023,27 Jun 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2021-0371,"Chetna Dental Centre, Lucknow, Uttar Pradesh, India",D-2023-0316,20 Jul 2023,19 Jul 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0436,"Bhandari Dental Care, Bilaspur, Chattisgarh, India",D-2023-0317,20 Jul 2023,19 Jul 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0440,"Dr. Kowe's Multispeciality Dental Clinic, Gadchiroli, Maharashtra, India",D-2023-0318,20 Jul 2023,19 Jul 2026,"Accreditation under Suspension w.e.f . April 27, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0460,"Dental Square, Gurgaon, Haryana, India",D-2023-0319,20 Jul 2023,19 Jul 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0470,"Vital Dental, Chandigarh, Chandigarh, India",D-2023-0320,20 Jul 2023,19 Jul 2026,Voluntary Withdrawal of Accreditation w.e.f. 29th July 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+D-2023-0482,"Vinayak Dental Hospital And Orthodontic Centre, Dausa, Rajasthan, India",D-2023-0321,20 Jul 2023,19 Jul 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0492,"Bhartia Dental Clinic, Bhopal, Madhya Pradesh, India",D-2023-0322,27 Jul 2023,26 Jul 2026,Forced Withdrawal of Accreditation w.e.f. 16th May 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0464,"Surabhi Speciality Dental Clinic & Orthodontic Centre, Ernakulam, Kerala, India",D-2023-0323,27 Jul 2023,26 Jul 2026,Voluntary Withdrawal of Accreditation w.e.f. 7th January 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0413,"Naarayana Dental Clinic, Anantapur, Andhra Pradesh, India",D-2023-0324,03 Aug 2023,02 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0479,"Sita Memorial Multispeciality Dental Clinic, Raipur, Chattisgarh, India",D-2023-0325,03 Aug 2023,02 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0457,"Kalra Dental Hospital, Palwal, Haryana, India",D-2023-0326,10 Aug 2023,09 Aug 2026,Forced Withdrawal of Accreditation w.e.f. 22nd April 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0412,"Goyal Dental Clinic, Charkhi Dadri , Haryana, India",D-2023-0327,24 Aug 2023,23 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0483,"Tishlar Dental Clinic, New Delhi, Delhi, India",D-2023-0328,24 Aug 2023,23 Aug 2026,Forced Withdrawal of Accreditation w.e.f. 12th April 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0503,"Dr Shiva Nagini Yalavarthi Multispeciality Dental Clinic (The Unit Of Apollo Dental Clinics), Hyderabad, Telangana, India",D-2023-0329,24 Aug 2023,23 Aug 2026,"Accreditation under Suspension w.e.f . September 01, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0499,"Cosmodentz Dental Clinic, Sonipat, Kharkhoda, Haryana, India",D-2023-0330,24 Aug 2023,23 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0502,"Manglam Dental Hospital & Orthodontic Centre, Jaipur, Rajasthan, India",D-2023-0331,24 Aug 2023,23 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2022-0471,"Mamta Dental Care Orthodontic Implant Centre, Mahendergarh, Haryana, India",D-2023-0332,31 Aug 2023,30 Aug 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0488,"Dr. Goenkas Raman Dental Care, Jaipur, Rajasthan, India",D-2023-0333,07 Sep 2023,06 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0491,"City Dental Clinic, Faridabad, Haryana, India",D-2023-0334,07 Sep 2023,06 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0497,"Life Line Dental & Diagnostics, Sahibabad, Uttar Pradesh, India",D-2023-0335,14 Sep 2023,13 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0514,"Dental World , Delhi, Delhi, India",D-2023-0336,21 Sep 2023,20 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0523,"Dev Dental Hospital, Jaipur, Rajasthan, India",D-2023-0337,21 Sep 2023,20 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0489,"Apple International Dental (A Unit of Apple Oral and Dental Pvt. Ltd.), Chittor, Tirupati, Andhra Pradesh, India",D-2023-0338,21 Sep 2023,20 Sep 2026,"Accreditation under Suspension w.e.f . September 07, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0511,"IM Dentist, Delhi, Delhi, India",D-2023-0339,21 Sep 2023,20 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+D-2023-0496,"Govt. Dental College & Hospital, Jamnagar, Gujarat, India",D-2023-0340,21 Sep 2023,20 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+DC-2023-0530,"Uttam Charitable Dental Clinic, Jhajjar, Bahadurgarh, Haryana, India",D-2023-0341,28 Sep 2023,27 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.401381
+D-2023-0490,"Bharati Vidyapeeth (Deemed To Be University) Dental College And Hospital Sangli, Sangli, Maharashtra, India",D-2023-0342,28 Sep 2023,27 Sep 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0482,"Shree Ram Diagnostic And Dental Hospital, Jaipur, Rajasthan, India",D-2023-0343,12 Oct 2023,11 Oct 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0512,"N K Dental Hospital, Jaipur, Rajasthan, India",D-2023-0344,19 Oct 2023,18 Oct 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0475,"Kids and Family Dental Centre, Gondia, Maharashtra, India",D-2023-0345,26 Oct 2023,25 Oct 2026,Forced Withdrawal of Accreditation w.e.f. 1st June 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0505,"MAC Dental Care, Delhi, Delhi, India",D-2023-0346,26 Oct 2023,25 Oct 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0540,"Dr. Rohits Dental Care, Delhi, Delhi, India",D-2023-0347,26 Oct 2023,25 Oct 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0509,"Smile Sculptors, Bangalore, Karnataka, India",D-2023-0348,02 Nov 2023,01 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0515,"Jyothi Multispeciality Dental Clinic , Delhi, Delhi, India",D-2023-0349,02 Nov 2023,01 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0532,"Teethz Tantras Dental Clinic, Pune, Maharashtra, India",D-2023-0350,02 Nov 2023,01 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0537,"Goel's Multispeciality Dental Clinic And Implant Centre, Delhi, Delhi, India",D-2023-0351,09 Nov 2023,08 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0527,"Bhardwaj Dental Solutions, New Delhi, Delhi, India",D-2023-0352,09 Nov 2023,08 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0533,"Apple International Dental (A Unit of Apple Oral and Dental Private Limited), Hyderabad, Telangana, India",D-2023-0353,23 Nov 2023,22 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0516,"Balaji Dental Hospital & Polycliinic, Dausa, Rajasthan, India",D-2023-0354,30 Nov 2023,29 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0473,"Vishnoi Dental Hospital, Kanpur, Uttar Pradesh, India",D-2023-0355,30 Nov 2023,29 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2022-0446,"Eledent International Digital Dentistry And Imaging Centre, Hyderabad, Telangana, India",D-2023-0356,30 Nov 2023,29 Nov 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0529,"32 Pearls Multispeciality Dental Clinic, Faridabad, Haryana, India",D-2023-0357,07 Dec 2023,06 Dec 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0510,"Dr. Gigy's Million Dollar Smile Dental Clinic, Thiruvananthapuram, Kerala, India",D-2023-0358,07 Dec 2023,06 Dec 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0525,"Sree Implant And Maxillofacial Dental Hospital, Hyderabad, Telangana, India",D-2023-0359,07 Dec 2023,06 Dec 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0495,"Absolute Dental Care, Faridabad, Haryana, India",D-2023-0360,21 Dec 2023,20 Dec 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0528,"Teerthanker Adinath Bright Dental Care, New Delhi, Delhi, India",D-2023-0361,21 Dec 2023,20 Dec 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0543,"M.A.R Super Speciality Dental Hospital, Palnadu, Narasaraopeta, Andhra Pradesh, India",D-2023-0362,28 Dec 2023,27 Dec 2026,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+D-2023-0546,"Manav Rachna Dental College, SDS, MRIIRS, Faridabad, Haryana, India",D-2024-0363,04 Jan 2024,03 Jan 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0536,"Meda Daulati Dental Hospital, Nadbai, Bharatpur, Rajasthan, India",D-2024-0364,11 Jan 2024,10 Jan 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0486,"Sai Manglam Manav Seva Dental Clinic, Bhopal, Madhya Pradesh, India",D-2024-0365,18 Jan 2024,17 Jan 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0526,"Siddharth Dental Hospital, Bhilwara, Rajasthan, India",D-2024-0366,18 Jan 2024,17 Jan 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0541,"Dr. Pooja's Dental Health and Implant Centre, Delhi, Delhi, India",D-2024-0367,18 Jan 2024,17 Jan 2027,Forced Withdrawal of Accreditation w.e.f. 11th September 2025,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0521,"Nexus Superspeciality Dental and Implant Centre, Delhi, Delhi, India",D-2024-0368,24 Jan 2024,23 Jan 2027,Voluntary Withdrawal of Accreditation w.e.f. 12th December 2024,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0535,"RBA Dental Care, Faridabad, Haryana, India",D-2024-0369,08 Feb 2024,07 Feb 2027,"Accreditation under Suspension w.e.f . August 01, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0538,"Somani Dental Clinic, Gondia, Maharashtra, India",D-2024-0370,08 Feb 2024,07 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0553,"Dentwin India Pvt. Ltd., Sahibabad, Ghaziabad, Uttar Pradesh, India",D-2024-0371,15 Feb 2024,14 Feb 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0534,"Rana Dental Clinic, Charkhi Dadri , Haryana, India",D-2024-0372,22 Feb 2024,21 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+D-2023-0540,"Bharati Vidyapeeth (Deemed To Be University) Dental College And Hospital Navi Mumbai, Navi Mumbai, Maharashtra, India",D-2024-0373,29 Feb 2024,28 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0493,"Usha Smile Care, Sikar, Rajasthan, India",D-2024-0374,29 Feb 2024,28 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0558,"Clove Dental (Unit Of Star Dental Centre Private Limited), Greater Noida, Uttar Pradesh, India",D-2024-0375,29 Feb 2024,28 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0548,"Conquer Dental Clinic (A Unit Of M/s MDS Conquer LLP), Medchal, Hyderabad, Telangana, India",D-2024-0376,29 Feb 2024,28 Feb 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2022-0407,"Sri Durga Multispeciality Dental Clinic, Kondapalli, Krishna, Andhra Pradesh, India",D-2024-0377,14 Mar 2024,13 Mar 2027,"Accreditation under Suspension w.e.f . August 01, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0556,"Clove Dental (Unit of Star Dental Centre Private Limited), Gurgaon, Haryana, India",D-2024-0378,14 Mar 2024,13 Mar 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2022-0417,"Clove Dental (Unit of Star Dental Center Private Limited), RK Puram, Delhi, Delhi, India",D-2024-0379,20 Mar 2024,19 Mar 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+D-2023-0491,"Bharati Vidyapeeth (Deemed To Be) University Dental College &Hospital, Pune, Pune, Maharashtra, India",D-2024-0380,04 Apr 2024,03 Apr 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.405401
+DC-2023-0494,"Dr. Tushir's Multispeciality Clinic, Delhi, Delhi, India",D-2024-0381,18 Apr 2024,17 Apr 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0531,"Care Dental Clinic, Chennai, Tamil Nadu, India",D-2024-0382,18 Apr 2024,17 Apr 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0498,"Ethical Dental Clinic, New Delhi, Delhi, India",D-2024-0383,18 Apr 2024,17 Apr 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0570,"Shri Kripa Dental Clinic, Dadri, Uttar Pradesh, India",D-2024-0384,09 May 2024,08 May 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0565,"Shagun Dental Care Laser And Implant Centre, Lucknow, Uttar Pradesh, India",D-2024-0385,16 May 2024,15 May 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0564,"Mishra's Clinic, Ghaziabad, Uttar Pradesh, India",D-2024-0386,30 May 2024,29 May 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0551,"Sri Laasya Dental Clinic, Visakhapatnam, Andhra Pradesh, India",D-2024-0387,30 May 2024,29 May 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0554,"KSD Premium , Gandhinagar, Gujarat, India",D-2024-0388,13 Jun 2024,12 Jun 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0549,"Haripriya Dental Clinic, Tirupati, Andhra Pradesh, India",D-2024-0389,04 Jul 2024,03 Jul 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0522,"Triveni Dental (A Unit of Triveni Wellness Pvt. Ltd.), Charkhi Dadri , Haryana, India",D-2024-0390,11 Jul 2024,10 Jul 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0587,"Dental Quest, Delhi, Delhi, India",D-2024-0391,11 Jul 2024,10 Jul 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0559,"Sehgal Dental Clinic, New Delhi, Delhi, India",D-2024-0392,11 Jul 2024,10 Jul 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0524,"Shree Dental Care Laser Implant Maxillofacial Trauma Center, Mahendergarh, Haryana, India",D-2024-0393,11 Jul 2024,10 Jul 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+D-2021-0379,"Vinayaka Missions Sankarachariyar Dental College, Salem, Tamil Nadu, India",D-2024-0394,18 Jul 2024,17 Jul 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0562,"Oraa Care Smile Dental Clinic, New Delhi, Delhi, India",D-2024-0395,18 Jul 2024,17 Jul 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0507,"Sehgal Multispeciality General And Dental Clinic, Bhopal, Madhya Pradesh, India",D-2024-0396,08 Aug 2024,07 Aug 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0573,"Apple International Dental (A Unit of Apple Oral and Dental Pvt. Ltd.), Srikakulam, Andhra Pradesh, India",D-2024-0397,08 Aug 2024,07 Aug 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0545,"Kansal Dental Clinic and Orthodontic Centre, Meerut, Uttar Pradesh, India",D-2024-0398,16 Aug 2024,15 Aug 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0575,"Dento Hub Dental Clinic, New Delhi, Delhi, India",D-2024-0399,22 Aug 2024,21 Aug 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0597,"Shree Krishan Dental Hospital , Jaipur, Rajasthan, India",D-2024-0400,29 Aug 2024,28 Aug 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0577,"Punhani Tooth Care, New Delhi, Delhi, India",D-2024-0401,05 Sep 2024,04 Sep 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0504,"Maa Madhuri Dental Hospital, Ranchi, Jharkhand, India",D-2024-0402,05 Sep 2024,04 Sep 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0567,"Simpladent Clinic, Ghaziabad, Uttar Pradesh, India",D-2024-0403,12 Sep 2024,11 Sep 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0539,"Kalyani Speciality Dental Clinic, Guntur, Andhra Pradesh, India",D-2024-0404,12 Sep 2024,11 Sep 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+D-2023-0539,"VEEYES Dental Hospital (A Unit Of Veeyes Dental Care Llp), Coimbatore, Tamil Nadu, India",D-2024-0405,19 Sep 2024,18 Sep 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+D-2022-0424,"VYWS Dental College & Hospital, Amravati, Maharashtra, India",D-2024-0406,26 Sep 2024,25 Sep 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2023-0519,"Rohilla Dental Clinic , Jind, Haryana, India",D-2024-0407,26 Sep 2024,25 Sep 2027,,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0583,"Clove Dental (Unit of Star Dental Centre Private Limited), Shahdara, Delhi, Delhi, India",D-2024-0408,26 Sep 2024,25 Sep 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0618,"Dev Dental Superspeciality Hospital, Jaipur, Rajasthan, India",D-2024-0409,26 Sep 2024,25 Sep 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0566,"Sparsh Dental Clinic , Ahmedabad, Gujarat, India",D-2024-0410,03 Oct 2024,02 Oct 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.409922
+DC-2024-0588,"Mittal Dental Clinic, Ambala, Haryana, India",D-2024-0411,03 Oct 2024,02 Oct 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0607,"Nexus Superspeciality Dental & Implant Centre, Shahdara, Delhi, Delhi, India",D-2024-0412,10 Oct 2024,09 Oct 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2023-0555,"Dental House, Jabalpur, Madhya Pradesh, India",D-2024-0413,10 Oct 2024,09 Oct 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2023-0500,"Tathastu Superspeciality Dental Clinic, Pithampur, Madhya Pradesh, India",D-2024-0414,07 Nov 2024,06 Nov 2027,"Accreditation under Suspension w.e.f . July 17, 2025",NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2023-0550,"Dr. Dhingra Dental And Surgical Centre, Karnal, Haryana, India",D-2024-0415,07 Nov 2024,06 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+D-2023-0542,"KLE Vishwanath Katti Institute Of Dental Sciences, Belagavi, Karnataka, India",D-2024-0416,14 Nov 2024,13 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0579,"Sri Sai Surya Dental Care , Srikakulam, Andhra Pradesh, India",D-2024-0417,14 Nov 2024,13 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0621,"Varun Dental Care, A Unit Of M/S Apple Oral And Dental Pvt Ltd, Vizianagaram, Andhra Pradesh, India",D-2024-0418,14 Nov 2024,13 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0594,"Shubham Dental Clinic, Karnal, Haryana, India",D-2024-0419,14 Nov 2024,13 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0568,"Agrawal's Multispeciality Dental Clinic, Ahmedabad, Gujarat, India",D-2024-0420,21 Nov 2024,20 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0598,"Dr Batra's Dentistree Dental Clinic, Vadodara, Gujarat, India",D-2024-0421,21 Nov 2024,20 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0580,"Dr. Gaur's Dental Clinic , Gurgaon, Haryana, India",D-2024-0422,21 Nov 2024,20 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0561,"The Dental Paradise, Ludhiana, Punjab, India",D-2024-0423,21 Nov 2024,20 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0614,"Modern Dental Hospital, Jaipur, Rajasthan, India",D-2024-0424,21 Nov 2024,20 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0613,"Vaishali Dental Hospital, Jaipur, Rajasthan, India",D-2024-0425,28 Nov 2024,27 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0635,"Smile Dental Clinic and Health Care, Sahibabad, Ghaziabad, Uttar Pradesh, India",D-2024-0426,28 Nov 2024,27 Nov 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0574,"Ramatri's Family and Child Dental Care, Ahmedabad, Gujarat, India",D-2024-0427,05 Dec 2024,04 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0578,"Gupta Dental Centre , Chandigarh, Chandigarh, India",D-2024-0428,05 Dec 2024,04 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0610,"Blue Orchid Health Care, Jaipur, Rajasthan, India",D-2024-0429,05 Dec 2024,04 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.414003
+DC-2024-0617,"Smile Care Dental Clinic, Bhopal, Madhya Pradesh, India",D-2024-0430,12 Dec 2024,11 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.416821
+DC-2024-0584,"Clove Dental (Unit of Star Dental Centre Private Limited), Panchkula, Haryana, India",D-2024-0431,19 Dec 2024,18 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.416821
+DC-2024-0605,"Truheal Clinic, Dwarka, Delhi, India",D-2024-0432,26 Dec 2024,25 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.416821
+DC-2024-0629,"Anand Dental Hospital & Diagnostic Centre , Jaipur, Rajasthan, India",D-2024-0433,26 Dec 2024,25 Dec 2028,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.416821
+DC-2023-0501,"Tathastu Superspeciality Dental Clinic, Mandideep, Madhya Pradesh, India",D-2025-0434,09 Jan 2025,08 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.416821
+DC-2024-0591,"Global Dental Hospital Orthodontic and implant Centre , Ajmer, Rajasthan, India",D-2025-0435,16 Jan 2025,15 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.416821
+DC-2024-0589,"Clove Dental (Unit of Star Dental Centre Private Limited), Vijayawada, Andhra Pradesh, India",D-2025-0436,16 Jan 2025,15 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0603,"Dental Craft Multispeciality Dentistry, Dwarka, New Delhi, Delhi, India",D-2025-0437,23 Jan 2025,22 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0599,"Dr. Jaiswal Dental Care Centre, New Delhi, Delhi, India",D-2025-0438,23 Jan 2025,22 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2023-0560,"Dr Rahar Dental Collage, Bhiwani, Haryana, India",D-2025-0439,30 Jan 2025,29 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0586,"Clove Dental (Unit of Star Dental Centre Private Limited), Secunderabad, Telangana, India",D-2025-0440,30 Jan 2025,29 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0619,"Tathastu Superspeciality Dental Clinic, Bhopal, Madhya Pradesh, India",D-2025-0441,30 Jan 2025,29 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0593,"Clove Dental (Unit of Star Dental Centre Private Limited), Chennai, Tamil Nadu, India",D-2025-0442,30 Jan 2025,29 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0640,"Dr. Asra's Smile Dental, Hyderabad, Telangana, India",D-2025-0443,30 Jan 2025,29 Jan 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0608,"Shree Ram Diagnostic And Dental Hospital, Jaipur, Rajasthan, India",D-2025-0444,06 Feb 2025,05 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2024-0633,"Dentistium Multispeciality Dental Clinic, Ahmedabad, Gujarat, India",D-2025-0445,13 Feb 2025,12 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.418329
+DC-2023-0513,"Chandak Dental Clinic , Nagpur, Maharashtra, India",D-2025-0446,13 Feb 2025,12 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0662,"Amaravathi Dental Hospital, Guntur, Andhra Pradesh, India",D-2025-0447,13 Feb 2025,12 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0648,"Deepa Dental Care, Sahibabad, Uttar Pradesh, India",D-2025-0448,20 Feb 2025,19 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0628,"Shikhar Dental Hospital , Jaipur, Rajasthan, India",D-2025-0449,27 Feb 2025,26 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0658,"Goyal Dental Clinic, Panchkula, Haryana, India",D-2025-0450,27 Feb 2025,26 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0668,"Shri Karni Dental Hospital, Jaipur, Rajasthan, India",D-2025-0451,27 Feb 2025,26 Feb 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2025-0676,"Global Multispeciality Dental Care, Srikakulam, Andhra Pradesh, India",D-2025-0452,06 Mar 2025,05 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0656,"Malhotra Smile Care & Implant Centre, Jaipur, Rajasthan, India",D-2025-0453,13 Mar 2025,12 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0630,"JBS Dental Studio , Hyderabad, Telangana, India",D-2025-0454,13 Mar 2025,12 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.420336
+DC-2024-0622,"Rayen Dental Care Centre, Chennai, Tamil Nadu, India",D-2025-0455,13 Mar 2025,12 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0581,"Malhan Dental Clinic , Jalandhar, Punjab, India",D-2025-0456,13 Mar 2025,12 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0649,"Vinayak Dental Care A Multispeciality Dental Clinic, Jaipur, Rajasthan, India",D-2025-0457,13 Mar 2025,12 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0620,"V Dental, Visakhapatnam, Andhra Pradesh, India",D-2025-0458,20 Mar 2025,19 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0634,"Dr. Pandeys Dental Hospital, Uttam Nagar, Delhi, Delhi, India",D-2025-0459,20 Mar 2025,19 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0654,"Root and Tooth Dental Hospital Orthodontic and Implant Centre , Jaipur, Rajasthan, India",D-2025-0460,20 Mar 2025,19 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0609,"Devkripa Health Care Center, Jaipur, Rajasthan, India",D-2025-0461,20 Mar 2025,19 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+D-2024-0602,"Centre for Dental Education & Research - All India Institute of Medical Sciences, New Delhi, Delhi, India",D-2025-0462,27 Mar 2025,26 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0651,"Mittal Dental Clinic, Ambala, Haryana, India",D-2025-0463,27 Mar 2025,26 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.422343
+DC-2024-0669,"Bansal Dental Hospital, Jaipur, Rajasthan, India",D-2025-0464,27 Mar 2025,26 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0666,"Smiles Dental Specialities, Bangalore, Karnataka, India",D-2025-0465,27 Mar 2025,26 Mar 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0663,"Dr. Ritesh Choudhary'S Yentl Dental, New Delhi, Delhi, India",D-2025-0466,03 Apr 2025,02 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2025-0687,"Sri Dental Clinic, A Unit Of Apple Oral And Dental Private Limited, West Godavari, Andhra Pradesh, India",D-2025-0467,03 Apr 2025,02 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0664,"Glow Dental Clinic, New Delhi, Delhi, India",D-2025-0468,10 Apr 2025,09 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0639,"Dr Chauhan's Bala Ji Dental Clinic, Alipur, Delhi, Delhi, India",D-2025-0469,10 Apr 2025,09 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2025-0702,"Gupta Dental Care & Orthodontic Centre, Najafgarh, Delhi, Delhi, India",D-2025-0470,10 Apr 2025,09 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0641,"Swanil Dental, Hansi, Haryana, India",D-2025-0471,01 May 2025,30 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0626,"Pratap Dental Clinic, New Delhi, Delhi, India",D-2025-0472,01 May 2025,30 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2025-0706,"Noida Dental Hospital, Greater Noida, Uttar Pradesh, India",D-2025-0473,01 May 2025,30 Apr 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.424350
+DC-2024-0665,"Shreeji Dental Hospital, Jodhpur, Rajasthan, India",D-2025-0474,08 May 2025,07 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2024-0616,"Dental De Care , Bangalore, Karnataka, India",D-2025-0475,08 May 2025,07 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2025-0677,"Agarwal Dental Clinic, Ajmer, Rajasthan, India",D-2025-0476,08 May 2025,07 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2025-0672,"Shri Balaji Dental And Cosmetic Clinic, Jaipur, Rajasthan, India",D-2025-0477,08 May 2025,07 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2024-0661,"KR`s Dental Care, Jaipur, Rajasthan, India",D-2025-0478,15 May 2025,14 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2024-0660,"Meda Daulati Dental & Craniofacial Hospital, Bharatpur, Rajasthan, India",D-2025-0479,15 May 2025,14 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2024-0585,"Clove Dental (Unit of Star Dental Centre Pvt. Ltd.), Secunderabad, Telangana, India",D-2025-0480,15 May 2025,14 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2025-0732,"Shri Balaji Dental Clinic, Sonipat, Haryana, India",D-2025-0481,15 May 2025,14 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2025-0731,"Shristhi Dental Clinic, Rohtak, Haryana, India",D-2025-0482,15 May 2025,14 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.426358
+DC-2024-0645,"Krupavathi Multispeciality Dental Clinic, Visakhapatnam, Andhra Pradesh, India",D-2025-0483,22 May 2025,21 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2024-0655,"Neo Dental, Gurgaon, Haryana, India",D-2025-0484,22 May 2025,21 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2024-0638,"Meghana Multi Speciality Dental Hospital, Tirupathi, Andhra Pradesh, India",D-2025-0485,22 May 2025,21 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2024-0590,"Dentoral , Bhopal, Madhya Pradesh, India",D-2025-0486,22 May 2025,21 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2025-0701,"Dental Dome, Jaipur, Rajasthan, India",D-2025-0487,22 May 2025,21 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2025-0682,"Tyagi Dental Clinic, South West Delhi, Delhi, India",D-2025-0488,29 May 2025,28 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2025-0717,"Smilera Dental Clinic, Jaipur, Rajasthan, India",D-2025-0489,29 May 2025,28 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2024-0647,"Unique Dental Clinic, Faridabad, Haryana, India",D-2025-0490,29 May 2025,28 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.428365
+DC-2025-0684,"Sushila Dental Clinic, Jaipur, Rajasthan, India",D-2025-0491,29 May 2025,28 May 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0700,"Dr. Singh's Dentistry, West Delhi, Delhi, India",D-2025-0492,05 Jun 2025,04 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0697,"Kalyani Dental Hospital, Hyderabad, Telangana, India",D-2025-0493,05 Jun 2025,04 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0725,"Dr. Om Parkash Dental Private Limited, Amritsar, Punjab, India",D-2025-0494,05 Jun 2025,04 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0713,"Bhardwaj's Multispeciality Dental Care Centre, Delhi, Delhi, India",D-2025-0495,05 Jun 2025,04 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0710,"Juneja Dental Clinic, New Delhi, Delhi, India",D-2025-0496,05 Jun 2025,04 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0674,"Surabhi Dental Hospital, Jaipur, Rajasthan, India",D-2025-0497,05 Jun 2025,04 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0680,"Dental Smiles, Paschim Vihar , Delhi, India",D-2025-0498,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0712,"The Dental Roots, New Delhi, Delhi, India",D-2025-0499,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0696,"Cavity Avengers Dental Clinic, Uttam nagar, Delhi, India",D-2025-0500,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0692,"Tooth Healerz, Chandigarh, Chandigarh, India",D-2025-0501,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0678,"Oro Care Facial Trauma Centre, Patna, Bihar, India",D-2025-0502,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2024-0650,"Dencity A Multispecialty Dental Clinic, Bikaner, Rajasthan, India",D-2025-0503,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0686,"Vision Dental Care, South West Delhi, Delhi, India",D-2025-0504,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.430377
+DC-2025-0689,"Southwest Dental Centre, New Delhi, Delhi, India",D-2025-0505,12 Jun 2025,11 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0690,"K B Dental Clinic, Dilshad Garden, Delhi, Delhi, India",D-2025-0506,19 Jun 2025,18 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0673,"Riddhi Siddhi Dental Care, Sikar, Rajasthan, India",D-2025-0507,19 Jun 2025,18 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0703,"Dental Duo, Ghaziabad, Uttar Pradesh, India",D-2025-0508,19 Jun 2025,18 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2024-0652,"Cloverleaf Dental Clinic, Ghaziabad, Uttar Pradesh, India",D-2025-0509,26 Jun 2025,25 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0691,"K.L. Dental, Charkhi Dadri , Haryana, India",D-2025-0510,26 Jun 2025,25 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0705,"Sri Sai Appolo Dental Hospital, Anantapur, Andhra Pradesh, India",D-2025-0511,26 Jun 2025,25 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0694,"Elite Speciality Clinic, Dwarka, New Delhi, Delhi, India",D-2025-0512,26 Jun 2025,25 Jun 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0715,"A One Dental Hospital, Bharatpur, Rajasthan, India",D-2025-0513,03 Jul 2025,02 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0740,"Sai Mobident Dental Centre (A Unit Of Mobident Hospitals Pvt Ltd.), Delhi, Delhi, India",D-2025-0514,03 Jul 2025,02 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0711,"Ocean International Dental Hospital, Hyderabad, Telangana, India",D-2025-0515,10 Jul 2025,09 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0671,"Rai Dental And Implant Centre, Bareilly, Uttar Pradesh, India",D-2025-0516,10 Jul 2025,09 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2024-0670,"Shree Vijaya Durga Dental And Implant Clinic, Visakhapatnam, Andhra Pradesh, India",D-2025-0517,10 Jul 2025,09 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0721,"KPS Multispeciality Dental Hospital, Vuyyuru, Krishna, Andhra Pradesh, India",D-2025-0518,17 Jul 2025,16 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2024-0657,"Armaan Dental Clinic & Smile Centre, Bhiwani, Haryana, India",D-2025-0519,17 Jul 2025,16 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+D-2024-0666,"Nair Hospital Dental College, Mumbai, Maharashtra, India",D-2025-0520,24 Jul 2025,23 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.432308
+DC-2025-0683,"Pitampura Dental Clinic, New Delhi, Delhi, India",D-2025-0521,24 Jul 2025,23 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0741,"Shakuntala Smiles and Gums Multispeciality Dental Clinic, Thane, Maharashtra, India",D-2025-0522,24 Jul 2025,23 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0728,"Mydenta Implant And Dental Centre (Mydenta Services), Jaipur, Rajasthan, India",D-2025-0523,24 Jul 2025,23 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2024-0667,"Lambade Dental Clinic, Nagpur, Maharashtra, India",D-2025-0524,24 Jul 2025,23 Jul 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2024-0659,"Super Specialist Deswal Dental Clinic, Rohtak, Haryana, India",D-2025-0525,07 Aug 2025,06 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0748,"Dant Care Studio, New Delhi, Delhi, India",D-2025-0526,07 Aug 2025,06 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0722,"Smile 32 Dental Clinic , Jaipur, Rajasthan, India",D-2025-0527,07 Aug 2025,06 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0736,"Shanti Dental Hospital, Jaipur, Rajasthan, India",D-2025-0528,14 Aug 2025,13 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0742,"Dentem (GT Denta Care LLP), Delhi, Delhi, India",D-2025-0529,14 Aug 2025,13 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0685,"Family Dental Care Centre, Ghaziabad, Uttar Pradesh, India",D-2025-0530,14 Aug 2025,13 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0724,"Global Dental Hospital Orthodontic And Implant Centre, Jodhpur, Rajasthan, India",D-2025-0531,28 Aug 2025,27 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313
+DC-2025-0714,"Surya Dental Clinic, Lucknow, Uttar Pradesh, India",D-2025-0532,28 Aug 2025,27 Aug 2029,Accredited on 3rd Edition,NABH_Dental,Dental,India,Active,2025-09-27T16:03:54.434313

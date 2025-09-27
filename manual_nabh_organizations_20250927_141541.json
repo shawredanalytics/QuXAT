@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Allow Location Detect current location using GPS",
+    "state": "Unknown",
+    "city": "Unknown",
+    "country": "India",
+    "accreditation_level": "Unknown",
+    "accreditation_category": "Unknown",
+    "valid_from": null,
+    "valid_until": null,
+    "certificate_number": null,
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "",
+    "source": "NABH Official Directory",
+    "scraped_date": "2025-09-27T14:14:41.687806",
+    "nabh_url": "https://nabh.co/find-a-healthcare-organisation/"
+  }
+]

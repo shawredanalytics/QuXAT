@@ -1,0 +1,58 @@
+{
+  "total_records": 3029,
+  "valid_records": 3021,
+  "invalid_records": 8,
+  "issues_found": {
+    "Status shows Expired but certification still valid": 4,
+    "Invalid date range (from >= upto)": 3,
+    "Suspiciously short certification period": 3,
+    "Hospital name too long": 1
+  },
+  "data_quality_metrics": {
+    "completeness": {
+      "hospital_name": 100.0,
+      "city": 100.0,
+      "state": 100.0,
+      "accreditation_number": 100.0,
+      "valid_from": 100.0,
+      "valid_upto": 100.0
+    },
+    "certification_status": {
+      "active": 1283,
+      "expired": 1746,
+      "unknown": 0
+    },
+    "geographic_distribution": {
+      "Tamil Nadu": 398,
+      "Maharashtra": 383,
+      "Uttar Pradesh": 361,
+      "Karnataka": 241,
+      "Madhya Pradesh": 223,
+      "Kerala": 188,
+      "Andhra Pradesh": 188,
+      "West Bengal": 184,
+      "Telangana": 148,
+      "Rajasthan": 124
+    },
+    "temporal_distribution": {
+      "2015": 10,
+      "2016": 80,
+      "2017": 98,
+      "2018": 188,
+      "2019": 180,
+      "2020": 169,
+      "2021": 269,
+      "2022": 296,
+      "2023": 582,
+      "2024": 610,
+      "2025": 547
+    }
+  },
+  "cleaned_data_stats": {
+    "total_hospitals": 3029,
+    "valid_hospitals": 3021,
+    "invalid_hospitals": 8,
+    "validation_success_rate": 99.7358864311654
+  },
+  "validation_date": "2025-09-27T14:31:28.833800"
+}

@@ -1,0 +1,364 @@
+[
+  {
+    "name": "Apollo Hospitals Hyderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Hospitals Bangalore",
+    "state": "Karnataka",
+    "city": "Bangalore",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Hospitals Delhi",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Hospitals Mumbai",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Hospitals Kolkata",
+    "state": "West Bengal",
+    "city": "Kolkata",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Hospitals Ahmedabad",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Apollo Hospitals Pune",
+    "state": "Maharashtra",
+    "city": "Pune",
+    "country": "India",
+    "source": "Apollo Hospitals Website",
+    "url": "https://www.apollohospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Accredited",
+        "type": "Academic Medical Center"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015",
+          "ISO 14001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS",
+        "ESI"
+      ]
+    }
+  },
+  {
+    "name": "Manipal Hospital Delhi",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "country": "India",
+    "source": "Manipal Hospitals Website",
+    "url": "https://www.manipalhospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Manipal Hospital Goa",
+    "state": "Goa",
+    "city": "Panaji",
+    "country": "India",
+    "source": "Manipal Hospitals Website",
+    "url": "https://www.manipalhospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Manipal Hospital Jaipur",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "country": "India",
+    "source": "Manipal Hospitals Website",
+    "url": "https://www.manipalhospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  },
+  {
+    "name": "Manipal Hospital Pune",
+    "state": "Maharashtra",
+    "city": "Pune",
+    "country": "India",
+    "source": "Manipal Hospitals Website",
+    "url": "https://www.manipalhospitals.com",
+    "scraped_date": "2025-09-27T12:39:32.091560",
+    "hospital_type": "Multi-specialty Hospital",
+    "certifications": {
+      "nabh": {
+        "status": "Accredited",
+        "level": "Full"
+      },
+      "jci": {
+        "status": "Unknown"
+      },
+      "nabl": {
+        "status": "Accredited"
+      },
+      "iso": {
+        "certifications": [
+          "ISO 9001:2015"
+        ]
+      },
+      "government_empanelments": [
+        "CGHS",
+        "ECHS"
+      ]
+    }
+  }
+]

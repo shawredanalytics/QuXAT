@@ -1,0 +1,13 @@
+{
+  "integration_date": "2025-09-27T12:40:22.792922",
+  "hospitals_added": 11,
+  "duplicates_skipped": 0,
+  "total_hospitals_in_database": 1599,
+  "indian_hospitals_count": 1563,
+  "certification_summary": {
+    "nabh_accredited": 11,
+    "jci_accredited": 7,
+    "nabl_accredited": 11,
+    "iso_certified": 11
+  }
+}

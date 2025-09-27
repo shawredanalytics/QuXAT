@@ -1,0 +1,27 @@
+{
+  "collection_date": "2025-09-27T12:39:32.105334",
+  "total_hospitals": 11,
+  "by_state": {
+    "Maharashtra": 3,
+    "Delhi": 2,
+    "Telangana": 1,
+    "Karnataka": 1,
+    "West Bengal": 1,
+    "Gujarat": 1,
+    "Goa": 1,
+    "Rajasthan": 1
+  },
+  "by_type": {
+    "Multi-specialty Hospital": 11
+  },
+  "by_source": {
+    "Apollo Hospitals Website": 7,
+    "Manipal Hospitals Website": 4
+  },
+  "certifications_summary": {
+    "nabh_accredited": 11,
+    "jci_accredited": 7,
+    "iso_certified": 11,
+    "government_empaneled": 11
+  }
+}

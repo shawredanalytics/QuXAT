@@ -1,0 +1,8 @@
+{
+  "total_validated_hospitals": 567,
+  "new_hospitals_added": 0,
+  "existing_hospitals_updated": 21,
+  "duplicates_skipped": 0,
+  "errors": 546,
+  "integration_timestamp": "2025-09-27T15:04:28.600289"
+}
