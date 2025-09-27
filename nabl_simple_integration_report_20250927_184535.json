@@ -1,0 +1,9 @@
+{
+  "integration_timestamp": "2025-09-27T18:45:35.849256",
+  "nabl_labs_processed": 3576,
+  "organizations_matched": 385,
+  "nabl_certifications_added": 385,
+  "organizations_updated": 385,
+  "total_organizations": 7067,
+  "success_rate": "10.8%"
+}
