@@ -5367,7 +5367,7 @@ else:
                 grade_color = '#6f42c1'
                 grade_text = 'Scope for Improvement (0-39)'
                 grade_emoji = ''
-                quality_level = 'Undertake Consistent Quality Initiatives'
+                quality_level = 'Below International Average - Needs Improvement'
                 quality_description = ''
         
             # Add ranking data to history for trend tracking
