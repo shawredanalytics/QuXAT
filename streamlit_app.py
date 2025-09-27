@@ -4672,7 +4672,7 @@ else:
         # Process search
         if search_button and org_name:
             # Data validation notice
-            st.info("🔍 **Data Validation Notice:** Healthcare Quality Grid uses validated data from official certification bodies.")
+            st.info("🔍 **Data Validation Notice:** Healthcare Quality Grid uses validated data from official national & international accreditation / certification bodies. Healthcare Organizations are bench marked and compared as per International Standards.")
             
             # Initialize the analyzer
             analyzer = get_analyzer()
@@ -5365,10 +5365,10 @@ else:
                 quality_description = 'Poor healthcare quality requiring significant improvements'
             else:
                 grade_color = '#6f42c1'
-                grade_text = 'Very Poor (0-39)'
-                grade_emoji = '🔄'
-                quality_level = 'Critical Quality Issues'
-                quality_description = 'Critical healthcare quality issues requiring urgent intervention'
+                grade_text = 'Scope for Improvement (0-39)'
+                grade_emoji = ''
+                quality_level = 'Undertake Consistent Quality Initiatives'
+                quality_description = ''
         
             # Add ranking data to history for trend tracking
             if rankings_data:
@@ -5436,7 +5436,7 @@ else:
                         <div style="font-size: 1.2em; font-weight: bold; color: {quality_level_color};">
                             {quality_level}
                         </div>
-                        <p style="margin: 0; color: #666; font-size: 0.9em;">{grade_emoji} {quality_description[:30]}...</p>
+                        <p style="margin: 0; color: #666; font-size: 0.9em;">{grade_emoji} {quality_description}</p>
                     </div>
                     """, unsafe_allow_html=True)
                 
