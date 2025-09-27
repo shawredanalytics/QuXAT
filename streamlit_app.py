@@ -4794,7 +4794,7 @@ else:
                     elif score >= 50:
                         grade, grade_color, grade_desc = "C", "🟠", "Average - Quality Recognition"
                     else:
-                        grade, grade_color, grade_desc = "F", "🔴", "Below Average - Needs Improvement"
+                        grade, grade_color, grade_desc = "F", "🔴", "Below International Average - Needs Improvement"
                     
                     col1, col2, col3 = st.columns([1, 2, 1])
                     with col2:
