@@ -1,0 +1,10 @@
+{
+  "viewport_test": true,
+  "responsive_layout": true,
+  "touch_targets": true,
+  "mobile_navigation": false,
+  "font_sizes": true,
+  "button_accessibility": false,
+  "form_usability": false,
+  "overall_score": 57.14285714285714
+}

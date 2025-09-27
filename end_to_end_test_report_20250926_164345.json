@@ -1,0 +1,22 @@
+{
+  "timestamp": "20250926_164345",
+  "test_type": "end_to_end_workflow",
+  "app_url": "https://quxatscore.streamlit.app/",
+  "repository": "shawredanalytics/QuXAT",
+  "results": {
+    "initial_app_accessible": true,
+    "initial_response_time": 0.651163,
+    "test_change_made": true,
+    "changes_pushed": true,
+    "deployment_successful": true,
+    "deployment_time": 19,
+    "cleanup_successful": true,
+    "total_time": 31,
+    "workflow_success": true
+  },
+  "summary": {
+    "total_time_seconds": 31,
+    "deployment_time_seconds": 19,
+    "success": true
+  }
+}

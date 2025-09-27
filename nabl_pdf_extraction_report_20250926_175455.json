@@ -1,0 +1,105 @@
+{
+  "extraction_timestamp": "2025-09-26T17:54:55.566510",
+  "pdf_source": "C:\\Users\\MANIKUMAR\\Downloads\\202402170534-NABL-600-doc.pdf",
+  "total_organizations_extracted": 5560,
+  "extraction_summary": {
+    "organizations_with_locations": 891,
+    "organizations_with_accreditation_numbers": 2278,
+    "organizations_with_validity_dates": 0,
+    "organizations_with_scope": 2179
+  },
+  "sample_organizations": [
+    {
+      "organization_name": "National Accreditation Board for Testing and",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [],
+      "services": [
+        "Testing"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Testing",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing"
+    },
+    {
+      "organization_name": "Laboratoryoratories",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [],
+      "services": [
+        "Clinical Laboratory"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing"
+    },
+    {
+      "organization_name": "No. Issue Expiry Person Number",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [],
+      "services": [
+        "Clinical Laboratory"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing"
+    },
+    {
+      "organization_name": "Legacy Building, Bhailal Amin Marg (Alembic Haematology",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [],
+      "services": [
+        "Clinical Laboratory"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing"
+    },
+    {
+      "organization_name": "Microbiology & Infectious disease serology",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [],
+      "services": [
+        "Clinical Laboratory"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing"
+    }
+  ],
+  "extraction_statistics": {
+    "avg_name_length": 31.28615107913669,
+    "total_locations_found": 891,
+    "unique_iso_standards": [
+      "ISO 15189"
+    ]
+  }
+}

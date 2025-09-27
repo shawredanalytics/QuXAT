@@ -1,0 +1,324 @@
+{
+  "cleaning_summary": {
+    "total_input": 5560,
+    "valid_organizations": 5095,
+    "invalid_names": 428,
+    "duplicates_removed": 37,
+    "enhanced_with_locations": 1449,
+    "high_confidence": 850
+  },
+  "data_analysis": {
+    "organization_types": {
+      "Healthcare Organization": 2133,
+      "Laboratory": 2066,
+      "Hospital": 497,
+      "Institute": 259,
+      "Clinic": 140
+    },
+    "top_locations": {
+      "Delhi": 111,
+      "Kolkata": 60,
+      "Mumbai": 51,
+      "Chennai": 51,
+      "Hyderabad": 31,
+      "Ahmedabad": 27,
+      "Pune": 21,
+      "Jaipur": 20,
+      ", Mumbai": 17,
+      "Coimbatore": 17,
+      "Guwahati": 14,
+      "Nagpur": 14,
+      ", Kolkata": 13,
+      ", Hyderabad": 13,
+      "Lucknow": 13,
+      "Patna": 12,
+      ", Chennai": 11,
+      "Bhopal": 10,
+      "Madurai": 10,
+      "Ghaziabad": 10
+    },
+    "confidence_distribution": {
+      "high": 141,
+      "medium": 1230,
+      "low": 3724
+    },
+    "quality_metrics": {
+      "avg_confidence_score": 54.07360157016683,
+      "organizations_with_locations": 1449,
+      "organizations_with_accreditation_numbers": 2023,
+      "avg_name_length": 33.28086359175662
+    }
+  },
+  "sample_high_quality_organizations": [
+    {
+      "organization_name": "Aurangabad Clinicicical Pathologyology Ekbote Yahoo.co.in",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Aurangabad"
+      ],
+      "services": [
+        "Clinical"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Clinical",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 57,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Research Centre, Mumbai Cytopathology Ospital.com",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Research Centre, Mumbai"
+      ],
+      "services": [
+        "pathology"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "pathology",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 49,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Multispeciality Hospitalitalitals India Private Limited, Chennai Clinicicical Pathologyology Sridhar Hospitalitalital.co",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Multispeciality Hospitals India Pvt. Ltd, Chennai"
+      ],
+      "services": [
+        "Clinical"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Clinical",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Hospital",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 120,
+        "confidence_score": 90.0
+      }
+    },
+    {
+      "organization_name": "Diagnosticsnostic Centre Private Limited), Kolkata",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        ", Kolkata"
+      ],
+      "services": [
+        "Diagnostic"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Diagnostic",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 50,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Visakhapatnam, Diagnosticsnostics Laboratoryoratoryotatory",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Visakhapatna"
+      ],
+      "services": [
+        "Diagnostic"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Diagnostic",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 58,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Radiology Center, Visakhapatnam",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Radiology Center, Visakhapatna"
+      ],
+      "services": [
+        "Radiology"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Radiology",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Clinic",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 31,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Pradesh Visakhapatnam Clinicicical Pathologyology Krishna Musbio.com",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Pradesh Visakhapatna"
+      ],
+      "services": [
+        "Clinical"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Clinical",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 68,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Diagnosticsnostic Centre Private Limited, Guwahati",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Diagnostic Centre Pvt. Ltd., Guwahati"
+      ],
+      "services": [
+        "Diagnostic"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Diagnostic",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 50,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Gauhati Medicalicalical College & Hospitalitalital, Guwahati",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Hospital, Guwahati"
+      ],
+      "services": [
+        "Medical"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Medical",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Hospital",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 60,
+        "confidence_score": 80.0
+      }
+    },
+    {
+      "organization_name": "Guwahati Clinicicical Pathologyology Omar Sherif Ahoo.com",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": [
+        "Guwahati"
+      ],
+      "services": [
+        "Clinical"
+      ],
+      "accreditation_status": "Active",
+      "accreditation_number": "",
+      "validity_date": "",
+      "scope": "Clinical",
+      "last_verified": "2025-09-26",
+      "source": "NABL PDF Document",
+      "extraction_method": "Line Parsing",
+      "organization_type": "Laboratory",
+      "data_quality": {
+        "has_location": true,
+        "has_accreditation_number": false,
+        "has_scope": true,
+        "name_length": 57,
+        "confidence_score": 80.0
+      }
+    }
+  ]
+}

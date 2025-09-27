@@ -2853,7 +2853,7 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
             quality_description = 'Healthcare quality requires improvement'
         else:
             grade_color = '#6f42c1'
-            grade_text = 'Poor Quality'
+            grade_text = 'Scope for Improvement'
             grade_emoji = '🔄'
             quality_level = 'Critical'
             quality_description = 'Healthcare quality requires immediate attention'
@@ -5361,7 +5361,7 @@ else:
                 grade_color = '#dc3545'
                 grade_text = 'Poor (40-49)'
                 grade_emoji = '⚠️'
-                quality_level = 'Poor Quality'
+                quality_level = 'Scope for Improvement'
                 quality_description = 'Poor healthcare quality requiring significant improvements'
             else:
                 grade_color = '#6f42c1'

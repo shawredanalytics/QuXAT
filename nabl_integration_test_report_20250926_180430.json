@@ -1,0 +1,73 @@
+{
+  "test_metadata": {
+    "test_timestamp": "2025-09-26T18:04:30.893874",
+    "database_file": "unified_healthcare_organizations.json",
+    "test_version": "1.0",
+    "tester": "NABLIntegrationTester"
+  },
+  "test_results": {
+    "database_tests": {
+      "metadata_present": true,
+      "organizations_present": true,
+      "total_organizations": 6649,
+      "nabl_organizations": 5094,
+      "data_sources": [
+        "NABL",
+        "NABH",
+        "JCI",
+        "NABH+NABL"
+      ],
+      "structure_valid": true
+    },
+    "integration_tests": {
+      "organizations_with_nabl_certs": 5094,
+      "organizations_with_nabl_data": 5094,
+      "average_confidence_score": 54.07636435021594,
+      "high_confidence_orgs": 850,
+      "data_quality_valid": true
+    },
+    "scoring_tests": {
+      "sample_organizations_tested": 5,
+      "nabl_scoring_working": true,
+      "sample_scores": [
+        {
+          "organization": "Fortis Memorial Research Institute",
+          "total_score": 55.0,
+          "nabl_score": 0.0,
+          "has_nabl_certification": false
+        },
+        {
+          "organization": "Lakeshore Hospital & Research Centre Ltd.",
+          "total_score": 55.0,
+          "nabl_score": 0.0,
+          "has_nabl_certification": false
+        },
+        {
+          "organization": "Dr B.L. Kapur Memorial Hospital",
+          "total_score": 55.0,
+          "nabl_score": 0.0,
+          "has_nabl_certification": false
+        },
+        {
+          "organization": "CARE Hospital",
+          "total_score": 70.0,
+          "nabl_score": 15.0,
+          "has_nabl_certification": true
+        },
+        {
+          "organization": "GEM Hospital & Research Centre Private Ltd.",
+          "total_score": 55.0,
+          "nabl_score": 0.0,
+          "has_nabl_certification": false
+        }
+      ],
+      "integration_functional": true
+    },
+    "overall_status": "PASSED",
+    "search_tests": {
+      "search_keywords_present": 52806,
+      "searchable_nabl_orgs": 5094,
+      "search_functional": true
+    }
+  }
+}

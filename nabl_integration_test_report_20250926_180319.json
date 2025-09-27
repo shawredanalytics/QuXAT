@@ -1,0 +1,42 @@
+{
+  "test_metadata": {
+    "test_timestamp": "2025-09-26T18:03:19.385677",
+    "database_file": "unified_healthcare_organizations.json",
+    "test_version": "1.0",
+    "tester": "NABLIntegrationTester"
+  },
+  "test_results": {
+    "database_tests": {
+      "metadata_present": true,
+      "organizations_present": true,
+      "total_organizations": 6649,
+      "nabl_organizations": 5094,
+      "data_sources": [
+        "JCI",
+        "NABH",
+        "NABH+NABL",
+        "NABL"
+      ],
+      "structure_valid": true
+    },
+    "integration_tests": {
+      "organizations_with_nabl_certs": 5094,
+      "organizations_with_nabl_data": 5094,
+      "average_confidence_score": 54.07636435021594,
+      "high_confidence_orgs": 850,
+      "data_quality_valid": true
+    },
+    "scoring_tests": {
+      "sample_organizations_tested": 0,
+      "nabl_scoring_working": false,
+      "sample_scores": [],
+      "integration_functional": false
+    },
+    "overall_status": "PARTIAL",
+    "search_tests": {
+      "search_keywords_present": 52806,
+      "searchable_nabl_orgs": 5094,
+      "search_functional": true
+    }
+  }
+}
