@@ -1,0 +1,6 @@
+# Deployment Trigger - Revert Version
+# Generated: 20250928_132839
+# Purpose: Force Streamlit Cloud to rebuild with reverted version (7,067 organizations)
+# This file triggers automatic deployment when pushed to GitHub
+
+DEPLOYMENT_TRIGGER=revert_to_working_version_20250928_132839
