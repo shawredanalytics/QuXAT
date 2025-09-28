@@ -559,7 +559,15 @@ class HealthcareOrgAnalyzer:
         """Load the unified healthcare organizations database"""
         try:
             with open('unified_healthcare_organizations.json', 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                # Extract organizations array from the JSON structure
+                if isinstance(data, dict) and 'organizations' in data:
+                    return data['organizations']
+                elif isinstance(data, list):
+                    return data
+                else:
+                    st.warning("⚠️ Unexpected database format. Some search features may be limited.")
+                    return []
         except FileNotFoundError:
             st.warning("⚠️ Unified healthcare database not found. Some search features may be limited.")
             return []
@@ -661,18 +669,30 @@ class HealthcareOrgAnalyzer:
         
         # Direct name match
         for org in self.unified_database:
-            if org['name'].lower() == org_name_lower:
+            # Skip if org is not a dictionary
+            if not isinstance(org, dict):
+                continue
+            if org.get('name', '').lower() == org_name_lower:
                 return org
         
         # Partial name match
         for org in self.unified_database:
-            if org_name_lower in org['name'].lower() or org['name'].lower() in org_name_lower:
+            # Skip if org is not a dictionary
+            if not isinstance(org, dict):
+                continue
+            org_name_db = org.get('name', '').lower()
+            if org_name_lower in org_name_db or org_name_db in org_name_lower:
                 return org
         
         # Search in original names for NABH organizations
         for org in self.unified_database:
-            if 'original_name' in org and org['original_name']:
-                if org_name_lower in org['original_name'].lower() or org['original_name'].lower() in org_name_lower:
+            # Skip if org is not a dictionary
+            if not isinstance(org, dict):
+                continue
+            original_name = org.get('original_name', '')
+            if original_name:
+                original_name_lower = original_name.lower()
+                if org_name_lower in original_name_lower or original_name_lower in org_name_lower:
                     return org
         
         return None
@@ -1838,7 +1858,10 @@ class HealthcareOrgAnalyzer:
             # Find current organization's region
             current_org_data = None
             for org in self.unified_database:
-                if org['name'].lower() == current_org_name.lower():
+                # Skip if org is not a dictionary
+                if not isinstance(org, dict):
+                    continue
+                if org.get('name', '').lower() == current_org_name.lower():
                     current_org_data = org
                     break
             
