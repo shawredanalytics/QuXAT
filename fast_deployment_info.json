@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-10-02T15:58:57.044635",
+  "deployment_type": "fast_deploy",
+  "repository": "shawredanalytics/QuXAT",
+  "branch": "main",
+  "app_url": "https://quxatscore.streamlit.app/",
+  "github_actions_url": "https://github.com/shawredanalytics/QuXAT/actions",
+  "streamlit_deploy_url": "https://share.streamlit.io/deploy?repository=shawredanalytics/QuXAT&branch=main&mainModule=streamlit_app.py&appName=quxatscore"
+}

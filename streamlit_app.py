@@ -53,6 +53,24 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# Testing Stage Notice (high-emphasis banner)
+st.markdown(
+    """
+    <div style="
+      background:#fff3cd;
+      border:1px solid #ffeeba;
+      color:#856404;
+      padding:14px 18px;
+      border-radius:10px;
+      margin:12px 0;
+      font-size:16px;
+    ">
+      <strong>🔶 Testing Stage:</strong> This application is under active testing. Features, data, and scores may change without notice.
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 def compute_quality_grade(score: float):
     """Return (grade, grade_color, grade_desc) for the given score.
     Defined early so it’s available when the main scorecard renders.
@@ -7018,35 +7036,59 @@ else:
                     
                     # Certifications Section
                     st.markdown("### 🏅 Mandatory Requirements")
+
+                    # Uniform card renderer for mandatory certifications
+                    def render_mandatory_card(title: str, status_text: str, impact_text: str, equivalency_text: str | None = None):
+                        status = str(status_text).strip()
+                        if status == "Active":
+                            bg1, bg2, border, heading, icon = "#e8f5e8", "#d4edda", "#28a745", "#155724", "✅"
+                        elif status == "Pending":
+                            bg1, bg2, border, heading, icon = "#fff3cd", "#ffeeba", "#ffc107", "#856404", "⏳"
+                        else:
+                            # Treat any non-active state (including Missing/Expired) as error style
+                            bg1, bg2, border, heading, icon = "#f8e8e8", "#f8d7da", "#dc3545", "#721c24", "❌"
+
+                        bullets = [f"Status: {status}", impact_text]
+                        if equivalency_text:
+                            bullets.append(f"Equivalency: {equivalency_text}")
+
+                        bullet_html = "".join([
+                            f'<p style="margin: 5px 0; color: {heading}; font-weight: 500;">• {line}</p>'
+                            for line in bullets
+                        ])
+
+                        st.markdown(
+                            f"""
+                            <div style="background: linear-gradient(135deg, {bg1} 0%, {bg2} 100%); border: 2px solid {border}; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                                <h4 style="color: {heading}; margin: 0 0 10px 0;">{icon} {title} (MANDATORY)</h4>
+                                {bullet_html}
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
                     
                     # CAP Accreditation Highlight (Mandatory)
-                    cap_certifications = [cert for cert in org_data.get('certifications', []) if 'CAP' in cert.get('name', '').upper() or 'COLLEGE OF AMERICAN PATHOLOGISTS' in cert.get('name', '').upper()]
-                    
+                    cap_certifications = [
+                        cert for cert in org_data.get('certifications', [])
+                        if 'CAP' in cert.get('name', '').upper() or 'COLLEGE OF AMERICAN PATHOLOGISTS' in cert.get('name', '').upper()
+                    ]
+
                     if cap_certifications:
-                        cap_cert = cap_certifications[0]  # Take the first CAP certification
+                        cap_cert = cap_certifications[0]
                         cap_status = cap_cert.get('status', 'Active')
-                        cap_icon = "✅" if cap_status == "Active" else "⏳" if cap_status == "Pending" else "❌"
-
-                        header_text = f"{cap_icon} {cap_cert.get('name', 'CAP Accreditation')} (MANDATORY)"
-                        details = [
-                            f"Status: {cap_status}",
-                            "Impact: +30 points (Mandatory requirement met)",
-                            "Equivalency: Equivalent to ISO 15189 Medical Laboratory Standard",
-                        ]
-
-                        if cap_status == "Active":
-                            st.success(header_text)
-                        elif cap_status == "Pending":
-                            st.warning(header_text)
-                        else:
-                            st.error(header_text)
-
-                        for line in details:
-                            st.write(f"• {line}")
+                        render_mandatory_card(
+                            title=cap_cert.get('name', 'CAP Accreditation'),
+                            status_text=cap_status,
+                            impact_text=("Impact: +30 points (Mandatory requirement met)" if str(cap_status).strip() == "Active" else "Impact: Penalty may apply until active"),
+                            equivalency_text="Equivalent to ISO 15189 Medical Laboratory Standard",
+                        )
                     else:
-                        st.error("❌ CAP Accreditation (MANDATORY - MISSING)")
-                        st.write("• Status: Not Found")
-                        st.write("• Impact: -40 points penalty (Mandatory requirement not met)")
+                        render_mandatory_card(
+                            title="CAP Accreditation",
+                            status_text="Missing",
+                            impact_text="Impact: -40 points penalty (Mandatory requirement not met)",
+                            equivalency_text="Equivalent to ISO 15189 Medical Laboratory Standard",
+                        )
                     
                     # JCI Accreditation Highlight (Mandatory)
                     jci_certifications = [
@@ -7070,30 +7112,21 @@ else:
                         jci_penalty = jci_penalty_default
 
                     if jci_certifications:
-                        jci_cert = jci_certifications[0]  # Take the first JCI/TJC certification
+                        jci_cert = jci_certifications[0]
                         jci_status = str(jci_cert.get('status', 'Active')).strip()
-                        jci_icon = "✅" if jci_status == "Active" else "⏳" if jci_status == "Pending" else "❌"
-                        jci_name = jci_cert.get('name', 'JCI Accreditation')
-                        header_text = f"{jci_icon} {jci_name} (MANDATORY)"
-                        details = [
-                            f"Status: {jci_status}",
-                            "Impact: Mandatory requirement met" if jci_status == "Active" else "Impact: Penalty may apply until active",
-                            "Equivalency: U.S. Joint Commission recognized as hospital accreditation equivalency"
-                        ]
-
-                        if jci_status == "Active":
-                            st.success(header_text)
-                        elif jci_status == "Pending":
-                            st.warning(header_text)
-                        else:
-                            st.error(header_text)
-
-                        for line in details:
-                            st.write(f"• {line}")
+                        render_mandatory_card(
+                            title=jci_cert.get('name', 'JCI Accreditation'),
+                            status_text=jci_status,
+                            impact_text=("Impact: Mandatory requirement met" if jci_status == "Active" else "Impact: Penalty may apply until active"),
+                            equivalency_text="U.S. Joint Commission recognized as hospital accreditation equivalency",
+                        )
                     else:
-                        st.error("❌ JCI Accreditation (MANDATORY - MISSING)")
-                        st.write("• Status: Not Found")
-                        st.write(f"• Impact: -{jci_penalty} points penalty (Mandatory requirement not met)")
+                        render_mandatory_card(
+                            title="JCI Accreditation",
+                            status_text="Missing",
+                            impact_text=f"Impact: -{jci_penalty} points penalty (Mandatory requirement not met)",
+                            equivalency_text="U.S. Joint Commission recognized as hospital accreditation equivalency",
+                        )
                     #         <h4 style="color: #155724; margin: 0 0 10px 0;">{jci_icon} {jci_cert.get('name', 'JCI Accreditation')} (MANDATORY)</h4>
                     #         <p style="margin: 5px 0; color: #155724; font-weight: 500;">
                     #             <strong>Status:</strong> {jci_status}<br>
@@ -7113,32 +7146,27 @@ else:
                     #     """, unsafe_allow_html=True)
                     
                     # ISO 9001 Certification Highlight (Mandatory)
-                    iso9001_certifications = [cert for cert in org_data.get('certifications', []) if 'ISO 9001' in cert.get('name', '').upper() or 'ISO9001' in cert.get('name', '').upper()]
-                    
+                    iso9001_certifications = [
+                        cert for cert in org_data.get('certifications', [])
+                        if 'ISO 9001' in cert.get('name', '').upper() or 'ISO9001' in cert.get('name', '').upper()
+                    ]
+
                     if iso9001_certifications:
-                        iso9001_cert = iso9001_certifications[0]  # Take the first ISO 9001 certification
+                        iso9001_cert = iso9001_certifications[0]
                         iso9001_status = iso9001_cert.get('status', 'Active')
-                        iso9001_icon = "✅" if iso9001_status == "Active" else "⏳" if iso9001_status == "Pending" else "❌"
-                        
-                        st.markdown(f"""
-                        <div style="background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%); border: 2px solid #28a745; border-radius: 10px; padding: 15px; margin: 10px 0;">
-                            <h4 style="color: #155724; margin: 0 0 10px 0;">{iso9001_icon} {iso9001_cert.get('name', 'ISO 9001 Quality Management')} (MANDATORY)</h4>
-                            <p style="margin: 5px 0; color: #155724; font-weight: 500;">
-                                <strong>Status:</strong> {iso9001_status}<br>
-                                <strong>Impact:</strong> +20 points (Mandatory requirement met)
-                            </p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    # else:
-                    #     st.markdown("""
-                    #     <div style="background: linear-gradient(135deg, #f8e8e8 0%, #f8d7da 100%); border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin: 10px 0;">
-                    #         <h4 style="color: #721c24; margin: 0 0 10px 0;">❌ ISO 9001 Quality Management (MANDATORY - MISSING)</h4>
-                    #         <p style="margin: 5px 0; color: #721c24; font-weight: 500;">
-                    #             <strong>Status:</strong> Not Found<br>
-                    #             <strong>Impact:</strong> -25 points penalty (Mandatory requirement not met)
-                    #         </p>
-                    #     </div>
-                    #     """, unsafe_allow_html=True)
+                        render_mandatory_card(
+                            title=iso9001_cert.get('name', 'ISO 9001 Quality Management'),
+                            status_text=iso9001_status,
+                            impact_text=("Impact: +20 points (Mandatory requirement met)" if str(iso9001_status).strip() == "Active" else "Impact: Penalty may apply until active"),
+                            equivalency_text=None,
+                        )
+                    else:
+                        render_mandatory_card(
+                            title="ISO 9001 Quality Management",
+                            status_text="Missing",
+                            impact_text="Impact: -25 points penalty (Mandatory requirement not met)",
+                            equivalency_text=None,
+                        )
                     
                     # ISO 15189 Certification Highlight (Mandatory)
                     iso15189_certifications = [cert for cert in org_data.get('certifications', []) if 'ISO 15189' in cert.get('name', '').upper() or 'ISO15189' in cert.get('name', '').upper()]
