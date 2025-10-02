@@ -1,0 +1,29 @@
+{
+  "mayo_cap_integration_report": {
+    "timestamp": "2025-09-29T10:17:18.142128",
+    "summary": {
+      "total_mayo_labs_processed": 2,
+      "merged_with_existing": 2,
+      "added_as_new": 0,
+      "total_organizations_after_integration": 7096
+    },
+    "updated_organizations": [
+      "Mayo Clinic",
+      "Mayo Clinic"
+    ],
+    "mayo_labs_integrated": [
+      {
+        "name": "Mayo Clinic BioPharma Diagnostics Laboratory",
+        "location": "55905",
+        "accreditation": "CAP 15189",
+        "quality_score": 95.0
+      },
+      {
+        "name": "Mayo Clinic Health System-Eau Claire",
+        "location": "54702",
+        "accreditation": "CAP 15189",
+        "quality_score": 95.0
+      }
+    ]
+  }
+}

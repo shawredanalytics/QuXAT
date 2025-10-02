@@ -5660,7 +5660,7 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666; padding: 12px;'>
     <p>🏥 QuXAT Healthcare Quality Grid v3.0 | Built with Streamlit</p>
-    <p>🌍 Global Healthcare Quality Assessment Platform | Powered by AI & Data Analytics</p>
+    <p>🌍 Global Healthcare Quality Grid | Powered by AI & Data Analytics</p>
     <p style='font-size: 0.8em; color: #888; margin-top: 8px;'>
         ⚠️ <strong>Data Source Disclaimer:</strong> All data is validated from official certification bodies and healthcare organizations. 
         Only verified information from NABH, NABL, JCI, ISO, and other accredited sources is displayed.

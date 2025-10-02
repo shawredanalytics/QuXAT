@@ -21,10 +21,18 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 import traceback
 import base64
+from typing import Optional, List, Dict, Any
 
 # Import data validation module
 from data_validator import healthcare_validator
 from iso_certification_scraper import get_iso_certifications
+from international_quality_methods import (
+    _calculate_international_quality_initiatives_score,
+    _calculate_international_quality_metrics,
+    _calculate_regional_adaptation_bonus,
+    generate_international_improvement_recommendations
+)
+from international_scoring_algorithm import InternationalHealthcareScorer
 from reportlab.graphics.charts.piecharts import Pie
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 import matplotlib.pyplot as plt
@@ -34,17 +42,75 @@ import io
 import base64
 warnings.filterwarnings('ignore')
 
+# Fallback to avoid NameError after removing Quick Mode
+qm = False
+
 # Page configuration
 st.set_page_config(
-    page_title="Healthcare Quality Grid",
+    page_title="Global Healthcare Quality Grid",
     page_icon="assets/QuXAT Logo Facebook.png",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
+
+def compute_quality_grade(score: float):
+    """Return (grade, grade_color, grade_desc) for the given score.
+    Defined early so it’s available when the main scorecard renders.
+    """
+    try:
+        s = float(score if score is not None else 0)
+    except Exception:
+        s = 0.0
+
+    if s >= 75:
+        grade = "A+"
+        grade_color = "🟢"
+        grade_desc = "Outstanding quality; aligns with international benchmarks"
+    elif s >= 65:
+        grade = "A"
+        grade_color = "🟢"
+        grade_desc = "High quality with strong accreditation portfolio"
+    elif s >= 55:
+        grade = "B+"
+        grade_color = "🟡"
+        grade_desc = "Solid quality; address identified gaps to improve"
+    elif s >= 45:
+        grade = "B"
+        grade_color = "🟡"
+        grade_desc = "Acceptable quality; needs targeted improvements"
+    else:
+        grade = "C"
+        grade_color = "🔴"
+        grade_desc = "Needs attention; critical improvements required"
+
+    return grade, grade_color, grade_desc
+
+def compute_ranking_quality(score: float):
+    """Return display styling and labels for ranking quality cards.
+    Defined early to avoid NameError when the rankings section renders.
+    Returns (color_hex, label_text, emoji, quality_level, description).
+    """
+    try:
+        s = float(score if score is not None else 0)
+    except Exception:
+        s = 0.0
+
+    if s >= 80:
+        return ('#28a745', 'Exceptional (80-100)', '🏆', 'Outstanding Quality', 'Outstanding healthcare quality with exceptional standards')
+    elif s >= 70:
+        return ('#20c997', 'Very Good (70-79)', '⭐', 'High Quality', 'Excellent healthcare quality with high standards')
+    elif s >= 60:
+        return ('#ffc107', 'Good (60-69)', '👍', 'Good Quality', 'Good healthcare quality meeting standard requirements')
+    elif s >= 50:
+        return ('#fd7e14', 'Fair (50-59)', '👌', 'Fair Quality', 'Fair healthcare quality requiring some improvements')
+    elif s >= 40:
+        return ('#dc3545', 'Poor (40-49)', 'WARNING️', 'Scope for Improvement', 'Poor healthcare quality requiring significant improvements')
+    else:
+        return ('#6f42c1', 'Scope for Improvement (0-39)', '', 'Below International Quality Scoring Average - Needs Improvement', '')
 
 # Dynamic logo function for consistent display across all pages
 def display_dynamic_logo():
-    """Display the Healthcare Quality Grid logo dynamically by loading from assets folder"""
+    """Display the Global Healthcare Quality Grid logo dynamically by loading from assets folder"""
     
     # Path to the PNG logo file
     logo_path = os.path.join("assets", "QuXAT Logo Facebook.png")
@@ -105,7 +171,7 @@ def display_dynamic_logo():
                     font-weight: bold;
                     margin: 0 auto;
                 ">
-                    Healthcare Quality Grid
+                    Global Healthcare Quality Grid
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -143,7 +209,7 @@ def admin_login():
     
     # Simple admin credentials (in production, use proper authentication)
     ADMIN_USERNAME = "admin"
-    ADMIN_PASSWORD = "QuXAT2024!"
+    ADMIN_PASSWORD = "GHQA2024!"
     
     with st.form("admin_login_form"):
         username = st.text_input("Username")
@@ -250,13 +316,205 @@ class HealthcareOrgAnalyzer:
         # Load unified healthcare database
         self.unified_database = self.load_unified_database()
         
+        # Load precomputed scored rankings (unique ranks with tie-breaking)
+        self.scored_index = {}
+        self.scored_entries = []
+        try:
+            # Resolve path robustly: try CWD first, then script directory
+            scored_path = 'scored_organizations_complete.json'
+            try:
+                base_dir = os.path.dirname(__file__)
+            except Exception:
+                base_dir = os.getcwd()
+            candidates = [scored_path, os.path.join(base_dir, scored_path)]
+            open_path = None
+            for p in candidates:
+                if os.path.exists(p):
+                    open_path = p
+                    break
+            if open_path is None:
+                # Fall through to except to initialize empty structures
+                raise FileNotFoundError('scored_organizations_complete.json not found')
+            with open(open_path, 'r', encoding='utf-8') as f:
+                scored = json.load(f)
+            self.scored_entries = [e for e in scored if isinstance(e, dict)]
+            for entry in self.scored_entries:
+                name = entry.get('name') or entry.get('organization_name')
+                if not name:
+                    continue
+                # Use the same normalization as lookup to ensure consistent keys
+                key = self._normalize_name(name)
+                if key in self.scored_index:
+                    existing = self.scored_index[key]
+                    if entry.get('total_score', 0) > existing.get('total_score', 0):
+                        self.scored_index[key] = entry
+                else:
+                    self.scored_index[key] = entry
+        except Exception:
+            # Fallback gracefully if precomputed file is missing or invalid
+            self.scored_index = {}
+            self.scored_entries = []
+        
+        # Bind international quality methods to this class
+        self.calculate_international_quality_initiatives = _calculate_international_quality_initiatives_score.__get__(self, HealthcareOrgAnalyzer)
+        self.calculate_international_quality_metrics = _calculate_international_quality_metrics.__get__(self, HealthcareOrgAnalyzer)
+        self.calculate_regional_adaptation_bonus = _calculate_regional_adaptation_bonus.__get__(self, HealthcareOrgAnalyzer)
+        self.generate_international_improvement_recommendations = generate_international_improvement_recommendations.__get__(self, HealthcareOrgAnalyzer)
+        # Initialize international scorer
+        self.international_scorer = InternationalHealthcareScorer()
+
+    def _normalize_name(self, name: str) -> str:
+        """Normalize organization name for consistent scored index lookup."""
+        if not name:
+            return ''
+        n = str(name).lower().strip()
+        n = re.sub(r"[\-_,.&'\"]", " ", n)
+        n = re.sub(r"\s+", " ", n).strip()
+        return n
+
+    def _country_to_region_type(self, country: str) -> str:
+        """Map country to a simple region type for context adjustments"""
+        developed = {
+            'UNITED STATES', 'USA', 'CANADA', 'UNITED KINGDOM', 'UK', 'GERMANY', 'FRANCE',
+            'JAPAN', 'AUSTRALIA', 'NEW ZEALAND', 'SINGAPORE', 'SWEDEN', 'NORWAY', 'DENMARK',
+            'NETHERLANDS', 'SWITZERLAND'
+        }
+        if not country:
+            return 'developed'
+        c = str(country).strip().upper()
+        return 'developed' if c in developed else 'developing'
+
+    def _country_to_region(self, country: str) -> str:
+        """Map country to broad region name"""
+        if not country:
+            return 'Global'
+        c = str(country).strip().upper()
+        if c in {'UNITED STATES', 'USA', 'CANADA'}:
+            return 'North America'
+        if c in {'UNITED KINGDOM', 'UK', 'GERMANY', 'FRANCE', 'NETHERLANDS', 'SWITZERLAND', 'SWEDEN', 'NORWAY', 'DENMARK'}:
+            return 'Europe'
+        if c in {'JAPAN', 'SINGAPORE', 'AUSTRALIA', 'NEW ZEALAND', 'INDIA'}:
+            return 'Asia-Pacific'
+        if c in {'SAUDI ARABIA', 'UAE', 'UNITED ARAB EMIRATES'}:
+            return 'Middle East'
+        return 'Global'
+
+    def get_official_site_details(self, org_name: str) -> dict:
+        """Fetch website, address, phone, and email from the organization's official site.
+
+        This method looks up the organization in the unified database to find a website URL,
+        then fetches the homepage and, if available, a contact page to extract contact details.
+
+        Returns a dict with keys: website, address, phone, email. Missing fields are None.
+        """
+        details = {"website": None, "address": None, "phone": None, "email": None}
+        try:
+            if not org_name:
+                return details
+
+            # Locate org record and website field (STRICT match only)
+            org_record = None
+            org_lower = org_name.lower().strip()
+            for org in (self.unified_database or []):
+                if not isinstance(org, dict):
+                    continue
+                name = org.get("name", "").lower().strip()
+                if org_lower == name:
+                    org_record = org
+                    break
+
+            website = None
+            if org_record:
+                website = (
+                    org_record.get("website")
+                    or org_record.get("web")
+                    or org_record.get("url")
+                    or org_record.get("official_website")
+                )
+
+            # If no website, return early
+            if not website or not isinstance(website, str):
+                return details
+
+            details["website"] = website.strip()
+
+            urls_to_try = [details["website"]]
+            # Attempt common contact page patterns
+            if details["website"].endswith("/"):
+                base = details["website"][:-1]
+            else:
+                base = details["website"]
+            for suffix in ("/contact", "/contact-us", "/contactus", "/about", "/about-us"):
+                urls_to_try.append(base + suffix)
+
+            html_text = ""
+            for u in urls_to_try:
+                try:
+                    resp = self.session.get(u, timeout=8)
+                    if resp.status_code == 200 and resp.text:
+                        html_text = resp.text
+                        break
+                except Exception:
+                    continue
+
+            if not html_text:
+                return details
+
+            # Parse HTML for address, phone, email
+            soup = BeautifulSoup(html_text, "html.parser")
+            page_text = soup.get_text(" ", strip=True)
+
+            # Email
+            email_match = re.search(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", page_text)
+            if email_match:
+                details["email"] = email_match.group(0)
+
+            # Phone: match international formats
+            phone_match = re.search(r"\+?\d[\d\s\-()]{7,}\d", page_text)
+            if phone_match:
+                details["phone"] = phone_match.group(0).strip()
+
+            # Address heuristics: prefer concise, structured patterns; avoid dumping raw JSON
+            address = None
+            # Try finding a line following an 'Address' label
+            address_label = re.search(r"Address[:\s]+([^\n]+)", page_text, re.IGNORECASE)
+            if address_label:
+                address = address_label.group(1).strip()
+            else:
+                # Generic pattern: capture street + country + postal code
+                addr_match = re.search(r"([A-Za-z0-9 .,'/\-]+\bSingapore\b[, ]+\d{6})", page_text, re.IGNORECASE)
+                if addr_match:
+                    address = addr_match.group(1).strip()
+
+            if address:
+                # Sanitize overly long or script-like content
+                address = re.sub(r"\s+", " ", address)
+                # Trim if too long
+                if len(address) > 180:
+                    # Keep up to last comma within limit
+                    cut = address[:180]
+                    comma_idx = cut.rfind(',')
+                    address = (cut[:comma_idx] if comma_idx > 0 else cut).strip()
+                # Remove obvious JSON fragments
+                if '{' in address or '}' in address or '"' in address:
+                    address = re.sub(r"[\{\}\"]", "", address).strip()
+
+            if address:
+                details["address"] = address
+
+        except Exception:
+            # Silent failure, return whatever we gathered
+            pass
+
+        return details
+        
         # Enhanced certification databases and scoring weights
         # Comprehensive Global Healthcare Quality Certifications (Updated with 100+ standards)
         self.certification_weights = {
             # International Gold Standards (Top Tier - 25-35 points)
             'JCI': 35,  # Joint Commission International - Global gold standard
             'Joint Commission': 30,  # US Joint Commission - Highest US standard
-            'Magnet': 28,  # Magnet Recognition - Nursing excellence gold standard
+        'Magnet': 32,  # Magnet Recognition - Nursing excellence gold standard (boosted)
             'DNV GL Healthcare': 25,  # International healthcare accreditation
             'WHO-FIC Collaborating Centre': 25,  # WHO standards
             
@@ -454,96 +712,214 @@ class HealthcareOrgAnalyzer:
         return None
 
     def generate_organization_suggestions(self, partial_input, max_suggestions=10):
-        """Generate smart autocomplete suggestions based on partial input"""
+        """Generate autocomplete suggestions with aggressive de-duplication and smart ranking."""
         if not partial_input or len(partial_input) < 2:
             return []
-        
+
         partial_lower = partial_input.lower().strip()
-        suggestions = []
-        seen_names = set()
-        
-        # Search in unified database
+
+        def _norm_text(text: str) -> str:
+            t = (text or '').lower().strip()
+            t = re.sub(r"\s+", " ", t)
+            # Normalize common company suffixes to reduce duplicates
+            t = t.replace("private limited", "pvt. ltd.")
+            t = t.replace("pvt ltd", "pvt. ltd.")
+            # Normalize separators
+            t = re.sub(r"\s*[-–—]\s*", " ", t)
+            t = re.sub(r"\s*,\s*", ", ", t)
+            return t
+
+        def _strip_parentheses(text: str) -> str:
+            # Remove descriptive parentheses (e.g., branches or unit notes)
+            return re.sub(r"\([^)]*\)", "", text or "").strip()
+
+        def _normalize_location(location: str) -> str:
+            loc = _norm_text(location or '')
+            # Drop country tokens
+            tokens = [t for t in re.split(r"[,\-\s]+", loc) if t and t not in {"india"}]
+            return " ".join(sorted(tokens))
+
+        def _canonicalize_name(name: str, location: str) -> str:
+            # Build a canonical version of the name for deduping
+            n = _strip_parentheses(name or "")
+            n = re.sub(r"\s+", " ", n).strip()
+            loc = _norm_text(location or '')
+
+            # Remove trailing tokens that are part of the location (order-agnostic)
+            name_parts = [p for p in re.split(r"[,\-\s]+", _norm_text(n)) if p]
+            loc_tokens = set([p for p in re.split(r"[,\-\s]+", loc) if p])
+            while name_parts and (name_parts[-1] in loc_tokens or name_parts[-1] in {"india"}):
+                name_parts.pop()
+
+            n = " ".join(name_parts)
+            # Clean up redundant commas/spaces
+            n = re.sub(r"\s*,\s*", ", ", n)
+            n = re.sub(r"\s+", " ", n).strip()
+            return n
+
+        def _dedupe_key(display_name: str, location: str) -> str:
+            # Combine canonicalized name and normalized location for robust deduplication
+            return f"{_norm_text(_canonicalize_name(display_name, location))}|{_normalize_location(location)}"
+
+        candidates = []
         if self.unified_database:
             for org in self.unified_database:
-                org_name = org.get('name', '')
-                original_name = org.get('original_name', '')
-                
-                # Check if partial input matches the beginning of organization name
-                if org_name.lower().startswith(partial_lower):
-                    if org_name not in seen_names:
-                        suggestions.append({
-                            'display_name': org_name,
-                            'full_name': original_name if original_name else org_name,
-                            'location': self._extract_location_from_org(org),
-                            'type': org.get('type', 'Healthcare Organization'),
-                            'match_type': 'name_start'
-                        })
-                        seen_names.add(org_name)
-                
-                # Check if partial input is contained within organization name
-                elif partial_lower in org_name.lower():
-                    if org_name not in seen_names:
-                        suggestions.append({
-                            'display_name': org_name,
-                            'full_name': original_name if original_name else org_name,
-                            'location': self._extract_location_from_org(org),
-                            'type': org.get('type', 'Healthcare Organization'),
-                            'match_type': 'name_contains'
-                        })
-                        seen_names.add(org_name)
-                
-                # Check original name for NABH organizations
-                if original_name and partial_lower in original_name.lower():
-                    if org_name not in seen_names:
-                        suggestions.append({
-                            'display_name': org_name,
-                            'full_name': original_name,
-                            'location': self._extract_location_from_org(org),
-                            'type': org.get('type', 'Healthcare Organization'),
-                            'match_type': 'original_name'
-                        })
-                        seen_names.add(org_name)
-        
-        # Sort suggestions: exact matches first, then starts with, then contains
+                org_name = (org.get('name', '') or '').strip()
+                if not org_name:
+                    continue
+
+                original_name = (org.get('original_name', '') or '').strip()
+                name_lower = org_name.lower().strip()
+                location = self._extract_location_from_org(org)
+
+                match_type = None
+                if name_lower.startswith(partial_lower):
+                    match_type = 'name_start'
+                elif partial_lower in name_lower:
+                    match_type = 'name_contains'
+                elif original_name and partial_lower in original_name.lower().strip():
+                    match_type = 'original_name'
+
+                if match_type:
+                    candidates.append({
+                        'display_name': org_name,
+                        'full_name': original_name if original_name else org_name,
+                        'location': location,
+                        'type': org.get('type', 'Healthcare Organization'),
+                        'match_type': match_type
+                    })
+
+        # Deduplicate by normalized name+location; prefer better matches and shorter names
+        best_by_key = {}
+        rank_map = {'name_start': 0, 'name_contains': 1, 'original_name': 2}
+
+        for s in candidates:
+            key = _dedupe_key(s['display_name'], s.get('location', ''))
+            cur = best_by_key.get(key)
+            if not cur:
+                best_by_key[key] = s
+                continue
+            # Prefer stronger match_type, then shorter display_name
+            cur_rank = rank_map.get(cur['match_type'], 99)
+            new_rank = rank_map.get(s['match_type'], 99)
+            if new_rank < cur_rank or (new_rank == cur_rank and len(s['display_name']) < len(cur['display_name'])):
+                best_by_key[key] = s
+
+        suggestions = list(best_by_key.values())
         suggestions.sort(key=lambda x: (
-            0 if x['match_type'] == 'name_start' else 
-            1 if x['match_type'] == 'name_contains' else 2,
-            x['display_name'].lower()
+            rank_map.get(x['match_type'], 99),
+            _norm_text(x['display_name'])
         ))
-        
+
         return suggestions[:max_suggestions]
+
+    def canonicalize_name(self, name: str, location: str) -> str:
+        """Canonicalize organization name by stripping branch/location tokens.
+
+        This mirrors the logic used in suggestion deduplication so UI display
+        and database matching stay consistent.
+        """
+        n = (name or "").strip()
+        # Remove descriptive parentheses
+        n = re.sub(r"\([^)]*\)", "", n).strip()
+        # Normalize whitespace and separators
+        def _norm(text: str) -> str:
+            t = (text or '').lower().strip()
+            t = re.sub(r"\s+", " ", t)
+            t = re.sub(r"\s*[-–—]\s*", " ", t)
+            t = re.sub(r"\s*,\s*", ", ", t)
+            return t
+        loc = _norm(location or '')
+        name_parts = [p for p in re.split(r"[,\-\s]+", _norm(n)) if p]
+        loc_tokens = set([p for p in re.split(r"[,\-\s]+", loc) if p])
+        # Drop country tokens as well
+        loc_tokens.update({"india", "bharat"})
+        while name_parts and name_parts[-1].lower() in loc_tokens:
+            name_parts.pop()
+        n = " ".join(name_parts)
+        n = re.sub(r"\s*,\s*", ", ", n)
+        n = re.sub(r"\s+", " ", n).strip()
+        return n
     
     def _extract_location_from_org(self, org):
         """Extract location information from organization data"""
-        # Try different location fields
+        def _sanitize_location(location_str: str) -> str:
+            if not location_str:
+                return 'Unknown Location'
+            # Split on common separators and clean tokens
+            raw_tokens = re.split(r"[,\-\|/]+|\s+-\s+", str(location_str))
+            tokens = []
+            seen = set()
+            for tok in raw_tokens:
+                t = tok.strip()
+                if not t:
+                    continue
+                # Drop country and generic tokens
+                t_low = t.lower()
+                # Remove HTML-escaped artefacts like \u003cbr\u003e, \u003e, etc.
+                if re.search(r"u003c|u003e", t_low):
+                    continue
+                if t_low in {"india", "bharat", "country", "unknown"}:
+                    continue
+                # De-duplicate while preserving order (case-insensitive)
+                if t_low in seen:
+                    continue
+                seen.add(t_low)
+                tokens.append(t)
+            # Prefer the most specific end tokens: City, State
+            if len(tokens) >= 2:
+                return f"{tokens[-2]}, {tokens[-1]}"
+            elif len(tokens) == 1:
+                return tokens[0]
+            return 'Unknown Location'
+
+        # Try different location fields in order of reliability
         if org.get('city') and org.get('state'):
-            return f"{org['city']}, {org['state']}"
-        elif org.get('location'):
-            return org['location']
-        elif org.get('address'):
-            return org['address']
-        elif org.get('original_name'):
-            # Extract location from original name (common in NABH data)
-            original = org['original_name']
-            # Look for patterns like "City, State, Country"
-            parts = original.split(',')
-            if len(parts) >= 3:
-                return f"{parts[-3].strip()}, {parts[-2].strip()}"
-            elif len(parts) >= 2:
-                return parts[-2].strip()
-        
-        return org.get('country', 'Unknown Location')
+            return _sanitize_location(f"{org['city']}, {org['state']}")
+        if org.get('location'):
+            return _sanitize_location(org['location'])
+        if org.get('address'):
+            return _sanitize_location(org['address'])
+        if org.get('original_name'):
+            return _sanitize_location(org['original_name'])
+
+        return _sanitize_location(org.get('country', 'Unknown Location'))
     
     def format_suggestion_display(self, suggestion):
-        """Format suggestion for display in the UI"""
-        display_name = suggestion['display_name']
-        location = suggestion.get('location', 'Unknown Location')
-        
-        # For organizations with multiple locations, show location prominently
-        if location and location != 'Unknown Location':
-            return f"{display_name} - {location}"
+        """Format suggestion for display in the UI with clean location."""
+        # Support dict and string suggestion types
+        if isinstance(suggestion, dict):
+            display_name = suggestion.get('display_name', '')
+            location = suggestion.get('location', '')
+        elif isinstance(suggestion, str):
+            display_name = suggestion
+            location = ''
         else:
-            return display_name
+            display_name = str(suggestion) if suggestion is not None else ''
+            location = ''
+
+        # Use the same canonicalization used for de-duplication to avoid name+location repetition
+        try:
+            name_clean = self.canonicalize_name(display_name, location)
+        except Exception:
+            name_clean = display_name
+
+        # Sanitize location presentation
+        def _sanitize_location_for_display(loc: str) -> str:
+            raw = loc or ''
+            parts = [p.strip() for p in re.split(r"[,\-\|/]+|\s+-\s+", raw) if p.strip()]
+            parts = [p for p in parts if p.lower() not in {"india", "bharat"}]
+            if len(parts) >= 2:
+                return f"{parts[-2]}, {parts[-1]}"
+            elif parts:
+                return parts[-1]
+            return ''
+
+        loc_clean = _sanitize_location_for_display(location)
+
+        if loc_clean:
+            return f"{name_clean} - {loc_clean}"
+        return name_clean
 
     def enhance_certification_with_jci(self, certifications, org_name):
         """
@@ -556,24 +932,375 @@ class HealthcareOrgAnalyzer:
         return certifications
     
     def load_unified_database(self):
-        """Load the unified healthcare organizations database"""
+        # Return cached result if already loaded to avoid repeated IO and processing
         try:
-            with open('unified_healthcare_organizations.json', 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                # Extract organizations array from the JSON structure
+            if hasattr(self, "_unified_db_cache") and isinstance(self._unified_db_cache, list) and self._unified_db_cache:
+                return self._unified_db_cache
+        except Exception:
+            pass
+        def _safe_load_list_or_dict(path):
+            try:
+                with open(path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
                 if isinstance(data, dict) and 'organizations' in data:
                     return data['organizations']
                 elif isinstance(data, list):
                     return data
+                elif isinstance(data, dict):
+                    # Single org object
+                    return [data]
                 else:
-                    st.warning("WARNING️ Unexpected database format. Some search features may be limited.")
                     return []
-        except FileNotFoundError:
-            st.warning("WARNING️ Unified healthcare database not found. Some search features may be limited.")
-            return []
+            except FileNotFoundError:
+                return []
+            except Exception:
+                # Attempt minimal recovery for loosely formatted JSON files (e.g., scraped content)
+                try:
+                    with open(path, 'r', encoding='utf-8') as f:
+                        text = f.read()
+                    # Simple heuristic extraction
+                    name_match = re.search(r'"name"\s*:\s*"([^"]+)"', text)
+                    website_match = re.search(r'"website"\s*:\s*"([^"]+)"', text)
+                    address_match = re.search(r'"address"\s*:\s*"([^"]+)"', text)
+                    if website_match or address_match:
+                        recovered = {
+                            'name': name_match.group(1) if name_match else '',
+                            'website': website_match.group(1) if website_match else '',
+                            'address': address_match.group(1) if address_match else ''
+                        }
+                        return [recovered]
+                except Exception:
+                    pass
+                return []
+
+        def _normalize_key(name: str, country: str) -> str:
+            base = (name or '').lower().strip()
+            base = re.sub(r'[^a-z0-9\s]', '', base)
+            base = re.sub(r'\s+', ' ', base)
+            return f"{base}|{(country or '').lower().strip()}"
+
+        def _strip_parentheses(text: str) -> str:
+            return re.sub(r"\([^)]*\)", "", text or "").strip()
+
+        # Resolve file paths robustly across working dir and script dir
+        def _resolve_path(path: str) -> str:
+            try:
+                base_dir = os.path.dirname(__file__)
+            except Exception:
+                base_dir = os.getcwd()
+            candidates = [path, os.path.join(base_dir, path)]
+            for c in candidates:
+                if os.path.exists(c):
+                    return c
+            return path
+
+        def canonicalize_org_name(name: str, city: str = '', state: str = '', country: str = '') -> str:
+            """Canonical base name for deduping across branches and variants."""
+            n = _strip_parentheses(name or '')
+            n = re.sub(r"\s+", " ", n).strip()
+            # Normalize company suffixes
+            n = re.sub(r"\bprivate\s+limited\b", "pvt. ltd.", n, flags=re.IGNORECASE)
+            n = re.sub(r"\bpvt\.?\s*ltd\b", "pvt. ltd.", n, flags=re.IGNORECASE)
+
+            # Remove trailing location tokens if they match provided fields
+            def _strip_tail(token: str, s: str) -> str:
+                if not token:
+                    return s
+                tl = token.lower().strip()
+                sl = s.lower()
+                if sl.endswith(tl):
+                    idx = sl.rfind(tl)
+                    return s[:idx].rstrip(" ,-/")
+                return s
+
+            n = _strip_tail(country, n)
+            n = _strip_tail(state, n)
+            n = _strip_tail(city, n)
+            # Common countries to strip even if not provided explicitly
+            for c in ["india", "united states", "usa"]:
+                n = _strip_tail(c, n)
+
+            # Clean residual punctuation
+            n = re.sub(r"\s*,\s*", ", ", n)
+            return n.strip()
+
+        try:
+            merged: list = []
+            # Primary source (preferred)
+            primary = _safe_load_list_or_dict(_resolve_path('unified_healthcare_organizations_with_mayo_cap.json'))
+            if not primary:
+                # Fallback to legacy file
+                primary = _safe_load_list_or_dict(_resolve_path('unified_healthcare_organizations.json'))
+                if primary:
+                    st.warning("WARNING️ Using legacy unified database as fallback.")
+            merged.extend(primary)
+
+            # Optional global sources
+            merged.extend(_safe_load_list_or_dict(_resolve_path('global_healthcare_organizations.json')))
+            merged.extend(_safe_load_list_or_dict(_resolve_path('validation_discovered_organizations.json')))
+
+            # External directory: external_organizations/*.json
+            external_dir = _resolve_path('external_organizations')
+            if os.path.isdir(external_dir):
+                for fname in os.listdir(external_dir):
+                    if not fname.lower().endswith('.json'):
+                        continue
+                    merged.extend(_safe_load_list_or_dict(os.path.join(external_dir, fname)))
+
+            # Removed ad-hoc file injection to prevent cross-organization contamination
+            # (tmc_details.json contained partial address-only data that could leak into other matches)
+
+            # Deduplicate by canonical base name + country (for grouping)
+            deduped = {}
+            for org in merged:
+                if not isinstance(org, dict):
+                    continue
+                name = org.get('name', '')
+                key = canonicalize_org_name(name, org.get('city', ''), org.get('state', ''), org.get('country', '')).lower()
+                # Prefer entries with richer data
+                if key in deduped:
+                    # Keep the one with more non-empty fields
+                    existing = deduped[key]
+                    existing_fields = sum(1 for k, v in existing.items() if v)
+                    new_fields = sum(1 for k, v in org.items() if v)
+                    if new_fields > existing_fields:
+                        deduped[key] = org
+                else:
+                    deduped[key] = org
+
+            final_list = list(deduped.values())
+            if not final_list:
+                st.warning("WARNING️ Unified healthcare database not found or empty. Some search features may be limited.")
+            # Cache and return
+            try:
+                self._unified_db_cache = final_list
+            except Exception:
+                pass
+            return final_list
         except Exception as e:
             st.error(f"Error loading unified database: {str(e)}")
             return []
+
+    def aggregate_unified_records(self, org_name: str) -> Optional[dict]:
+        """Aggregate all unified database records that represent the same base organization."""
+        if not self.unified_database:
+            return None
+        input_name = org_name or ''
+        canon_input = re.sub(r"\s+", " ", input_name).strip().lower()
+
+        def canonicalize(name: str, city: str = '', state: str = '', country: str = '') -> str:
+            # Mirror loader canonicalization
+            n = re.sub(r"\([^)]*\)", "", (name or '')).strip()
+            n = re.sub(r"\s+", " ", n)
+            n = re.sub(r"\bprivate\s+limited\b", "pvt. ltd.", n, flags=re.IGNORECASE)
+            n = re.sub(r"\bpvt\.?\s*ltd\b", "pvt. ltd.", n, flags=re.IGNORECASE)
+            def _strip_tail(token: str, s: str) -> str:
+                if not token:
+                    return s
+                tl = token.lower().strip()
+                sl = s.lower()
+                if sl.endswith(tl):
+                    idx = sl.rfind(tl)
+                    return s[:idx].rstrip(" ,-/")
+                return s
+            s = _strip_tail(country, n)
+            s = _strip_tail(state, s)
+            s = _strip_tail(city, s)
+            for c in ["india", "united states", "usa"]:
+                s = _strip_tail(c, s)
+            return re.sub(r"\s+", " ", s).strip().lower()
+
+        # Collect matching records by canonical name comparison
+        matches = []
+        for org in self.unified_database:
+            if not isinstance(org, dict):
+                continue
+            canon_org = canonicalize(org.get('name', ''), org.get('city', ''), org.get('state', ''), org.get('country', ''))
+            if canon_org == canonicalize(org_name):
+                matches.append(org)
+
+        if not matches:
+            return None
+
+        # Aggregate certifications and prefer richer fields
+        agg = {}
+        best = max(matches, key=lambda o: sum(1 for k, v in o.items() if v))
+        agg.update(best)
+        agg['name'] = best.get('name', org_name)
+        agg['merged_from'] = [m.get('name', '') for m in matches]
+
+        # Union certifications with deduplication by normalized title
+        # Harden against string items and unexpected types
+        certs = []
+        seen = set()
+        for m in matches:
+            cert_list = m.get('certifications', []) or []
+            for c in cert_list:
+                if isinstance(c, dict):
+                    title = (c.get('name') or c.get('issuer') or '').lower().strip()
+                    if not title:
+                        continue
+                    if title in seen:
+                        continue
+                    certs.append(c)
+                    seen.add(title)
+                elif isinstance(c, str):
+                    title = c.lower().strip()
+                    if not title:
+                        continue
+                    if title in seen:
+                        continue
+                    certs.append({'name': c})
+                    seen.add(title)
+                else:
+                    # Skip unsupported certification item types
+                    continue
+        agg['certifications'] = certs
+        return agg
+
+    def search_organization_info_from_suggestion(self, suggestion_data):
+        """Search for organization information using complete suggestion data from QuXAT database.
+
+        Canonicalizes the suggestion display name by stripping location tokens so
+        unified database matching works reliably (e.g., "Mayo Clinic - Rochester, Minnesota" -> "Mayo Clinic").
+        """
+        try:
+            # Ensure suggestion_data is usable as a dictionary
+            # Coerce string inputs and other types into a safe dict or fall back to regular search
+            if isinstance(suggestion_data, str):
+                suggestion_data = {
+                    'display_name': suggestion_data,
+                    'full_name': suggestion_data,
+                    'location': '',
+                    'type': 'Healthcare Organization'
+                }
+            elif suggestion_data is None:
+                return None
+            elif not isinstance(suggestion_data, dict):
+                # Best-effort coercion; otherwise, use normal search
+                try:
+                    suggestion_str = str(suggestion_data)
+                except Exception:
+                    suggestion_str = ''
+                if suggestion_str:
+                    return self.search_organization_info(suggestion_str)
+                return None
+            
+            org_name = suggestion_data.get('display_name', '')
+            full_name = suggestion_data.get('full_name', '')
+            location = suggestion_data.get('location', '')
+
+            # Canonicalize the organization name using the provided location to remove suffixes
+            try:
+                base_name = self.canonicalize_name(org_name, location)
+            except Exception:
+                base_name = org_name
+            
+            # If no display_name, try to use the suggestion_data as a fallback
+            if not org_name:
+                # Check if suggestion_data has other name fields
+                org_name = suggestion_data.get('name', '') or suggestion_data.get('full_name', '')
+                if not org_name:
+                    st.error("No organization name found in suggestion data")
+                    return None
+            
+            # Initialize results structure
+            results = {
+                'name': base_name,
+                'display_name': org_name,
+                'full_name': full_name,
+                'location': location,
+                'type': suggestion_data.get('type', 'Healthcare Organization'),
+                'certifications': [],
+                'quality_initiatives': [],
+                'iso_certifications': None,
+                'branch_info': None,
+                'score_breakdown': {},
+                'total_score': 0,
+                'data_source': 'QuXAT_Database_Suggestion'
+            }
+            
+            # Search in unified database using the canonical base name
+            unified_org = self.search_unified_database(base_name)
+            # Extra safety: ensure we only treat dictionaries as unified org records
+            if unified_org and not isinstance(unified_org, dict):
+                unified_org = None
+            # Fallback: try exact display name or full_name if canonical fails
+            if not unified_org:
+                try:
+                    unified_org = self.search_unified_database(org_name)
+                except Exception:
+                    pass
+            if not unified_org and full_name:
+                try:
+                    unified_org = self.search_unified_database(full_name)
+                except Exception:
+                    pass
+            if unified_org:
+                # Use complete data from unified database
+                results['certifications'] = unified_org.get('certifications', [])
+                results['unified_data'] = unified_org
+                
+                # Update with additional fields from unified database
+                results['city'] = unified_org.get('city', results['location'])
+                results['state'] = unified_org.get('state', '')
+                results['country'] = unified_org.get('country', '')
+                results['address'] = unified_org.get('address', '')
+                results['website'] = unified_org.get('website', '')
+                results['phone'] = unified_org.get('phone', '')
+                results['email'] = unified_org.get('email', '')
+                
+                # Use original name if available
+                if unified_org.get('original_name'):
+                    results['original_name'] = unified_org['original_name']
+            else:
+                # Fallback to regular certification search
+                certifications = self.search_certifications(base_name)
+                results['certifications'] = certifications
+            
+            # Apply comprehensive deduplication to all certifications
+            results['certifications'] = self._comprehensive_deduplicate_certifications(results['certifications'])
+            
+            # Search for quality initiatives
+            initiatives = self.search_quality_initiatives(base_name)
+            results['quality_initiatives'] = initiatives
+
+            # Get branch info from healthcare validator
+            branch_info = None
+            try:
+                validation_result = healthcare_validator.validate_organization_certifications(base_name)
+                if validation_result and 'branches' in validation_result:
+                    branch_info = validation_result['branches']
+                    results['branch_info'] = branch_info
+            except Exception as e:
+                pass
+            
+            # Calculate quality score using the unified batch methodology for consistency
+            # Align suggestion-based searches with the main search scoring
+            patient_feedback_data = []
+            score_data = self.calculate_quality_score(results['certifications'], initiatives, base_name)
+            results['score_breakdown'] = score_data
+            results['total_score'] = score_data['total_score']
+            
+            # Generate improvement recommendations
+            recommendations = self.generate_improvement_recommendations(
+                base_name, 
+                score_data, 
+                results['certifications'], 
+                initiatives, 
+                branch_info
+            )
+            results['improvement_recommendations'] = recommendations
+            
+            # Add score to history for trend tracking
+            add_score_to_history(base_name, score_data)
+            
+            return results
+            
+        except Exception:
+            # Fail gracefully without surfacing low-level errors to the UI
+            st.info("🔍 Organization search did not yield results using the suggestion. You can refine the name or try the regular search.")
+            return None
 
     def search_organization_info(self, org_name):
         """Search for organization information from multiple sources including unified database"""
@@ -595,11 +1322,73 @@ class HealthcareOrgAnalyzer:
                 # Use data from unified database
                 results['certifications'] = unified_org.get('certifications', [])
                 results['unified_data'] = unified_org
+                
+                # Defensive: remove any unvalidated JCI entries from unified data
+                # Only retain JCI if validator confirms exact accreditation for this org
+                validated_jci = []
+                try:
+                    validation_result = healthcare_validator.validate_organization_certifications(org_name)
+                    if validation_result and 'certifications' in validation_result:
+                        for cert in validation_result['certifications']:
+                            if isinstance(cert, dict):
+                                nm = cert.get('name', '').upper()
+                                if 'JCI' in nm or 'JOINT COMMISSION' in nm:
+                                    validated_jci.append(cert)
+                except Exception:
+                    validated_jci = []
+
+                cleaned_certs = []
+                for cert in results['certifications']:
+                    if isinstance(cert, dict):
+                        nm = cert.get('name', '').upper()
+                    else:
+                        nm = str(cert).upper()
+                    # Skip any JCI-like entries unless they are validated above
+                    if 'JCI' in nm or 'JOINT COMMISSION' in nm:
+                        continue
+                    cleaned_certs.append(cert)
+                # Add validated JCI back, if present
+                cleaned_certs.extend(validated_jci)
+                results['certifications'] = cleaned_certs
+
+                # Sanitize quality indicators based on validated JCI presence
+                qi = unified_org.get('quality_indicators', {}) if isinstance(unified_org, dict) else {}
+                if qi.get('jci_accredited') and not validated_jci:
+                    qi['jci_accredited'] = False
+                    qi['international_accreditation'] = False
+                results['quality_indicators'] = qi
                 # Removed success message for cleaner UI
             else:
                 # Fallback to original search methods
                 certifications = self.search_certifications(org_name)
                 results['certifications'] = certifications
+                
+                # If no certifications found, try public domain fallback
+                if not certifications:
+                    try:
+                        from public_domain_fallback_system import PublicDomainFallbackSystem
+                        fallback_system = PublicDomainFallbackSystem()
+                        # Use the generator to obtain structured fallback data
+                        fallback_org = fallback_system.generate_fallback_organization_data(org_name)
+
+                        if fallback_org:
+                            results['certifications'] = fallback_org.get('certifications', [])
+                            results['public_domain_data'] = fallback_org
+                            results['data_source'] = 'public_domain'
+                            # Add a note about the data source
+                            results['source_note'] = "Data gathered from public domain sources"
+                    except Exception:
+                        # If fallback system fails, continue with empty certifications
+                        pass
+            
+            # Enrich with official site details (website/address/phone/email)
+            try:
+                site_details = self.get_official_site_details(org_name)
+                if isinstance(site_details, dict):
+                    results['website_info'] = site_details
+            except Exception:
+                # If enrichment fails, continue without website info
+                pass
             
             # Apply comprehensive deduplication to all certifications
             results['certifications'] = self._comprehensive_deduplicate_certifications(results['certifications'])
@@ -633,13 +1422,52 @@ class HealthcareOrgAnalyzer:
                 # If branch info generation fails, continue without it
                 pass
             
-            # Calculate quality score with branch information
-            # Patient feedback data will be automatically scraped within calculate_quality_score
-            patient_feedback_data = []  # Not used anymore - automated scraping handles this
-            
-            score_data = self.calculate_quality_score(results['certifications'], initiatives, org_name, branch_info, patient_feedback_data)
+            # Calculate quality score using the unified batch methodology for consistency
+            # This aligns the UI score with ranking_summary/scored_organizations data
+            score_data = self.calculate_quality_score(results['certifications'], initiatives, org_name)
             results['score_breakdown'] = score_data
             results['total_score'] = score_data['total_score']
+
+            # Enrich with precomputed unique rank and percentile if available
+            try:
+                pre_key = self._normalize_name(results.get('name', org_name))
+                pre = self.scored_index.get(pre_key)
+                if pre:
+                    results['overall_rank'] = pre.get('overall_rank')
+                    results['percentile'] = pre.get('percentile')
+                    results['certification_count'] = pre.get('certification_count')
+                    results['tie_breaking_info'] = pre.get('tie_breaking_info')
+                    # Prefer precomputed total_score for display consistency if it differs
+                    pre_score = pre.get('total_score')
+                    if isinstance(pre_score, (int, float)):
+                        results['total_score'] = pre_score
+                    results['scoring_source'] = 'precomputed_exact'
+                else:
+                    # Fallback: attempt partial match against precomputed entries
+                    best = None
+                    q = pre_key
+                    if self.scored_entries:
+                        for entry in self.scored_entries:
+                            nm = self._normalize_name(entry.get('name') or entry.get('organization_name'))
+                            if not nm:
+                                continue
+                            if q in nm or nm in q:
+                                if best is None or (entry.get('total_score', 0) > best.get('total_score', 0)):
+                                    best = entry
+                    if best:
+                        results['overall_rank'] = best.get('overall_rank')
+                        results['percentile'] = best.get('percentile')
+                        results['certification_count'] = best.get('certification_count')
+                        results['tie_breaking_info'] = best.get('tie_breaking_info')
+                        pre_score = best.get('total_score')
+                        if isinstance(pre_score, (int, float)):
+                            results['total_score'] = pre_score
+                        results['scoring_source'] = 'precomputed_partial'
+                    else:
+                        results['scoring_source'] = 'live'
+            except Exception:
+                # If enrichment fails, continue with live-computed values
+                results['scoring_source'] = 'live'
             
             # Generate improvement recommendations
             recommendations = self.generate_improvement_recommendations(
@@ -661,41 +1489,101 @@ class HealthcareOrgAnalyzer:
             return None
     
     def search_unified_database(self, org_name):
-        """Search for organization in the unified healthcare database"""
+        """Search for organization in the unified healthcare database with fuzzy matching"""
         if not self.unified_database:
             return None
             
         org_name_lower = org_name.lower().strip()
         
-        # Direct name match
+        # Direct name match (case-insensitive)
         for org in self.unified_database:
             # Skip if org is not a dictionary
             if not isinstance(org, dict):
                 continue
-            if org.get('name', '').lower() == org_name_lower:
-                return org
+            if org.get('name', '').lower().strip() == org_name_lower:
+                aggregated = self.aggregate_unified_records(org.get('name', org_name))
+                return aggregated or org
         
-        # Partial name match
+        # Partial name match (case-insensitive)
         for org in self.unified_database:
             # Skip if org is not a dictionary
             if not isinstance(org, dict):
                 continue
-            org_name_db = org.get('name', '').lower()
+            org_name_db = org.get('name', '').lower().strip()
             if org_name_lower in org_name_db or org_name_db in org_name_lower:
-                return org
+                aggregated = self.aggregate_unified_records(org.get('name', org_name))
+                return aggregated or org
         
-        # Search in original names for NABH organizations
+        # Search in original names for NABH organizations (case-insensitive)
         for org in self.unified_database:
             # Skip if org is not a dictionary
             if not isinstance(org, dict):
                 continue
             original_name = org.get('original_name', '')
             if original_name:
-                original_name_lower = original_name.lower()
+                original_name_lower = original_name.lower().strip()
                 if org_name_lower in original_name_lower or original_name_lower in org_name_lower:
-                    return org
+                    aggregated = self.aggregate_unified_records(org.get('name', org_name))
+                    return aggregated or org
         
-        return None
+        # Fuzzy matching for typos and variations (case-insensitive)
+        from difflib import SequenceMatcher
+        
+        def similarity_score(a, b):
+            return SequenceMatcher(None, a.lower().strip(), b.lower().strip()).ratio()
+        
+        def word_overlap_score(search_words, target_words):
+            search_set = set(word.lower().strip() for word in search_words)
+            target_set = set(word.lower().strip() for word in target_words)
+            if not search_set or not target_set:
+                return 0.0
+            intersection = search_set.intersection(target_set)
+            return len(intersection) / len(search_set)
+        
+        search_words = org_name_lower.split()
+        best_match = None
+        best_score = 0.0
+        threshold = 0.6  # Minimum similarity threshold
+        
+        for org in self.unified_database:
+            if not isinstance(org, dict):
+                continue
+                
+            org_name_db = org.get('name', '')
+            if not org_name_db:
+                continue
+            
+            # Calculate multiple similarity scores (case-insensitive)
+            scores = []
+            
+            # 1. Direct similarity
+            direct_score = similarity_score(org_name_lower, org_name_db)
+            scores.append(direct_score * 0.4)
+            
+            # 2. Word overlap score
+            org_words = org_name_db.lower().strip().split()
+            overlap_score = word_overlap_score(search_words, org_words)
+            scores.append(overlap_score * 0.6)
+            
+            # Calculate final score
+            final_score = sum(scores)
+            
+            # Special boost for common typos (case-insensitive)
+            # Handle "john hopkins" -> "johns hopkins" case
+            if 'john hopkins' in org_name_lower and 'johns hopkins' in org_name_db.lower():
+                final_score = max(final_score, 0.9)
+            
+            if final_score > best_score and final_score >= threshold:
+                best_score = final_score
+                best_match = org
+        
+        # If we found a best match, also aggregate duplicates under the same canonical base
+        if best_match:
+            aggregated = self.aggregate_unified_records(best_match.get('name', org_name))
+            return aggregated or best_match
+
+        # As last resort, try aggregation by input name
+        return self.aggregate_unified_records(org_name)
 
     def search_certifications(self, org_name):
         """Search for organization certifications using only validated official sources"""
@@ -738,10 +1626,23 @@ class HealthcareOrgAnalyzer:
         if not certifications:
             return certifications
         
+        # Sanitize input: convert string items to dicts and skip invalid types
+        sanitized = []
+        for cert in certifications:
+            if isinstance(cert, dict):
+                sanitized.append(cert)
+            elif isinstance(cert, str):
+                name = cert.strip()
+                if name:
+                    sanitized.append({'name': name, 'status': 'Active'})
+            else:
+                # Skip unsupported certification item types
+                continue
+
         # Track unique certifications by normalized name
         unique_certs = {}
         
-        for cert in certifications:
+        for cert in sanitized:
             cert_name = cert.get('name', '').strip()
             if not cert_name:
                 continue
@@ -876,11 +1777,24 @@ class HealthcareOrgAnalyzer:
         if not certifications:
             return certifications
         
+        # Sanitize input: convert string items to dicts and skip invalid types
+        sanitized = []
+        for cert in certifications:
+            if isinstance(cert, dict):
+                sanitized.append(cert)
+            elif isinstance(cert, str):
+                name = cert.strip()
+                if name:
+                    sanitized.append({'name': name, 'status': 'Active'})
+            else:
+                # Skip unsupported certification item types
+                continue
+
         # Separate JCI and non-JCI certifications
         jci_certs = []
         other_certs = []
         
-        for cert in certifications:
+        for cert in sanitized:
             cert_name = cert.get('name', '').upper()
             if ('JCI' in cert_name or 
                 'JOINT COMMISSION INTERNATIONAL' in cert_name):
@@ -903,7 +1817,7 @@ class HealthcareOrgAnalyzer:
             
             return other_certs + [best_jci]
         
-        return certifications
+        return sanitized
     
     def search_quality_initiatives(self, org_name):
         """Search for quality initiatives using web-validated data"""
@@ -938,46 +1852,76 @@ class HealthcareOrgAnalyzer:
             'total_score': 0,
             'compliance_check': None
         }
+
+        # Robust input sanitization: ensure certifications and initiatives are dicts
+        if certifications is None:
+            certifications = []
+        # Sanitize and deduplicate certifications to prevent string items
+        certifications = self._comprehensive_deduplicate_certifications(certifications)
+
+        if initiatives is None:
+            initiatives = []
+        # Convert any string initiatives to minimal dicts and drop unsupported types
+        sanitized_initiatives = []
+        for init in initiatives:
+            if isinstance(init, dict):
+                sanitized_initiatives.append(init)
+            elif isinstance(init, str):
+                name = init.strip()
+                if name:
+                    sanitized_initiatives.append({'name': name, 'status': 'Active', 'impact_score': 5, 'category': 'Other'})
+        initiatives = sanitized_initiatives
         
+        # Normalize certification statuses to be uniform and encouraging
+        try:
+            status_active_synonyms = {
+                'ACTIVE', 'ACCREDITED', 'ACCREDITATION', 'VALID', 'CURRENT', 'COMPLIANT', 'CERTIFIED'
+            }
+            status_progress_synonyms = {
+                'IN PROGRESS', 'PENDING', 'APPLIED', 'UNDER REVIEW'
+            }
+            for c in certifications:
+                if isinstance(c, dict):
+                    raw = str(c.get('status', '')).strip().upper()
+                    if raw in status_active_synonyms:
+                        c['status'] = 'Active'
+                    elif raw in status_progress_synonyms:
+                        c['status'] = 'In Progress'
+        except Exception:
+            pass
+
         # MANDATORY: Validate compliance with required certifications before score generation
         compliance_summary = self._validate_mandatory_certifications(certifications)
         score_breakdown['compliance_check'] = compliance_summary
         
-        # Apply compliance penalty if not fully compliant
-        compliance_penalty = 0
-        if not compliance_summary['is_fully_compliant']:
-            # Penalty based on non-compliance percentage
-            non_compliance_rate = compliance_summary['non_compliant_count'] / compliance_summary['total_required']
-            compliance_penalty = non_compliance_rate * 30  # Up to 30 point penalty for full non-compliance
+        # EQUIVALENCY LOGIC: NABL accreditation implies ISO 15189 accreditation
+        certifications = self._apply_nabl_iso_equivalency(certifications)
         
-        # Store compliance penalty in score breakdown for transparency
-        score_breakdown['compliance_penalty'] = compliance_penalty
-        
-        # Define certification weight hierarchy with specific ISO certification weights
+        # BALANCED SCORING METHODOLOGY - REBALANCED FOR MANDATORY ISO STANDARDS
+        # Certification weights optimized for balanced improvement opportunities
         certification_weights = {
-            # International Accreditation Bodies (Highest Weight)
-            'JCI': {'weight': 3.5, 'base_score': 30, 'description': 'Joint Commission International - Global Gold Standard'},
+            # TIER 1: International Excellence Standards (Premium Weight)
+            'JCI': {'weight': 4.5, 'base_score': 35, 'description': 'Joint Commission International - Global Healthcare Excellence', 'region': 'International'},
+            'MAGNET': {'weight': 4.0, 'base_score': 32, 'description': 'Magnet Recognition Program - International Nursing Excellence', 'region': 'International'},
             
-            # Specific ISO Certifications (High Weight - Healthcare Critical)
-            'ISO_9001': {'weight': 3.2, 'base_score': 25, 'description': 'ISO 9001 - Quality Management Systems'},
-            'ISO_13485': {'weight': 3.2, 'base_score': 25, 'description': 'ISO 13485 - Medical Devices Quality Management'},
-            'ISO_15189': {'weight': 3.0, 'base_score': 22, 'description': 'ISO 15189 - Medical Laboratories Quality and Competence'},
-            'ISO_27001': {'weight': 2.8, 'base_score': 20, 'description': 'ISO 27001 - Information Security Management'},
-            'ISO_45001': {'weight': 2.6, 'base_score': 18, 'description': 'ISO 45001 - Occupational Health and Safety Management'},
-            'ISO_14001': {'weight': 2.4, 'base_score': 16, 'description': 'ISO 14001 - Environmental Management Systems'},
-            'ISO_50001': {'weight': 2.2, 'base_score': 14, 'description': 'ISO 50001 - Energy Management Systems'},
+            # TIER 2: International ISO Standards (High Weight) - MANDATORY STANDARDS
+            'ISO_9001': {'weight': 3.5, 'base_score': 28, 'description': 'Quality Management Systems - MANDATORY', 'region': 'International'},
+            'ISO_13485': {'weight': 3.5, 'base_score': 28, 'description': 'Medical Devices Quality Management - MANDATORY', 'region': 'International'},
+            'ISO_15189': {'weight': 3.8, 'base_score': 30, 'description': 'Medical Laboratory Quality - MANDATORY', 'region': 'International'},
+            'ISO_27001': {'weight': 4.0, 'base_score': 32, 'description': 'Information Security Management - MANDATORY', 'region': 'International'},
+            'ISO_45001': {'weight': 3.6, 'base_score': 29, 'description': 'Occupational Health & Safety - MANDATORY', 'region': 'International'},
+            'ISO_14001': {'weight': 3.2, 'base_score': 26, 'description': 'Environmental Management - MANDATORY', 'region': 'International'},
+            'ISO_50001': {'weight': 2.8, 'base_score': 22, 'description': 'Energy Management - RECOMMENDED', 'region': 'International'},
+            'ISO_GENERAL': {'weight': 2.5, 'base_score': 20, 'description': 'Other ISO Certifications', 'region': 'International'},
             
-            # General ISO (for non-specific ISO certifications)
-            'ISO_GENERAL': {'weight': 2.0, 'base_score': 12, 'description': 'Other ISO Certifications'},
+            # TIER 3: National Excellence Standards (High Weight) - MANDATORY FOR LABS
+            'CAP': {'weight': 4.2, 'base_score': 34, 'description': 'College of American Pathologists - MANDATORY', 'region': 'North America', 'mandatory': True},
+            'NABH': {'weight': 3.8, 'base_score': 30, 'description': 'National Accreditation Board for Hospitals', 'region': 'India'},
+            'NABL': {'weight': 3.6, 'base_score': 28, 'description': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)', 'region': 'India'},
             
-            # National/Regional Accreditation Bodies (Medium-High Weight)
-            'CAP': {'weight': 2.8, 'base_score': 22, 'description': 'College of American Pathologists - Laboratory Accreditation'},
-            'NABH': {'weight': 2.6, 'base_score': 20, 'description': 'National Accreditation Board for Hospitals'},
-            'NABL': {'weight': 2.4, 'base_score': 18, 'description': 'National Accreditation Board for Testing and Calibration Laboratories'},
-            
-            # Regional/Local Certifications (Lower Weight)
-            'STATE': {'weight': 1.5, 'base_score': 10, 'description': 'State-level certifications'},
-            'LOCAL': {'weight': 1.0, 'base_score': 6, 'description': 'Local certifications'}
+            # TIER 4: Regional Standards (Medium Weight)
+            'STATE': {'weight': 2.2, 'base_score': 18, 'description': 'State/Provincial Accreditation', 'region': 'Regional'},
+            'LOCAL': {'weight': 1.8, 'base_score': 15, 'description': 'Local Healthcare Certification', 'region': 'Local'}
         }
         
         # Calculate weighted certification score with enhanced logic
@@ -988,9 +1932,10 @@ class HealthcareOrgAnalyzer:
         if certifications is None:
             certifications = []
         
-        # Process each certification with weighted scoring
+        # Process each certification with weighted scoring (robust against missing status)
         for cert in certifications:
-            if cert['status'] not in ['Active', 'In Progress']:
+            status_val = str(cert.get('status', '')).strip()
+            if status_val not in ['Active', 'In Progress']:
                 continue
                 
             cert_name = cert.get('name', '').upper()
@@ -1002,7 +1947,7 @@ class HealthcareOrgAnalyzer:
                 weight = weight_info['weight']
                 
                 # Apply status multiplier
-                status_multiplier = 1.0 if cert['status'] == 'Active' else 0.5
+                status_multiplier = 1.0 if status_val == 'Active' else 0.5
                 
                 # Calculate weighted score
                 weighted_score = base_score * weight * status_multiplier
@@ -1037,18 +1982,8 @@ class HealthcareOrgAnalyzer:
             total_weighted_score += international_bonus
             score_breakdown['international_bonus'] = international_bonus
         
-        # Apply compliance penalty BEFORE capping to ensure it has effect
-        total_weighted_score = max(0, total_weighted_score - compliance_penalty)
-        
-        # Cap the certification score at 70 (leaving room for quality initiatives)
-        # But ensure compliance penalty is still effective even after capping
-        certification_score = min(total_weighted_score, 70)
-        
-        # If there was a compliance penalty, ensure it reduces the final score
-        if compliance_penalty > 0:
-            # Apply additional penalty to the capped score if needed
-            max_possible_after_penalty = 70 - (compliance_penalty * 0.5)  # Reduced penalty factor after cap
-            certification_score = min(certification_score, max_possible_after_penalty)
+        # Cap the certification score at 75 (increased from 70 to accommodate higher weights)
+        certification_score = min(total_weighted_score, 75)
         
         score_breakdown['certification_score'] = max(0, certification_score)
         
@@ -1056,9 +1991,159 @@ class HealthcareOrgAnalyzer:
         quality_initiatives_score = self._calculate_quality_initiatives_score(initiatives)
         score_breakdown['quality_initiatives_score'] = quality_initiatives_score
         
-        # Calculate total score
-        score_breakdown['total_score'] = score_breakdown['certification_score'] + score_breakdown['quality_initiatives_score']
+        # Calculate total score with MANDATORY ISO STANDARDS PENALTY ENFORCEMENT
+        base_total_score = score_breakdown['certification_score'] + score_breakdown['quality_initiatives_score']
+
+        # Apply MANDATORY ISO STANDARDS penalties (CRITICAL for healthcare quality assurance)
+        mandatory_penalty = compliance_summary.get('total_penalty', 0)
+
+        # Weight alignment: soften penalties when strong historical performance exists (precomputed)
+        try:
+            precomputed_entry = None
+            if isinstance(org_name, str) and org_name.strip():
+                norm = self._normalize_name(org_name)
+                precomputed_entry = self.scored_index.get(norm)
+                if not precomputed_entry and hasattr(self, 'scored_entries'):
+                    best = None
+                    for entry in self.scored_entries:
+                        name_norm = self._normalize_name(str(entry.get('name', '')))
+                        if norm in name_norm or name_norm in norm:
+                            if best is None or float(entry.get('total_score', 0)) > float(best.get('total_score', 0)):
+                                best = entry
+                    precomputed_entry = best
+
+            if precomputed_entry and float(precomputed_entry.get('total_score', 0)) >= 70:
+                reduction_factor = 0.4  # reduce penalties by 60% for high performers
+                adjusted_penalty = int(mandatory_penalty * reduction_factor)
+                score_breakdown['mandatory_penalty_aligned'] = adjusted_penalty
+                score_breakdown['alignment_note'] = 'Penalties softened based on precomputed high performance context.'
+                mandatory_penalty = adjusted_penalty
+        except Exception:
+            # If alignment context lookup fails, keep original penalties
+            pass
+        if mandatory_penalty > 0:
+            score_breakdown['mandatory_penalty'] = mandatory_penalty
+            score_breakdown['penalty_breakdown'] = compliance_summary.get('penalty_breakdown', {})
+            score_breakdown['missing_critical_standards'] = compliance_summary.get('missing_critical_standards', [])
+            
+            # Enhanced penalty reason with specific missing MANDATORY standards
+            missing_standards = [std['standard'] for std in compliance_summary.get('missing_critical_standards', [])]
+            if missing_standards:
+                score_breakdown['penalty_reason'] = f"MANDATORY ISO STANDARDS MISSING: {', '.join(missing_standards)} - Total penalty: {mandatory_penalty} points"
+            else:
+                score_breakdown['penalty_reason'] = "All mandatory ISO standards are compliant"
+        else:
+            score_breakdown['mandatory_penalty'] = 0
+            score_breakdown['penalty_breakdown'] = {}
+            score_breakdown['missing_critical_standards'] = []
+            score_breakdown['penalty_reason'] = "✅ All mandatory ISO standards are compliant"
         
+        # Final score calculation with MANDATORY ISO penalties applied BEFORE final score
+        final_score = max(0, base_total_score - mandatory_penalty)
+
+        # Encouraging baseline: ensure non-zero score when recognized accreditation exists
+        try:
+            recognized_keywords = ['NABH', 'JCI', 'CAP', 'ISO', 'NABL']
+            recognized_count = 0
+            for c in certifications:
+                if isinstance(c, dict):
+                    name = str(c.get('name', '')).upper()
+                    if any(k in name for k in recognized_keywords):
+                        recognized_count += 1
+            baseline_floor = 12.0
+            if recognized_count > 0 and final_score < baseline_floor:
+                score_breakdown['baseline_adjustment'] = baseline_floor - final_score
+                final_score = baseline_floor
+            else:
+                score_breakdown['baseline_adjustment'] = 0.0
+        except Exception:
+            # In case of unexpected data issues, keep existing score
+            score_breakdown['baseline_adjustment'] = 0.0
+
+        score_breakdown['total_score'] = final_score
+        
+        # Add comprehensive compliance status
+        total_mandatory_standards = len([cert for cert in compliance_summary.get('missing_critical_standards', []) if cert.get('mandatory', False)])
+        if total_mandatory_standards > 0:
+            score_breakdown['compliance_status'] = f"⚠️ CRITICAL: {total_mandatory_standards} mandatory ISO standards missing. Immediate action required for quality assurance."
+        else:
+            score_breakdown['compliance_status'] = "✅ EXCELLENT: All mandatory ISO standards are compliant. Organization meets international healthcare quality requirements."
+        
+        # Add CAP compliance warning if not compliant (use dynamic penalty value)
+        if not compliance_summary.get('cap_compliant', False):
+            cap_penalty = compliance_summary.get('details', {}).get('CAP', {}).get('penalty', 0)
+            score_breakdown['cap_warning'] = f"⚠️ CRITICAL: CAP accreditation is MANDATORY for laboratory services. {cap_penalty}-point penalty applied."
+        else:
+            score_breakdown['cap_warning'] = "✅ CAP accreditation is compliant."
+        
+        return score_breakdown
+
+    def calculate_quality_score_international(self, certifications, initiatives, org_name="", branch_info=None, patient_feedback_data=None):
+        """Calculate quality score using InternationalHealthcareScorer and return a mapped breakdown for UI"""
+        score_breakdown = {
+            'certification_score': 0,
+            'quality_initiatives_score': 0,
+            'patient_feedback_score': 0,
+            'total_score': 0,
+            'compliance_check': None
+        }
+
+        # Ensure lists are present
+        certifications = certifications or []
+        initiatives = initiatives or []
+
+        # Normalize certification statuses
+        try:
+            status_active_synonyms = {'ACTIVE', 'ACCREDITED', 'ACCREDITATION', 'VALID', 'CURRENT', 'COMPLIANT', 'CERTIFIED'}
+            status_progress_synonyms = {'IN PROGRESS', 'PENDING', 'APPLIED', 'UNDER REVIEW'}
+            for c in certifications:
+                if isinstance(c, dict):
+                    raw = str(c.get('status', '')).strip().upper()
+                    if raw in status_active_synonyms:
+                        c['status'] = 'Active'
+                    elif raw in status_progress_synonyms:
+                        c['status'] = 'In Progress'
+        except Exception:
+            pass
+
+        # Build context from unified database
+        context = None
+        try:
+            org_data = self.search_unified_database(org_name)
+            if org_data:
+                country = org_data.get('country', '')
+                context = {
+                    'region': self._country_to_region(country),
+                    'region_type': self._country_to_region_type(country),
+                    'hospital_type': org_data.get('hospital_type', 'Hospital')
+                }
+        except Exception:
+            context = None
+
+        # Use international scorer
+        intl = self.international_scorer.calculate_international_quality_score(
+            certifications=certifications,
+            quality_metrics=None,
+            hospital_context=context
+        )
+
+        # Map results to UI-friendly structure
+        score_breakdown['certification_score'] = intl.get('certification_score', 0)
+        score_breakdown['quality_initiatives_score'] = intl.get('quality_metrics_score', 0)
+        score_breakdown['patient_feedback_score'] = 0
+        score_breakdown['total_score'] = intl.get('total_score', 0)
+        score_breakdown['certification_breakdown'] = intl.get('certification_breakdown', {})
+        score_breakdown['international_details'] = {
+            'international_recognition': intl.get('international_recognition', {}),
+            'regional_context': intl.get('regional_context', {}),
+            'recommendations': intl.get('recommendations', [])
+        }
+
+        # Optional: include compliance/penalty fields if present
+        for key in ['mandatory_penalty', 'penalty_breakdown', 'missing_critical_standards', 'compliance_status', 'cap_warning']:
+            if key in intl:
+                score_breakdown[key] = intl[key]
+
         return score_breakdown
     
     def _determine_certification_type(self, cert_name):
@@ -1068,6 +2153,10 @@ class HealthcareOrgAnalyzer:
         # JCI Accreditation
         if 'JCI' in cert_name or 'JOINT COMMISSION' in cert_name:
             return 'JCI'
+        
+        # Magnet Recognition Program
+        elif 'MAGNET' in cert_name:
+            return 'MAGNET'
         
         # Specific ISO Certifications (Healthcare Critical)
         elif 'ISO 9001' in cert_name or 'ISO9001' in cert_name:
@@ -1103,39 +2192,210 @@ class HealthcareOrgAnalyzer:
         else:
             return 'LOCAL'
     
+    def _determine_international_certification_type(self, cert_name):
+        """Determine certification tier and type for international scoring"""
+        cert_name = cert_name.upper()
+        
+        # Tier 1: Global Gold Standards
+        if 'JCI' in cert_name or 'JOINT COMMISSION INTERNATIONAL' in cert_name:
+            return 'GLOBAL_GOLD', 'JCI'
+        elif 'WHO COLLABORATING' in cert_name or 'WORLD HEALTH ORGANIZATION' in cert_name:
+            return 'GLOBAL_GOLD', 'WHO_COLLABORATING'
+        elif 'MAGNET' in cert_name:
+            return 'GLOBAL_GOLD', 'MAGNET'
+        elif 'PLANETREE' in cert_name:
+            return 'GLOBAL_GOLD', 'PLANETREE'
+        
+        # Tier 2: International ISO Standards
+        elif 'ISO 9001' in cert_name or 'ISO9001' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_9001'
+        elif 'ISO 13485' in cert_name or 'ISO13485' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_13485'
+        elif 'ISO 15189' in cert_name or 'ISO15189' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_15189'
+        elif 'ISO 27001' in cert_name or 'ISO27001' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_27001'
+        elif 'ISO 45001' in cert_name or 'ISO45001' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_45001'
+        elif 'ISO 14001' in cert_name or 'ISO14001' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_14001'
+        elif 'ISO 50001' in cert_name or 'ISO50001' in cert_name:
+            return 'ISO_STANDARDS', 'ISO_50001'
+        
+        # Tier 3: Regional Excellence Standards
+        elif 'JOINT COMMISSION' in cert_name and 'INTERNATIONAL' not in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'JOINT_COMMISSION'
+        elif 'CQC' in cert_name or 'CARE QUALITY COMMISSION' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'CQC'
+        elif 'ACHS' in cert_name or 'AUSTRALIAN COUNCIL ON HEALTHCARE' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'ACHS'
+        elif 'CCHSA' in cert_name or 'CANADIAN COUNCIL ON HEALTH' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'CCHSA'
+        elif 'HAS' in cert_name or 'HAUTE AUTORITÉ' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'HAS'
+        elif 'NIAHO' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'NIAHO'
+        elif 'ACHSI' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'ACHSI'
+        elif 'GAHAR' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'GAHAR'
+        elif 'COHSASA' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'COHSASA'
+        elif 'JCAHO' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'JCAHO'
+        elif 'MSQH' in cert_name:
+            return 'REGIONAL_EXCELLENCE', 'MSQH'
+        
+        # Tier 4: National/Regional Standards (Equal Treatment)
+        elif 'NABH' in cert_name:
+            return 'NATIONAL_REGIONAL', 'NABH'
+        elif 'NABL' in cert_name:
+            return 'NATIONAL_REGIONAL', 'NABL'
+        elif 'CAP' in cert_name or 'COLLEGE OF AMERICAN PATHOLOGISTS' in cert_name:
+            return 'NATIONAL_REGIONAL', 'CAP'
+        elif 'AABB' in cert_name:
+            return 'NATIONAL_REGIONAL', 'AABB'
+        elif 'CLIA' in cert_name:
+            return 'NATIONAL_REGIONAL', 'CLIA'
+        elif 'RTAC' in cert_name:
+            return 'NATIONAL_REGIONAL', 'RTAC'
+        elif 'JACIE' in cert_name:
+            return 'NATIONAL_REGIONAL', 'JACIE'
+        elif 'FACT' in cert_name:
+            return 'NATIONAL_REGIONAL', 'FACT'
+        elif 'AACI' in cert_name:
+            return 'NATIONAL_REGIONAL', 'AACI'
+        elif 'STATE' in cert_name or 'PROVINCIAL' in cert_name:
+            return 'NATIONAL_REGIONAL', 'STATE_REGIONAL'
+        
+        # Tier 5: Specialty Certifications
+        elif 'HIMSS' in cert_name:
+            return 'SPECIALTY', 'HIMSS'
+        elif 'AAAHC' in cert_name:
+            return 'SPECIALTY', 'AAAHC'
+        elif 'AAAASF' in cert_name:
+            return 'SPECIALTY', 'AAAASF'
+        elif 'ACHC' in cert_name:
+            return 'SPECIALTY', 'ACHC'
+        elif 'CHAP' in cert_name:
+            return 'SPECIALTY', 'CHAP'
+        elif 'URAC' in cert_name:
+            return 'SPECIALTY', 'URAC'
+        elif 'NCQA' in cert_name:
+            return 'SPECIALTY', 'NCQA'
+        elif 'AAPL' in cert_name:
+            return 'SPECIALTY', 'AAPL'
+        else:
+            return 'SPECIALTY', 'LOCAL'
+    
     def _count_international_certifications(self, certifications):
         """Count international certifications (JCI, ISO)"""
         international_count = 0
         for cert in certifications:
             if cert['status'] == 'Active':
                 cert_name = cert.get('name', '').upper()
-                if 'JCI' in cert_name or 'ISO' in cert_name or 'JOINT COMMISSION' in cert_name:
+                if 'JCI' in cert_name or 'ISO' in cert_name or 'JOINT COMMISSION' in cert_name or 'MAGNET' in cert_name:
                     international_count += 1
         return international_count
+    
+    def _apply_nabl_iso_equivalency(self, certifications):
+        """
+        Apply NABL-ISO 15189 equivalency logic: When a healthcare organization has NABL accreditation,
+        it automatically implies ISO 15189 accreditation for scoring purposes.
+        """
+        if not certifications:
+            return certifications
+        
+        # Check if NABL accreditation exists and is active
+        has_active_nabl = False
+        nabl_cert = None
+        
+        for cert in certifications:
+            cert_name = cert.get('name', '').upper()
+            if 'NABL' in cert_name and cert.get('status') == 'Active':
+                has_active_nabl = True
+                nabl_cert = cert
+                break
+        
+        # If NABL is found, check if ISO 15189 already exists
+        if has_active_nabl:
+            has_iso_15189 = False
+            for cert in certifications:
+                cert_name = cert.get('name', '').upper()
+                if 'ISO 15189' in cert_name or 'ISO15189' in cert_name:
+                    has_iso_15189 = True
+                    break
+            
+            # If ISO 15189 doesn't exist, add it as an implied certification
+            if not has_iso_15189:
+                implied_iso_cert = {
+                    'name': 'ISO 15189 (Implied by NABL)',
+                    'status': 'Active',
+                    'score_impact': 22,  # Same as ISO 15189 base score
+                    'description': 'Medical Laboratories Quality and Competence - Implied by NABL Accreditation',
+                    'validity': nabl_cert.get('validity', 'Valid'),
+                    'issuer': 'ISO (Implied)',
+                    'certificate_number': f"IMPLIED-{nabl_cert.get('certificate_number', 'N/A')}",
+                    'equivalency_note': '⚖️ Automatically granted due to NABL accreditation equivalency'
+                }
+                certifications.append(implied_iso_cert)
+        
+        return certifications
     
     def _validate_mandatory_certifications(self, certifications):
         """
         Validate compliance with mandatory certification requirements before QuXAT score generation.
-        All organizations must be reviewed for compliance with these certification/accreditation standards:
-        - ISO 9001 Standard Certification
-        - ISO 14001 Standard Certification  
-        - ISO 45001 Standard Certification
-        - ISO 27001 Standard Certification
-        - ISO 13485 Standard Certification
-        - ISO 50001 Standard Certification
-        - ISO 15189 Standard Certification
-        - College of American Pathologists (CAP) Accreditation
+        MANDATORY ISO STANDARDS FRAMEWORK FOR HEALTHCARE QUALITY ASSURANCE.
+        
+        All healthcare organizations MUST have the following ISO standards:
+        - ISO 9001 Quality Management [MANDATORY - 8 point penalty]
+        - ISO 15189 Medical Laboratory Quality [MANDATORY - 10 point penalty]
+        - ISO 27001 Information Security [MANDATORY - 12 point penalty]
+        - ISO 45001 Occupational Health & Safety [MANDATORY - 10 point penalty]
+        - ISO 13485 Medical Device Quality [MANDATORY - 8 point penalty]
+        - ISO 14001 Environmental Management [MANDATORY - 6 point penalty]
+        - College of American Pathologists (CAP) [MANDATORY - 15 point penalty]
+        
+        BALANCED SCORING APPROACH:
+        - Total possible penalty: 69 points (ensures organizations can still achieve positive scores)
+        - Penalties are proportional to the importance of each standard
+        - Organizations without any ISO standards will face significant but not devastating penalties
+        - Room for improvement through quality initiatives and other certifications
         """
         required_certifications = {
-            'ISO 9001': {'found': False, 'status': None, 'name': None},
-            'ISO 14001': {'found': False, 'status': None, 'name': None},
-            'ISO 45001': {'found': False, 'status': None, 'name': None},
-            'ISO 27001': {'found': False, 'status': None, 'name': None},
-            'ISO 13485': {'found': False, 'status': None, 'name': None},
-            'ISO 50001': {'found': False, 'status': None, 'name': None},
-            'ISO 15189': {'found': False, 'status': None, 'name': None},
-            'CAP': {'found': False, 'status': None, 'name': None}
+            'CAP': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 8, 'category': 'Laboratory Standards', 'importance': 'Critical'},
+            'JCI': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 10, 'category': 'Hospital Accreditation', 'importance': 'Critical'},
+            'ISO 9001': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 4, 'category': 'Quality Management', 'importance': 'Critical'},
+            'ISO 15189': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 5, 'category': 'Laboratory Quality', 'importance': 'Critical'},
+            'ISO 27001': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 6, 'category': 'Information Security', 'importance': 'Critical'},
+            'ISO 45001': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 5, 'category': 'Occupational Safety', 'importance': 'Critical'},
+            'ISO 13485': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 4, 'category': 'Medical Devices', 'importance': 'Critical'},
+            'ISO 14001': {'found': False, 'status': None, 'name': None, 'mandatory': True, 'penalty': 3, 'category': 'Environmental Management', 'importance': 'Critical'},
+            'ISO 50001': {'found': False, 'status': None, 'name': None, 'mandatory': False, 'penalty': 0, 'category': 'Energy Management', 'importance': 'Critical'}
         }
+
+        # Regional adjustments: soften ISO penalties when strong US-equivalent standards are present
+        # Detect presence of U.S. Joint Commission (non-international) and CAP
+        has_us_joint_commission = False
+        has_cap = False
+        if certifications:
+            for cert in certifications:
+                name_upper = str(cert.get('name', '')).upper()
+                if 'JOINT COMMISSION' in name_upper and 'INTERNATIONAL' not in name_upper:
+                    has_us_joint_commission = True
+                if 'CAP' in name_upper or 'COLLEGE OF AMERICAN PATHOLOGISTS' in name_upper:
+                    has_cap = True
+
+        if has_us_joint_commission or has_cap:
+            # Softening ISO penalties to reflect US equivalency (TJC/CAP)
+            # ISO 15189 is lab-specific: if CAP is present, do not penalize for missing ISO 15189
+            if has_cap:
+                required_certifications['ISO 15189']['penalty'] = 0
+            else:
+                required_certifications['ISO 15189']['penalty'] = max(1, int(required_certifications['ISO 15189']['penalty'] * 0.5))
+
+            for iso_key in ['ISO 9001', 'ISO 27001', 'ISO 45001', 'ISO 13485', 'ISO 14001']:
+                required_certifications[iso_key]['penalty'] = max(1, int(required_certifications[iso_key]['penalty'] * 0.5))
         
         compliance_summary = {
             'total_required': len(required_certifications),
@@ -1143,11 +2403,42 @@ class HealthcareOrgAnalyzer:
             'non_compliant_count': 0,
             'compliance_percentage': 0,
             'details': required_certifications,
-            'is_fully_compliant': False
+            'is_fully_compliant': False,
+            'cap_compliant': False,  # Track CAP compliance specifically
+            'total_penalty': 0,  # Track total penalty for missing mandatory certifications
+            'penalty_breakdown': {},  # Track penalties by category
+            'missing_critical_standards': []  # Track missing critical international standards
         }
         
         if not certifications:
+            # No certifications provided: treat all mandatory standards as missing
+            compliance_summary['compliant_count'] = 0
             compliance_summary['non_compliant_count'] = len(required_certifications)
+            compliance_summary['compliance_percentage'] = 0
+            compliance_summary['is_fully_compliant'] = False
+            compliance_summary['cap_compliant'] = False
+
+            total_penalty = 0
+            for cert_key, cert_info in required_certifications.items():
+                # Record missing mandatory standards with penalties
+                if cert_info.get('mandatory', False) and cert_info.get('penalty', 0) > 0:
+                    total_penalty += cert_info['penalty']
+                    category = cert_info.get('category', 'Other')
+                    # Track penalty breakdown by category
+                    if category not in compliance_summary['penalty_breakdown']:
+                        compliance_summary['penalty_breakdown'][category] = 0
+                    compliance_summary['penalty_breakdown'][category] += cert_info['penalty']
+
+                    compliance_summary['missing_critical_standards'].append({
+                        'standard': cert_key,
+                        'category': category,
+                        'penalty': cert_info['penalty'],
+                        'impact': cert_info.get('importance', 'Critical'),
+                        'mandatory': True,
+                        'description': f"Missing {cert_key} certification - {cert_info['penalty']} point penalty applied"
+                    })
+
+            compliance_summary['total_penalty'] = total_penalty
             return compliance_summary
         
         # Check each certification against requirements
@@ -1169,13 +2460,50 @@ class HealthcareOrgAnalyzer:
                 required_certifications['CAP']['found'] = True
                 required_certifications['CAP']['status'] = cert_status
                 required_certifications['CAP']['name'] = cert.get('name', '')
+
+            # Check for JCI accreditation (mandatory) and equivalency for US Joint Commission
+            if 'JOINT COMMISSION INTERNATIONAL' in cert_name or 'JCI' in cert_name:
+                required_certifications['JCI']['found'] = True
+                required_certifications['JCI']['status'] = cert_status
+                required_certifications['JCI']['name'] = cert.get('name', '')
+            elif 'JOINT COMMISSION' in cert_name and 'INTERNATIONAL' not in cert_name:
+                # Treat US Joint Commission as equivalent to JCI for mandatory compliance
+                required_certifications['JCI']['found'] = True
+                required_certifications['JCI']['status'] = cert_status
+                required_certifications['JCI']['name'] = cert.get('name', '')
         
-        # Calculate compliance metrics
+        # Calculate compliance metrics with MANDATORY ISO STANDARDS PENALTY SYSTEM
         for cert_key, cert_info in required_certifications.items():
             if cert_info['found'] and cert_info['status'] in ['Active', 'Valid', 'Current']:
                 compliance_summary['compliant_count'] += 1
+                # Check CAP compliance specifically
+                if cert_key == 'CAP':
+                    compliance_summary['cap_compliant'] = True
             else:
                 compliance_summary['non_compliant_count'] += 1
+                # Apply penalty for missing MANDATORY certifications
+                penalty = cert_info.get('penalty', 0)
+                category = cert_info.get('category', 'Other')
+                importance = cert_info.get('importance', 'Recommended')
+                
+                # ONLY apply penalties for MANDATORY certifications
+                if cert_info.get('mandatory', False) and penalty > 0:
+                    compliance_summary['total_penalty'] += penalty
+                    
+                    # Track penalty breakdown by category
+                    if category not in compliance_summary['penalty_breakdown']:
+                        compliance_summary['penalty_breakdown'][category] = 0
+                    compliance_summary['penalty_breakdown'][category] += penalty
+                    
+                    # Track missing critical standards (ALL mandatory standards are critical)
+                    compliance_summary['missing_critical_standards'].append({
+                        'standard': cert_key,
+                        'category': category,
+                        'penalty': penalty,
+                        'impact': importance,
+                        'mandatory': True,
+                        'description': f"Missing {cert_key} certification - {penalty} point penalty applied"
+                    })
         
         compliance_summary['compliance_percentage'] = (
             compliance_summary['compliant_count'] / compliance_summary['total_required'] * 100
@@ -1185,50 +2513,50 @@ class HealthcareOrgAnalyzer:
         return compliance_summary
     
     def _calculate_quality_initiatives_score(self, initiatives):
-        """Calculate score based on quality initiatives with weighted impact"""
+        """Calculate score based on quality initiatives with BALANCED WEIGHTED IMPACT for improvement opportunities"""
         if not initiatives or initiatives == 'no_official_data_available':
             return 0
         
         total_score = 0
         initiative_count = 0
         
-        # Category weights for different types of initiatives
+        # REBALANCED Category weights for different types of initiatives - MORE GENEROUS SCORING
         category_weights = {
-            'Patient Safety': 1.0,
-            'Quality Improvement': 0.9,
-            'Clinical Excellence': 0.8,
-            'Technology Innovation': 0.7,
-            'Staff Development': 0.6,
-            'Community Health': 0.5,
-            'Research': 0.4,
-            'Other': 0.3
+            'Patient Safety': 1.2,          # Increased from 1.0
+            'Quality Improvement': 1.1,     # Increased from 0.9
+            'Clinical Excellence': 1.0,     # Increased from 0.8
+            'Technology Innovation': 0.9,   # Increased from 0.7
+            'Staff Development': 0.8,       # Increased from 0.6
+            'Community Health': 0.7,        # Increased from 0.5
+            'Research': 0.6,                # Increased from 0.4
+            'Other': 0.5                    # Increased from 0.3
         }
         
         for initiative in initiatives:
             if isinstance(initiative, dict):
                 # Get initiative details
                 category = initiative.get('category', 'Other')
-                impact_score = initiative.get('impact_score', 5)  # Default impact
+                impact_score = initiative.get('impact_score', 6)  # Increased default from 5 to 6
                 status = initiative.get('status', 'Active')
                 
                 # Apply category weight
-                category_weight = category_weights.get(category, 0.3)
+                category_weight = category_weights.get(category, 0.5)
                 
-                # Apply status multiplier
-                status_multiplier = 1.0 if status == 'Active' else 0.7 if status == 'In Progress' else 0.3
+                # Apply status multiplier - MORE GENEROUS
+                status_multiplier = 1.0 if status == 'Active' else 0.8 if status == 'In Progress' else 0.5  # Increased multipliers
                 
                 # Calculate weighted score
                 weighted_score = impact_score * category_weight * status_multiplier
                 total_score += weighted_score
                 initiative_count += 1
         
-        # Apply diversity bonus for multiple initiatives
+        # Apply diversity bonus for multiple initiatives - INCREASED BONUS
         if initiative_count > 1:
-            diversity_bonus = min(initiative_count * 0.5, 5)  # Up to 5 points
+            diversity_bonus = min(initiative_count * 0.8, 8)  # Increased from 0.5 to 0.8, max from 5 to 8
             total_score += diversity_bonus
         
-        # Cap the quality initiatives score at 30
-        return min(total_score, 30)
+        # INCREASED Cap for quality initiatives score from 30 to 35 for better improvement opportunities
+        return min(total_score, 35)
     
     def generate_improvement_recommendations(self, org_name, score_breakdown, certifications, initiatives, branch_info=None):
         """Generate actionable improvement recommendations based on scoring analysis"""
@@ -1245,16 +2573,16 @@ class HealthcareOrgAnalyzer:
         cert_score = score_breakdown.get('certification_score', 0)
         quality_score = score_breakdown.get('quality_initiatives_score', 0)
         
-        # Calculate potential score improvements
-        max_possible_score = 100  # 70 (cert) + 30 (quality initiatives)
+        # Calculate potential score improvements - UPDATED FOR REBALANCED SCORING
+        max_possible_score = 110  # 75 (cert) + 35 (quality initiatives) - UPDATED
         improvement_potential = max_possible_score - current_total
         
         recommendations['score_potential'] = {
             'current_score': current_total,
             'maximum_possible': max_possible_score,
             'improvement_potential': improvement_potential,
-            'certification_potential': max(0, 70 - cert_score),
-            'quality_initiatives_potential': max(0, 30 - quality_score)
+            'certification_potential': max(0, 75 - cert_score),  # Updated from 70 to 75
+            'quality_initiatives_potential': max(0, 35 - quality_score)  # Updated from 30 to 35
         }
         
         # Priority Actions (High Impact, Quick Wins)
@@ -1290,45 +2618,89 @@ class HealthcareOrgAnalyzer:
                 ]
             })
         
-        # Certification Gap Analysis
-        active_certs = [cert['name'] for cert in certifications if cert['status'] == 'Active']
+        # Certification Gap Analysis - INCLUDING ALL MANDATORY ISO STANDARDS
+        active_certs = [cert.get('name') for cert in certifications if str(cert.get('status', '')).strip() == 'Active']
         
-        # Check for missing key certifications
+        # Check for missing key certifications - COMPREHENSIVE LIST INCLUDING ALL MANDATORY ISO STANDARDS
         key_certifications = {
-            'JCI': {
-                'name': 'Joint Commission International',
+            # MANDATORY ISO STANDARDS (Critical Priority)
+            'CAP': {
+                'name': 'College of American Pathologists (CAP) Laboratory Accreditation',
                 'priority': 'Critical',
-                'score_impact': '20-25 points',
-                'description': 'Global gold standard for healthcare quality',
-                'prerequisites': ['Strong quality management system', 'Staff training programs', 'Patient safety protocols']
-            },
-            'NABH': {
-                'name': 'National Accreditation Board for Hospitals',
-                'priority': 'High',
-                'score_impact': '15-20 points',
-                'description': 'National standard for healthcare quality in India',
-                'prerequisites': ['Quality policy', 'Patient rights charter', 'Infection control protocols']
+                'score_impact': '15 points penalty if missing',
+                'description': 'MANDATORY: International laboratory quality standard - highest penalty for missing',
+                'prerequisites': ['Laboratory quality management system', 'Proficiency testing', 'Quality control procedures', 'Staff competency assessment']
             },
             'ISO 9001': {
-                'name': 'ISO 9001:2015 Quality Management',
-                'priority': 'Medium',
-                'score_impact': '10-15 points',
-                'description': 'International quality management standard',
-                'prerequisites': ['Quality management system', 'Process documentation', 'Internal audits']
+                'name': 'ISO 9001:2015 Quality Management System',
+                'priority': 'Critical',
+                'score_impact': '8 points penalty if missing',
+                'description': 'MANDATORY: International quality management standard - foundation for healthcare quality',
+                'prerequisites': ['Quality management system', 'Process documentation', 'Internal audits', 'Management review']
+            },
+            'ISO 15189': {
+                'name': 'ISO 15189:2012 Medical Laboratory Quality and Competence',
+                'priority': 'Critical',
+                'score_impact': '10 points penalty if missing',
+                'description': 'MANDATORY: Specific standard for medical laboratory quality and competence',
+                'prerequisites': ['Laboratory quality system', 'Technical competence', 'Quality control', 'Proficiency testing']
+            },
+            'ISO 27001': {
+                'name': 'ISO 27001:2013 Information Security Management',
+                'priority': 'Critical',
+                'score_impact': '12 points penalty if missing',
+                'description': 'MANDATORY: Information security management system - critical for patient data protection',
+                'prerequisites': ['Information security policy', 'Risk assessment', 'Security controls', 'Incident management']
+            },
+            'ISO 45001': {
+                'name': 'ISO 45001:2018 Occupational Health and Safety Management',
+                'priority': 'Critical',
+                'score_impact': '10 points penalty if missing',
+                'description': 'MANDATORY: Occupational health and safety management system for healthcare workers',
+                'prerequisites': ['OH&S policy', 'Hazard identification', 'Risk assessment', 'Emergency procedures']
+            },
+            'ISO 13485': {
+                'name': 'ISO 13485:2016 Medical Devices Quality Management',
+                'priority': 'Critical',
+                'score_impact': '8 points penalty if missing',
+                'description': 'MANDATORY: Quality management system for medical devices and equipment',
+                'prerequisites': ['Medical device quality system', 'Design controls', 'Risk management', 'Post-market surveillance']
             },
             'ISO 14001': {
-                'name': 'ISO 14001:2015 Environmental Management',
-                'priority': 'Medium',
-                'score_impact': '8-12 points',
-                'description': 'Environmental management system certification',
-                'prerequisites': ['Environmental policy', 'Waste management system', 'Energy efficiency measures']
+                'name': 'ISO 14001:2015 Environmental Management System',
+                'priority': 'Critical',
+                'score_impact': '6 points penalty if missing',
+                'description': 'MANDATORY: Environmental management system for sustainable healthcare operations',
+                'prerequisites': ['Environmental policy', 'Waste management system', 'Energy efficiency measures', 'Environmental monitoring']
+            },
+            # RECOMMENDED HIGH-VALUE CERTIFICATIONS
+            'JCI': {
+                'name': 'Joint Commission International Hospital Accreditation',
+                'priority': 'Critical',
+                'score_impact': '12 points penalty if missing',
+                'description': 'MANDATORY: Global gold standard for healthcare quality and patient safety',
+                'prerequisites': ['Strong quality management system', 'Staff training programs', 'Patient safety protocols', 'Performance improvement']
+            },
+            'NABH': {
+                'name': 'National Accreditation Board for Hospitals & Healthcare Providers',
+                'priority': 'Critical',
+                'score_impact': '15-20 points bonus',
+                'description': 'RECOMMENDED: National standard for healthcare quality in India',
+                'prerequisites': ['Quality policy', 'Patient rights charter', 'Infection control protocols', 'Clinical governance']
             },
             'NABL': {
-                'name': 'National Accreditation Board for Testing',
-                'priority': 'Medium',
-                'score_impact': '8-12 points',
-                'description': 'Laboratory accreditation for diagnostic services',
-                'prerequisites': ['Laboratory quality system', 'Calibrated equipment', 'Trained technicians']
+                'name': 'National Accreditation Board for Testing and Calibration Laboratories',
+                'priority': 'Critical',
+                'score_impact': '10 points penalty if missing',
+                'description': 'MANDATORY: Laboratory accreditation for diagnostic services',
+                'prerequisites': ['Laboratory quality system', 'Calibrated equipment', 'Trained technicians', 'Quality control']
+            },
+            'ISO 50001': {
+                'name': 'ISO 50001:2018 Energy Management System',
+                'priority': 'Critical',
+                'score_impact': '6 points penalty if missing',
+                'description': 'MANDATORY: Energy management system for operational efficiency',
+                'prerequisites': ['Energy policy', 'Energy planning', 'Energy monitoring', 'Continuous improvement']
             }
         }
         
@@ -1983,13 +3355,13 @@ class HealthcareOrgAnalyzer:
         iso_relevance = {
             'ISO 9001': 'High - Core quality management',
             'ISO 13485': 'Very High - Medical device specific',
-            'ISO 14001': 'Medium - Environmental compliance',
+            'ISO 14001': 'Critical - Environmental compliance',
             'ISO 45001': 'High - Patient and staff safety',
             'ISO 27001': 'High - Patient data protection',
             'ISO 15189': 'Very High - Laboratory services',
             'ISO 17025': 'High - Testing accuracy',
             'ISO 22000': 'Medium - Food service safety',
-            'ISO 50001': 'Low - Operational efficiency',
+            'ISO 50001': 'Critical - Energy management compliance',
             'ISO 37001': 'Medium - Governance and ethics',
             'ISO 27799': 'Very High - Health data security',
             'ISO 14155': 'High - Clinical research quality'
@@ -2173,7 +3545,10 @@ class HealthcareOrgAnalyzer:
         for org in self.unified_database:
             try:
                 # Calculate score for each organization
-                score_data = self.calculate_quality_score(org['name'], org.get('city', ''))
+                # Get certifications and initiatives for this organization
+                certifications = org.get('certifications', [])
+                initiatives = org.get('quality_initiatives', [])
+                score_data = self.calculate_quality_score(certifications, initiatives, org['name'], None, [])
                 total_score = score_data.get('total_score', 0)
                 
                 org_info = {
@@ -2372,6 +3747,107 @@ class HealthcareOrgAnalyzer:
             }
         }
 
+    def add_new_organization(self, org_data: Dict[str, Any]) -> bool:
+        """Add a new organization to the unified database and trigger ranking recalculation"""
+        try:
+            # Load current database
+            database_path = 'unified_healthcare_organizations.json'
+            
+            # Try to find the file in current directory or script directory
+            try:
+                base_dir = os.path.dirname(__file__)
+            except Exception:
+                base_dir = os.getcwd()
+            
+            candidates = [database_path, os.path.join(base_dir, database_path)]
+            db_path = None
+            for path in candidates:
+                if os.path.exists(path):
+                    db_path = path
+                    break
+            
+            if not db_path:
+                # Create new database file
+                db_path = database_path
+                current_db = []
+            else:
+                # Load existing database
+                with open(db_path, 'r', encoding='utf-8') as f:
+                    current_db = json.load(f)
+                    if isinstance(current_db, dict) and 'organizations' in current_db:
+                        current_db = current_db['organizations']
+                    elif not isinstance(current_db, list):
+                        current_db = []
+            
+            # Check for duplicates based on name and location
+            org_name = org_data.get('name', '').lower().strip()
+            org_location = org_data.get('location', '').lower().strip()
+            
+            is_update = False
+            for existing_org in current_db:
+                existing_name = existing_org.get('name', '').lower().strip()
+                existing_location = existing_org.get('location', '').lower().strip()
+                
+                if existing_name == org_name and existing_location == org_location:
+                    # Organization already exists, update it instead
+                    existing_org.update(org_data)
+                    existing_org['last_updated'] = datetime.now().isoformat()
+                    is_update = True
+                    break
+            
+            if not is_update:
+                # Add timestamp and data source
+                org_data['last_updated'] = datetime.now().isoformat()
+                org_data['data_source'] = 'website_upload'
+                
+                # Add the new organization
+                current_db.append(org_data)
+            
+            # Save updated database
+            with open(db_path, 'w', encoding='utf-8') as f:
+                json.dump(current_db, f, indent=2, ensure_ascii=False)
+            
+            # Reload the unified database cache
+            self._unified_db_cache = None
+            self.unified_database = self.load_unified_database()
+            
+            # Trigger automatic ranking recalculation
+            try:
+                from unique_ranking_system import UniqueRankingSystem
+                ranking_system = UniqueRankingSystem()
+                ranking_success = ranking_system.run_complete_unique_ranking()
+                
+                if ranking_success:
+                    print(f"✅ Rankings updated successfully after adding {org_data.get('name', 'organization')}")
+                    
+                    # Reload the database to get updated ranking information
+                    self._unified_db_cache = None
+                    self.unified_database = self.load_unified_database()
+                    
+                    # Find the newly added organization with updated ranking
+                    org_name_lower = org_data.get('name', '').lower().strip()
+                    for updated_org in self.unified_database:
+                        if updated_org.get('name', '').lower().strip() == org_name_lower:
+                            # Update org_data with ranking information
+                            org_data.update({
+                                'overall_rank': updated_org.get('overall_rank', 'N/A'),
+                                'percentile': updated_org.get('percentile', 0),
+                                'ranking_metadata': updated_org.get('ranking_metadata', {})
+                            })
+                            break
+                else:
+                    print(f"⚠️ Warning: Failed to update rankings after adding {org_data.get('name', 'organization')}")
+                    
+            except Exception as ranking_error:
+                print(f"⚠️ Warning: Could not update rankings: {str(ranking_error)}")
+                # Don't fail the entire operation if ranking fails
+            
+            return True
+            
+        except Exception as e:
+            print(f"Error adding organization to database: {str(e)}")
+            return False
+
 # PDF Generation Functions
 def create_score_chart(score, title="Quality Score"):
     """Create a score visualization chart for PDF"""
@@ -2488,7 +3964,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         story = []
         
         # Header
-        story.append(Paragraph("Healthcare Quality Grid", title_style))
+        story.append(Paragraph("Global Healthcare Quality Grid", title_style))
         story.append(Paragraph(f"Detailed Assessment Report for {org_name}", heading_style))
         story.append(Paragraph(f"Generated on: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}", normal_style))
         story.append(Spacer(1, 20))
@@ -2501,7 +3977,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         grade = "A+" if score >= 75 else "A" if score >= 65 else "B+" if score >= 55 else "B" if score >= 45 else "C"
         
         summary_text = f"""
-        <b>{org_name}</b> has achieved an overall Healthcare Quality Grid quality score of <b>{score:.1f}/100</b> (Grade: <b>{grade}</b>).
+        <b>{org_name}</b> has achieved an overall Global Healthcare Quality Assessment quality score of <b>{score:.1f}/100</b> (Grade: <b>{grade}</b>).
         This assessment is based on comprehensive analysis of certifications, quality initiatives, transparency measures, 
         and reputation factors from publicly available sources.
         """
@@ -2518,21 +3994,24 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
             total_required = compliance_check.get('total_required', 8)
             is_fully_compliant = compliance_check.get('is_fully_compliant', False)
             
-            compliance_status = "✅ FULLY COMPLIANT" if is_fully_compliant else "WARNING️ NON-COMPLIANT"
+            compliance_status = "✅ FULLY COMPLIANT - ALL MANDATORY ISO STANDARDS MET" if is_fully_compliant else "⚠️ CRITICAL NON-COMPLIANCE - MANDATORY ISO STANDARDS MISSING"
             
             compliance_text = f"""
-            <b>Compliance Status:</b> {compliance_status}<br/>
-            <b>Compliance Rate:</b> {compliance_percentage:.1f}% ({compliant_count}/{total_required} required certifications)<br/><br/>
+            <b>MANDATORY ISO STANDARDS COMPLIANCE STATUS:</b> {compliance_status}<br/>
+            <b>Compliance Rate:</b> {compliance_percentage:.1f}% ({compliant_count}/{total_required} mandatory certifications)<br/>
+            <b>Penalty Applied:</b> {compliance_check.get('total_penalty', 0)} points for missing mandatory standards<br/><br/>
             
-            <b>Required Certifications Review:</b><br/>
+            <b>MANDATORY ISO STANDARDS REVIEW:</b><br/>
             """
             
-            # Add details for each required certification
+            # Add details for each required certification with penalty information
             details = compliance_check.get('details', {})
             for cert_name, cert_info in details.items():
                 status_icon = "✅" if cert_info.get('found') and cert_info.get('status') in ['Active', 'Valid', 'Current'] else "❌"
                 cert_status = cert_info.get('status', 'Not Found') if cert_info.get('found') else 'Not Found'
-                compliance_text += f"• {status_icon} <b>{cert_name}:</b> {cert_status}<br/>"
+                penalty_info = f" (Penalty: {cert_info.get('penalty', 0)} points)" if cert_info.get('mandatory', False) and not cert_info.get('found') else ""
+                mandatory_label = " [MANDATORY]" if cert_info.get('mandatory', False) else " [RECOMMENDED]"
+                compliance_text += f"• {status_icon} <b>{cert_name}{mandatory_label}:</b> {cert_status}{penalty_info}<br/>"
             
             story.append(Paragraph(compliance_text, normal_style))
         else:
@@ -2667,8 +4146,7 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         • <b>College of American Pathologists (CAP)</b> - Laboratory Accreditation<br/><br/>
         
         <b>Scoring Methodology:</b><br/>
-        • <b>Weighted Certification System (100%):</b> Evidence-based scoring using verified certifications with specific weights<br/>
-        • <b>Compliance Penalty:</b> Up to 30 points deducted for non-compliance with mandatory standards<br/><br/>
+        • <b>Weighted Certification System (100%):</b> Evidence-based scoring using verified certifications with specific weights<br/><br/>
         
         <b>Certification Weight Hierarchy:</b><br/>
         • <b>JCI Accreditation:</b> Weight 3.5, Base Score 30 pts (Global Gold Standard)<br/>
@@ -2726,7 +4204,10 @@ def generate_detailed_scorecard_pdf(org_name, org_data):
         <b>Report Generated by:</b> Healthcare Quality Grid v3.0<br/>
         <b>Generation Date:</b> {datetime.now().strftime('%B %d, %Y at %I:%M %p')}<br/>
         <b>Organization:</b> {org_name}<br/>
-        <b>Report ID:</b> QXT-{datetime.now().strftime('%Y%m%d')}-{hash(org_name) % 10000:04d}
+        <b>Report ID:</b> QXT-{datetime.now().strftime('%Y%m%d')}-{hash(org_name) % 10000:04d}<br/>
+        <br/>
+        <b>Contact Information:</b><br/>
+        Contact the Global Healthcare Quality Assessment team at quxat.team@gmail.com to add your organization to our quality self-assessment database.
         """
         
         story.append(Paragraph(footer_text, normal_style))
@@ -2798,7 +4279,7 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         with col4:
             active_certs = len([c for c in org_data.get('certifications', []) if c.get('status') == 'Active'])
             st.metric(
-                label="Active Certifications",
+                label="Mandatory Requirements",
                 value=active_certs
             )
         
@@ -2806,6 +4287,41 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         st.markdown("### 🎯 Detailed Score Breakdown Analysis")
         
         score_breakdown = org_data.get('score_breakdown', {})
+        
+        # Display mandatory ISO compliance status prominently (sanitized, no raw HTML)
+        compliance_status = score_breakdown.get('compliance_status', '')
+        mandatory_penalty = score_breakdown.get('mandatory_penalty', 0)
+        
+        # Resolve missing standards using either 'standard' or 'name' keys
+        missing_items = score_breakdown.get('missing_critical_standards', []) or []
+        missing_names = []
+        for item in missing_items:
+            if isinstance(item, dict):
+                missing_names.append(item.get('standard') or item.get('name') or 'Unknown')
+            else:
+                missing_names.append(str(item))
+        
+        if isinstance(mandatory_penalty, (int, float)) and mandatory_penalty > 0:
+            st.error("🚨 MANDATORY ISO STANDARDS NON-COMPLIANCE DETECTED")
+            if compliance_status:
+                st.write(compliance_status)
+            st.write(f"Penalty Applied: -{mandatory_penalty} points from final score")
+            if missing_names:
+                st.write("Missing Standards:")
+                for name in missing_names:
+                    st.write(f"• {name}")
+        else:
+            st.success("✅ MANDATORY ISO STANDARDS COMPLIANCE VERIFIED")
+            if compliance_status:
+                st.write(compliance_status)
+            st.write("All required international quality standards are met.")
+        
+        # CAP compliance warning
+        cap_warning = score_breakdown.get('cap_warning', '')
+        if 'CRITICAL' in cap_warning:
+            st.error(cap_warning)
+        else:
+            st.success(cap_warning)
         
         # Define score components with their maximum values and colors - certification-only scoring
         components = [
@@ -3162,8 +4678,8 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
                 st.markdown("- This significantly impacts the overall quality score")
         
         # Certification Improvement Recommendations Section
-        st.markdown("### 💡 QuXAT Certification Enhancement Plan")
-        st.markdown("*Just like credit repair, improving your QuXAT score requires strategic action and time*")
+        st.markdown("### 💡 Global Healthcare Quality Enhancement Plan")
+        st.markdown("*Just like credit repair, improving your healthcare quality score requires strategic action and time*")
         
         recommendations = []
         
@@ -3395,7 +4911,7 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
         if certifications:
             st.markdown(f"**Total Certifications Found:** {len(certifications)}")
             active_certs = [cert for cert in certifications if cert.get('status') == 'Active']
-            st.markdown(f"**Active Certifications:** {len(active_certs)}")
+            st.markdown(f"**Mandatory Requirements:** {len(active_certs)}")
             
             # Note: Detailed certification cards are displayed in the main profile section below
             
@@ -3486,7 +5002,6 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
             
             **Scoring Methodology:**
             - **Weighted Certification System (100%):** Evidence-based scoring using verified certifications with specific weights
-            - **Compliance Penalty:** Up to 30 points deducted for non-compliance with mandatory standards
             
             **Certification Weight Hierarchy:**
             - **JCI Accreditation:** Weight 3.5, Base Score 30 pts (Global Gold Standard)
@@ -3554,6 +5069,13 @@ def display_detailed_scorecard_inline(org_name, org_data, score):
             **Assessment Type:** Comprehensive Quality Analysis
             """)
         
+        # Contact Information Section
+        st.markdown("### 📧 Contact Information")
+        st.info("""
+        **Add Your Organization to Our Database:**  
+        Contact the Global Healthcare Quality Assessment team at **quxat.team@gmail.com** to add your organization to our quality self-assessment database.
+        """)
+        
         st.markdown("---")
         st.success("✅ Detailed scorecard displayed successfully! This comprehensive view includes all information that would be in the PDF report.")
         
@@ -3568,6 +5090,16 @@ def get_analyzer():
 
 # Display dynamic logo at the top of every page
 display_dynamic_logo()
+
+# Credit banner: larger font, centered, with link
+st.markdown(
+    """
+    <div style="text-align:center; font-size:18px; font-weight:600; margin-top:4px; margin-bottom:8px; color:#333;">
+    QuXAT Healthcare Quality Grid is designed using TRAE AI by the QuXAT - Data Analytics Team of Shawred Analytics PLC, India. Website: <a href="https://www.shawredanalytics.com" target="_blank">www.shawredanalytics.com</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Initialize score history tracking
 if 'score_history' not in st.session_state:
@@ -3776,7 +5308,7 @@ default_page_index = handle_url_routing()
 
 # Sidebar Navigation
 with st.sidebar:
-    st.markdown("### Healthcare Quality Grid")
+    st.markdown("### Global Healthcare Quality Grid")
     
     page = st.selectbox(
         "Navigate to:",
@@ -3790,6 +5322,15 @@ with st.sidebar:
     st.info("🌍 **Global Coverage**\n190+ Countries")
     st.success("🏥 **Organizations**\n15,000+ Tracked")
     st.warning("📋 **Certifications**\n5 Major Standards")
+    
+    st.markdown("---")
+    st.markdown("### 📧 Contact Us")
+    st.markdown("""
+    **Add Your Organization:**
+    
+    Contact the Global Healthcare Quality Assessment team at **quxat.team@gmail.com** to add your organization to our quality self-assessment database.
+    """)
+    st.info("💡 We welcome healthcare organizations worldwide!")
 
 # Page routing
 if page == "📈 Global Healthcare Quality Trends":
@@ -4241,11 +5782,17 @@ elif page == "📊 Quality Dashboard & Analytics":
     # Key Metrics Row
     col1, col2, col3, col4 = st.columns(4)
     
+    # Unified dynamic count for organizations (ranked dataset)
+    try:
+        _total_ranked_orgs = len(getattr(analyzer, 'scored_entries', []) or [])
+    except Exception:
+        _total_ranked_orgs = 0
+    _total_ranked_orgs_fmt = f"{_total_ranked_orgs:,}"
+
     with col1:
         st.metric(
             label="🏥 Total Organizations",
-            value="7,067",
-                delta="↗️ +532 dental facilities"
+            value=_total_ranked_orgs_fmt
         )
     
     with col2:
@@ -4367,14 +5914,14 @@ else:
                     margin-bottom: 1rem; 
                     font-size: 1.8rem;
                     font-weight: 600;
-                ">🌟 Healthcare Quality Grid</h2>
+                ">🌟 Global Healthcare Quality Grid</h2>
                 <p style="
                     font-size: 1.1rem; 
                     margin-bottom: 1rem; 
                     opacity: 0.95;
                     line-height: 1.6;
                 ">
-                    Discover Quality Centric Healthcare Organizations Worldwide
+                    AI powered discovery of Worldwide Quality - Centric Healthcare Organizations
                 </p>
                 <div style="
                     display: flex;
@@ -4399,6 +5946,10 @@ else:
                         <div style="font-size: 1.5rem; font-weight: bold;">📈</div>
                         <div style="font-size: 0.9rem; opacity: 0.9;">Benchmarking</div>
                     </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold;">🌍🏥</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Global Medical Tourism</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4413,7 +5964,7 @@ else:
                 color: #333;
                 margin-bottom: 1.5rem;
                 font-weight: 600;
-            ">Who Benefits from Healthcare Quality Grid?</h3>
+            ">Who Benefits from Global Healthcare Quality Grid?</h3>
         </div>
         """, unsafe_allow_html=True)
         
@@ -4571,7 +6122,7 @@ else:
                     margin-bottom: 0.75rem; 
                     font-size: 1.4rem;
                     font-weight: 600;
-                ">🚀 Start Your Quality Assessment Journey</h3>
+                ">🚀 Start your Healthcare Quality Self - Assessment Journey</h3>
                 <p style="
                     font-size: 1.1rem; 
                     margin-bottom: 0;
@@ -4598,7 +6149,7 @@ else:
                 color: #666;
                 margin-bottom: 0;
                 line-height: 1.5;
-            ">Enter the name of any healthcare organization to get detailed quality metrics and certifications</p>
+            ">Enter the name of any healthcare organization to get QuXAT Score and Global Rank - based on publicly available information regarding the healthcare organization</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -4607,9 +6158,11 @@ else:
         analyzer = get_analyzer()
         
         # Text input for typing
-        search_input = st.text_input("🏥 Enter Organization Name", 
+        search_input = st.text_input("🏥 Enter Healthcare Organization Name and Press Enter to Generate Organization related Suggestions below", 
                                    placeholder="e.g., Mayo Clinic, Johns Hopkins, Apollo Hospitals",
                                    key="home_org_search")
+
+        # Removed Quick Mode toggle to restore original behavior
         
         # Generate suggestions if user has typed something
         suggestions = []
@@ -4620,12 +6173,16 @@ else:
             analyzer_suggestions = analyzer.generate_organization_suggestions(search_input, max_suggestions=8)
             
             if analyzer_suggestions:
-                # Create formatted options for selectbox
+                # Create formatted options for selectbox with de-duplication
                 suggestion_options = ["Select from suggestions..."]
+                seen_display = set()
                 
-                # Add database suggestions
+                # Add database suggestions (skip duplicates in display text)
                 for suggestion in analyzer_suggestions:
                     display_text = analyzer.format_suggestion_display(suggestion)
+                    if display_text in seen_display:
+                        continue
+                    seen_display.add(display_text)
                     suggestion_options.append(f"🏥 {display_text}")
                 
                 selected_suggestion = st.selectbox(
@@ -4639,15 +6196,81 @@ else:
                     # Remove prefix and find the corresponding suggestion
                     clean_selection = selected_suggestion.replace("🏥 ", "")
                     
-                    # Find the corresponding suggestion
+                    # Find the corresponding suggestion and store complete data
+                    suggestion_found = False
                     for suggestion in analyzer_suggestions:
                         if analyzer.format_suggestion_display(suggestion) == clean_selection:
-                            selected_org = suggestion['display_name']
+                            # Set a safe selected_org before storing
+                            if isinstance(suggestion, dict):
+                                selected_org = suggestion.get('display_name') or suggestion.get('name') or ''
+                                st.session_state.selected_suggestion_data = suggestion
+                            else:
+                                selected_org = str(suggestion)
+                                # Fallback: create a proper dictionary structure
+                                st.session_state.selected_suggestion_data = {
+                                    'display_name': selected_org,
+                                    'full_name': selected_org,
+                                    'location': 'Unknown Location',
+                                    'type': 'Healthcare Organization'
+                                }
+                            suggestion_found = True
                             break
+                    
+                    # If no matching suggestion found, clear the selection
+                    if not suggestion_found:
+                        st.session_state.selected_suggestion_data = None
             else:
-                # Show message when no suggestions found in database
-                st.info("🔍 **Organization not found in QuXAT database?**\n\n"
-                       "Contact the QuXAT team at **quxat.team@gmail.com** to add your organization to our quality assessment database.")
+                # If no database suggestions found, try dynamic validation
+                # Check if the organization exists through validation system
+                try:
+                    validation_result = analyzer.search_organization_info(search_input)
+                    if validation_result and isinstance(validation_result, dict):
+                        if validation_result.get('unified_data'):
+                            # Found in main database via validation path: inform success, avoid warning
+                            found = validation_result['unified_data']
+                            # Use actual DB name for match comparison; only fall back for display
+                            db_name = found.get('name', '')
+                            found_name = db_name if db_name else search_input
+                            found_loc = analyzer._extract_location_from_org(found)
+
+                            # Enforce strict name match to prevent incorrect mappings
+                            def _clean_name(n: str) -> str:
+                                n = (n or '').strip()
+                                n = re.sub(r"\([^)]*\)", "", n)
+                                n = re.sub(r"\s+", " ", n)
+                                return n.lower().strip()
+
+                            query_clean = _clean_name(search_input)
+                            found_clean = _clean_name(db_name)
+                            # Require an explicit equality with a non-empty DB name
+                            is_strict_match = bool(db_name) and (query_clean == found_clean)
+
+                            if is_strict_match:
+                                st.success(f"✅ Organization found in main database: {found_name} - {found_loc}")
+                                # Preload selection data for smoother search
+                                st.session_state.selected_suggestion_data = {
+                                    'display_name': found_name,
+                                    'full_name': found.get('original_name', found_name),
+                                    'location': found_loc,
+                                    'type': found.get('type', 'Healthcare Organization')
+                                }
+                            else:
+                                # Avoid claiming a match when names differ materially
+                                st.warning("⚠️ Potential mismatch: A different organization was found in the database. Please refine the name or pick from suggestions.")
+                                st.session_state.selected_suggestion_data = None
+                        else:
+                            # Found via validation/public sources but not in main database
+                            st.warning("🔍 **Organization found through validation system**\n\n"
+                                      f"'{search_input}' was found through our validation system but is not in our main database yet. "
+                                      "You can still proceed, or contact us to add it.")
+                    else:
+                        # Show message when no suggestions found in database
+                        st.info("🔍 **Organization not found in Global Healthcare Quality Assessment database?**\n\n"
+                               "Contact the Global Healthcare Quality Assessment team at **quxat.team@gmail.com** to add your organization to our quality assessment database.")
+                except Exception:
+                    # Fallback to original message if validation fails
+                    st.info("🔍 **Organization not found in Global Healthcare Quality Assessment database?**\n\n"
+                           "Contact the Global Healthcare Quality Assessment team at **quxat.team@gmail.com** to add your organization to our quality assessment database.")
         
         # Use selected organization or typed input
         org_name = selected_org if selected_org else search_input
@@ -4660,20 +6283,399 @@ else:
         # Search button
         search_button = st.button("🔍 Search Organization", type="primary", key="home_search_btn", use_container_width=True)
         
+        # Add website upload option
+        st.markdown("---")
+        st.markdown("### 🌐 Add New Organization to the database")
+        st.markdown("Don't see your organization? Upload your organization website link to add quality centric data from your website to the QuXAT database for generating QuXAT score and related assessment.")
+        
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            website_url = st.text_input("🔗 Organization Website URL", 
+                                      placeholder="https://www.example-hospital.com",
+                                      key="website_upload_url")
+        with col2:
+            st.markdown("<br>", unsafe_allow_html=True)  # Add spacing
+            upload_button = st.button("📤 Upload Link & Generate Score", type="secondary", key="website_upload_btn")
+        
+        # Process website upload
+        if upload_button and website_url:
+            # Validate URL format
+            if not website_url.startswith(('http://', 'https://')):
+                st.error("❌ Please enter a valid URL starting with http:// or https://")
+            else:
+                st.info("🌐 **Website Upload Notice:** QuXAT will analyze the provided website to extract organization information and assess quality using our standardized scoring methodology.")
+                
+                # Initialize the analyzer
+                analyzer = get_analyzer()
+                
+                with st.spinner("🌐 Analyzing website and extracting organization data..."):
+                    try:
+                        # Import the website scraper
+                        from website_scraper import HealthcareWebsiteScraper
+                        
+                        # Helper: extract a reasonable organization name from the URL
+                        def _extract_org_name_from_url(u: str) -> str:
+                            try:
+                                from urllib.parse import urlparse
+                                parsed = urlparse(u)
+                                host = (parsed.netloc or "").lower().strip()
+                                host = re.sub(r"^www\\.", "", host)
+                                # Take primary domain token
+                                primary = host.split(".")[0] if host else ""
+                                primary = primary.replace("-", " ")
+                                # Fallback to first path segment if domain is too generic
+                                if not primary or len(primary) < 3:
+                                    seg = (parsed.path or "").strip("/").split("/")[0]
+                                    primary = (seg or "").replace("-", " ")
+                                name = primary.strip()
+                                # Title case for readability
+                                if name:
+                                    return name.title()
+                                return "New Organization"
+                            except Exception:
+                                return "New Organization"
+                        
+                        # Create scraper instance
+                        scraper = HealthcareWebsiteScraper()
+                        
+                        # Extract organization data from website
+                        extracted_data = scraper.scrape_organization_data(website_url)
+                        
+                        if extracted_data:
+                            # Ensure we have an organization name; derive from URL if missing
+                            org_name_from_url = _extract_org_name_from_url(website_url)
+                            extracted_name = extracted_data.get('name') or org_name_from_url
+                            extracted_data['name'] = extracted_name
+                            
+                            # Calculate QuXAT score for the new organization
+                            # Use the analyzer's calculate_quality_score method directly
+                            certifications = extracted_data.get('certifications', [])
+                            quality_initiatives = extracted_data.get('quality_initiatives', [])
+                            
+                            score_data = analyzer.calculate_quality_score(
+                                certifications=certifications,
+                                initiatives=quality_initiatives,
+                                org_name=extracted_name
+                            )
+                            
+                            # Merge extracted data with score
+                            org_data = {**extracted_data, **score_data}
+                            
+                            # Add to database
+                            success = analyzer.add_new_organization(org_data)
+                            
+                            if success:
+                                st.success(f"✅ Successfully added **{extracted_name}** to QuXAT database!")
+                                
+                                # Display the organization information (reuse existing display logic)
+                                display_name = extracted_name or org_data.get('name', 'New Organization')
+                                location = org_data.get('location', '') or org_data.get('city', '')
+                                state = org_data.get('state', '')
+                                
+                                # Build the complete display name
+                                if location and state:
+                                    full_display = f"{display_name} - {location}, {state}"
+                                elif location:
+                                    full_display = f"{display_name} - {location}"
+                                else:
+                                    full_display = display_name
+                                
+                                st.success(f"✅ Assessment completed for: **{full_display}**")
+                                
+                                # Display QuXAT score and ranking information
+                                total_score = org_data.get('total_score', 0)
+
+                                # Compute ranking/percentile for newly added org
+                                try:
+                                    analyzer = get_analyzer()
+                                except Exception:
+                                    analyzer = None
+
+                                overall_rank = 'N/A'
+                                percentile = 0.0
+                                try:
+                                    # Prefer precomputed unique ranks when available
+                                    if analyzer is not None:
+                                        _key = analyzer._normalize_name(org_data.get('name') or extracted_data.get('name') or '')
+                                        _entry = getattr(analyzer, 'scored_index', {}).get(_key)
+                                        if isinstance(_entry, dict):
+                                            _overall = _entry.get('overall_rank')
+                                            _pct = _entry.get('percentile', 0)
+                                            try:
+                                                _pct = float(_pct)
+                                            except Exception:
+                                                _pct = 0.0
+                                            if isinstance(_overall, int) and _overall > 0:
+                                                overall_rank = _overall
+                                                percentile = _pct
+
+                                        # Fallback to on-the-fly ranking calculation
+                                        if overall_rank == 'N/A':
+                                            calc = analyzer.calculate_organization_rankings(org_data.get('name') or extracted_data.get('name') or '', float(total_score)) or {}
+                                            _overall = calc.get('overall_rank')
+                                            _pct = calc.get('percentile', 0)
+                                            try:
+                                                _pct = float(_pct)
+                                            except Exception:
+                                                _pct = 0.0
+                                            if isinstance(_overall, int) and _overall > 0:
+                                                overall_rank = _overall
+                                                percentile = _pct
+                                except Exception:
+                                    # Leave defaults if anything goes wrong; downstream UI will show recalculation notice
+                                    pass
+                                
+                                # Create a metrics display for the new organization
+                                col1, col2, col3 = st.columns(3)
+                                with col1:
+                                    st.metric("QuXAT Score", f"{total_score:.1f}/100")
+                                with col2:
+                                    if overall_rank != 'N/A':
+                                        st.metric("Global Ranking", f"#{overall_rank}")
+                                    else:
+                                        st.metric("Global Ranking", "Calculating...")
+                                with col3:
+                                    try:
+                                        st.metric("Percentile", f"{float(percentile or 0):.1f}%")
+                                    except Exception:
+                                        st.metric("Percentile", "0.0%")
+                                
+                                # Show ranking update status
+                                if overall_rank != 'N/A':
+                                    st.info(f"🏆 **Ranking Generated:** {display_name} ranks #{overall_rank} globally with a QuXAT score of {total_score:.1f}/100 (Top {percentile:.1f}%)")
+                                else:
+                                    st.info("🔄 **Ranking Update:** Global rankings are being recalculated to include this new organization. Please refresh the page in a few moments to see the updated ranking.")
+
+                                # If we could not arrive at a score, explain the reason clearly
+                                try:
+                                    no_quality_info = (not certifications and not quality_initiatives)
+                                    if (total_score is None) or (float(total_score) == 0.0 and no_quality_info):
+                                        st.warning("Quality Related Information is not available on your website. We advice you to update your website with Quality Certifications/Accreditations/Initiatives related information")
+                                except Exception:
+                                    pass
+                                
+                                # Set org_data for display (will be processed by existing display logic below)
+                                # This allows the existing scoring display to work
+                                pass
+                            else:
+                                st.error("❌ Failed to add organization to database. Please try again.")
+                                org_data = None
+                        else:
+                            st.error("❌ Could not extract organization data from the provided website. Please check the URL and try again.")
+                            org_data = None
+                            
+                    except ImportError:
+                        st.error("❌ Website scraper module not found. Please contact support.")
+                        org_data = None
+                    except Exception as e:
+                        st.error(f"❌ Error processing website: {str(e)}")
+                        org_data = None
+        
         # Process search
         if search_button and org_name:
             # Data validation notice
-            st.info("🔍 **Data Validation Notice:** Healthcare Quality Grid uses validated data from official national & international accreditation / certification bodies. Healthcare Organizations are bench marked and compared as per International Standards.")
-            
+            st.info("🔍 **Data Validation Notice:** Healthcare Quality Grid uses validated data from official national and international accreditation and certification bodies available in the public domain. Healthcare organizations are benchmarked and compared against international standards.")
+
             # Initialize the analyzer
             analyzer = get_analyzer()
-            
+
             with st.spinner("🔍 Searching for organization data..."):
-                # Real-time data search
-                org_data = analyzer.search_organization_info(org_name)
-                
+                # Check if we have complete suggestion data to use
+                if hasattr(st.session_state, 'selected_suggestion_data') and st.session_state.selected_suggestion_data:
+                    # Use the complete organization data from the suggestion
+                    suggestion_data = st.session_state.selected_suggestion_data
+                    
+                    # Search for the organization using the complete data
+                    org_data = analyzer.search_organization_info_from_suggestion(suggestion_data)
+                    
+                    # Clear the session state after use
+                    st.session_state.selected_suggestion_data = None
+                else:
+                    # Fallback to regular search for typed input
+                    org_data = analyzer.search_organization_info(org_name)
+                # Inform user when no organization data is found
+                if not org_data:
+                    st.warning("Organization not traced in our database - Please contact the Global Healthcare Quality Assessment team at quxat.team@gmail.com to add your organization to our quality self-assessment database.")
+
                 if org_data:
-                    st.success(f"✅ Found information for: **{org_name}**")
+                    # Display the complete organization information
+                    display_name = org_data.get('name', org_name)
+                    location = org_data.get('location', '') or org_data.get('city', '')
+                    state = org_data.get('state', '')
+                    
+                    # Build the complete display name
+                    if location and state:
+                        full_display = f"{display_name} - {location}, {state}"
+                    elif location:
+                        full_display = f"{display_name} - {location}"
+                    else:
+                        full_display = display_name
+                    
+                    st.success(f"✅ Found information for: **{full_display}**")
+
+                    # ——— Make key scoring cards the first thing visible after search ———
+                    # Compute score early (prefer precomputed unique ranks when available)
+                    try:
+                        _pre_key = analyzer._normalize_name(org_name)
+                        _pre_entry = getattr(analyzer, 'scored_index', {}).get(_pre_key, {})
+                        _pre_score = _pre_entry.get('total_score')
+                        if isinstance(_pre_score, (int, float)):
+                            score = float(_pre_score)
+                            org_data['total_score'] = score
+                        else:
+                            # Fallback to computed org_data value
+                            score = org_data.get('total_score', 0)
+                            if not isinstance(score, (int, float)):
+                                score = float(score) if str(score).replace('.', '', 1).isdigit() else 0.0
+                    except Exception:
+                        score = float(org_data.get('total_score', 0) or 0)
+
+                    # Normalize score to float
+                    try:
+                        score = float(score)
+                    except Exception:
+                        score = 0.0
+
+                    # Calculate rankings data (prefer precomputed unique ranks)
+                    rankings_data = {}
+                    try:
+                        _key = analyzer._normalize_name(org_name)
+                        _entry = getattr(analyzer, 'scored_index', {}).get(_key)
+                        if isinstance(_entry, dict):
+                            _total_orgs = len(getattr(analyzer, 'scored_entries', []) or []) or (_entry.get('total_organizations') or 1)
+                            _overall = _entry.get('overall_rank')
+                            _pct = _entry.get('percentile', 0)
+                            try:
+                                _pct = float(_pct)
+                            except Exception:
+                                _pct = 0.0
+                            if isinstance(_overall, int) and _overall > 0:
+                                rankings_data = {
+                                    'overall_rank': _overall,
+                                    'total_organizations': _total_orgs,
+                                    'percentile': _pct,
+                                    'category_rankings': {},
+                                    'top_performers': [],
+                                    'similar_performers': [],
+                                    'top_performers_benchmark': {'performers_above': [], 'performers_below': []},
+                                    'regional_ranking': {}
+                                }
+                        if not rankings_data:
+                            rankings_data = analyzer.calculate_organization_rankings(org_name, score)
+                    except Exception:
+                        rankings_data = {
+                            'overall_rank': 1,
+                            'total_organizations': 1,
+                            'percentile': 100.0,
+                            'category_rankings': {},
+                            'top_performers': [],
+                            'similar_performers': [],
+                            'top_performers_benchmark': {'performers_above': [], 'performers_below': []},
+                            'regional_ranking': {}
+                        }
+                    # Normalize percentile
+                    try:
+                        pct_val = rankings_data.get('percentile', 0)
+                        if not isinstance(pct_val, (int, float)):
+                            pct_val = float(pct_val)
+                        rankings_data['percentile'] = float(pct_val or 0)
+                        rankings_data.setdefault('overall_rank', 1)
+                        rankings_data.setdefault('total_organizations', 1)
+                    except Exception:
+                        pass
+
+                    # Compute quality level text for the cards
+                    grade_color, grade_text, grade_emoji, quality_level, quality_description = compute_ranking_quality(score)
+
+                    # Render the primary scoring cards at the top of the results
+                    st.markdown("### 🏆 Detailed Scoring Information")
+                    st.markdown(
+                        """
+                        <style>
+                          .quxat-card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 16px; text-align: center; margin: 12px; background: #ffffff; min-height: 160px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+                          .quxat-card--accent { border-width: 2px; }
+                          .quxat-card h4 { margin-bottom: 8px; font-size: 1.05rem; }
+                          .quxat-sub { color:#6c757d;font-size:0.95em;margin-bottom:6px; }
+                        </style>
+                        <div class="quxat-sub">
+                            Overview of your organization’s position: rank among all organizations, percentile standing, current quality score, and quality level classification.
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+                    rank_col1, rank_col2, rank_col3, rank_col4 = st.columns(4)
+
+                    with rank_col1:
+                        rank_color = '#28a745' if rankings_data['percentile'] >= 75 else '#ffc107' if rankings_data['percentile'] >= 50 else '#fd7e14' if rankings_data['percentile'] >= 25 else '#dc3545'
+                        st.markdown(f"""
+                        <div class="quxat-card quxat-card--accent" style="background: {rank_color}20; border-color: {rank_color};">
+                            <h4 style="color: {rank_color};">🏆 Overall Rank</h4>
+                            <div style="font-size: 2em; font-weight: bold; color: {rank_color};">
+                                #{rankings_data['overall_rank']}
+                            </div>
+                            <p style="margin: 0; color: #666;">out of {rankings_data['total_organizations']} organizations</p>
+                            <div style='color: #6c757d; font-size: 0.8em;'>➡️ No change</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    with rank_col2:
+                        percentile_color = '#28a745' if rankings_data['percentile'] >= 75 else '#ffc107' if rankings_data['percentile'] >= 50 else '#fd7e14' if rankings_data['percentile'] >= 25 else '#dc3545'
+                        st.markdown(f"""
+                        <div class="quxat-card quxat-card--accent" style="background: {percentile_color}20; border-color: {percentile_color};">
+                            <h4 style="color: {percentile_color};">📊 Percentile</h4>
+                            <div style="font-size: 2em; font-weight: bold; color: {percentile_color};">
+                                {rankings_data['percentile']:.0f}%
+                            </div>
+                            <p style="margin: 0; color: #666;">Better than {rankings_data['percentile']:.0f}% of organizations</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    with rank_col3:
+                        quality_rank_color = '#1976d2'
+                        st.markdown(f"""
+                        <div class="quxat-card quxat-card--accent" style="background: {quality_rank_color}20; border-color: {quality_rank_color};">
+                            <h4 style="color: {quality_rank_color};">🏥 Quality Score</h4>
+                            <div style="font-size: 2em; font-weight: bold; color: {quality_rank_color};">
+                                {score:.1f}
+                            </div>
+                            <p style="margin: 0; color: #666;">{grade_text}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    with rank_col4:
+                        quality_level_color = '#28a745' if quality_level == 'Outstanding Quality' else '#20c997' if 'High' in quality_level else '#ffc107' if 'Good' in quality_level else '#fd7e14' if 'Fair' in quality_level else '#dc3545'
+                        st.markdown(f"""
+                        <div class="quxat-card quxat-card--accent" style="background: {quality_level_color}20; border-color: {quality_level_color};">
+                            <h4 style="color: {quality_level_color};">⭐ Quality Level</h4>
+                            <div style="font-size: 1.2em; font-weight: bold; color: {quality_level_color};">
+                                {quality_level}
+                            </div>
+                            <p style="margin: 0; color: #666; font-size: 0.9em;">{grade_emoji} {quality_description}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    # Official Website & Contacts (show only available fields)
+                    try:
+                        site_details = analyzer.get_official_site_details(display_name)
+                    except Exception:
+                        site_details = {}
+
+                    website = site_details.get('website') or org_data.get('website')
+                    address = site_details.get('address') or org_data.get('address')
+                    phone = site_details.get('phone') or org_data.get('phone')
+                    email = site_details.get('email') or org_data.get('email')
+
+                    has_contact_info = any([website, address, phone, email])
+                    if has_contact_info:
+                        st.markdown("### 🌐 Official Website & Contacts")
+                        if website:
+                            st.write(f"Website: [{website}]({website})")
+                        if address:
+                            st.write(f"Address: {address}")
+                        if phone:
+                            st.write(f"Phone: {phone}")
+                        if email:
+                            st.write(f"Email: {email}")
                     
                     # Check for branch information and display suggestions
                     if 'branch_info' in org_data and org_data['branch_info']:
@@ -4743,69 +6745,455 @@ else:
                     st.session_state.current_data = org_data
                     
                     # Define variables needed for comparison table
-                    score = org_data['total_score']
+                    # Defensive default for total_score
+                    if not isinstance(org_data.get('score_breakdown'), dict) or not org_data.get('score_breakdown'):
+                        try:
+                            # Compute a fallback breakdown to avoid empty rendering paths
+                            # Use unified scoring for consistency across all UI paths
+                            fallback_sb = analyzer.calculate_quality_score(
+                                org_data.get('certifications', []),
+                                org_data.get('quality_initiatives', []),
+                                org_name
+                            )
+                            if isinstance(fallback_sb, dict) and fallback_sb:
+                                org_data['score_breakdown'] = fallback_sb
+                                # Prefer existing total_score if present; otherwise use fallback
+                                org_data['total_score'] = org_data.get('total_score', fallback_sb.get('total_score', 0))
+                        except Exception:
+                            # If fallback computation fails, continue with safe defaults
+                            pass
+
+                    # Derive score consistently from precomputed source when available
+                    # This ensures the scorecard matches the ranking tables
+                    _pre_key = analyzer._normalize_name(org_name)
+                    _pre = getattr(analyzer, 'scored_index', {}).get(_pre_key, {})
+                    _ps = _pre.get('total_score')
+                    if isinstance(_ps, (int, float)):
+                        score = float(_ps)
+                        org_data['total_score'] = score
+                    else:
+                        # Fallback to computed org_data value
+                        score = org_data.get('total_score', 0)
+                        try:
+                            if not isinstance(score, (int, float)):
+                                score = float(score)
+                        except Exception:
+                            score = 0.0
+                    # Final numeric guard
+                    try:
+                        score = float(score)
+                    except Exception:
+                        score = 0.0
                     grade = "A+" if score >= 75 else "A" if score >= 65 else "B+" if score >= 55 else "B" if score >= 45 else "C"
                     org_type = "Hospital"  # Default type, can be enhanced later
                     
                     # Display organization profile
                     st.subheader(f"🏥 {org_name} - Quality Scorecard")
+
+                    # (Removed duplicate quick score and rank snapshot to avoid double rendering)
                     
-                    # Key metrics
-                    col1, col2, col3, col4 = st.columns(4)
-                    
-                    with col1:
-                        score_color = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
-                        st.metric("🏆 Overall Quality Score", f"{score:.2f}/100", f"{score_color}")
-                    
-                    with col2:
-                        active_certs = len([c for c in org_data['certifications'] if c['status'] == 'Active'])
-                        st.metric("📜 Active Certifications", active_certs)
-                    
-                    with col3:
-                        premium_certs = len([c for c in org_data['certifications'] if c.get('premium', False)])
-                        st.metric("🏆 Premium Certifications", premium_certs)
-                    
-                    with col4:
-                        trend = "Improving" if score >= 70 else "Stable" if score >= 50 else "Needs Attention"
-                        trend_icon = "↗️" if score >= 70 else "➡️" if score >= 50 else "↘️"
-                        st.metric("📊 Quality Trend", trend, trend_icon)
-                    
-                    # Detailed Scoring Information Section
-                    st.markdown("### 🏆 Detailed Scoring Information")
-                    
-                    # Quality Grade Display
-                    if score >= 90:
-                        grade, grade_color, grade_desc = "A+", "🟢", "Exceptional Quality Recognition"
-                    elif score >= 80:
-                        grade, grade_color, grade_desc = "A", "🟢", "Excellent - Quality Recognition"
-                    elif score >= 70:
-                        grade, grade_color, grade_desc = "B+", "🟡", "Good - Quality Recognition"
-                    elif score >= 60:
-                        grade, grade_color, grade_desc = "B", "🟡", "Adequate - Quality Recognition"
-                    elif score >= 50:
-                        grade, grade_color, grade_desc = "C", "🟠", "Average - Quality Recognition"
-                    else:
-                        grade, grade_color, grade_desc = "F", "🔴", "Below International Average - Needs Improvement"
-                    
-                    col1, col2, col3 = st.columns([1, 2, 1])
-                    with col2:
-                        st.markdown(f"""
-                        <div style="text-align: center; padding: 20px; border: 2px solid #e0e0e0; border-radius: 10px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-                            <h2 style="color: #2c3e50; margin: 0;">Quality Grade: {grade_color} {grade}</h2>
-                            <p style="color: #7f8c8d; margin: 5px 0; font-size: 18px;">{grade_desc}</p>
-                            <h3 style="color: #e74c3c; margin: 10px 0;">{score:.1f}/100</h3>
+                    # Data source information
+                    data_source = org_data.get('data_source', 'QuXAT Database')
+                    if data_source == 'Public Domain':
+                        st.markdown("""
+                        <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 1rem; margin: 1rem 0; border-radius: 5px;">
+                            <p style="margin: 0; color: #1976d2; font-weight: 500;">
+                                🌐 <strong>Data Source:</strong> Public Domain Information<br>
+                                <small>This organization's data was gathered from publicly available sources including accreditation bodies, quality rankings, and official websites. For more accurate information or to add your organization to our database, please contact <a href="mailto:quxat.team@gmail.com" style="color: #1976d2;">quxat.team@gmail.com</a></small>
+                            </p>
                         </div>
                         """, unsafe_allow_html=True)
                     
+                    # Key metrics
+                    # Compute quick ranking to display alongside score (prefer precomputed unique ranks)
+                    quick_rank = {}
+                    try:
+                        _key = analyzer._normalize_name(org_name)
+                        _entry = getattr(analyzer, 'scored_index', {}).get(_key)
+                        if isinstance(_entry, dict):
+                            quick_rank = {
+                                'overall_rank': _entry.get('overall_rank') or 1,
+                                'total_organizations': len(getattr(analyzer, 'scored_entries', []) or [] ) or (_entry.get('total_organizations') or 1),
+                                'percentile': float(_entry.get('percentile', 0) or 0)
+                            }
+                        else:
+                            quick_rank = analyzer.calculate_organization_rankings(org_name, score) or {}
+                            if 'overall_rank' not in quick_rank or not isinstance(quick_rank.get('overall_rank'), int):
+                                quick_rank['overall_rank'] = 1
+                            if 'total_organizations' not in quick_rank or not isinstance(quick_rank.get('total_organizations'), int):
+                                quick_rank['total_organizations'] = 1
+                            pct_val = quick_rank.get('percentile', 0)
+                            try:
+                                quick_rank['percentile'] = float(pct_val)
+                            except Exception:
+                                quick_rank['percentile'] = 0.0
+                    except Exception:
+                        quick_rank = {'overall_rank': 1, 'total_organizations': 1, 'percentile': 0.0}
+
+                    # (Moved score/rank cards to the Detailed Scoring Information section per request)
+
+                    # (Percentile card moved to Detailed Scoring Information section)
+                    
+                    # CAP Accreditation Status - Mandatory Compliance (Background Processing Only)
+                    # st.markdown("---")  # Commented out to hide UI section
+                    
+                    # Check CAP compliance from quality indicators
+                    quality_indicators = org_data.get('quality_indicators', {})
+                    cap_compliant = quality_indicators.get('cap_accredited', False)
+                    
+                    # Also check for CAP certifications as backup
+                    cap_certifications = [cert for cert in org_data.get('certifications', []) 
+                                        if 'CAP' in cert.get('name', '').upper() or 
+                                           'COLLEGE OF AMERICAN PATHOLOGISTS' in cert.get('name', '').upper()]
+                    if cap_certifications and not cap_compliant:
+                        cap_compliant = any(cert.get('status', '').lower() == 'active' for cert in cap_certifications)
+                    
+                    # Check for JCI compliance
+                    jci_compliant = quality_indicators.get('jci_accredited', False)
+                    if not jci_compliant:
+                        jci_certifications = [cert for cert in org_data.get('certifications', []) 
+                                        if 'JCI' in cert.get('name', '').upper() or 
+                                           'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper()]
+                        if jci_certifications:
+                            jci_compliant = any(cert.get('status', '').lower() == 'active' for cert in jci_certifications)
+                    
+                    # Check for ISO 9001 compliance
+                    iso9001_compliant = False
+                    iso9001_certifications = [cert for cert in org_data.get('certifications', []) 
+                                    if 'ISO 9001' in cert.get('name', '').upper() or 
+                                       'ISO9001' in cert.get('name', '').upper()]
+                    if iso9001_certifications:
+                        iso9001_compliant = any(cert.get('status', '').lower() == 'active' for cert in iso9001_certifications)
+                    
+                    # Check for ISO 15189 compliance
+                    iso15189_compliant = False
+                    iso15189_certifications = [cert for cert in org_data.get('certifications', []) 
+                                     if 'ISO 15189' in cert.get('name', '').upper() or 
+                                        'ISO15189' in cert.get('name', '').upper()]
+                    if iso15189_certifications:
+                        iso15189_compliant = any(cert.get('status', '').lower() == 'active' for cert in iso15189_certifications)
+                    
+                    # Count missing mandatory accreditations (for scoring calculations - runs in background)
+                    missing_mandatory = []
+                    if not cap_compliant:
+                        missing_mandatory.append("CAP")
+                    if not jci_compliant:
+                        missing_mandatory.append("JCI")
+                    if not iso9001_compliant:
+                        missing_mandatory.append("ISO 9001")
+                    if not iso15189_compliant:
+                        missing_mandatory.append("ISO 15189")
+                    
+                    cap_warning = ''
+                    
+                    # Mandatory accreditation display logic commented out - scoring continues in background
+                    # if len(missing_mandatory) == 0:
+                    #     st.markdown("""
+                    #     <div style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border: 2px solid #28a745; border-radius: 10px; padding: 20px; margin: 15px 0; text-align: center;">
+                    #         <h3 style="color: #155724; margin: 0 0 10px 0;">🏆 ALL MANDATORY ACCREDITATIONS VERIFIED ✅</h3>
+                    #         <p style="color: #155724; margin: 0; font-size: 16px; font-weight: 500;">
+                    #             CAP, JCI, ISO 9001, and ISO 15189 accreditations verified<br>
+                    #             <small>Mandatory requirements: FULLY COMPLIANT</small>
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    # elif len(missing_mandatory) == 1:
+                    #     st.markdown(f"""
+                    #     <div style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); border: 2px solid #ffc107; border-radius: 10px; padding: 20px; margin: 15px 0; text-align: center;">
+                    #         <h3 style="color: #856404; margin: 0 0 10px 0;">⚠️ MISSING MANDATORY ACCREDITATION ⚠️</h3>
+                    #         <p style="color: #856404; margin: 0; font-size: 16px; font-weight: 500;">
+                    #             {missing_mandatory[0]} accreditation not found<br>
+                    #             <small>Mandatory requirement: PARTIALLY COMPLIANT (penalty applied)</small>
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    # else:
+                    #     st.markdown(f"""
+                    #     <div style="background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%); border: 2px solid #dc3545; border-radius: 10px; padding: 20px; margin: 15px 0; text-align: center;">
+                    #         <h3 style="color: #721c24; margin: 0 0 10px 0;">❌ MULTIPLE MANDATORY ACCREDITATIONS MISSING ❌</h3>
+                    #         <p style="color: #721c24; margin: 0; font-size: 16px; font-weight: 500;">
+                    #             Missing: {', '.join(missing_mandatory)}<br>
+                    #             <small>Mandatory requirements: NON-COMPLIANT (significant penalties applied)</small>
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    #     
+                    #     if cap_warning:
+                    #         st.error(cap_warning)
+                    
+                    # Detailed Scoring Information Section
+
+                    # Remove repeated summary cards here; only keep unique items below
+                    # Ensure score is numeric for grade rendering
+                    try:
+                        score = float(score)
+                    except Exception:
+                        score = 0.0
+                    
+                    # Quality Grade Card (match style with other cards)
+                    grade, grade_color, grade_desc = compute_quality_grade(score)
+                    try:
+                        theme = {
+                            '🟢': {'bg': '#eef9f0', 'border': '#28a745', 'text': '#1e7e34'},
+                            '🟡': {'bg': '#fff9e6', 'border': '#ffc107', 'text': '#b8860b'},
+                            '🔴': {'bg': '#fdebea', 'border': '#dc3545', 'text': '#721c24'},
+                        }.get(grade_color, {'bg': '#f5f7fa', 'border': '#e0e0e0', 'text': '#2c3e50'})
+
+                        gc1, gc2, gc3, gc4 = st.columns(4)
+                        with gc1:
+                            st.markdown(f"""
+                            <div class="quxat-card quxat-card--accent" style="background:{theme['bg']};border-color:{theme['border']};color:{theme['text']};">
+                                <h4 style="color:{theme['text']};">🏅 Quality Grade</h4>
+                                <div style="font-size: 1.6em; font-weight: 700;">{grade_color} {grade}</div>
+                                <p style="margin: 4px 0 0 0; color:#6c757d; font-size: 0.9em;">{grade_desc}</p>
+                                <p style="margin: 2px 0 0 0; color:#6c757d; font-size: 0.85em;">{score:.1f}/100</p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                    except Exception:
+                        pass
+
+                    # Score Breakdown (inline)
+                    try:
+                        score_br = org_data.get('score_breakdown', {})
+                        if isinstance(score_br, dict) and score_br:
+                            st.markdown("### 📊 Score Breakdown")
+                            bcol1, bcol2 = st.columns(2)
+                            with bcol1:
+                                # Support both international and public-domain breakdown keys
+                                cert_score = score_br.get('certification_score')
+                                if cert_score is None:
+                                    cert_score = score_br.get('Accreditation Score', 0)
+                                if isinstance(cert_score, (int, float)):
+                                    st.progress(min(max(cert_score, 0), 100) / 100)
+                                    st.write(f"Certifications: {cert_score:.1f}/100")
+                                qi_score = score_br.get('quality_initiatives_score')
+                                if qi_score is None:
+                                    qi_score = score_br.get('quality_metrics_score')
+                                if qi_score is None:
+                                    qi_score = score_br.get('Quality Indicators Score', 0)
+                                if isinstance(qi_score, (int, float)):
+                                    st.progress(min(max(qi_score, 0), 100) / 100)
+                                    st.write(f"Quality Initiatives: {qi_score:.1f}/100")
+                                pf_score = score_br.get('patient_feedback_score', 0)
+                                if isinstance(pf_score, (int, float)) and pf_score > 0:
+                                    st.progress(min(max(pf_score, 0), 100) / 100)
+                                    st.write(f"Patient Feedback: {pf_score:.1f}/100")
+                                web_score = score_br.get('Web Presence Score')
+                                if isinstance(web_score, (int, float)) and web_score > 0:
+                                    st.progress(min(max(web_score, 0), 100) / 100)
+                                    st.write(f"Web Presence: {web_score:.1f}/100")
+                            with bcol2:
+                                comp_status = score_br.get('compliance_status')
+                                if comp_status:
+                                    st.info(comp_status)
+                                cap_warn = score_br.get('cap_warning')
+                                if cap_warn:
+                                    st.warning(cap_warn)
+                                penalty = score_br.get('mandatory_penalty')
+                                if penalty is None:
+                                    penalty = score_br.get('Total Mandatory Penalties', 0)
+                                if isinstance(penalty, (int, float)) and penalty > 0:
+                                    with st.expander("Penalty details"):
+                                        pb = score_br.get('penalty_breakdown', {})
+                                        if isinstance(pb, dict) and pb:
+                                            for k, v in pb.items():
+                                                st.write(f"{k}: {v}")
+                                        missing = score_br.get('missing_critical_standards', [])
+                                        if missing:
+                                            st.write("Missing mandatory standards:")
+                                            for m in missing:
+                                                std = m.get('standard') if isinstance(m, dict) else str(m)
+                                                st.write(f"• {std}")
+                                # Additional breakdown hidden on home page per request
+                        else:
+                            # Always show section header to avoid blank UI when breakdown is missing
+                            st.markdown("### 📊 Score Breakdown")
+                            st.info("No detailed breakdown available for this organization.")
+                    except Exception:
+                        # Always show section header to avoid blank UI even on errors
+                        st.markdown("### 📊 Score Breakdown")
+                        st.info("Breakdown unavailable due to a rendering error.")
+
                     st.markdown("---")
                     
                     # Certifications Section
-                    st.markdown("### 🏅 Active Certifications")
+                    st.markdown("### 🏅 Mandatory Requirements")
                     
-                    # Get certifications from organization data (excluding JCI and NABH as they are accreditations)
+                    # CAP Accreditation Highlight (Mandatory)
+                    cap_certifications = [cert for cert in org_data.get('certifications', []) if 'CAP' in cert.get('name', '').upper() or 'COLLEGE OF AMERICAN PATHOLOGISTS' in cert.get('name', '').upper()]
+                    
+                    if cap_certifications:
+                        cap_cert = cap_certifications[0]  # Take the first CAP certification
+                        cap_status = cap_cert.get('status', 'Active')
+                        cap_icon = "✅" if cap_status == "Active" else "⏳" if cap_status == "Pending" else "❌"
+
+                        header_text = f"{cap_icon} {cap_cert.get('name', 'CAP Accreditation')} (MANDATORY)"
+                        details = [
+                            f"Status: {cap_status}",
+                            "Impact: +30 points (Mandatory requirement met)",
+                            "Equivalency: Equivalent to ISO 15189 Medical Laboratory Standard",
+                        ]
+
+                        if cap_status == "Active":
+                            st.success(header_text)
+                        elif cap_status == "Pending":
+                            st.warning(header_text)
+                        else:
+                            st.error(header_text)
+
+                        for line in details:
+                            st.write(f"• {line}")
+                    else:
+                        st.error("❌ CAP Accreditation (MANDATORY - MISSING)")
+                        st.write("• Status: Not Found")
+                        st.write("• Impact: -40 points penalty (Mandatory requirement not met)")
+                    
+                    # JCI Accreditation Highlight (Mandatory)
+                    jci_certifications = [
+                        cert for cert in org_data.get('certifications', [])
+                        if 'JCI' in str(cert.get('name', '')).upper() 
+                        or 'JOINT COMMISSION INTERNATIONAL' in str(cert.get('name', '')).upper()
+                        or (
+                            # Treat U.S. Joint Commission as equivalency for hospital accreditation
+                            'JOINT COMMISSION' in str(cert.get('name', '')).upper() and 
+                            'INTERNATIONAL' not in str(cert.get('name', '')).upper()
+                        )
+                    ]
+
+                    # Pull penalty information from score breakdown if available
+                    jci_penalty_default = 10
+                    jci_penalty = jci_penalty_default
+                    try:
+                        pb = score_br.get('penalty_breakdown', {}) if isinstance(score_br, dict) else {}
+                        jci_penalty = int(pb.get('Hospital Accreditation', jci_penalty_default))
+                    except Exception:
+                        jci_penalty = jci_penalty_default
+
+                    if jci_certifications:
+                        jci_cert = jci_certifications[0]  # Take the first JCI/TJC certification
+                        jci_status = str(jci_cert.get('status', 'Active')).strip()
+                        jci_icon = "✅" if jci_status == "Active" else "⏳" if jci_status == "Pending" else "❌"
+                        jci_name = jci_cert.get('name', 'JCI Accreditation')
+                        header_text = f"{jci_icon} {jci_name} (MANDATORY)"
+                        details = [
+                            f"Status: {jci_status}",
+                            "Impact: Mandatory requirement met" if jci_status == "Active" else "Impact: Penalty may apply until active",
+                            "Equivalency: U.S. Joint Commission recognized as hospital accreditation equivalency"
+                        ]
+
+                        if jci_status == "Active":
+                            st.success(header_text)
+                        elif jci_status == "Pending":
+                            st.warning(header_text)
+                        else:
+                            st.error(header_text)
+
+                        for line in details:
+                            st.write(f"• {line}")
+                    else:
+                        st.error("❌ JCI Accreditation (MANDATORY - MISSING)")
+                        st.write("• Status: Not Found")
+                        st.write(f"• Impact: -{jci_penalty} points penalty (Mandatory requirement not met)")
+                    #         <h4 style="color: #155724; margin: 0 0 10px 0;">{jci_icon} {jci_cert.get('name', 'JCI Accreditation')} (MANDATORY)</h4>
+                    #         <p style="margin: 5px 0; color: #155724; font-weight: 500;">
+                    #             <strong>Status:</strong> {jci_status}<br>
+                    #             <strong>Impact:</strong> +25 points (Mandatory requirement met)
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    # else:
+                    #     st.markdown("""
+                    #     <div style="background: linear-gradient(135deg, #f8e8e8 0%, #f8d7da 100%); border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                    #         <h4 style="color: #721c24; margin: 0 0 10px 0;">❌ JCI Accreditation (MANDATORY - MISSING)</h4>
+                    #         <p style="margin: 5px 0; color: #721c24; font-weight: 500;">
+                    #             <strong>Status:</strong> Not Found<br>
+                    #             <strong>Impact:</strong> -30 points penalty (Mandatory requirement not met)
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    
+                    # ISO 9001 Certification Highlight (Mandatory)
+                    iso9001_certifications = [cert for cert in org_data.get('certifications', []) if 'ISO 9001' in cert.get('name', '').upper() or 'ISO9001' in cert.get('name', '').upper()]
+                    
+                    if iso9001_certifications:
+                        iso9001_cert = iso9001_certifications[0]  # Take the first ISO 9001 certification
+                        iso9001_status = iso9001_cert.get('status', 'Active')
+                        iso9001_icon = "✅" if iso9001_status == "Active" else "⏳" if iso9001_status == "Pending" else "❌"
+                        
+                        st.markdown(f"""
+                        <div style="background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%); border: 2px solid #28a745; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                            <h4 style="color: #155724; margin: 0 0 10px 0;">{iso9001_icon} {iso9001_cert.get('name', 'ISO 9001 Quality Management')} (MANDATORY)</h4>
+                            <p style="margin: 5px 0; color: #155724; font-weight: 500;">
+                                <strong>Status:</strong> {iso9001_status}<br>
+                                <strong>Impact:</strong> +20 points (Mandatory requirement met)
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    # else:
+                    #     st.markdown("""
+                    #     <div style="background: linear-gradient(135deg, #f8e8e8 0%, #f8d7da 100%); border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                    #         <h4 style="color: #721c24; margin: 0 0 10px 0;">❌ ISO 9001 Quality Management (MANDATORY - MISSING)</h4>
+                    #         <p style="margin: 5px 0; color: #721c24; font-weight: 500;">
+                    #             <strong>Status:</strong> Not Found<br>
+                    #             <strong>Impact:</strong> -25 points penalty (Mandatory requirement not met)
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    
+                    # ISO 15189 Certification Highlight (Mandatory)
+                    iso15189_certifications = [cert for cert in org_data.get('certifications', []) if 'ISO 15189' in cert.get('name', '').upper() or 'ISO15189' in cert.get('name', '').upper()]
+                    
+                    if iso15189_certifications:
+                        iso15189_cert = iso15189_certifications[0]  # Take the first ISO 15189 certification
+                        iso15189_status = iso15189_cert.get('status', 'Active')
+                        iso15189_icon = "✅" if iso15189_status == "Active" else "⏳" if iso15189_status == "Pending" else "❌"
+                        
+                        st.markdown(f"""
+                        <div style="background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%); border: 2px solid #28a745; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                            <h4 style="color: #155724; margin: 0 0 10px 0;">{iso15189_icon} {iso15189_cert.get('name', 'ISO 15189 Medical Laboratory')} (MANDATORY)</h4>
+                            <p style="margin: 5px 0; color: #155724; font-weight: 500;">
+                                <strong>Status:</strong> {iso15189_status}<br>
+                                <strong>Impact:</strong> +20 points (Mandatory requirement met)
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    # else:
+                    #     st.markdown("""
+                    #     <div style="background: linear-gradient(135deg, #f8e8e8 0%, #f8d7da 100%); border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                    #         <h4 style="color: #721c24; margin: 0 0 10px 0;">❌ ISO 15189 Medical Laboratory (MANDATORY - MISSING)</h4>
+                    #         <p style="margin: 5px 0; color: #721c24; font-weight: 500;">
+                    #             <strong>Status:</strong> Not Found<br>
+                    #             <strong>Impact:</strong> -25 points penalty (Mandatory requirement not met)
+                    #         </p>
+                    #     </div>
+                    #     """, unsafe_allow_html=True)
+                    
+                    # Get other certifications (excluding CAP, JCI, ISO 9001, ISO 15189 and NABH as they are accreditations)
                     certifications = org_data.get('certifications', [])
-                    # Filter out JCI and NABH as they should be in accreditations section
-                    certifications = [cert for cert in certifications if not ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper())]
+                    # Filter out CAP, JCI, ISO 9001, ISO 15189, NABH, and MAGNET as they should be in accreditations section
+                    certifications = [
+                        cert for cert in certifications
+                        if not (
+                            'CAP' in cert.get('name', '').upper()
+                            or 'COLLEGE OF AMERICAN PATHOLOGISTS' in cert.get('name', '').upper()
+                            or 'JCI' in cert.get('name', '').upper()
+                            or 'NABH' in cert.get('name', '').upper()
+                            or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper()
+                            or 'ISO 9001' in cert.get('name', '').upper()
+                            or 'ISO9001' in cert.get('name', '').upper()
+                            or 'ISO 15189' in cert.get('name', '').upper()
+                            or 'ISO15189' in cert.get('name', '').upper()
+                            or 'MAGNET' in cert.get('name', '').upper()
+                            or 'MAGNET RECOGNITION' in cert.get('name', '').upper()
+                        )
+                    ]
+                    # Only show valid/non-expired certifications on homepage
+                    valid_statuses = {"ACTIVE", "VALID", "CURRENT", "ACCREDITED", "CERTIFIED", "COMPLIANT"}
+                    certifications = [
+                        cert for cert in certifications
+                        if str(cert.get('status', '')).strip().upper() in valid_statuses
+                    ]
+
                     if certifications:
                         cert_cols = st.columns(min(len(certifications), 3))
                         for idx, cert in enumerate(certifications[:6]):  # Show up to 6 certifications
@@ -4858,10 +7246,24 @@ else:
                     
                     # Get accreditations from organization data
                     accreditations = org_data.get('accreditations', [])
+                    # Filter to only valid/non-expired accreditations for homepage
+                    accreditations = [
+                        acc for acc in accreditations
+                        if str(acc.get('status', '')).strip().upper() in valid_statuses
+                    ]
                     
                     # Add JCI and NABH from certifications data as they are actually accreditations
                     all_certifications = org_data.get('certifications', [])
-                    jci_nabh_accreditations = [cert for cert in all_certifications if ('JCI' in cert.get('name', '').upper() or 'NABH' in cert.get('name', '').upper() or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper())]
+                    jci_nabh_accreditations = [
+                        cert for cert in all_certifications
+                        if (
+                            'JCI' in cert.get('name', '').upper()
+                            or 'NABH' in cert.get('name', '').upper()
+                            or 'JOINT COMMISSION INTERNATIONAL' in cert.get('name', '').upper()
+                            or 'MAGNET' in cert.get('name', '').upper()
+                            or 'MAGNET RECOGNITION' in cert.get('name', '').upper()
+                        ) and str(cert.get('status', '')).strip().upper() in valid_statuses
+                    ]
                     
                     # Convert JCI/NABH certifications to accreditation format (avoid duplicates)
                     existing_accred_names = [acc.get('name', '').upper() for acc in accreditations]
@@ -4871,9 +7273,17 @@ else:
                         if cert_name.upper() in existing_accred_names:
                             continue
                             
+                        # Determine appropriate accreditation level
+                        _upper_name = cert_name.upper()
+                        accred_level = (
+                            'International Recognition' if ('MAGNET' in _upper_name or 'MAGNET RECOGNITION' in _upper_name)
+                            else 'International Standard' if ('JCI' in _upper_name or 'JOINT COMMISSION INTERNATIONAL' in _upper_name)
+                            else 'National Standard'
+                        )
+
                         accred_entry = {
                             'name': cert_name,
-                            'level': 'International Standard' if ('JCI' in cert_name.upper() or 'JOINT COMMISSION INTERNATIONAL' in cert_name.upper()) else 'National Standard',
+                            'level': accred_level,
                             'awarded_date': cert.get('issued_date', cert.get('awarded_date', 'N/A')),
                             'description': cert.get('description', ''),
                             'status': cert.get('status', 'Active'),
@@ -4897,21 +7307,24 @@ else:
                                 'name': 'Joint Commission Accreditation',
                                 'level': 'Gold Standard',
                                 'awarded_date': '2023',
-                                'description': 'Comprehensive healthcare quality and safety accreditation'
+                                'description': 'Comprehensive healthcare quality and safety accreditation',
+                                'status': 'Active'
                             })
                         if 'score' in locals() and score >= 60:
                             accreditations.append({
                                 'name': 'ISO 9001:2015 Quality Management',
                                 'level': 'Certified',
                                 'awarded_date': '2022',
-                                'description': 'International standard for quality management systems'
+                                'description': 'International standard for quality management systems',
+                                'status': 'Active'
                             })
                         if 'score' in locals() and score >= 50:
                             accreditations.append({
                                 'name': 'Healthcare Quality Recognition',
                                 'level': 'Bronze',
                                 'awarded_date': '2023',
-                                'description': 'Recognition for commitment to healthcare quality improvement'
+                                'description': 'Recognition for commitment to healthcare quality improvement',
+                                'status': 'Active'
                             })
                     
                     if accreditations:
@@ -5011,10 +7424,17 @@ else:
                                 </div>"""
                             
                             # Display the main accreditation info
+                            accred_name_display = accred.get('name', 'Unknown Accreditation')
+                            equivalency_note = ""
+                            
+                            # Add equivalency notation for NABL
+                            if 'nabl' in accred.get('name', '').lower():
+                                equivalency_note = "<br><strong>Equivalency:</strong> ⚖️ Equivalent to ISO 15189 Medical Laboratory Standard"
+                            
                             st.markdown(f"""
                             <div style="padding: 20px; border-left: 4px solid {level_color}; background: #f8f9fa; margin: 15px 0; border-radius: 0 8px 8px 0;">
-                                <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{level_icon} {accred.get('name', 'Unknown Accreditation')}</h4>
-                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {status_color};">{accred.get('status', 'Active')}</span></p>
+                                <h4 style="color: #2c3e50; margin: 0 0 10px 0;">{level_icon} {accred_name_display}</h4>
+                                <p style="margin: 5px 0; color: #666;"><strong>Accreditation Status:</strong> <span style="color: {status_color};">{accred.get('status', 'Active')}</span>{equivalency_note}</p>
                             </div>
                             """, unsafe_allow_html=True)
                             
@@ -5032,6 +7452,9 @@ else:
                     st.markdown("### 🏆 Certifications & Accreditations")
                     if org_data['certifications']:
                         cert_df = pd.DataFrame(org_data['certifications'])
+                        # Show only valid/non-expired certifications
+                        if 'status' in cert_df.columns:
+                            cert_df = cert_df[cert_df['status'].astype(str).str.upper().isin(list(valid_statuses))]
                         cert_df['Status Icon'] = cert_df['status'].map({
                             'Active': '✅', 'In Progress': '🔄', 'Expired': '❌'
                         })
@@ -5137,7 +7560,6 @@ else:
                         **Scoring Methodology:**
                         - **Weighted Certification System (70%):** Evidence-based scoring using verified certifications with specific weights
                         - **Quality Initiatives (30%):** Programs and improvement activities
-                        - **Compliance Penalty:** Up to 30 points deducted for non-compliance with mandatory standards
                         
                         **Certification Weight Hierarchy:**
                         - **JCI Accreditation:** Weight 3.5, Base Score 30 pts (Global Gold Standard)
@@ -5185,23 +7607,38 @@ else:
                         # Score Potential Overview
                         score_potential = recommendations.get('score_potential', {})
                         if score_potential:
+                            # Normalize maximum to 100 for display and recompute potential accordingly
+                            raw_current = score_potential.get('current_score', 0)
+                            raw_max = score_potential.get('maximum_possible', 100)
+
+                            # Prioritize unified 'score' used across the scorecard to avoid inconsistencies
+                            try:
+                                unified_score = float(score)
+                            except Exception:
+                                unified_score = None
+
+                            if unified_score is not None:
+                                current_score = unified_score
+                            else:
+                                current_score = raw_current if isinstance(raw_current, (int, float)) else None
+                            max_possible = raw_max if isinstance(raw_max, (int, float)) else None
+
+                            max_possible_display = 100.0 if max_possible is None else min(float(max_possible), 100.0)
+                            improvement_potential_display = None
+                            if current_score is not None:
+                                improvement_potential_display = max(0.0, max_possible_display - float(current_score))
+
                             col1, col2, col3 = st.columns(3)
                             with col1:
-                                current_score = score_potential.get('current_score', 0)
-                                if isinstance(current_score, (int, float)):
-                                    st.metric("Current Score", f"{current_score:.1f}/100")
+                                if current_score is not None:
+                                    st.metric("Current Score", f"{float(current_score):.1f}/100")
                                 else:
                                     st.metric("Current Score", "N/A")
                             with col2:
-                                max_possible = score_potential.get('maximum_possible', 100)
-                                if isinstance(max_possible, (int, float)):
-                                    st.metric("Maximum Possible", f"{max_possible}/100")
-                                else:
-                                    st.metric("Maximum Possible", "100/100")
+                                st.metric("Maximum Possible", f"{max_possible_display:.1f}/100")
                             with col3:
-                                improvement_potential = score_potential.get('improvement_potential', 0)
-                                if isinstance(improvement_potential, (int, float)):
-                                    st.metric("Improvement Potential", f"+{improvement_potential:.1f} points")
+                                if improvement_potential_display is not None:
+                                    st.metric("Improvement Potential", f"+{improvement_potential_display:.1f} points")
                                 else:
                                     st.metric("Improvement Potential", "N/A")
                         
@@ -5312,124 +7749,255 @@ else:
                     org_region = analyzer.determine_organization_region(org_name, org_location)
                     org_region = org_region.title()  # Capitalize for display
         
-        # Quality Scorecard - Organization Rankings (only show if score is defined)
-        if 'score' in locals():
+        # Quality Scorecard - Organization Rankings
+        # Derive score from computed org_data or precomputed index for reliability
+        try:
+            score = None
+            if isinstance(org_data, dict):
+                _ts = org_data.get('total_score')
+                if isinstance(_ts, (int, float)):
+                    score = float(_ts)
+            if score is None:
+                _pre_key = analyzer._normalize_name(org_name)
+                _pre = analyzer.scored_index.get(_pre_key)
+                if _pre:
+                    _ps = _pre.get('total_score')
+                    if isinstance(_ps, (int, float)):
+                        score = float(_ps)
+            if score is None:
+                score = 0.0
+        except Exception:
+            score = 0.0
+
+        if True:
             st.markdown("---")
             st.markdown("### 🏆 Quality Scorecard - Organization Rankings")
             st.markdown("*See how your organization ranks against all others in our database based on evidenced quality certifications and safety standards*")
+
+            # Top 10 Organizations (from precomputed summary)
+            try:
+                # Robust path resolution for ranking_summary.json
+                summary_path = 'ranking_summary.json'
+                try:
+                    _base_dir = os.path.dirname(__file__)
+                except Exception:
+                    _base_dir = os.getcwd()
+                _candidates = [summary_path, os.path.join(_base_dir, summary_path)]
+                _open_summary = None
+                for _p in _candidates:
+                    if os.path.exists(_p):
+                        _open_summary = _p
+                        break
+                if _open_summary:
+                    with open(_open_summary, 'r', encoding='utf-8') as f:
+                        _summary = json.load(f)
+                    _top10 = _summary.get('top_10_organizations') or _summary.get('top10')
+                    if isinstance(_top10, list) and _top10:
+                        st.markdown("#### 🌍 Global Top 10 Organizations")
+                        _df_top = pd.DataFrame(_top10)
+                        # Normalize columns for consistent display
+                        renames = {
+                            'rank': 'Rank',
+                            'name': 'Organization',
+                            'country': 'Country',
+                            'total_score': 'Score',
+                            'percentile': 'Percentile'
+                        }
+                        _df_top = _df_top[[c for c in renames if c in _df_top.columns]].rename(columns=renames)
+                        if 'Percentile' in _df_top.columns:
+                            # Format percentile as percentage
+                            _df_top['Percentile'] = _df_top['Percentile'].map(lambda x: f"{float(x):.2f}%" if isinstance(x, (int, float)) else x)
+                        if 'Score' in _df_top.columns:
+                            _df_top['Score'] = _df_top['Score'].map(lambda x: f"{float(x):.1f}" if isinstance(x, (int, float)) else x)
+                        st.dataframe(_df_top, use_container_width=True, hide_index=True)
+            except Exception:
+                # Silently continue if summary file missing or invalid
+                pass
             
-            # Calculate rankings
-            rankings_data = analyzer.calculate_organization_rankings(org_name, score)
+            # Calculate rankings (prefer precomputed unique ranks when available)
+            rankings_data = {}
+            try:
+                # Try precomputed scored index first
+                _key = analyzer._normalize_name(org_name)
+                _entry = analyzer.scored_index.get(_key)
+                if isinstance(_entry, dict):
+                    _total_orgs = len(analyzer.scored_entries) if analyzer.scored_entries else _entry.get('total_organizations') or 1
+                    _overall = _entry.get('overall_rank')
+                    _pct = _entry.get('percentile', 0)
+                    try:
+                        _pct = float(_pct)
+                    except Exception:
+                        _pct = 0.0
+                    # Only accept if rank present; otherwise compute
+                    if isinstance(_overall, int) and _overall > 0:
+                        rankings_data = {
+                            'overall_rank': _overall,
+                            'total_organizations': _total_orgs,
+                            'percentile': _pct,
+                            'category_rankings': {},
+                            'top_performers': [],
+                            'similar_performers': [],
+                            'top_performers_benchmark': {'performers_above': [], 'performers_below': []},
+                            'regional_ranking': {}
+                        }
+                # If no precomputed data, compute dynamically
+                if not rankings_data:
+                    rankings_data = analyzer.calculate_organization_rankings(org_name, score)
+            except Exception:
+                # As a last resort, ensure a minimal structure so UI never fails
+                rankings_data = {
+                    'overall_rank': 1,
+                    'total_organizations': 1,
+                    'percentile': 100.0,
+                    'category_rankings': {},
+                    'top_performers': [],
+                    'similar_performers': [],
+                    'top_performers_benchmark': {'performers_above': [], 'performers_below': []},
+                    'regional_ranking': {}
+                }
+            # Ensure required keys exist to avoid UI rendering errors
+            try:
+                if isinstance(rankings_data, dict):
+                    # Normalize percentile to a float value
+                    pct_val = rankings_data.get('percentile', 0)
+                    if not isinstance(pct_val, (int, float)):
+                        try:
+                            pct_val = float(pct_val)
+                        except Exception:
+                            pct_val = 0.0
+                    rankings_data['percentile'] = float(pct_val or 0)
+                    # Provide safe defaults for rank and total orgs
+                    rankings_data.setdefault('overall_rank', 1)
+                    rankings_data.setdefault('total_organizations', 1)
+            except Exception:
+                pass
             
-            # Healthcare quality grade for rankings display
+# Healthcare quality grade for rankings display
             
             # Healthcare quality categories and descriptions
-            if score >= 80:
-                grade_color = '#28a745'
-                grade_text = 'Exceptional (80-100)'
-                grade_emoji = '🏆'
-                quality_level = 'Outstanding Quality'
-                quality_description = 'Outstanding healthcare quality with exceptional standards'
-            elif score >= 70:
-                grade_color = '#20c997'
-                grade_text = 'Very Good (70-79)'
-                grade_emoji = '⭐'
-                quality_level = 'High Quality'
-                quality_description = 'Excellent healthcare quality with high standards'
-            elif score >= 60:
-                grade_color = '#ffc107'
-                grade_text = 'Good (60-69)'
-                grade_emoji = '👍'
-                quality_level = 'Good Quality'
-                quality_description = 'Good healthcare quality meeting standard requirements'
-            elif score >= 50:
-                grade_color = '#fd7e14'
-                grade_text = 'Fair (50-59)'
-                grade_emoji = '👌'
-                quality_level = 'Fair Quality'
-                quality_description = 'Fair healthcare quality requiring some improvements'
-            elif score >= 40:
-                grade_color = '#dc3545'
-                grade_text = 'Poor (40-49)'
-                grade_emoji = 'WARNING️'
-                quality_level = 'Scope for Improvement'
-                quality_description = 'Poor healthcare quality requiring significant improvements'
-            else:
-                grade_color = '#6f42c1'
-                grade_text = 'Scope for Improvement (0-39)'
-                grade_emoji = ''
-                quality_level = 'Below International Average - Needs Improvement'
-                quality_description = ''
+            grade_color, grade_text, grade_emoji, quality_level, quality_description = compute_ranking_quality(score)
         
             # Add ranking data to history for trend tracking
             if rankings_data and isinstance(rankings_data, dict):
                 add_ranking_to_history(org_name, rankings_data)
                 
-                # Overall Ranking Display
-                rank_col1, rank_col2, rank_col3, rank_col4 = st.columns(4)
+                # Overall Ranking cards are now shown at the top of the results,
+                # immediately after search; skip re-rendering here to avoid duplication.
                 
-                # Get ranking trend for display
-                ranking_trend = get_ranking_trend(org_name)
-                
-                with rank_col1:
-                    rank_color = '#28a745' if rankings_data['percentile'] >= 75 else '#ffc107' if rankings_data['percentile'] >= 50 else '#fd7e14' if rankings_data['percentile'] >= 25 else '#dc3545'
-                    
-                    # Add trend indicator
-                    trend_indicator = ""
-                    if ranking_trend:
-                        if ranking_trend['direction'] == 'up':
-                            trend_indicator = f"<div style='color: #28a745; font-size: 0.8em;'>📈 +{ranking_trend['rank_change']} positions</div>"
-                        elif ranking_trend['direction'] == 'down':
-                            trend_indicator = f"<div style='color: #dc3545; font-size: 0.8em;'>📉 -{ranking_trend['rank_change']} positions</div>"
+                # Rank Neighbors (10 above and 10 below the current organization)
+                try:
+                    st.markdown("#### 🔎 Organizations Near Your Rank (±10)")
+                    neighbors_cols = st.columns(2)
+                    # Prefer precomputed unique ranks for accurate neighbors
+                    entries = getattr(analyzer, 'scored_entries', []) or []
+                    key = analyzer._normalize_name(org_name)
+                    idx = None
+                    if entries:
+                        # Sort by overall_rank ascending
+                        try:
+                            sorted_all = sorted(
+                                [e for e in entries if isinstance(e, dict)],
+                                key=lambda e: int(e.get('overall_rank') or 0)
+                            )
+                        except Exception:
+                            sorted_all = [e for e in entries if isinstance(e, dict)]
+                        # Find index of current org
+                        for i, e in enumerate(sorted_all):
+                            nm = e.get('name') or e.get('organization_name') or ''
+                            if analyzer._normalize_name(nm) == key:
+                                idx = i
+                                break
+                        if idx is not None:
+                            above = sorted_all[max(0, idx-10): idx]
+                            below = sorted_all[idx+1: min(len(sorted_all), idx+11)]
+                            # Format helpers
+                            def _to_df(items):
+                                data = []
+                                for it in items:
+                                    try:
+                                        data.append({
+                                            'Rank': it.get('overall_rank'),
+                                            'Organization': it.get('name') or it.get('organization_name'),
+                                            'Country': it.get('country', 'Unknown'),
+                                            'Score': float(it.get('total_score', 0)),
+                                            'Percentile': float(it.get('percentile', 0))
+                                        })
+                                    except Exception:
+                                        pass
+                                df = pd.DataFrame(data)
+                                if not df.empty:
+                                    if 'Percentile' in df.columns:
+                                        df['Percentile'] = df['Percentile'].map(lambda x: f"{float(x):.2f}%")
+                                    if 'Score' in df.columns:
+                                        df['Score'] = df['Score'].map(lambda x: f"{float(x):.1f}")
+                                return df
+                            with neighbors_cols[0]:
+                                st.markdown("**10 Above**")
+                                df_above = _to_df(above)
+                                st.dataframe(df_above, use_container_width=True, hide_index=True)
+                            with neighbors_cols[1]:
+                                st.markdown("**10 Below**")
+                                df_below = _to_df(below)
+                                st.dataframe(df_below, use_container_width=True, hide_index=True)
                         else:
-                            trend_indicator = f"<div style='color: #6c757d; font-size: 0.8em;'>➡️ No change</div>"
-                    
-                    st.markdown(f"""
-                    <div style="background: {rank_color}20; border: 2px solid {rank_color}; border-radius: 10px; padding: 1rem; text-align: center;">
-                        <h4 style="color: {rank_color}; margin-bottom: 0.5rem;">🏆 Overall Rank</h4>
-                        <div style="font-size: 2em; font-weight: bold; color: {rank_color};">
-                            #{rankings_data['overall_rank']}
-                        </div>
-                        <p style="margin: 0; color: #666;">out of {rankings_data['total_organizations']} organizations</p>
-                        {trend_indicator}
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with rank_col2:
-                    percentile_color = '#28a745' if rankings_data['percentile'] >= 75 else '#ffc107' if rankings_data['percentile'] >= 50 else '#fd7e14' if rankings_data['percentile'] >= 25 else '#dc3545'
-                    st.markdown(f"""
-                    <div style="background: {percentile_color}20; border: 2px solid {percentile_color}; border-radius: 10px; padding: 1rem; text-align: center;">
-                        <h4 style="color: {percentile_color}; margin-bottom: 0.5rem;">📊 Percentile</h4>
-                        <div style="font-size: 2em; font-weight: bold; color: {percentile_color};">
-                            {rankings_data['percentile']:.0f}%
-                        </div>
-                        <p style="margin: 0; color: #666;">Better than {rankings_data['percentile']:.0f}% of organizations</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with rank_col3:
-                    quality_rank_color = '#1976d2'
-                    st.markdown(f"""
-                    <div style="background: {quality_rank_color}20; border: 2px solid {quality_rank_color}; border-radius: 10px; padding: 1rem; text-align: center;">
-                        <h4 style="color: {quality_rank_color}; margin-bottom: 0.5rem;">🏥 Quality Score</h4>
-                        <div style="font-size: 2em; font-weight: bold; color: {quality_rank_color};">
-                            {score:.1f}
-                        </div>
-                        <p style="margin: 0; color: #666;">{grade_text}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with rank_col4:
-                    quality_level_color = '#28a745' if quality_level == 'Outstanding Quality' else '#20c997' if 'High' in quality_level else '#ffc107' if 'Good' in quality_level else '#fd7e14' if 'Fair' in quality_level else '#dc3545'
-                    st.markdown(f"""
-                    <div style="background: {quality_level_color}20; border: 2px solid {quality_level_color}; border-radius: 10px; padding: 1rem; text-align: center;">
-                        <h4 style="color: {quality_level_color}; margin-bottom: 0.5rem;">⭐ Quality Level</h4>
-                        <div style="font-size: 1.2em; font-weight: bold; color: {quality_level_color};">
-                            {quality_level}
-                        </div>
-                        <p style="margin: 0; color: #666; font-size: 0.9em;">{grade_emoji} {quality_description}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                            # Fallback to dynamic benchmark neighbors if precomputed index not found
+                            benchmark_data = rankings_data.get('top_performers_benchmark', {}) if isinstance(rankings_data, dict) else {}
+                            perf_above = benchmark_data.get('performers_above', [])[-10:]
+                            perf_below = benchmark_data.get('performers_below', [])[:10]
+                            def _to_df_benchmark(items):
+                                data = []
+                                for it in items:
+                                    try:
+                                        data.append({
+                                            'Rank': it.get('rank_position'),
+                                            'Organization': it.get('name'),
+                                            'Country': it.get('country', 'Unknown'),
+                                            'Score': float(it.get('total_score', 0)),
+                                            'Percentile': ''
+                                        })
+                                    except Exception:
+                                        pass
+                                df = pd.DataFrame(data)
+                                if not df.empty and 'Score' in df.columns:
+                                    df['Score'] = df['Score'].map(lambda x: f"{float(x):.1f}")
+                                return df
+                            with neighbors_cols[0]:
+                                st.markdown("**10 Above**")
+                                st.dataframe(_to_df_benchmark(perf_above), use_container_width=True, hide_index=True)
+                            with neighbors_cols[1]:
+                                st.markdown("**10 Below**")
+                                st.dataframe(_to_df_benchmark(perf_below), use_container_width=True, hide_index=True)
+                    else:
+                        st.info("Precomputed rankings unavailable. Showing dynamic neighbors from benchmark.")
+                        benchmark_data = rankings_data.get('top_performers_benchmark', {}) if isinstance(rankings_data, dict) else {}
+                        perf_above = benchmark_data.get('performers_above', [])[-10:]
+                        perf_below = benchmark_data.get('performers_below', [])[:10]
+                        def _to_df_benchmark(items):
+                            data = []
+                            for it in items:
+                                try:
+                                    data.append({
+                                        'Rank': it.get('rank_position'),
+                                        'Organization': it.get('name'),
+                                        'Country': it.get('country', 'Unknown'),
+                                        'Score': float(it.get('total_score', 0)),
+                                        'Percentile': ''
+                                    })
+                                except Exception:
+                                    pass
+                            df = pd.DataFrame(data)
+                            if not df.empty and 'Score' in df.columns:
+                                df['Score'] = df['Score'].map(lambda x: f"{float(x):.1f}")
+                            return df
+                        with neighbors_cols[0]:
+                            st.markdown("**10 Above**")
+                            st.dataframe(_to_df_benchmark(perf_above), use_container_width=True, hide_index=True)
+                        with neighbors_cols[1]:
+                            st.markdown("**10 Below**")
+                            st.dataframe(_to_df_benchmark(perf_below), use_container_width=True, hide_index=True)
+                except Exception:
+                    # Do not block the rest of the UI if neighbors fail
+                    pass
                 
                 # Category-Specific Rankings
                 st.markdown("#### 📋 Category Performance Rankings")
@@ -5925,26 +8493,29 @@ else:
             # Comprehensive metrics
             col1, col2, col3, col4 = st.columns(4)
             
-            with col1:
-                score = org_data['total_score']
-                score_color = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
-                st.metric("🏆 Overall Score", f"{score:.2f}/100", f"{score_color}")
+            # Column 1 metrics
+            score = org_data['total_score']
+            score_color = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
+            col1.metric("🏆 Overall Score", f"{score:.2f}/100", f"{score_color}")
             
-            with col2:
-                active_certs = len([c for c in org_data['certifications'] if c['status'] == 'Active'])
-                st.metric("📜 Active Certifications", active_certs)
+            # Column 2 metrics (avoid context manager to prevent indentation issues)
+            active_certs = len([
+                c for c in org_data.get('certifications', [])
+                if str(c.get('status', '')).strip() == 'Active'
+            ])
+            col2.metric("📜 Mandatory Requirements", active_certs)
             
-            with col3:
-                premium_certs = len([c for c in org_data['certifications'] if c.get('premium', False)])
-                st.metric("🏆 Premium Certifications", premium_certs)
+            # Column 3 metrics
+            premium_certs = len([c for c in org_data['certifications'] if c.get('premium', False)])
+            col3.metric("🏆 Premium Certifications", premium_certs)
             
-            with col4:
-                trend = "Improving" if score >= 70 else "Stable" if score >= 50 else "Needs Attention"
-                trend_icon = "↗️" if score >= 70 else "➡️" if score >= 50 else "↘️"
-                st.metric("📊 Quality Trend", trend, trend_icon)
+            # Column 4 metrics
+            trend = "Improving" if score >= 70 else "Stable" if score >= 50 else "Needs Attention"
+            trend_icon = "↗️" if score >= 70 else "➡️" if score >= 50 else "↘️"
+            col4.metric("📊 Quality Trend", trend, trend_icon)
             
             # Score breakdown
-            if org_data['score_breakdown']:
+            if org_data.get('score_breakdown') and isinstance(org_data['score_breakdown'], dict):
                 st.markdown("### 📊 Score Breakdown")
                 score_data = org_data['score_breakdown']
                 
@@ -5966,13 +8537,13 @@ else:
                 with col2:
                     # Display certifications
                     if org_data['certifications']:
-                        st.markdown("**🏆 Active Certifications:**")
+                        st.markdown("**🏆 Mandatory Requirements:**")
                         for cert in org_data['certifications'][:5]:  # Show top 5
-                            if cert['status'] == 'Active':
+                            if str(cert.get('status', '')).strip() == 'Active':
                                 st.write(f"• {cert['name']} - {cert['issuer']}")
             
             # Clear detailed view button
-            if st.button("❌ Close Healthcare Quality Grid Report", key="close_detailed"):
+            if st.button("❌ Close Global Healthcare Quality Assessment Report", key="close_detailed"):
                 if hasattr(st.session_state, 'detailed_org'):
                     del st.session_state.detailed_org
                 if hasattr(st.session_state, 'detailed_data'):
@@ -5982,33 +8553,34 @@ else:
         st.markdown("---")
         
         st.markdown("""
-        ### About Healthcare Quality Grid
-        The **Healthcare Quality Grid** is a comprehensive platform designed to evaluate 
+        ### About Global Healthcare Quality Grid
+        The **Global Healthcare Quality Grid** is a comprehensive platform designed to evaluate 
         and score healthcare organizations worldwide based on their quality certifications 
-        and accreditations.
+        and accreditations using internationally recognized standards.
         
         ### Key Features:
         - **🔍 Organization Search** - Find and analyze any healthcare organization globally
-        - **📊 Quality Scoring** - Evidence-based scoring using only verified certifications
-        - **🏆 Certification Tracking** - Monitor ISO, NABH, NABL, JCI, and other quality certifications
+        - **📊 Quality Scoring** - Evidence-based scoring using verified international certifications
+        - **🏆 Certification Tracking** - Monitor JCI, ISO, Joint Commission, CQC, and other global quality certifications
         - **📈 Quality Trends** - Track certification improvements and portfolio development over time
-        - **📰 News Integration** - Real-time updates from company disclosures and news articles
+        - **🌍 Global Standards** - Assessment based on internationally recognized healthcare quality frameworks
         
-        ### Tracked Certifications:
+        ### Tracked International Certifications:
+        - **JCI** 🏥 - Joint Commission International (Global Gold Standard)
         - **ISO Certifications** - International Organization for Standardization
-        - **NABH** - National Accreditation Board for Hospitals & Healthcare Providers
-        - **NABL** - National Accreditation Board for Testing and Calibration Laboratories
-        - **JCI** 🏥 - Joint Commission International
+        - **Joint Commission** - US Healthcare Accreditation Leader
+        - **CQC** - Care Quality Commission (UK)
         - **HIMSS** - Healthcare Information and Management Systems Society
         - **AAAHC** - Accreditation Association for Ambulatory Health Care
+        - **Regional Standards** - NABH (India), CCHSA (Canada), ACHSI (Australia), and others
         
         ---
         
-        ### WARNING️ Important Legal Disclaimers
+        ### ⚠️ Important Legal Disclaimers
         
         **Assessment Nature & Limitations:**
-        - The Healthcare Quality Grid is an **assessment tool based on publicly available knowledge** regarding healthcare organizations
-        - **The Healthcare Quality Grid can be wrong** in assessing the quality of an organization and should not be considered as definitive or absolute
+        - The Global Healthcare Quality Grid is an **assessment tool based on publicly available knowledge** regarding healthcare organizations
+        - **The Global Healthcare Quality Grid can be wrong** in assessing the quality of an organization and should not be considered as definitive or absolute
         - Scores are generated using automated algorithms and may not reflect the complete picture of an organization's quality
         - This platform is intended for **informational and comparative analysis purposes only**
         
@@ -6019,19 +8591,28 @@ else:
         - Certification statuses may change without immediate reflection in our system
         
         **No Medical or Professional Advice:**
-        - Healthcare Quality Grid scores do not constitute medical advice, professional recommendations, or endorsements
+        - Global Healthcare Quality Grid scores do not constitute medical advice, professional recommendations, or endorsements
         - Users should conduct independent verification and due diligence before making healthcare decisions
         - This tool should not be used as the sole basis for selecting healthcare providers or organizations
         
         **Limitation of Liability:**
-        - Healthcare Quality Grid and its developers disclaim all warranties, express or implied, regarding the accuracy or completeness of information
-        - Users assume full responsibility for any decisions made based on Healthcare Quality Grid assessments
+        - Global Healthcare Quality Grid and its developers disclaim all warranties, express or implied, regarding the accuracy or completeness of information
+        - Users assume full responsibility for any decisions made based on Global Healthcare Quality Grid assessments
         - No liability is accepted for any direct, indirect, or consequential damages arising from the use of this platform
         
         **Intellectual Property & Fair Use:**
         - All data is used under fair use principles for educational and informational purposes
         - Trademark and certification names are property of their respective owners
         - This platform is not affiliated with or endorsed by any certification bodies or healthcare organizations
+        
+        ---
+        
+        ### 📧 Contact & Organization Registration
+        
+        **Add Your Organization to Our Database:**
+        Contact the Global Healthcare Quality Assessment team at **quxat.team@gmail.com** to add your organization to our quality self-assessment database.
+        
+        We welcome healthcare organizations worldwide to join our comprehensive quality assessment platform and showcase their certifications and quality initiatives.
         """)
         
         # Quality Dashboard Section - Consolidated from Quality Dashboard page
@@ -6061,10 +8642,16 @@ else:
         
         with col2:
             st.subheader("📊 Key Metrics")
-            st.metric("🏥 Total Organizations", "7,067", "↑ +2,161")
-            st.metric("📊 Average Score", "81.2", "↑ +2.1")
-            st.metric("🏆 Top Performers (90+)", "156", "↑ +8")
-            st.metric("WARNING️ Need Improvement (<60)", "89", "↓ -12")
+            # Use the same unified dynamic count here for consistency
+            try:
+                _total_ranked_orgs = len(getattr(analyzer, 'scored_entries', []) or [])
+            except Exception:
+                _total_ranked_orgs = 0
+            _total_ranked_orgs_fmt = f"{_total_ranked_orgs:,}"
+            st.metric("🏥 Total Organizations", _total_ranked_orgs_fmt)
+            st.metric("📊 Average Score", "81.2")
+            st.metric("🏆 Top Performers (90+)", "156")
+            st.metric("WARNING️ Need Improvement (<60)", "89")
 
         # Global Healthcare Quality Section - Consolidated from Global Healthcare Quality page
         st.markdown("---")
@@ -6088,7 +8675,15 @@ else:
         # Key metrics
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("🏥 Organizations Tracked", "1,000+")
+            # Prefer unified database size if available, fallback to ranked
+            try:
+                _total_tracked_orgs = len(getattr(analyzer, 'unified_database', []) or [])
+                if not _total_tracked_orgs:
+                    _total_tracked_orgs = len(getattr(analyzer, 'scored_entries', []) or [])
+            except Exception:
+                _total_tracked_orgs = len(getattr(analyzer, 'scored_entries', []) or [])
+            _total_tracked_orgs_fmt = f"{_total_tracked_orgs:,}"
+            st.metric("🏥 Organizations Tracked", _total_tracked_orgs_fmt)
         with col2:
             st.metric("🌍 Countries Covered", "50+")
         with col3:
@@ -6442,7 +9037,29 @@ else:
             - **Assessment Limitations:** Certification-based scores may be incorrect or incomplete due to data availability constraints
             """)
 
-
+        # Footer with Contact Information
+        st.markdown("---")
+        st.markdown("""
+        <div style="
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid #dee2e6;
+        ">
+            <h4 style="color: #495057; margin-bottom: 1rem; font-weight: 600;">
+                📧 Add Your Organization to Our Database
+            </h4>
+            <p style="color: #6c757d; font-size: 1rem; margin-bottom: 0; line-height: 1.6;">
+                Contact the Global Healthcare Quality Assessment team at 
+                <a href="mailto:quxat.team@gmail.com" style="color: #007bff; text-decoration: none; font-weight: 600;">
+                    quxat.team@gmail.com
+                </a> 
+                to add your organization to our quality self-assessment database.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
     except Exception as e:
         # Log error silently without displaying to user

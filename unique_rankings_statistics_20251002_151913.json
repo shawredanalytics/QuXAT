@@ -1,0 +1,114 @@
+{
+  "ranking_system_info": {
+    "system_type": "Unique Sequential Ranking",
+    "tie_breaking_criteria": [
+      "Total QuXAT Score (Primary)",
+      "Certification Count (Secondary)",
+      "Organization Name Alphabetical (Tertiary)"
+    ],
+    "generation_timestamp": "2025-10-02T15:19:13.035593"
+  },
+  "organization_statistics": {
+    "total_organizations": 9691,
+    "unique_ranks_assigned": 9691,
+    "rank_range": [
+      1,
+      9691
+    ]
+  },
+  "score_statistics": {
+    "average_score": 4.39882365081003,
+    "median_score": 0,
+    "highest_score": 65,
+    "lowest_score": 0,
+    "score_distribution": {
+      "A+ (75-100)": 0,
+      "A (65-74)": 12,
+      "B+ (55-64)": 0,
+      "B (45-54)": 0,
+      "C (0-44)": 9679
+    }
+  },
+  "top_10_organizations": [
+    {
+      "rank": 1,
+      "name": "Johns Hopkins Hospital",
+      "country": "United States",
+      "total_score": 65,
+      "certification_count": 4,
+      "percentile": 100.0
+    },
+    {
+      "rank": 2,
+      "name": "Accupath Diagnostic Laboratories, Inc.",
+      "country": "United States",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.9896811474564
+    },
+    {
+      "rank": 3,
+      "name": "Almac Diagnostic Services",
+      "country": "United Kingdom",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.9793622949128
+    },
+    {
+      "rank": 4,
+      "name": "Dianon Systems, Inc. and Esoterix Genetic Laboratories, LLC",
+      "country": "United States",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.96904344236921
+    },
+    {
+      "rank": 5,
+      "name": "King Abdulaziz Medical City",
+      "country": "Saudi Arabia",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.95872458982561
+    },
+    {
+      "rank": 6,
+      "name": "Labcorp Central Laboratory Services LP",
+      "country": "United States",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.948405737282
+    },
+    {
+      "rank": 7,
+      "name": "Livasa Hospital (A Unit of Ivy Health and Life Sciences Private Limited) (Earlier Certificate issued in the name of Ivy Hospital Mohali (A Unit of Ivy Health & Life Sciences Pvt. Ltd.)",
+      "country": "India",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.93808688473842
+    },
+    {
+      "rank": 8,
+      "name": "N Z Health & Medicare Center (Zeel Multi Speciality Hospital), Sagwara",
+      "country": "India",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.92776803219482
+    },
+    {
+      "rank": 9,
+      "name": "National University Hospital Singapore",
+      "country": "Singapore",
+      "total_score": 65,
+      "certification_count": 2,
+      "percentile": 99.91744917965121
+    },
+    {
+      "rank": 10,
+      "name": "Aarupadai Veedu Medical College & Hospital",
+      "country": "India",
+      "total_score": 65,
+      "certification_count": 1,
+      "percentile": 99.90713032710762
+    }
+  ]
+}

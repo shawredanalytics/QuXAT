@@ -5,7 +5,8 @@
   "main_file": "streamlit_app.py",
   "deployment_url": "https://quxatscore.streamlit.app/",
   "streamlit_cloud_url": "https://share.streamlit.io/",
-  "deployment_timestamp": "2025-09-27T10:49:00.377238",
+  "version": "2.0.0",
+  "deployment_timestamp": "2025-10-02T15:48:00",
   "deployment_steps": [
     "1. Go to https://share.streamlit.io/",
     "2. Sign in with GitHub account",

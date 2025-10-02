@@ -1,0 +1,166 @@
+[
+  {
+    "id": "mayo_cap_1",
+    "name": "Mayo Clinic BioPharma Diagnostics Laboratory",
+    "original_name": "Mayo Clinic BioPharma Diagnostics Laboratory",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "55905",
+    "phone": "800-533-1710",
+    "website": "https://www.mayoclinic.org",
+    "location": {
+      "city": "",
+      "state": "",
+      "zip_code": "55905"
+    },
+    "country": "United States",
+    "state": "",
+    "city": "",
+    "zip_code": "55905",
+    "hospital_type": "Academic Medical Center",
+    "certifications": [
+      {
+        "name": "College of American Pathologists (CAP)",
+        "type": "CAP 15189 Accreditation",
+        "status": "Active",
+        "accreditation_date": "",
+        "expiry_date": "",
+        "accreditation_no": "",
+        "reference_no": "",
+        "remarks": "CAP 15189 Accredited Laboratory",
+        "score_impact": 18.0,
+        "source": "CAP Database"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Mayo Clinic Quality Standards",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "quality_indicators": {
+      "cap_accredited": true,
+      "iso_15189_accredited": true,
+      "laboratory_accreditation": true,
+      "international_accreditation": true,
+      "accreditation_valid": true,
+      "academic_affiliation": true,
+      "research_facility": true
+    },
+    "specialties": [
+      "Clinical Laboratory Testing",
+      "Molecular Diagnostics",
+      "Pathology Services",
+      "BioPharma Diagnostics"
+    ],
+    "quality_score": 95.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "data_source": "CAP Database, Mayo Clinic",
+    "last_updated": "2025-09-29T10:16:24.027645",
+    "search_keywords": [
+      "mayo clinic",
+      "mayo",
+      "clinic",
+      "cap accredited",
+      "laboratory",
+      "diagnostics",
+      "",
+      ""
+    ]
+  },
+  {
+    "id": "mayo_cap_2",
+    "name": "Mayo Clinic Health System-Eau Claire",
+    "original_name": "Mayo Clinic Health System-Eau Claire",
+    "organization_type": "Medical Laboratory",
+    "accreditation_type": "CAP 15189",
+    "accreditation_body": "College of American Pathologists",
+    "status": "Active",
+    "address": "54702",
+    "phone": "888-838-4777",
+    "website": "https://www.mayoclinic.org",
+    "location": {
+      "city": "",
+      "state": "",
+      "zip_code": "54702"
+    },
+    "country": "United States",
+    "state": "",
+    "city": "",
+    "zip_code": "54702",
+    "hospital_type": "Academic Medical Center",
+    "certifications": [
+      {
+        "name": "College of American Pathologists (CAP)",
+        "type": "CAP 15189 Accreditation",
+        "status": "Active",
+        "accreditation_date": "",
+        "expiry_date": "",
+        "accreditation_no": "",
+        "reference_no": "",
+        "remarks": "CAP 15189 Accredited Laboratory",
+        "score_impact": 18.0,
+        "source": "CAP Database"
+      }
+    ],
+    "quality_initiatives": [
+      {
+        "name": "CAP 15189 Accreditation Program",
+        "description": "ISO 15189 accreditation for medical laboratories ensuring quality management systems",
+        "status": "Active",
+        "impact": "High",
+        "category": "Laboratory Quality Management"
+      },
+      {
+        "name": "Mayo Clinic Quality Standards",
+        "description": "Comprehensive quality assurance program for medical testing",
+        "status": "Active",
+        "impact": "High",
+        "category": "Quality Control"
+      }
+    ],
+    "quality_indicators": {
+      "cap_accredited": true,
+      "iso_15189_accredited": true,
+      "laboratory_accreditation": true,
+      "international_accreditation": true,
+      "accreditation_valid": true,
+      "academic_affiliation": true,
+      "research_facility": true
+    },
+    "specialties": [
+      "Clinical Laboratory Testing",
+      "Molecular Diagnostics",
+      "Pathology Services",
+      "Health System Laboratory"
+    ],
+    "quality_score": 95.0,
+    "compliance_level": "High",
+    "accreditation_level": "International",
+    "data_source": "CAP Database, Mayo Clinic",
+    "last_updated": "2025-09-29T10:16:24.027645",
+    "search_keywords": [
+      "mayo clinic",
+      "mayo",
+      "clinic",
+      "cap accredited",
+      "laboratory",
+      "diagnostics",
+      "",
+      ""
+    ]
+  }
+]

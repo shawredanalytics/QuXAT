@@ -239,8 +239,18 @@
       "apollo hospitals chennai",
       "ahc"
     ],
-    "nabl_accredited": false,
-    "nabl_score": 0
+    "nabl_accredited": true,
+    "nabl_score": 18,
+    "nabl_accreditation_details": {
+      "organization_name": "Apollo Hospitals Enterprise Limited",
+      "nabl_accredited": true,
+      "accreditation_type": "Medical Laboratory",
+      "iso_standard": "ISO 15189",
+      "locations": ["Chennai", "Delhi", "Bangalore", "Hyderabad", "Mumbai", "Pan India"],
+      "services": ["Clinical Laboratory", "Pathology", "Radiology", "Molecular Diagnostics"],
+      "accreditation_status": "Active",
+      "last_verified": "2025-01-20"
+    }
   },
   {
     "name": "Fortis Memorial Research Institute",

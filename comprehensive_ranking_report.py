@@ -8,6 +8,39 @@ class RankingReportGenerator:
         self.scored_organizations = []
         self.ranking_statistics = {}
         
+        # Known substrings that indicate group-level or network entries
+        self.group_indicators = [
+            'Group', 'Network', 'Hospital Group', 'Health System', 'Private Hospital Network'
+        ]
+
+    def _is_group_level(self, org_name: str, all_names: list) -> bool:
+        """Heuristic to detect group-level entries that lack a location qualifier.
+        - Flags names without commas/parentheses location qualifiers
+        - Flags names that are prefixes for multiple branch entries (e.g., 'Apollo Hospitals')
+        - Flags names containing explicit group/network indicators
+        """
+        if not org_name:
+            return False
+        name = org_name.strip()
+        # Explicit group/network keywords
+        for kw in self.group_indicators:
+            if kw.lower() in name.lower():
+                return True
+        
+        # If name contains a comma or parentheses, treat as branch-specific
+        if ',' in name or '(' in name and ')' in name:
+            return False
+        
+        # If there exist other entries starting with this name + space/comma, mark as group-level
+        prefix_variants = (name + ' ', name + ',')
+        for other in all_names:
+            if other == name:
+                continue
+            low = other.strip()
+            if low.startswith(prefix_variants[0]) or low.startswith(prefix_variants[1]):
+                return True
+        return False
+        
     def load_data(self):
         """Load scored organizations and ranking statistics"""
         try:
@@ -124,8 +157,19 @@ class RankingReportGenerator:
         """Generate CSV reports for easy data analysis"""
         print("Generating CSV reports...")
         
+        # Filter to organization-specific entries (exclude group-level)
+        try:
+            all_names = [o.get('name', '') for o in self.scored_organizations]
+            filtered_orgs = [
+                o for o in self.scored_organizations
+                if not self._is_group_level(o.get('name', ''), all_names)
+            ]
+        except Exception:
+            # Fallback to original list if filtering fails
+            filtered_orgs = self.scored_organizations
+
         # Main ranking report
-        df_complete = pd.DataFrame(self.scored_organizations)
+        df_complete = pd.DataFrame(filtered_orgs)
         main_columns = [
             'overall_rank', 'name', 'country', 'region', 'hospital_type',
             'total_score', 'percentile', 'certification_score', 
@@ -171,8 +215,17 @@ class RankingReportGenerator:
         report_lines.append(f"Lowest Score: {min(scores):.2f}")
         report_lines.append("")
         
-        # Top 10 organizations
-        sorted_orgs = sorted(self.scored_organizations, key=lambda x: x['overall_rank'])
+        # Top 10 organizations (filtered)
+        try:
+            all_names = [o.get('name', '') for o in self.scored_organizations]
+            filtered_orgs = [
+                o for o in self.scored_organizations
+                if not self._is_group_level(o.get('name', ''), all_names)
+            ]
+        except Exception:
+            filtered_orgs = self.scored_organizations
+
+        sorted_orgs = sorted(filtered_orgs, key=lambda x: x['overall_rank'])
         
         report_lines.append("TOP 10 HEALTHCARE ORGANIZATIONS")
         report_lines.append("-" * 40)

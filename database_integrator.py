@@ -95,31 +95,12 @@ class DatabaseIntegrator:
         
         for hospital in nabh_data:
             try:
-                # Check if this hospital also has JCI accreditation
-                jci_accredited = self._check_jci_accreditation(hospital['name'])
-                
                 enhanced_hospital = hospital.copy()
                 
-                # Add JCI certification if found
-                if jci_accredited:
-                    jci_cert = {
-                        'name': 'Joint Commission International (JCI)',
-                        'type': 'JCI Accreditation',
-                        'status': 'Active',
-                        'accreditation_date': jci_accredited.get('accreditation_date', ''),
-                        'expiry_date': '',
-                        'accreditation_no': '',
-                        'reference_no': '',
-                        'remarks': 'JCI Accredited',
-                        'score_impact': 20.0,
-                        'source': 'JCI Database'
-                    }
-                    enhanced_hospital['certifications'].append(jci_cert)
-                    enhanced_hospital['quality_indicators']['jci_accredited'] = True
-                    enhanced_hospital['quality_indicators']['international_accreditation'] = True
-                else:
-                    enhanced_hospital['quality_indicators']['jci_accredited'] = False
-                    enhanced_hospital['quality_indicators']['international_accreditation'] = False
+                # Set JCI accreditation to False by default for NABH hospitals
+                # JCI accreditation should only be added through proper validation in data_validator.py
+                enhanced_hospital['quality_indicators']['jci_accredited'] = False
+                enhanced_hospital['quality_indicators']['international_accreditation'] = False
                 
                 # Add search keywords
                 enhanced_hospital['search_keywords'] = self._generate_search_keywords(
@@ -139,22 +120,57 @@ class DatabaseIntegrator:
         return enhanced
     
     def _check_jci_accreditation(self, hospital_name: str) -> Dict:
-        """Check if a hospital has JCI accreditation"""
+        """Check if a hospital has JCI accreditation using exact matching"""
         jci_data = self.load_jci_data()
         
         # Normalize hospital name for comparison
         normalized_name = self._normalize_name(hospital_name)
         
         for jci_org in jci_data:
+            # Skip organizations that require verification
+            if jci_org.get('verification_required', True):
+                continue
+                
             jci_normalized = self._normalize_name(jci_org.get('name', ''))
             
-            # Check for exact match or partial match
-            if normalized_name == jci_normalized or \
-               normalized_name in jci_normalized or \
-               jci_normalized in normalized_name:
-                return jci_org
+            # Use exact match only - no partial matching to prevent false positives
+            if normalized_name == jci_normalized:
+                # Additional validation: check location if available
+                if self._validate_location_match(hospital_name, jci_org):
+                    return jci_org
         
         return None
+    
+    def _validate_location_match(self, hospital_name: str, jci_org: Dict) -> bool:
+        """Validate location match between hospital and JCI organization"""
+        try:
+            # Extract location information from hospital name
+            hospital_parts = hospital_name.lower().split(',')
+            
+            # Get JCI organization location data
+            jci_city = jci_org.get('city', '').lower()
+            jci_state = jci_org.get('state', '').lower()
+            jci_country = jci_org.get('country', '').lower()
+            
+            # If no location data in JCI org, allow match (backward compatibility)
+            if not jci_city and not jci_state and not jci_country:
+                return True
+            
+            # Check if any location component matches
+            hospital_text = hospital_name.lower()
+            
+            if jci_city and jci_city in hospital_text:
+                return True
+            if jci_state and jci_state in hospital_text:
+                return True
+            if jci_country and jci_country in hospital_text:
+                return True
+                
+            return False
+            
+        except Exception as e:
+            # If location validation fails, allow match (backward compatibility)
+            return True
     
     def _normalize_name(self, name: str) -> str:
         """Normalize hospital name for comparison"""

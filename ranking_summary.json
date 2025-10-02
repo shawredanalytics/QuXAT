@@ -1,84 +1,84 @@
 {
-  "total_organizations_processed": 1588,
-  "average_score": 16.183375314861028,
+  "total_organizations_processed": 11005,
+  "average_score": 6.985733757383007,
   "score_distribution": {
     "A+ (75-100)": 0,
-    "A (65-74)": 0,
-    "B+ (55-64)": 14,
+    "A (65-74)": 14,
+    "B+ (55-64)": 0,
     "B (45-54)": 0,
-    "C (0-44)": 1574
+    "C (0-44)": 10991
   },
   "top_10_organizations": [
     {
       "rank": 1,
-      "name": "Apollo Hospitals",
-      "country": "India",
-      "total_score": 55.0,
+      "name": "Mayo Clinic",
+      "country": "United States",
+      "total_score": 67,
       "percentile": 100.0
     },
     {
       "rank": 2,
-      "name": "Asansol Healthworld Pvt. Ltd.",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.93702770780857
+      "name": "Johns Hopkins Hospital",
+      "country": "United States",
+      "total_score": 65,
+      "percentile": 99.99091322126307
     },
     {
       "rank": 3,
-      "name": "City Hospital",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.87405541561712
+      "name": "Accupath Diagnostic Laboratories, Inc.",
+      "country": "United States",
+      "total_score": 65,
+      "percentile": 99.98182644252613
     },
     {
       "rank": 4,
-      "name": "Dhanalakshmi Srinivasan Medical College and Hospital",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.81108312342569
+      "name": "Almac Diagnostic Services",
+      "country": "United Kingdom",
+      "total_score": 65,
+      "percentile": 99.97273966378918
     },
     {
       "rank": 5,
-      "name": "Fortis Hospital",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.74811083123426
+      "name": "Dianon Systems, Inc. and Esoterix Genetic Laboratories, LLC",
+      "country": "United States",
+      "total_score": 65,
+      "percentile": 99.96365288505224
     },
     {
       "rank": 6,
-      "name": "Fortis Memorial Research Institute",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.68513853904281
+      "name": "King Abdulaziz Medical City",
+      "country": "Saudi Arabia",
+      "total_score": 65,
+      "percentile": 99.95456610631531
     },
     {
       "rank": 7,
-      "name": "Institute of liver & Biliary Sciences, Vasant Kunj",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.62216624685138
+      "name": "Labcorp Central Laboratory Services LP",
+      "country": "United States",
+      "total_score": 65,
+      "percentile": 99.94547932757837
     },
     {
       "rank": 8,
-      "name": "Manipal Hospital",
+      "name": "Livasa Hospital (A Unit of Ivy Health and Life Sciences Private Limited) (Earlier Certificate issued in the name of Ivy Hospital Mohali (A Unit of Ivy Health & Life Sciences Pvt. Ltd.)",
       "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.55919395465995
+      "total_score": 65,
+      "percentile": 99.93639254884144
     },
     {
       "rank": 9,
-      "name": "Max Hospital",
+      "name": "N Z Health & Medicare Center (Zeel Multi Speciality Hospital), Sagwara",
       "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.49622166246851
+      "total_score": 65,
+      "percentile": 99.9273057701045
     },
     {
       "rank": 10,
-      "name": "Max Super Speciality Hospital",
-      "country": "India",
-      "total_score": 55.0,
-      "percentile": 99.43324937027708
+      "name": "National University Hospital Singapore",
+      "country": "Singapore",
+      "total_score": 65,
+      "percentile": 99.91821899136755
     }
   ],
-  "generation_date": "2025-09-26 15:51:09"
+  "generation_date": "2025-10-01 19:07:04"
 }

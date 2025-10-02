@@ -1342,7 +1342,7 @@ class HealthcareOrgAnalyzer:
                 'prerequisites': ['Environmental policy', 'Waste management system', 'Energy efficiency measures']
             },
             'NABL': {
-                'name': 'National Accreditation Board for Testing',
+                'name': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
                 'priority': 'Medium',
                 'score_impact': '8-12 points',
                 'description': 'Laboratory accreditation for diagnostic services',

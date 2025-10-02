@@ -35,13 +35,79 @@ class BatchScoringSystem:
         self.ranking_results = {}
         
     def load_database(self):
-        """Load the unified healthcare organizations database"""
+        """Load organizations via analyzer's merged unified database"""
         try:
-            with open('unified_healthcare_organizations.json', 'r', encoding='utf-8') as f:
-                self.organizations = json.load(f)
-            logger.info(f"Loaded {len(self.organizations)} organizations from database")
+            # Use the analyzer's loader to ensure all external sources are included
+            self.organizations = self.analyzer.unified_database if hasattr(self.analyzer, 'unified_database') else []
+            logger.info(f"Loaded {len(self.organizations)} organizations from merged unified database")
+            if not self.organizations:
+                logger.warning("Unified database is empty; batch scoring will produce no results.")
+
+            # Group by canonical base name to fuse duplicates across branches/variants
+            def canonicalize(name: str, city: str = '', state: str = '', country: str = '') -> str:
+                import re
+                n = re.sub(r"\([^)]*\)", "", (name or '')).strip()
+                n = re.sub(r"\s+", " ", n)
+                n = re.sub(r"\bprivate\s+limited\b", "pvt. ltd.", n, flags=re.IGNORECASE)
+                n = re.sub(r"\bpvt\.?\s*ltd\b", "pvt. ltd.", n, flags=re.IGNORECASE)
+                def _strip_tail(token: str, s: str) -> str:
+                    if not token:
+                        return s
+                    tl = token.lower().strip()
+                    sl = s.lower()
+                    if sl.endswith(tl):
+                        idx = sl.rfind(tl)
+                        return s[:idx].rstrip(" ,-/")
+                    return s
+                s = _strip_tail(country, n)
+                s = _strip_tail(state, s)
+                s = _strip_tail(city, s)
+                for c in ["india", "united states", "usa"]:
+                    s = _strip_tail(c, s)
+                return re.sub(r"\s+", " ", s).strip().lower()
+
+            grouped = {}
+            for org in self.organizations:
+                if not isinstance(org, dict):
+                    continue
+                key = canonicalize(org.get('name', ''), org.get('city', ''), org.get('state', ''), org.get('country', ''))
+                bucket = grouped.setdefault(key, [])
+                bucket.append(org)
+
+            # Build aggregated organizations list
+            aggregated = []
+            for key, items in grouped.items():
+                # Prefer the item with richest data as base
+                base = max(items, key=lambda o: sum(1 for k, v in o.items() if v))
+                agg = dict(base)
+                agg['merged_from'] = [i.get('name', '') for i in items]
+                # Merge certifications with simple dedupe by normalized name
+                certs = []
+                seen = set()
+                for i in items:
+                    for c in i.get('certifications', []) or []:
+                        if isinstance(c, dict):
+                            title = (c.get('name') or c.get('issuer') or '').lower().strip()
+                            if not title or title in seen:
+                                continue
+                            certs.append(c)
+                            seen.add(title)
+                        elif isinstance(c, str):
+                            title = c.lower().strip()
+                            if not title or title in seen:
+                                continue
+                            certs.append({'name': c, 'type': '', 'status': 'Active', 'issuer': '', 'score_impact': 0})
+                            seen.add(title)
+                        else:
+                            # Skip unsupported certification formats
+                            continue
+                agg['certifications'] = certs
+                aggregated.append(agg)
+
+            self.organizations = aggregated
+            logger.info(f"Aggregated into {len(self.organizations)} unique organizations after deduplication")
         except Exception as e:
-            logger.error(f"Error loading database: {e}")
+            logger.error(f"Error loading database via analyzer: {e}")
             raise
     
     def calculate_organization_score(self, org_data: Dict) -> Dict:

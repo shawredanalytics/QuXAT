@@ -33,6 +33,16 @@ class UniqueRankingSystem:
                 with open(filename, 'r', encoding='utf-8') as f:
                     self.organizations = json.load(f)
                 logger.info(f"Loaded {len(self.organizations)} organizations from {filename}")
+                # Apply organization-specific filtering to exclude group-level entries
+                try:
+                    all_names = [o.get('name', '') for o in self.organizations]
+                    self.organizations = [
+                        o for o in self.organizations
+                        if not self._is_group_level(o.get('name', ''), all_names)
+                    ]
+                    logger.info(f"Filtered to {len(self.organizations)} organization-specific entries (removed group-level)")
+                except Exception as e:
+                    logger.warning(f"Filtering group-level entries failed: {e}")
                 return True
             else:
                 logger.error(f"File {filename} not found")
@@ -238,6 +248,31 @@ class UniqueRankingSystem:
         
         logger.info(f"Saved unique rankings to {len(files_created)} files")
         return files_created
+
+    # --- Helper methods ---
+    def _is_group_level(self, org_name: str, all_names: list) -> bool:
+        """Heuristic to detect group-level entries that lack a location qualifier.
+        Mirrors the logic in comprehensive_ranking_report to keep outputs consistent.
+        """
+        if not org_name:
+            return False
+        name = org_name.strip()
+        # Explicit group/network keywords
+        group_indicators = ['Group', 'Network', 'Hospital Group', 'Health System', 'Private Hospital Network']
+        for kw in group_indicators:
+            if kw.lower() in name.lower():
+                return True
+        # Location qualifier
+        if ',' in name or ('(' in name and ')' in name):
+            return False
+        # Prefix variant check
+        for other in all_names:
+            if other == name:
+                continue
+            low = other.strip()
+            if low.startswith(name + ' ') or low.startswith(name + ','):
+                return True
+        return False
     
     def run_complete_unique_ranking(self) -> bool:
         """Run the complete unique ranking process"""

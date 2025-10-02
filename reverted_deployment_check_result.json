@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-09-28T14:16:53.066648",
+  "url": "https://quxatscore.streamlit.app/",
+  "status_code": 200,
+  "checks": {
+    "Contains 7,067 organizations": false,
+    "Contains 4,561 NABH facilities": false,
+    "Contains dental references": false,
+    "Contains NABH references": false,
+    "Contains NABL references": true,
+    "Contains JCI references": false,
+    "Working search functionality": false,
+    "Quality scoring available": false
+  },
+  "negative_checks": {
+    "Still contains 1,599 organizations": false,
+    "Still contains Apollo hospital issues": false
+  },
+  "deployment_successful": false
+}

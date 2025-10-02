@@ -34,8 +34,18 @@ class CAPDatabaseIntegrator:
             if os.path.exists(self.unified_file):
                 with open(self.unified_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                print(f"✅ Loaded {len(data)} existing healthcare organizations")
-                return data
+                
+                # Handle different data structures
+                if isinstance(data, dict) and 'organizations' in data:
+                    organizations = data['organizations']
+                elif isinstance(data, list):
+                    organizations = data
+                else:
+                    print("⚠️ Unexpected data structure in unified database")
+                    organizations = []
+                
+                print(f"✅ Loaded {len(organizations)} existing healthcare organizations")
+                return organizations
             else:
                 print("ℹ️ No existing unified database found, creating new one")
                 return []
@@ -287,37 +297,142 @@ class CAPDatabaseIntegrator:
         standardized_cap = self.standardize_cap_data(cap_data)
         print(f"✅ Standardized {len(standardized_cap)} CAP laboratories")
         
-        # Check for duplicates
-        duplicate_check = self.check_for_duplicates(existing_data, standardized_cap)
-        if duplicate_check['duplicates_found'] > 0:
-            print(f"⚠️ Found {duplicate_check['duplicates_found']} potential duplicates")
-            for dup in duplicate_check['duplicate_pairs'][:5]:  # Show first 5
-                print(f"   - CAP: {dup['cap_lab']} <-> Existing: {dup['existing_org']}")
+        # Check for duplicates and merge with existing organizations
+        merged_data = self.merge_cap_with_existing(existing_data, standardized_cap)
         
-        # Combine data
-        combined_data = existing_data + standardized_cap
-        
-        print(f"✅ Created enhanced database with {len(combined_data)} organizations")
-        print(f"   - Existing organizations: {len(existing_data)}")
-        print(f"   - New CAP laboratories: {len(standardized_cap)}")
+        print(f"✅ Created enhanced database with {len(merged_data)} organizations")
         
         # Save enhanced data
-        self.save_enhanced_data(combined_data)
+        self.save_enhanced_data(merged_data)
         
         # Generate summary
-        self.generate_integration_summary(combined_data)
+        self.generate_integration_summary(merged_data)
+    
+    def merge_cap_with_existing(self, existing_data: List[Dict], cap_data: List[Dict]) -> List[Dict]:
+        """Merge CAP data with existing organizations, handling Mayo Clinic specifically"""
+        merged_data = existing_data.copy()
+        mayo_clinic_matched = False
+        
+        for cap_lab in cap_data:
+            cap_name = cap_lab['name']
+            matched = False
+            
+            # Special handling for Mayo Clinic facilities
+            if 'mayo clinic' in cap_name.lower():
+                # Look for existing Mayo Clinic entry
+                for existing_org in merged_data:
+                    if 'mayo clinic' in existing_org['name'].lower():
+                        # Merge CAP certification into existing Mayo Clinic entry
+                        self._merge_cap_certification_into_org(existing_org, cap_lab)
+                        matched = True
+                        mayo_clinic_matched = True
+                        print(f"✅ Merged CAP lab '{cap_name}' into existing Mayo Clinic")
+                        break
+                
+                if not matched:
+                    # Add as new organization if no Mayo Clinic found
+                    merged_data.append(cap_lab)
+                    print(f"✅ Added new CAP lab: {cap_name}")
+            else:
+                # Regular matching logic for other organizations
+                cap_name_normalized = self._normalize_name(cap_name)
+                
+                for existing_org in merged_data:
+                    existing_name_normalized = self._normalize_name(existing_org['name'])
+                    
+                    if self._names_similar(cap_name_normalized, existing_name_normalized):
+                        # Merge CAP certification into existing organization
+                        self._merge_cap_certification_into_org(existing_org, cap_lab)
+                        matched = True
+                        print(f"✅ Merged CAP lab '{cap_name}' into existing '{existing_org['name']}'")
+                        break
+                
+                if not matched:
+                    # Add as new organization
+                    merged_data.append(cap_lab)
+                    print(f"✅ Added new CAP lab: {cap_name}")
+        
+        if mayo_clinic_matched:
+            print("🏥 Mayo Clinic CAP accreditation successfully integrated!")
+        
+        return merged_data
+    
+    def _merge_cap_certification_into_org(self, existing_org: Dict, cap_lab: Dict):
+        """Merge CAP certification data into an existing organization"""
+        # Add CAP certifications
+        if 'certifications' not in existing_org:
+            existing_org['certifications'] = []
+        elif not isinstance(existing_org['certifications'], list):
+            # Handle case where certifications might be a dict or other type
+            existing_org['certifications'] = []
+        
+        # Add CAP certification
+        cap_cert = {
+            "name": "College of American Pathologists (CAP)",
+            "type": "CAP 15189 Accreditation",
+            "status": "Active",
+            "accreditation_date": "",
+            "expiry_date": "",
+            "accreditation_no": "",
+            "reference_no": "",
+            "remarks": "CAP 15189 Accredited Laboratory",
+            "score_impact": 18.0,
+            "source": "CAP Database"
+        }
+        existing_org['certifications'].append(cap_cert)
+        
+        # Update quality indicators
+        if 'quality_indicators' not in existing_org:
+            existing_org['quality_indicators'] = {}
+        
+        existing_org['quality_indicators'].update({
+            'cap_accredited': True,
+            'iso_15189_accredited': True,
+            'laboratory_accreditation': True,
+            'international_accreditation': True,
+            'accreditation_valid': True
+        })
+        
+        # Update data source
+        if 'data_source' in existing_org:
+            if 'CAP' not in existing_org['data_source']:
+                existing_org['data_source'] += ', CAP'
+        else:
+            existing_org['data_source'] = 'CAP'
+        
+        # Update last modified
+        existing_org['last_updated'] = datetime.now().isoformat()
+        
+        # Add CAP-specific information
+        existing_org['cap_laboratory_info'] = {
+            'cap_lab_name': cap_lab['name'],
+            'cap_address': cap_lab.get('address', ''),
+            'cap_phone': cap_lab.get('phone', ''),
+            'cap_specialties': cap_lab.get('specialties', [])
+        }
     
     def save_enhanced_data(self, data: List[Dict]):
-        """Save enhanced unified data to JSON file"""
+        """Save the enhanced database with CAP data"""
         try:
+            # Structure the data properly for the unified database format
+            output_data = {
+                "organizations": data,
+                "metadata": {
+                    "total_organizations": len(data),
+                    "last_updated": datetime.now().isoformat(),
+                    "data_sources": ["JCI", "CAP", "NABH", "NABL", "Manual"],
+                    "cap_integration_completed": True
+                }
+            }
+            
             with open(self.output_file, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
-            print(f"✅ Enhanced database saved to {self.output_file}")
+                json.dump(output_data, f, indent=2, ensure_ascii=False)
+            print(f"✅ Saved enhanced database to {self.output_file}")
             
             # Also update the main unified file
             with open(self.unified_file, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
-            print(f"✅ Updated main unified database: {self.unified_file}")
+                json.dump(output_data, f, indent=2, ensure_ascii=False)
+            print(f"✅ Updated main unified database at {self.unified_file}")
             
         except Exception as e:
             print(f"❌ Error saving enhanced data: {str(e)}")

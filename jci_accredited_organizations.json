@@ -1,5 +1,17 @@
 [
   {
+    "name": "Apollo Hospitals Chennai",
+    "city": "Chennai",
+    "state": "Tamil Nadu", 
+    "country": "India",
+    "type": "Multi-specialty Hospital",
+    "accreditation_date": "2019-05-08",
+    "region": "Asia-Pacific",
+    "source": "JCI Official Website - Verified",
+    "verification_required": false,
+    "note": "Verified JCI accreditation - exact match required"
+  },
+  {
     "name": "Singapore General Hospital",
     "country": "Singapore",
     "type": "Academic Medical Center",

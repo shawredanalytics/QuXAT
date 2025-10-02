@@ -423,12 +423,52 @@ class HealthcareDataValidator:
         Get NABL accreditation data for the accreditations section
         """
         try:
-            # NABL accreditation disabled - only use validated accreditations from official sources
-            # The hardcoded data below is for demonstration only and should not be used for scoring
-            logger.info(f"NABL accreditation disabled for {org_name} - only validated official sources allowed")
+            logger.info(f"Checking NABL accreditation for {org_name}")
             
-            # NOTE: In production, this would connect to the official NABL database API
-            # Currently returning None to prevent simulated results
+            # Load unified database to check for NABL accreditation
+            unified_db_path = os.path.join(os.path.dirname(__file__), 'unified_healthcare_organizations.json')
+            
+            if not os.path.exists(unified_db_path):
+                logger.warning(f"Unified database not found: {unified_db_path}")
+                return None
+            
+            with open(unified_db_path, 'r', encoding='utf-8') as f:
+                db = json.load(f)
+                # Unified DB is a dict with key 'organizations'
+                if isinstance(db, dict):
+                    organizations = db.get('organizations', [])
+                else:
+                    # Fallback if file is a plain list
+                    organizations = db
+            
+            # Search for organization with NABL accreditation
+            org_name_lower = org_name.lower().strip()
+            
+            for org in organizations:
+                # Guard against malformed entries
+                if not isinstance(org, dict):
+                    continue
+                if org.get('name', '').lower().strip() == org_name_lower:
+                    # Check if organization has NABL accreditation details
+                    if org.get('nabl_accredited') and org.get('nabl_accreditation_details'):
+                        nabl_details = org['nabl_accreditation_details']
+                        
+                        # Return NABL accreditation data in the expected format
+                        return {
+                            'name': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                            'type': 'NABL Accreditation',
+                            'status': nabl_details.get('accreditation_status', 'Active'),
+                            'accreditation_date': nabl_details.get('last_verified', 'Unknown'),
+                            'expiry_date': '',
+                            'remarks': f"NABL Accredited - {nabl_details.get('accreditation_type', 'Medical Laboratory')}",
+                            'score_impact': 18.0,
+                            'issuer': 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
+                            'source': 'NABL Official Database',
+                            'iso_standard': nabl_details.get('iso_standard', 'ISO 15189'),
+                            'services': nabl_details.get('services', [])
+                        }
+            
+            logger.info(f"No NABL accreditation found for {org_name}")
             return None
             
         except Exception as e:
@@ -460,24 +500,22 @@ class HealthcareDataValidator:
             for jci_org in jci_organizations:
                 jci_name_lower = jci_org['name'].lower().strip()
                 
-                # Check for exact match or partial match
-                if (org_name_lower == jci_name_lower or 
-                    org_name_lower in jci_name_lower or 
-                    jci_name_lower in org_name_lower):
+                # Use EXACT match only to prevent false positives
+                # This prevents "Apollo Hospitals Secunderabad" from matching "Apollo Hospitals Chennai"
+                if org_name_lower == jci_name_lower:
                     
                     # Only include if verification is not required or if it's from verified source
                     if not jci_org.get('verification_required', True):
                         certification = {
-                            'name': 'JCI Accreditation',
-                            'issuer': 'Joint Commission International',
-                            'type': 'Healthcare Accreditation',
+                            'name': 'Joint Commission International (JCI)',
+                            'type': 'JCI Accreditation',
                             'status': 'Active',
                             'accreditation_date': jci_org.get('accreditation_date', 'Unknown'),
-                            'region': jci_org.get('region', 'Unknown'),
-                            'country': jci_org.get('country', 'Unknown'),
-                            'source': 'JCI Official Database',
-                            'verification_status': 'Verified',
-                            'organization_type': jci_org.get('type', 'Healthcare Organization')
+                            'expiry_date': '',
+                            'remarks': 'JCI Accredited',
+                            'score_impact': 20.0,
+                            'issuer': 'Joint Commission International (JCI)',
+                            'source': 'JCI Official Database'
                         }
                         jci_certifications.append(certification)
                         logger.info(f"Found JCI accreditation for {org_name}")
@@ -579,105 +617,11 @@ class HealthcareDataValidator:
         # First try to extract from organization website
         web_initiatives = self._extract_quality_initiatives_from_website(org_name)
         
-        # Expanded quality initiatives database with real healthcare organizations
+        # DISABLED: No automatic quality initiative assignment without evidence
+        # Quality initiatives must be validated through official sources or verified web content
+        # The hardcoded data below was removed to prevent simulated scoring without evidence
         known_initiatives = {
-            'apollo hospitals': [
-                {
-                    'name': 'Apollo Digital Health Initiative',
-                    'description': 'Comprehensive digital transformation program',
-                    'impact_score': 15,
-                    'year': 2023,
-                    'category': 'Digital Health'
-                },
-                {
-                    'name': 'Apollo Green Hospitals Program',
-                    'description': 'Sustainability and environmental health initiative',
-                    'impact_score': 10,
-                    'year': 2023,
-                    'category': 'Environmental Health'
-                }
-            ],
-            'fortis healthcare': [
-                {
-                    'name': 'Fortis Quality Excellence Program',
-                    'description': 'Patient safety and quality improvement initiative',
-                    'impact_score': 12,
-                    'year': 2023,
-                    'category': 'Patient Safety'
-                }
-            ],
-            'max healthcare': [
-                {
-                    'name': 'Max Patient First Initiative',
-                    'description': 'Patient-centric care delivery model',
-                    'impact_score': 14,
-                    'year': 2023,
-                    'category': 'Patient Care'
-                }
-            ],
-            'medanta': [
-                {
-                    'name': 'Medanta Innovation Lab',
-                    'description': 'Medical technology innovation and research',
-                    'impact_score': 16,
-                    'year': 2023,
-                    'category': 'Innovation'
-                }
-            ],
-            'aiims delhi': [
-                {
-                    'name': 'AIIMS Research Excellence Program',
-                    'description': 'Advanced medical research and education initiative',
-                    'impact_score': 20,
-                    'year': 2023,
-                    'category': 'Research'
-                }
-            ],
-            'manipal hospitals': [
-                {
-                    'name': 'Manipal Quality Care Initiative',
-                    'description': 'Comprehensive quality improvement program',
-                    'impact_score': 13,
-                    'year': 2023,
-                    'category': 'Quality Care'
-                }
-            ],
-            'narayana health': [
-                {
-                    'name': 'Narayana Affordable Healthcare Initiative',
-                    'description': 'Making quality healthcare accessible and affordable',
-                    'impact_score': 18,
-                    'year': 2023,
-                    'category': 'Healthcare Access'
-                }
-            ],
-            'dr lal pathlabs': [
-                {
-                    'name': 'Dr Lal Digital Pathology Initiative',
-                    'description': 'Advanced digital pathology and AI integration',
-                    'impact_score': 12,
-                    'year': 2023,
-                    'category': 'Digital Health'
-                }
-            ],
-            'srl diagnostics': [
-                {
-                    'name': 'SRL Quality Assurance Program',
-                    'description': 'Enhanced laboratory quality and accuracy standards',
-                    'impact_score': 11,
-                    'year': 2023,
-                    'category': 'Quality Assurance'
-                }
-            ],
-            'metropolis healthcare': [
-                {
-                    'name': 'Metropolis Home Healthcare Initiative',
-                    'description': 'Comprehensive home-based diagnostic services',
-                    'impact_score': 10,
-                    'year': 2023,
-                    'category': 'Home Healthcare'
-                }
-            ]
+            # All hardcoded initiatives removed - only verified initiatives from official sources allowed
         }
         
         org_key = org_name.lower().strip()
@@ -718,121 +662,53 @@ class HealthcareDataValidator:
 
     def _detect_organization_branches(self, org_name: str) -> Dict:
         """
-        Detect and return available branches/locations for healthcare organizations
-        
-        Args:
-            org_name: Name of the healthcare organization
-            
-        Returns:
-            Dict containing branch information and suggestions
+        DISABLED: No automatic inheritance of accreditations from mother hospitals to sister hospitals
+        Each hospital location must be validated independently for its own certifications.
+        This method now only provides location detection without any accreditation assumptions.
         """
         org_name_lower = org_name.lower().strip()
         
-        # Comprehensive multi-location healthcare organizations database
+        # Multi-location organizations - for information only, no accreditation inheritance
         multi_location_orgs = {
-            # Major Indian Hospital Chains
             'apollo hospitals': {
                 'has_multiple_locations': True,
                 'total_branches': 71,
-                'primary_locations': [
-                    {'name': 'Apollo Hospitals Chennai', 'city': 'Chennai', 'state': 'Tamil Nadu', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Apollo Hospitals Delhi', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Apollo Hospitals Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
-                    {'name': 'Apollo Hospitals Hyderabad', 'city': 'Hyderabad', 'state': 'Telangana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Apollo Hospitals Mumbai', 'city': 'Mumbai', 'state': 'Maharashtra', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Neurology']},
-                    {'name': 'Apollo Hospitals Kolkata', 'city': 'Kolkata', 'state': 'West Bengal', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Nephrology']}
-                ],
-                'regions': ['South India', 'North India', 'West India', 'East India']
+                'note': 'Each Apollo location must be validated independently for certifications'
             },
             'fortis healthcare': {
                 'has_multiple_locations': True,
                 'total_branches': 36,
-                'primary_locations': [
-                    {'name': 'Fortis Memorial Research Institute Gurgaon', 'city': 'Gurgaon', 'state': 'Haryana', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Fortis Hospital Mohali', 'city': 'Mohali', 'state': 'Punjab', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Fortis Hospital Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
-                    {'name': 'Fortis Hospital Mumbai', 'city': 'Mumbai', 'state': 'Maharashtra', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Fortis Hospital Noida', 'city': 'Noida', 'state': 'Uttar Pradesh', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Neurology']},
-                    {'name': 'Fortis Hospital Kolkata', 'city': 'Kolkata', 'state': 'West Bengal', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Nephrology']}
-                ],
-                'regions': ['North India', 'South India', 'West India', 'East India']
+                'note': 'Each Fortis location must be validated independently for certifications'
             },
             'max healthcare': {
                 'has_multiple_locations': True,
                 'total_branches': 17,
-                'primary_locations': [
-                    {'name': 'Max Super Speciality Hospital Saket', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Max Hospital Gurgaon', 'city': 'Gurgaon', 'state': 'Haryana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Max Hospital Mohali', 'city': 'Mohali', 'state': 'Punjab', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
-                    {'name': 'Max Hospital Patparganj', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Max Hospital Vaishali', 'city': 'Ghaziabad', 'state': 'Uttar Pradesh', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
-                    {'name': 'Max Hospital Pitampura', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
-                ],
-                'regions': ['North India']
+                'note': 'Each Max location must be validated independently for certifications'
             },
             'manipal hospitals': {
                 'has_multiple_locations': True,
                 'total_branches': 28,
-                'primary_locations': [
-                    {'name': 'Manipal Hospital Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Manipal Hospital Goa', 'city': 'Panaji', 'state': 'Goa', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Manipal Hospital Delhi', 'city': 'New Delhi', 'state': 'Delhi', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
-                    {'name': 'Manipal Hospital Pune', 'city': 'Pune', 'state': 'Maharashtra', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Manipal Hospital Jaipur', 'city': 'Jaipur', 'state': 'Rajasthan', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
-                    {'name': 'Manipal Hospital Vijayawada', 'city': 'Vijayawada', 'state': 'Andhra Pradesh', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
-                ],
-                'regions': ['South India', 'North India', 'West India']
+                'note': 'Each Manipal location must be validated independently for certifications'
             },
             'narayana health': {
                 'has_multiple_locations': True,
                 'total_branches': 23,
-                'primary_locations': [
-                    {'name': 'Narayana Health City Bangalore', 'city': 'Bangalore', 'state': 'Karnataka', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Narayana Hospital Kolkata', 'city': 'Kolkata', 'state': 'West Bengal', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Narayana Hospital Gurugram', 'city': 'Gurgaon', 'state': 'Haryana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
-                    {'name': 'Narayana Hospital Hyderabad', 'city': 'Hyderabad', 'state': 'Telangana', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Narayana Hospital Ahmedabad', 'city': 'Ahmedabad', 'state': 'Gujarat', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
-                    {'name': 'Narayana Hospital Jaipur', 'city': 'Jaipur', 'state': 'Rajasthan', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
-                ],
-                'regions': ['South India', 'North India', 'West India', 'East India']
+                'note': 'Each Narayana location must be validated independently for certifications'
             },
-            
-            # International Hospital Chains
             'mayo clinic': {
                 'has_multiple_locations': True,
                 'total_branches': 3,
-                'primary_locations': [
-                    {'name': 'Mayo Clinic Rochester', 'city': 'Rochester', 'state': 'Minnesota', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Mayo Clinic Phoenix', 'city': 'Phoenix', 'state': 'Arizona', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Mayo Clinic Jacksonville', 'city': 'Jacksonville', 'state': 'Florida', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']}
-                ],
-                'regions': ['Midwest USA', 'Southwest USA', 'Southeast USA']
+                'note': 'Each Mayo Clinic location must be validated independently for certifications'
             },
             'cleveland clinic': {
                 'has_multiple_locations': True,
                 'total_branches': 12,
-                'primary_locations': [
-                    {'name': 'Cleveland Clinic Main Campus', 'city': 'Cleveland', 'state': 'Ohio', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Cleveland Clinic Florida', 'city': 'Weston', 'state': 'Florida', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Cleveland Clinic Nevada', 'city': 'Las Vegas', 'state': 'Nevada', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Neurology', 'Oncology']},
-                    {'name': 'Cleveland Clinic London', 'city': 'London', 'state': 'England', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Cleveland Clinic Abu Dhabi', 'city': 'Abu Dhabi', 'state': 'UAE', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Neurology']},
-                    {'name': 'Cleveland Clinic Canada', 'city': 'Toronto', 'state': 'Ontario', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Nephrology']}
-                ],
-                'regions': ['Midwest USA', 'Southeast USA', 'Southwest USA', 'Europe', 'Middle East', 'North America']
+                'note': 'Each Cleveland Clinic location must be validated independently for certifications'
             },
             'johns hopkins': {
                 'has_multiple_locations': True,
                 'total_branches': 6,
-                'primary_locations': [
-                    {'name': 'Johns Hopkins Hospital Baltimore', 'city': 'Baltimore', 'state': 'Maryland', 'type': 'Flagship', 'specialties': ['Cardiac', 'Oncology', 'Neurology', 'Transplant']},
-                    {'name': 'Johns Hopkins Bayview', 'city': 'Baltimore', 'state': 'Maryland', 'type': 'Major Branch', 'specialties': ['Cardiac', 'Oncology', 'Orthopedics']},
-                    {'name': 'Johns Hopkins Howard County', 'city': 'Columbia', 'state': 'Maryland', 'type': 'Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Pediatrics']},
-                    {'name': 'Johns Hopkins All Children\'s Hospital', 'city': 'St. Petersburg', 'state': 'Florida', 'type': 'Specialty Branch', 'specialties': ['Pediatrics', 'Pediatric Cardiac', 'Pediatric Oncology']},
-                    {'name': 'Johns Hopkins Singapore', 'city': 'Singapore', 'state': 'Singapore', 'type': 'International Branch', 'specialties': ['Cardiac', 'Oncology', 'Gastroenterology']},
-                    {'name': 'Johns Hopkins Aramco Healthcare', 'city': 'Dhahran', 'state': 'Saudi Arabia', 'type': 'International Branch', 'specialties': ['General Medicine', 'Orthopedics', 'Gynecology']}
-                ],
-                'regions': ['Mid-Atlantic USA', 'Southeast USA', 'Asia', 'Middle East']
+                'note': 'Each Johns Hopkins location must be validated independently for certifications'
             }
         }
         
@@ -843,10 +719,10 @@ class HealthcareDataValidator:
                     'has_branches': True,
                     'organization_name': org_key.title(),
                     'total_branches': branch_data['total_branches'],
-                    'available_locations': branch_data['primary_locations'],
-                    'regions_served': branch_data['regions'],
-                    'suggestion_message': f"We found {branch_data['total_branches']} locations for {org_key.title()}. Please select a specific location for accurate quality assessment.",
-                    'search_type': 'multi_location'
+                    'validation_note': branch_data['note'],
+                    'suggestion_message': f"We found {branch_data['total_branches']} locations for {org_key.title()}. Please select a specific location for accurate quality assessment. Each location will be validated independently.",
+                    'search_type': 'multi_location',
+                    'accreditation_inheritance': False
                 }
         
         # Check if the search already includes a specific location
@@ -861,7 +737,7 @@ class HealthcareDataValidator:
                 'has_branches': False,
                 'is_specific_location': True,
                 'search_type': 'specific_location',
-                'message': 'Specific location detected. Providing location-specific quality assessment.'
+                'message': 'Specific location detected. Providing location-specific quality assessment with independent validation.'
             }
         
         # Default response for single-location organizations
