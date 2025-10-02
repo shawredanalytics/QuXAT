@@ -27,6 +27,7 @@ from typing import Optional, List, Dict, Any
 from data_validator import healthcare_validator
 from iso_certification_scraper import get_iso_certifications
 from international_quality_methods import (
+# Live deployment test - 20251002_161953
     _calculate_international_quality_initiatives_score,
     _calculate_international_quality_metrics,
     _calculate_regional_adaptation_bonus,
